@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "id": "floorkit.kitchen-sink",
+  "labelName": "Kitchen Sink",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.5,
+    "height": 0.2
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "kitchen",
+    "catalog:placement": "free",
+    "catalog:tags": "sink",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/kitchen/sink.op#catalog-kitchen-sink",
+    "catalog:note": "Dropped into a counter run; not scaled with the run.",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "SINK",
+    "mat:bowl": "metal",
+    "mat:tap": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.25
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "bowl",
+        "kind": "polygon",
+        "color": "#9aa0a6",
+        "vertices": [
+          [
+            0.24,
+            0.16
+          ],
+          [
+            0.2377,
+            0.1715
+          ],
+          [
+            0.2312,
+            0.1812
+          ],
+          [
+            0.2215,
+            0.1877
+          ],
+          [
+            0.21,
+            0.19
+          ],
+          [
+            -0.21,
+            0.19
+          ],
+          [
+            -0.2215,
+            0.1877
+          ],
+          [
+            -0.2312,
+            0.1812
+          ],
+          [
+            -0.2377,
+            0.1715
+          ],
+          [
+            -0.24,
+            0.16
+          ],
+          [
+            -0.24,
+            -0.16
+          ],
+          [
+            -0.2377,
+            -0.1715
+          ],
+          [
+            -0.2312,
+            -0.1812
+          ],
+          [
+            -0.2215,
+            -0.1877
+          ],
+          [
+            -0.21,
+            -0.19
+          ],
+          [
+            0.21,
+            -0.19
+          ],
+          [
+            0.2215,
+            -0.1877
+          ],
+          [
+            0.2312,
+            -0.1812
+          ],
+          [
+            0.2377,
+            -0.1715
+          ],
+          [
+            0.24,
+            -0.16
+          ]
+        ]
+      },
+      {
+        "id": "tap",
+        "kind": "polygon",
+        "color": "#b9bcc0",
+        "vertices": [
+          [
+            -0.03,
+            -0.23
+          ],
+          [
+            0.03,
+            -0.23
+          ],
+          [
+            0.03,
+            -0.18
+          ],
+          [
+            -0.03,
+            -0.18
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "bowl",
+        "kind": "cuboid",
+        "color": "#9aa0a6",
+        "center": [
+          0,
+          0.83,
+          0
+        ],
+        "width": 0.48,
+        "height": 0.16,
+        "depth": 0.38
+      },
+      {
+        "id": "tap",
+        "kind": "cuboid",
+        "color": "#b9bcc0",
+        "center": [
+          0,
+          1.02,
+          -0.2
+        ],
+        "width": 0.05,
+        "height": 0.22,
+        "depth": 0.05
+      }
+    ]
+  }
+}

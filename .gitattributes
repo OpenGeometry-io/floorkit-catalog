@@ -1,0 +1,5 @@
+* text=auto eol=lf
+# Block files are hashed byte for byte; never let git rewrite them.
+blocks/**/*.op -text
+test/fixtures/**/*.op -text
+index.json -text

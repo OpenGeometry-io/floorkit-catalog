@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OpenGeometry-io/floorkit-catalog/schema/index/v1.schema.json",
+  "title": "Floorkit catalog index (floorkit.catalog/v1)",
+  "description": "The generated index.json. It lists every block with the facts a loader needs before fetching it: where it is, how big it is, its SHA-256, its licence, and whether it has been revoked.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "entries"],
+  "properties": {
+    "schema": { "const": "floorkit.catalog/v1" },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "size": { "type": "number", "minimum": 0.01, "maximum": 100 },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "publisher",
+        "slug",
+        "version",
+        "labelName",
+        "type",
+        "category",
+        "license",
+        "attribution",
+        "tags",
+        "dimensions",
+        "path",
+        "bytes",
+        "sha256",
+        "contentHash"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*\\.[a-z0-9]+(-[a-z0-9]+)*$" },
+        "publisher": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "name", "tier"],
+          "properties": {
+            "id": { "$ref": "#/$defs/slug" },
+            "name": { "type": "string", "minLength": 1 },
+            "tier": { "enum": ["official", "verified", "community"] }
+          }
+        },
+        "slug": { "$ref": "#/$defs/slug" },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "labelName": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "license": { "type": "string", "minLength": 1 },
+        "attribution": { "type": "string", "minLength": 1 },
+        "tags": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "depth", "height"],
+          "properties": {
+            "width": { "$ref": "#/$defs/size" },
+            "depth": { "$ref": "#/$defs/size" },
+            "height": { "$ref": "#/$defs/size" }
+          }
+        },
+        "path": {
+          "description": "Relative to the index, always blocks/<publisher>/<slug>/<version>.op.",
+          "type": "string",
+          "pattern": "^blocks/[a-z0-9]+(-[a-z0-9]+)*/[a-z0-9]+(-[a-z0-9]+)*/(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.op$"
+        },
+        "bytes": { "type": "integer", "minimum": 1, "maximum": 262144 },
+        "sha256": { "$ref": "#/$defs/sha256", "description": "Of the file's exact bytes." },
+        "contentHash": {
+          "$ref": "#/$defs/sha256",
+          "description": "Of the definition's canonical JSON (keys sorted at every depth, no whitespace): the same identity Parti's block library uses."
+        },
+        "revoked": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["at", "reason"],
+          "properties": {
+            "at": { "type": "string", "minLength": 1 },
+            "reason": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

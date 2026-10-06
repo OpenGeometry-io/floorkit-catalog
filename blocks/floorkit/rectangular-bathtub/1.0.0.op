@@ -1,0 +1,462 @@
+{
+  "version": 1,
+  "id": "floorkit.rectangular-bathtub",
+  "labelName": "Rectangular Bathtub",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 1.7,
+    "depth": 0.75,
+    "height": 0.6
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:tags": "bath, bathroom",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/bed.op#bathtub-rect-01",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "BATH",
+    "mat:rim-deck": "ceramic",
+    "mat:tub-basin-floor": "ceramic",
+    "mat:basin-wall-back": "ceramic",
+    "mat:basin-wall-front": "ceramic",
+    "mat:basin-wall-left": "ceramic",
+    "mat:basin-wall-right": "ceramic",
+    "mat:drain": "metal",
+    "mat:faucet-base": "metal",
+    "mat:faucet-body": "metal",
+    "mat:spout-arm": "metal",
+    "mat:spout-outlet": "metal"
+  },
+  "anchors": {
+    "drainCenter": {
+      "placement": {
+        "position": [
+          -0.47,
+          0.15,
+          0.04
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-center"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          -0.66,
+          0.6,
+          -0.33
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "faucet-mount"
+      }
+    },
+    "backWall": {
+      "placement": {
+        "position": [
+          0,
+          0.3,
+          -0.375
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "back-wall"
+      }
+    },
+    "floorContact": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "apron-surround-footprint",
+        "kind": "polyline",
+        "color": "#333333",
+        "points": [
+          [
+            -0.85,
+            -0.375
+          ],
+          [
+            0.85,
+            -0.375
+          ],
+          [
+            0.85,
+            0.375
+          ],
+          [
+            -0.85,
+            0.375
+          ],
+          [
+            -0.85,
+            -0.375
+          ]
+        ]
+      },
+      {
+        "id": "rim-deck",
+        "kind": "polyline",
+        "color": "#888888",
+        "points": [
+          [
+            -0.8,
+            -0.33
+          ],
+          [
+            0.8,
+            -0.33
+          ],
+          [
+            0.8,
+            0.33
+          ],
+          [
+            -0.8,
+            0.33
+          ],
+          [
+            -0.8,
+            -0.33
+          ]
+        ]
+      },
+      {
+        "id": "tub-basin-well",
+        "kind": "polyline",
+        "color": "#888888",
+        "points": [
+          [
+            -0.75,
+            -0.26
+          ],
+          [
+            0.75,
+            -0.26
+          ],
+          [
+            0.75,
+            0.26
+          ],
+          [
+            -0.75,
+            0.26
+          ],
+          [
+            -0.75,
+            -0.26
+          ]
+        ]
+      },
+      {
+        "id": "faucet-marker",
+        "kind": "polyline",
+        "color": "#888888",
+        "points": [
+          [
+            -0.68,
+            -0.36
+          ],
+          [
+            -0.58,
+            -0.36
+          ],
+          [
+            -0.58,
+            -0.33
+          ],
+          [
+            -0.68,
+            -0.33
+          ],
+          [
+            -0.68,
+            -0.36
+          ]
+        ]
+      },
+      {
+        "id": "spout-marker",
+        "kind": "polyline",
+        "color": "#888888",
+        "points": [
+          [
+            -0.6,
+            -0.33
+          ],
+          [
+            -0.48,
+            -0.33
+          ],
+          [
+            -0.48,
+            -0.29
+          ],
+          [
+            -0.6,
+            -0.29
+          ],
+          [
+            -0.6,
+            -0.33
+          ]
+        ]
+      },
+      {
+        "id": "drain-marker",
+        "kind": "polyline",
+        "color": "#888888",
+        "points": [
+          [
+            -0.49,
+            0.025
+          ],
+          [
+            -0.45,
+            0.025
+          ],
+          [
+            -0.45,
+            0.065
+          ],
+          [
+            -0.49,
+            0.065
+          ],
+          [
+            -0.49,
+            0.025
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "apron-surround",
+        "kind": "cuboid",
+        "color": "#E8E8E8",
+        "center": [
+          0,
+          0.225,
+          0
+        ],
+        "width": 1.7,
+        "height": 0.45,
+        "depth": 0.75
+      },
+      {
+        "id": "rim-deck",
+        "kind": "cuboid",
+        "color": "#D8D8D8",
+        "center": [
+          0,
+          0.48,
+          0
+        ],
+        "width": 1.7,
+        "height": 0.06,
+        "depth": 0.75
+      },
+      {
+        "id": "tub-basin-floor",
+        "kind": "cuboid",
+        "color": "#BFC4C8",
+        "center": [
+          0,
+          0.2,
+          0
+        ],
+        "width": 1.54,
+        "height": 0.02,
+        "depth": 0.55
+      },
+      {
+        "id": "basin-wall-back",
+        "kind": "cuboid",
+        "color": "#CFD3D6",
+        "center": [
+          0,
+          0.36,
+          -0.26
+        ],
+        "width": 1.54,
+        "height": 0.3,
+        "depth": 0.03
+      },
+      {
+        "id": "basin-wall-front",
+        "kind": "cuboid",
+        "color": "#CFD3D6",
+        "center": [
+          0,
+          0.36,
+          0.26
+        ],
+        "width": 1.54,
+        "height": 0.3,
+        "depth": 0.03
+      },
+      {
+        "id": "basin-wall-left",
+        "kind": "cuboid",
+        "color": "#CFD3D6",
+        "center": [
+          -0.755,
+          0.36,
+          0
+        ],
+        "width": 0.03,
+        "height": 0.3,
+        "depth": 0.55
+      },
+      {
+        "id": "basin-wall-right",
+        "kind": "cuboid",
+        "color": "#CFD3D6",
+        "center": [
+          0.755,
+          0.36,
+          0
+        ],
+        "width": 0.03,
+        "height": 0.3,
+        "depth": 0.55
+      },
+      {
+        "id": "drain",
+        "kind": "cylinder",
+        "color": "#9FA4A8",
+        "center": [
+          -0.47,
+          0.215,
+          0.04
+        ],
+        "radius": 0.028,
+        "height": 0.01
+      },
+      {
+        "id": "faucet-base",
+        "kind": "cylinder",
+        "color": "#B9BDC2",
+        "center": [
+          -0.66,
+          0.525,
+          -0.33
+        ],
+        "radius": 0.028,
+        "height": 0.03
+      },
+      {
+        "id": "faucet-body",
+        "kind": "cylinder",
+        "color": "#B9BDC2",
+        "center": [
+          -0.66,
+          0.62,
+          -0.33
+        ],
+        "radius": 0.022,
+        "height": 0.16
+      },
+      {
+        "id": "spout-arm",
+        "kind": "cuboid",
+        "color": "#B9BDC2",
+        "center": [
+          -0.58,
+          0.66,
+          -0.31
+        ],
+        "width": 0.18,
+        "height": 0.018,
+        "depth": 0.03
+      },
+      {
+        "id": "spout-outlet",
+        "kind": "cylinder",
+        "color": "#B9BDC2",
+        "center": [
+          -0.5,
+          0.645,
+          -0.31
+        ],
+        "radius": 0.013,
+        "height": 0.03
+      }
+    ]
+  }
+}

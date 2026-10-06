@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "id": "floorkit.wash-basin",
+  "labelName": "Wash Basin",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.45,
+    "depth": 0.55,
+    "height": 0.85
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:tags": "basin, sink, bathroom",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/sanitary/wash-basin.op#catalog-sanitary-wash-basin",
+    "catalog:note": "Wall at -Z; tap on the wall side.",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "WASHHANDBASIN",
+    "mat:bowl": "ceramic",
+    "mat:pedestal": "ceramic",
+    "mat:tap": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.275
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "rim",
+        "kind": "polygon",
+        "color": "#eceae4",
+        "vertices": [
+          [
+            0.225,
+            0.225
+          ],
+          [
+            0.2212,
+            0.2441
+          ],
+          [
+            0.2104,
+            0.2604
+          ],
+          [
+            0.1941,
+            0.2712
+          ],
+          [
+            0.175,
+            0.275
+          ],
+          [
+            -0.175,
+            0.275
+          ],
+          [
+            -0.1941,
+            0.2712
+          ],
+          [
+            -0.2104,
+            0.2604
+          ],
+          [
+            -0.2212,
+            0.2441
+          ],
+          [
+            -0.225,
+            0.225
+          ],
+          [
+            -0.225,
+            -0.225
+          ],
+          [
+            -0.2212,
+            -0.2441
+          ],
+          [
+            -0.2104,
+            -0.2604
+          ],
+          [
+            -0.1941,
+            -0.2712
+          ],
+          [
+            -0.175,
+            -0.275
+          ],
+          [
+            0.175,
+            -0.275
+          ],
+          [
+            0.1941,
+            -0.2712
+          ],
+          [
+            0.2104,
+            -0.2604
+          ],
+          [
+            0.2212,
+            -0.2441
+          ],
+          [
+            0.225,
+            -0.225
+          ]
+        ]
+      },
+      {
+        "id": "bowl",
+        "kind": "polygon",
+        "color": "#ffffff",
+        "vertices": [
+          [
+            0.16,
+            0.03
+          ],
+          [
+            0.1442,
+            0.1038
+          ],
+          [
+            0.0998,
+            0.1629
+          ],
+          [
+            0.0356,
+            0.1957
+          ],
+          [
+            -0.0356,
+            0.1957
+          ],
+          [
+            -0.0998,
+            0.1629
+          ],
+          [
+            -0.1442,
+            0.1038
+          ],
+          [
+            -0.16,
+            0.03
+          ],
+          [
+            -0.1442,
+            -0.0438
+          ],
+          [
+            -0.0998,
+            -0.1029
+          ],
+          [
+            -0.0356,
+            -0.1357
+          ],
+          [
+            0.0356,
+            -0.1357
+          ],
+          [
+            0.0998,
+            -0.1029
+          ],
+          [
+            0.1442,
+            -0.0438
+          ]
+        ]
+      },
+      {
+        "id": "tap",
+        "kind": "polygon",
+        "color": "#b9bcc0",
+        "vertices": [
+          [
+            -0.03,
+            -0.25
+          ],
+          [
+            0.03,
+            -0.25
+          ],
+          [
+            0.03,
+            -0.19
+          ],
+          [
+            -0.03,
+            -0.19
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "counter",
+        "kind": "cuboid",
+        "color": "#e6e2d9",
+        "center": [
+          0,
+          0.825,
+          0
+        ],
+        "width": 0.45,
+        "height": 0.05,
+        "depth": 0.55
+      },
+      {
+        "id": "bowl",
+        "kind": "cylinder",
+        "color": "#ffffff",
+        "center": [
+          0,
+          0.77,
+          0.03
+        ],
+        "radius": 0.16,
+        "height": 0.12
+      },
+      {
+        "id": "pedestal",
+        "kind": "cuboid",
+        "color": "#e6e2d9",
+        "center": [
+          0,
+          0.4,
+          0
+        ],
+        "width": 0.12,
+        "height": 0.8,
+        "depth": 0.12
+      },
+      {
+        "id": "tap",
+        "kind": "cuboid",
+        "color": "#b9bcc0",
+        "center": [
+          0,
+          0.9,
+          -0.22
+        ],
+        "width": 0.05,
+        "height": 0.11,
+        "depth": 0.05
+      }
+    ]
+  }
+}

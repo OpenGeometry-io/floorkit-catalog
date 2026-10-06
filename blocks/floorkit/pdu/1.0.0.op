@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "id": "floorkit.pdu",
+  "labelName": "PDU",
+  "type": "MEP_EQUIPMENT",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.8,
+    "height": 1.9
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:tags": "data centre, power",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/pdu.op#catalog-datacenter-pdu",
+    "catalog:note": "Floor PDU: one 400 A input, two 32 A breakered outputs sized to a rack inlet so they connect without a transition.",
+    "ifc:class": "IfcElectricDistributionBoard",
+    "ifcClass": "IfcElectricDistributionBoard"
+  },
+  "ports": [
+    {
+      "id": "in",
+      "domain": "electrical",
+      "systemType": "power",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.15,
+          0.38
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "electrical",
+        "poles": 3,
+        "amperage": 400
+      }
+    },
+    {
+      "id": "outA",
+      "domain": "electrical",
+      "systemType": "power",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          -0.15,
+          0.15,
+          -0.38
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "electrical",
+        "poles": 3,
+        "amperage": 32
+      }
+    },
+    {
+      "id": "outB",
+      "domain": "electrical",
+      "systemType": "power",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0.15,
+          0.15,
+          -0.38
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "electrical",
+        "poles": 3,
+        "amperage": 32
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "pdu-outline",
+        "kind": "polygon",
+        "color": "#d8cfc0",
+        "vertices": [
+          [
+            -0.3,
+            -0.4
+          ],
+          [
+            0.3,
+            -0.4
+          ],
+          [
+            0.3,
+            0.4
+          ],
+          [
+            -0.3,
+            0.4
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "pdu-body",
+        "kind": "cuboid",
+        "color": "#e8e0d2",
+        "center": [
+          0,
+          0.95,
+          0
+        ],
+        "width": 0.6,
+        "height": 1.9,
+        "depth": 0.8
+      }
+    ]
+  }
+}

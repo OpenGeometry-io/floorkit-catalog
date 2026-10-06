@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "id": "fixture.chair",
+  "labelName": "Simple Chair",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.64,
+    "depth": 0.64,
+    "height": 0.96
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:tags": "chair, dining",
+    "catalog:basedOn": "blocks/floorkit/simple-chair/1.0.0.op",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "CHAIR",
+    "mat:leg-front-left": "frame",
+    "mat:leg-front-right": "frame",
+    "mat:leg-back-left": "frame",
+    "mat:leg-back-right": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.52,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "seat",
+        "kind": "polygon",
+        "color": "#D8D8D8",
+        "vertices": [
+          [
+            -0.26,
+            -0.24
+          ],
+          [
+            -0.26,
+            0.24
+          ],
+          [
+            0.26,
+            0.24
+          ],
+          [
+            0.26,
+            -0.24
+          ]
+        ]
+      },
+      {
+        "id": "backrest",
+        "kind": "polygon",
+        "color": "#C6C6C6",
+        "vertices": [
+          [
+            -0.24,
+            -0.29
+          ],
+          [
+            -0.24,
+            -0.19
+          ],
+          [
+            0.24,
+            -0.19
+          ],
+          [
+            0.24,
+            -0.29
+          ]
+        ]
+      },
+      {
+        "id": "leg-front-left",
+        "kind": "polygon",
+        "color": "#5A5A5A",
+        "vertices": [
+          [
+            -0.25,
+            0.19
+          ],
+          [
+            -0.25,
+            0.25
+          ],
+          [
+            -0.19,
+            0.25
+          ],
+          [
+            -0.19,
+            0.19
+          ]
+        ]
+      },
+      {
+        "id": "leg-front-right",
+        "kind": "polygon",
+        "color": "#5A5A5A",
+        "vertices": [
+          [
+            0.19,
+            0.19
+          ],
+          [
+            0.19,
+            0.25
+          ],
+          [
+            0.25,
+            0.25
+          ],
+          [
+            0.25,
+            0.19
+          ]
+        ]
+      },
+      {
+        "id": "leg-back-left",
+        "kind": "polygon",
+        "color": "#5A5A5A",
+        "vertices": [
+          [
+            -0.25,
+            -0.25
+          ],
+          [
+            -0.25,
+            -0.19
+          ],
+          [
+            -0.19,
+            -0.19
+          ],
+          [
+            -0.19,
+            -0.25
+          ]
+        ]
+      },
+      {
+        "id": "leg-back-right",
+        "kind": "polygon",
+        "color": "#5A5A5A",
+        "vertices": [
+          [
+            0.19,
+            -0.25
+          ],
+          [
+            0.19,
+            -0.19
+          ],
+          [
+            0.25,
+            -0.19
+          ],
+          [
+            0.25,
+            -0.25
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "ref": "a"
+      }
+    ]
+  },
+  "definitions": {
+    "a": {
+      "kind": "boolean3d",
+      "operation": "union",
+      "baseRef": "b",
+      "operandRefs": [
+        "b"
+      ]
+    },
+    "b": {
+      "kind": "boolean3d",
+      "operation": "union",
+      "baseRef": "a",
+      "operandRefs": [
+        "a"
+      ]
+    }
+  }
+}

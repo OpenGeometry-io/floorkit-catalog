@@ -1,0 +1,51 @@
+version = 1
+SPDX-PackageName = "floorkit-catalog"
+SPDX-PackageSupplier = "Vishwajeet Mane"
+SPDX-PackageDownloadLocation = "https://github.com/OpenGeometry-io/floorkit-catalog"
+
+# The tables never overlap: every path is classified exactly once. A new
+# top-level file fails `reuse lint` until it is added to one of them.
+
+# Schema, tools, tests, docs, CI and repository files: Apache-2.0.
+[[annotations]]
+path = [
+  "AGENTS.md",
+  "CHANGELOG.md",
+  "CONTRIBUTING.md",
+  "GOVERNANCE.md",
+  "LICENSE.md",
+  "README.md",
+  "SECURITY.md",
+  ".editorconfig",
+  ".gitattributes",
+  ".gitignore",
+  "categories.json",
+  "package.json",
+  "package-lock.json",
+  "publishers.json",
+  "revocations.json",
+  ".github/**",
+  "docs/**",
+  "schema/**",
+  "test/*.mjs",
+  "tools/**",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "2025-present Vishwajeet Mane and floorkit-catalog contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+# The blocks, and the data derived from them: CC BY 4.0.
+[[annotations]]
+path = ["blocks/**", "index.json", "test/fixtures/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "2025-present Vishwajeet Mane and floorkit-catalog contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Adapted from the Contributor Covenant 2.1, which its authors publish under
+# CC BY 4.0 (stated on contributor-covenant.org; not fetchable from where this
+# file was written, so re-check at launch).
+[[annotations]]
+path = "CODE_OF_CONDUCT.md"
+precedence = "override"
+SPDX-FileCopyrightText = "Contributor Covenant contributors (https://www.contributor-covenant.org); adapted for floorkit-catalog"
+SPDX-License-Identifier = "CC-BY-4.0"

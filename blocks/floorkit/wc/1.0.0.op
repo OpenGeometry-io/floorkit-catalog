@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "id": "floorkit.wc",
+  "labelName": "WC Pan",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.38,
+    "depth": 0.66,
+    "height": 0.78
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:tags": "toilet, wc, bathroom",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/sanitary/wc.op#catalog-sanitary-wc",
+    "catalog:note": "Wall-hung cistern at -Z; pan projects to +Z.",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "TOILETPAN",
+    "mat:pan": "ceramic",
+    "mat:cistern": "ceramic"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.33
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "pan",
+        "kind": "polygon",
+        "color": "#f2f0ea",
+        "vertices": [
+          [
+            0.15,
+            -0.15
+          ],
+          [
+            0.18,
+            -0.05
+          ],
+          [
+            0.19,
+            0.05
+          ],
+          [
+            0.18,
+            0.15
+          ],
+          [
+            0.14,
+            0.25
+          ],
+          [
+            0.07,
+            0.31
+          ],
+          [
+            0,
+            0.33
+          ],
+          [
+            -0.07,
+            0.31
+          ],
+          [
+            -0.14,
+            0.25
+          ],
+          [
+            -0.18,
+            0.15
+          ],
+          [
+            -0.19,
+            0.05
+          ],
+          [
+            -0.18,
+            -0.05
+          ],
+          [
+            -0.15,
+            -0.15
+          ]
+        ]
+      },
+      {
+        "id": "cistern",
+        "kind": "polygon",
+        "color": "#e6e3dc",
+        "vertices": [
+          [
+            -0.19,
+            -0.33
+          ],
+          [
+            0.19,
+            -0.33
+          ],
+          [
+            0.19,
+            -0.15
+          ],
+          [
+            -0.19,
+            -0.15
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "pan",
+        "kind": "cuboid",
+        "color": "#fbfbf7",
+        "center": [
+          0,
+          0.2,
+          0.09
+        ],
+        "width": 0.36,
+        "height": 0.4,
+        "depth": 0.48
+      },
+      {
+        "id": "seat",
+        "kind": "cuboid",
+        "color": "#ededea",
+        "center": [
+          0,
+          0.415,
+          0.09
+        ],
+        "width": 0.36,
+        "height": 0.03,
+        "depth": 0.46
+      },
+      {
+        "id": "cistern",
+        "kind": "cuboid",
+        "color": "#fbfbf7",
+        "center": [
+          0,
+          0.58,
+          -0.24
+        ],
+        "width": 0.38,
+        "height": 0.36,
+        "depth": 0.18
+      }
+    ]
+  }
+}

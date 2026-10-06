@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Every check a pull request must pass. CONTRIBUTING.md ("What CI checks")
+# lists the same steps; `npm run check` runs the ones that need no git history.
+#
+# Security: this workflow runs on `pull_request`, never `pull_request_target`.
+# GitHub documents that a pull request from a fork then gets a read-only
+# GITHUB_TOKEN and no other secrets ("Workflows in forked repositories",
+# https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflows-in-forked-repositories;
+# read from the docs, not tested on this repository). `permissions` below keeps
+# the token read-only on every event anyway. Values from the event payload
+# reach a `run:` line only through `env:`, never by `${{ }}` interpolation into
+# the script.
+
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+# One run per pull request or branch; a newer commit cancels the older run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          # Full history and every tag: tools/immutable.mjs compares blocks/
+          # with every v* tag, and fails on a shallow clone rather than
+          # passing with no tags (checkout's defaults are fetch-depth 1 and
+          # fetch-tags false).
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Tests
+        run: npm test
+
+      - name: Validate every block
+        run: node tools/validate.mjs
+
+      - name: Index is current
+        run: node tools/build-index.mjs --check
+
+      - name: Released blocks unchanged
+        run: node tools/immutable.mjs
+
+      - name: Every commit signed off (DCO)
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node tools/dco.mjs "$BASE_SHA" "$HEAD_SHA"
+
+  reuse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # Runs `reuse lint`: every file has a licence and copyright notice
+      # (REUSE.toml), and every licence named has its text in LICENSES/.
+      - name: REUSE compliance
+        uses: fsfe/reuse-action@v6

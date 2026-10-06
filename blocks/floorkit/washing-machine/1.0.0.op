@@ -1,0 +1,226 @@
+{
+  "version": 1,
+  "id": "floorkit.washing-machine",
+  "labelName": "Washing Machine",
+  "type": "APPLIANCE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.6,
+    "height": 0.85
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "appliances",
+    "catalog:placement": "free",
+    "catalog:tags": "laundry, utility",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/sanitary/washing-machine.op#catalog-sanitary-washing-machine",
+    "catalog:note": "Front-loader; door face at +Z, back to the wall at -Z.",
+    "ifc:class": "IfcElectricAppliance",
+    "ifc:predefinedType": "WASHINGMACHINE",
+    "mat:door": "glass"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "case",
+        "kind": "polygon",
+        "color": "#e6e3dc",
+        "vertices": [
+          [
+            -0.3,
+            -0.3
+          ],
+          [
+            0.3,
+            -0.3
+          ],
+          [
+            0.3,
+            0.3
+          ],
+          [
+            -0.3,
+            0.3
+          ]
+        ]
+      },
+      {
+        "id": "drum",
+        "kind": "polygon",
+        "color": "#ffffff",
+        "vertices": [
+          [
+            0.19,
+            0.02
+          ],
+          [
+            0.1755,
+            0.0927
+          ],
+          [
+            0.1344,
+            0.1544
+          ],
+          [
+            0.0727,
+            0.1955
+          ],
+          [
+            0,
+            0.21
+          ],
+          [
+            -0.0727,
+            0.1955
+          ],
+          [
+            -0.1344,
+            0.1544
+          ],
+          [
+            -0.1755,
+            0.0927
+          ],
+          [
+            -0.19,
+            0.02
+          ],
+          [
+            -0.1755,
+            -0.0527
+          ],
+          [
+            -0.1344,
+            -0.1144
+          ],
+          [
+            -0.0727,
+            -0.1555
+          ],
+          [
+            0,
+            -0.17
+          ],
+          [
+            0.0727,
+            -0.1555
+          ],
+          [
+            0.1344,
+            -0.1144
+          ],
+          [
+            0.1755,
+            -0.0527
+          ]
+        ]
+      },
+      {
+        "id": "door-seam",
+        "kind": "polyline",
+        "color": "#b4b0a8",
+        "points": [
+          [
+            -0.3,
+            0.24
+          ],
+          [
+            0.3,
+            0.24
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "case",
+        "kind": "cuboid",
+        "color": "#eeebe4",
+        "center": [
+          0,
+          0.425,
+          0
+        ],
+        "width": 0.6,
+        "height": 0.85,
+        "depth": 0.6
+      },
+      {
+        "id": "door",
+        "kind": "cylinder",
+        "color": "#d6d2c8",
+        "center": [
+          0,
+          0.5,
+          0.29
+        ],
+        "radius": 0.19,
+        "height": 0.03
+      }
+    ]
+  }
+}

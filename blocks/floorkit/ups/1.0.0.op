@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "id": "floorkit.ups",
+  "labelName": "UPS",
+  "type": "MEP_EQUIPMENT",
+  "dimensions": {
+    "width": 1.2,
+    "depth": 0.85,
+    "height": 1.9
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:tags": "data centre, power",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/ups.op#catalog-datacenter-ups",
+    "catalog:note": "IFC4 has a real UPS member on IfcElectricFlowStorageDeviceTypeEnum, so this one maps exactly.",
+    "ifc:class": "IfcElectricFlowStorageDevice",
+    "ifc:predefinedType": "UPS",
+    "ifcClass": "IfcElectricFlowStorageDevice",
+    "mat:ups-panel": "frame"
+  },
+  "ports": [
+    {
+      "id": "in",
+      "domain": "electrical",
+      "systemType": "power",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.3,
+          0.2,
+          0.42
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "electrical",
+        "poles": 3,
+        "amperage": 400
+      }
+    },
+    {
+      "id": "out",
+      "domain": "electrical",
+      "systemType": "power",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0.3,
+          0.2,
+          0.42
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "electrical",
+        "poles": 3,
+        "amperage": 400
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "ups-outline",
+        "kind": "polygon",
+        "color": "#cfd6c8",
+        "vertices": [
+          [
+            -0.6,
+            -0.425
+          ],
+          [
+            0.6,
+            -0.425
+          ],
+          [
+            0.6,
+            0.425
+          ],
+          [
+            -0.6,
+            0.425
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "ups-body",
+        "kind": "cuboid",
+        "color": "#e2e8dc",
+        "center": [
+          0,
+          0.95,
+          0
+        ],
+        "width": 1.2,
+        "height": 1.9,
+        "depth": 0.85
+      },
+      {
+        "id": "ups-panel",
+        "kind": "cuboid",
+        "color": "#4d5a63",
+        "center": [
+          0,
+          1.5,
+          -0.43
+        ],
+        "width": 0.5,
+        "height": 0.35,
+        "depth": 0.03
+      }
+    ]
+  }
+}

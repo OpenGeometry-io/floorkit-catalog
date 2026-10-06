@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "id": "floorkit.crah",
+  "labelName": "CRAH Unit",
+  "type": "MEP_EQUIPMENT",
+  "dimensions": {
+    "width": 1.2,
+    "depth": 0.9,
+    "height": 2
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:tags": "data centre, air handler, cooling",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/crah.op#catalog-datacenter-crah",
+    "catalog:note": "Downflow computer-room air handler. Air-side ports carry the 600 hall module as their nominal section: nothing ducts onto a rack or a tile, so the coupling is tile-pitched and every air connection matches exactly.",
+    "ifc:class": "IfcUnitaryEquipment",
+    "ifcClass": "IfcUnitaryEquipment",
+    "mat:crah-grille": "metal"
+  },
+  "ports": [
+    {
+      "id": "supplyOut",
+      "domain": "hvac",
+      "systemType": "supplyAir",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.1,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "rectangular",
+        "width": 0.6,
+        "height": 0.6
+      }
+    },
+    {
+      "id": "returnIn",
+      "domain": "hvac",
+      "systemType": "returnAir",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          1.7,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "rectangular",
+        "width": 0.6,
+        "height": 0.6
+      }
+    },
+    {
+      "id": "chwIn",
+      "domain": "piping",
+      "systemType": "chilledWaterSupply",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.45,
+          0.25,
+          0.45
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "chwOut",
+      "domain": "piping",
+      "systemType": "chilledWaterReturn",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0.45,
+          0.25,
+          0.45
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "crah-outline",
+        "kind": "polygon",
+        "color": "#b9c4cf",
+        "vertices": [
+          [
+            -0.6,
+            -0.45
+          ],
+          [
+            0.6,
+            -0.45
+          ],
+          [
+            0.6,
+            0.45
+          ],
+          [
+            -0.6,
+            0.45
+          ]
+        ]
+      },
+      {
+        "id": "crah-fan",
+        "kind": "arc",
+        "color": "#7d8b99",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.3,
+        "startAngle": 0,
+        "sweepAngle": 6.2831853
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "crah-body",
+        "kind": "cuboid",
+        "color": "#d5dde4",
+        "center": [
+          0,
+          1,
+          0
+        ],
+        "width": 1.2,
+        "height": 2,
+        "depth": 0.9
+      },
+      {
+        "id": "crah-grille",
+        "kind": "cuboid",
+        "color": "#8c98a4",
+        "center": [
+          0,
+          1.7,
+          -0.45
+        ],
+        "width": 0.9,
+        "height": 0.5,
+        "depth": 0.04
+      }
+    ]
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "version": 1,
+  "id": "floorkit.minimal-sofa",
+  "labelName": "Minimal Sofa",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 2.32,
+    "depth": 0.98,
+    "height": 0.78
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:tags": "sofa, couch, living",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/minimal-sofa.op#catalog-furnishing-minimal-sofa",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "SOFA",
+    "mat:base-plinth": "frame",
+    "mat:seat-deck": "soft",
+    "mat:backrest": "soft",
+    "mat:arm-left": "soft",
+    "mat:arm-right": "soft",
+    "mat:seat-left": "soft",
+    "mat:seat-right": "soft"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.43,
+          0.06
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "footprint",
+        "kind": "polygon",
+        "color": "#D7D5D0",
+        "vertices": [
+          [
+            -1.16,
+            -0.49
+          ],
+          [
+            -1.16,
+            0.49
+          ],
+          [
+            1.16,
+            0.49
+          ],
+          [
+            1.16,
+            -0.49
+          ]
+        ]
+      },
+      {
+        "id": "backrest",
+        "kind": "polygon",
+        "color": "#ECE9E3",
+        "vertices": [
+          [
+            -0.94,
+            -0.47
+          ],
+          [
+            -0.94,
+            -0.31
+          ],
+          [
+            0.94,
+            -0.31
+          ],
+          [
+            0.94,
+            -0.47
+          ]
+        ]
+      },
+      {
+        "id": "arm-left",
+        "kind": "polygon",
+        "color": "#ECE9E3",
+        "vertices": [
+          [
+            -1.16,
+            -0.36
+          ],
+          [
+            -1.16,
+            0.46
+          ],
+          [
+            -0.92,
+            0.46
+          ],
+          [
+            -0.92,
+            -0.36
+          ]
+        ]
+      },
+      {
+        "id": "arm-right",
+        "kind": "polygon",
+        "color": "#ECE9E3",
+        "vertices": [
+          [
+            0.92,
+            -0.36
+          ],
+          [
+            0.92,
+            0.46
+          ],
+          [
+            1.16,
+            0.46
+          ],
+          [
+            1.16,
+            -0.36
+          ]
+        ]
+      },
+      {
+        "id": "seat-left",
+        "kind": "polygon",
+        "color": "#F7F5EF",
+        "vertices": [
+          [
+            -0.9,
+            -0.29
+          ],
+          [
+            -0.9,
+            0.33
+          ],
+          [
+            -0.01,
+            0.33
+          ],
+          [
+            -0.01,
+            -0.29
+          ]
+        ]
+      },
+      {
+        "id": "seat-right",
+        "kind": "polygon",
+        "color": "#F7F5EF",
+        "vertices": [
+          [
+            0.01,
+            -0.29
+          ],
+          [
+            0.01,
+            0.33
+          ],
+          [
+            0.9,
+            0.33
+          ],
+          [
+            0.9,
+            -0.29
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "base-plinth",
+        "kind": "cuboid",
+        "color": "#C9C7C1",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "width": 2.18,
+        "height": 0.1,
+        "depth": 0.88
+      },
+      {
+        "id": "seat-deck",
+        "kind": "cuboid",
+        "color": "#D7D5D0",
+        "center": [
+          0,
+          0.21,
+          0.04
+        ],
+        "width": 2.12,
+        "height": 0.22,
+        "depth": 0.84
+      },
+      {
+        "id": "backrest",
+        "kind": "cuboid",
+        "color": "#ECE9E3",
+        "center": [
+          0,
+          0.58,
+          -0.39
+        ],
+        "width": 1.88,
+        "height": 0.4,
+        "depth": 0.12
+      },
+      {
+        "id": "arm-left",
+        "kind": "cuboid",
+        "color": "#ECE9E3",
+        "center": [
+          -1.04,
+          0.36,
+          0.02
+        ],
+        "width": 0.24,
+        "height": 0.52,
+        "depth": 0.86
+      },
+      {
+        "id": "arm-right",
+        "kind": "cuboid",
+        "color": "#ECE9E3",
+        "center": [
+          1.04,
+          0.36,
+          0.02
+        ],
+        "width": 0.24,
+        "height": 0.52,
+        "depth": 0.86
+      },
+      {
+        "id": "seat-left",
+        "kind": "cuboid",
+        "color": "#F7F5EF",
+        "center": [
+          -0.46,
+          0.4,
+          0.06
+        ],
+        "width": 0.88,
+        "height": 0.18,
+        "depth": 0.62
+      },
+      {
+        "id": "seat-right",
+        "kind": "cuboid",
+        "color": "#F7F5EF",
+        "center": [
+          0.46,
+          0.4,
+          0.06
+        ],
+        "width": 0.88,
+        "height": 0.18,
+        "depth": 0.62
+      }
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "id": "floorkit.rear-door-heat-exchanger",
+  "labelName": "Rear-Door HX",
+  "type": "MEP_EQUIPMENT",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.16,
+    "height": 2
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:tags": "data centre, cooling, rdhx",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/rdhx.op#catalog-datacenter-rdhx",
+    "catalog:note": "Rear-door heat exchanger: a water-cooling coil hung on a rack's hot face. IfcCoil.WATERCOOLINGCOIL is the exact IFC4 member.",
+    "ifc:class": "IfcCoil",
+    "ifc:predefinedType": "WATERCOOLINGCOIL",
+    "ifcClass": "IfcCoil",
+    "mat:rdhx-body": "metal"
+  },
+  "ports": [
+    {
+      "id": "chwIn",
+      "domain": "piping",
+      "systemType": "chilledWaterSupply",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.25,
+          0.15,
+          0.08
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "chwOut",
+      "domain": "piping",
+      "systemType": "chilledWaterReturn",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0.25,
+          0.15,
+          0.08
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "rdhx-outline",
+        "kind": "polygon",
+        "color": "#9fc0d4",
+        "vertices": [
+          [
+            -0.3,
+            -0.08
+          ],
+          [
+            0.3,
+            -0.08
+          ],
+          [
+            0.3,
+            0.08
+          ],
+          [
+            -0.3,
+            0.08
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "rdhx-body",
+        "kind": "cuboid",
+        "color": "#b7d3e5",
+        "center": [
+          0,
+          1,
+          0
+        ],
+        "width": 0.6,
+        "height": 2,
+        "depth": 0.16
+      }
+    ]
+  }
+}

@@ -1,0 +1,1417 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OpenGeometry-io/floorkit-catalog/schema/op/v1.schema.json",
+  "title": "Floorkit catalog block (.op v1)",
+  "description": "A Floorkit .op element definition as this catalog accepts it. Floorkit's own parser repairs bad input (it drops unknown keys, defaults missing values and clamps sizes); this schema rejects anything Floorkit would have to repair, so a block is exactly what its author wrote. Rules a JSON Schema cannot express (references, limits, canonical bytes, paths) are checked by tools/validate.mjs. See docs/format-v1.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "id",
+    "labelName",
+    "type",
+    "dimensions",
+    "metadata",
+    "profileView",
+    "modelView"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "id": {
+      "description": "<publisher>.<slug>, matching the file's path.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*\\.[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "labelName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^(?!.*://)[^<>\\u0000-\\u001f\\u007f]+$"
+    },
+    "type": {
+      "description": "What a block may be. Walls, slabs and datums are not library content.",
+      "enum": [
+        "FURNITURE",
+        "FIXTURE",
+        "APPLIANCE",
+        "LANDSCAPE",
+        "MEP_EQUIPMENT",
+        "DOOR",
+        "WINDOW"
+      ]
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "depth",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "$ref": "#/$defs/size"
+        },
+        "depth": {
+          "$ref": "#/$defs/size"
+        },
+        "height": {
+          "$ref": "#/$defs/size"
+        }
+      }
+    },
+    "placement": {
+      "description": "The root placement must be the identity: a project or an .opbase places the block, never the block itself.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position",
+        "rotation",
+        "scale"
+      ],
+      "properties": {
+        "anchor": {
+          "const": [
+            0,
+            0,
+            0
+          ]
+        },
+        "position": {
+          "const": [
+            0,
+            0,
+            0
+          ]
+        },
+        "rotation": {
+          "const": [
+            0,
+            0,
+            0
+          ]
+        },
+        "scale": {
+          "const": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    "metadata": {
+      "$ref": "#/$defs/rootMetadata"
+    },
+    "anchors": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/name"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/anchor"
+      }
+    },
+    "ports": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/port"
+      }
+    },
+    "definitions": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/name"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/definitionNode"
+      }
+    },
+    "profileView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "elements"
+      ],
+      "properties": {
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 400,
+          "items": {
+            "$ref": "#/$defs/profileViewElement"
+          }
+        }
+      }
+    },
+    "modelView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "elements"
+      ],
+      "properties": {
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 400,
+          "items": {
+            "$ref": "#/$defs/modelViewElement"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "description": "A door or a window sits in a wall: it is 'hosted', and nothing else is.",
+      "if": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "DOOR",
+              "WINDOW"
+            ]
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "required": [
+              "catalog:placement"
+            ],
+            "properties": {
+              "catalog:placement": {
+                "const": "hosted"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "catalog:placement": {
+                "const": "free"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "description": "Only a window has a default sill height.",
+      "if": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "not": {
+              "const": "WINDOW"
+            }
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "not": {
+              "required": [
+                "catalog:defaultSill"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "name": {
+      "description": "A node id, a definition key, an anchor name or a port id.",
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+    },
+    "size": {
+      "type": "number",
+      "minimum": 0.01,
+      "maximum": 100
+    },
+    "coordinate": {
+      "type": "number",
+      "minimum": -1000,
+      "maximum": 1000
+    },
+    "angle": {
+      "description": "Radians, at most one full turn either way.",
+      "type": "number",
+      "minimum": -6.2832,
+      "maximum": 6.2832
+    },
+    "point2": {
+      "description": "A plan point [x, z] in metres. Plan y IS model z.",
+      "type": "array",
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/coordinate"
+        },
+        {
+          "$ref": "#/$defs/coordinate"
+        }
+      ],
+      "items": false,
+      "minItems": 2
+    },
+    "point3": {
+      "description": "A model point [x, y, z] in metres, y up.",
+      "type": "array",
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/coordinate"
+        },
+        {
+          "$ref": "#/$defs/coordinate"
+        },
+        {
+          "$ref": "#/$defs/coordinate"
+        }
+      ],
+      "items": false,
+      "minItems": 3
+    },
+    "rotation3": {
+      "description": "Euler degrees in three's default XYZ order.",
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
+        },
+        {
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
+        },
+        {
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
+        }
+      ],
+      "items": false,
+      "minItems": 3
+    },
+    "scale3": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        }
+      ],
+      "items": false,
+      "minItems": 3
+    },
+    "placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position",
+        "rotation",
+        "scale"
+      ],
+      "properties": {
+        "anchor": {
+          "$ref": "#/$defs/point3"
+        },
+        "position": {
+          "$ref": "#/$defs/point3"
+        },
+        "rotation": {
+          "$ref": "#/$defs/rotation3"
+        },
+        "scale": {
+          "$ref": "#/$defs/scale3"
+        }
+      }
+    },
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "openMetadata": {
+      "description": "Free-form string metadata on an anchor or a port, e.g. { \"role\": \"seating-point\" }. Never empty: Floorkit drops an empty object.",
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9:_-]{0,63}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 200
+      }
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^<>\\u0000-\\u001f\\u007f]+$"
+    },
+    "rootMetadata": {
+      "description": "A closed vocabulary. Every key travels with the definition when it is embedded in a project.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalog:version",
+        "catalog:license",
+        "catalog:attribution",
+        "catalog:category"
+      ],
+      "properties": {
+        "catalog:version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "catalog:license": {
+          "const": "CC-BY-4.0"
+        },
+        "catalog:attribution": {
+          "$ref": "#/$defs/text",
+          "maxLength": 200,
+          "type": "string"
+        },
+        "catalog:category": {
+          "enum": [
+            "seating",
+            "tables",
+            "beds",
+            "storage",
+            "kitchen",
+            "sanitary",
+            "appliances",
+            "lighting",
+            "planting",
+            "vehicles",
+            "equipment",
+            "openings",
+            "other"
+          ]
+        },
+        "catalog:placement": {
+          "enum": [
+            "free",
+            "hosted"
+          ]
+        },
+        "catalog:defaultSill": {
+          "description": "Metres above the floor, for a window.",
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+        },
+        "catalog:lod": {
+          "enum": [
+            "100",
+            "200",
+            "300"
+          ]
+        },
+        "catalog:tags": {
+          "description": "Comma-and-space separated, lowercase.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9 -]{0,31}(, [a-z0-9][a-z0-9 -]{0,31}){0,11}$"
+        },
+        "catalog:author": {
+          "$ref": "#/$defs/text",
+          "maxLength": 200,
+          "type": "string"
+        },
+        "catalog:note": {
+          "$ref": "#/$defs/text",
+          "maxLength": 500,
+          "type": "string"
+        },
+        "catalog:basedOn": {
+          "$ref": "#/$defs/text",
+          "maxLength": 300,
+          "type": "string"
+        },
+        "ifc:class": {
+          "type": "string",
+          "pattern": "^Ifc[A-Z][A-Za-z0-9]*$"
+        },
+        "ifc:predefinedType": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "class:uniclass2015": {
+          "$ref": "#/$defs/text",
+          "maxLength": 64,
+          "type": "string"
+        },
+        "class:omniclass": {
+          "$ref": "#/$defs/text",
+          "maxLength": 64,
+          "type": "string"
+        },
+        "ifcClass": {
+          "description": "The one unprefixed key: Floorkit 0.6's IFC export reads it for assets with ports. Must equal ifc:class.",
+          "type": "string",
+          "pattern": "^Ifc[A-Z][A-Za-z0-9]*$"
+        }
+      },
+      "patternProperties": {
+        "^mat:[A-Za-z][A-Za-z0-9_-]{0,63}$": {
+          "description": "What a node is made of — a role, never a colour.",
+          "enum": [
+            "surface",
+            "soft",
+            "frame",
+            "metal",
+            "glass",
+            "ceramic",
+            "planting"
+          ]
+        }
+      },
+      "dependentRequired": {
+        "ifc:predefinedType": [
+          "ifc:class"
+        ],
+        "ifcClass": [
+          "ifc:class"
+        ]
+      }
+    },
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "placement"
+      ],
+      "properties": {
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "metadata": {
+          "$ref": "#/$defs/openMetadata"
+        }
+      }
+    },
+    "positive": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 10000
+    },
+    "portProfile": {
+      "type": "object",
+      "required": [
+        "shape"
+      ],
+      "properties": {
+        "shape": {
+          "enum": [
+            "round",
+            "rectangular",
+            "tray",
+            "electrical"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "shape": {
+                "const": "round"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "shape",
+              "diameter"
+            ],
+            "properties": {
+              "shape": true,
+              "diameter": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 10
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "shape": {
+                "enum": [
+                  "rectangular",
+                  "tray"
+                ]
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "shape",
+              "width",
+              "height"
+            ],
+            "properties": {
+              "shape": true,
+              "width": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 10
+              },
+              "height": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 10
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "type": "object",
+            "properties": {
+              "shape": {
+                "const": "electrical"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "shape",
+              "poles"
+            ],
+            "properties": {
+              "shape": true,
+              "poles": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12
+              },
+              "voltage": {
+                "$ref": "#/$defs/positive"
+              },
+              "amperage": {
+                "$ref": "#/$defs/positive"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "port": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "domain",
+        "systemType",
+        "flowDirection",
+        "placement",
+        "profile"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "domain": {
+          "enum": [
+            "hvac",
+            "piping",
+            "electrical",
+            "cableCarrier",
+            "conduit"
+          ]
+        },
+        "systemType": {
+          "type": "string",
+          "pattern": "^[a-z][A-Za-z0-9]{0,63}$"
+        },
+        "flowDirection": {
+          "enum": [
+            "source",
+            "sink",
+            "bidirectional"
+          ]
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "profile": {
+          "$ref": "#/$defs/portProfile"
+        },
+        "metadata": {
+          "$ref": "#/$defs/openMetadata"
+        }
+      }
+    },
+    "polygon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "vertices"
+      ],
+      "properties": {
+        "kind": {
+          "const": "polygon"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "vertices": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/point2"
+          }
+        }
+      }
+    },
+    "polyline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "points"
+      ],
+      "properties": {
+        "kind": {
+          "const": "polyline"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "points": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/point2"
+          }
+        }
+      }
+    },
+    "arc": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "center",
+        "radius",
+        "startAngle",
+        "sweepAngle"
+      ],
+      "properties": {
+        "kind": {
+          "const": "arc"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "center": {
+          "$ref": "#/$defs/point2"
+        },
+        "radius": {
+          "$ref": "#/$defs/size"
+        },
+        "startAngle": {
+          "$ref": "#/$defs/angle"
+        },
+        "sweepAngle": {
+          "$ref": "#/$defs/angle",
+          "not": {
+            "const": 0
+          },
+          "type": "number"
+        },
+        "deflection": {
+          "description": "Tessellation tolerance in metres. Floorkit's default is 0.002.",
+          "type": "number",
+          "minimum": 0.0005,
+          "maximum": 0.05
+        }
+      }
+    },
+    "polyline3d": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "points"
+      ],
+      "properties": {
+        "kind": {
+          "const": "polyline3d"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "points": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/point3"
+          }
+        }
+      }
+    },
+    "cuboid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "center",
+        "width",
+        "height",
+        "depth"
+      ],
+      "properties": {
+        "kind": {
+          "const": "cuboid"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "center": {
+          "$ref": "#/$defs/point3"
+        },
+        "width": {
+          "$ref": "#/$defs/size"
+        },
+        "height": {
+          "$ref": "#/$defs/size"
+        },
+        "depth": {
+          "$ref": "#/$defs/size"
+        }
+      }
+    },
+    "cylinder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "center",
+        "radius",
+        "height"
+      ],
+      "properties": {
+        "kind": {
+          "const": "cylinder"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "center": {
+          "$ref": "#/$defs/point3"
+        },
+        "radius": {
+          "$ref": "#/$defs/size"
+        },
+        "height": {
+          "$ref": "#/$defs/size"
+        },
+        "angle": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 6.2832
+        }
+      }
+    },
+    "sweep": {
+      "description": "Inline (path + profile) or by reference (pathRef + profileRef), decided the way Floorkit decides it: any pathRef or profileRef makes it a reference sweep.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "sweep"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "path": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/point3"
+          }
+        },
+        "profile": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/point3"
+          }
+        },
+        "pathRef": {
+          "$ref": "#/$defs/name"
+        },
+        "profileRef": {
+          "$ref": "#/$defs/name"
+        },
+        "capStart": {
+          "type": "boolean"
+        },
+        "capEnd": {
+          "type": "boolean"
+        }
+      },
+      "if": {
+        "type": "object",
+        "anyOf": [
+          {
+            "required": [
+              "pathRef"
+            ]
+          },
+          {
+            "required": [
+              "profileRef"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "type": "object",
+        "required": [
+          "pathRef",
+          "profileRef"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "path"
+              ]
+            },
+            {
+              "required": [
+                "profile"
+              ]
+            }
+          ]
+        }
+      },
+      "else": {
+        "type": "object",
+        "required": [
+          "path",
+          "profile"
+        ]
+      }
+    },
+    "offset2d": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "sourceRef",
+        "distance",
+        "output"
+      ],
+      "properties": {
+        "kind": {
+          "const": "offset2d"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "sourceRef": {
+          "$ref": "#/$defs/name"
+        },
+        "distance": {
+          "type": "number",
+          "minimum": -10,
+          "maximum": 10,
+          "not": {
+            "const": 0
+          }
+        },
+        "acuteThresholdDegrees": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 180
+        },
+        "bevel": {
+          "type": "boolean"
+        },
+        "output": {
+          "enum": [
+            "polyline",
+            "polygon"
+          ]
+        }
+      }
+    },
+    "boolean3d": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "operation",
+        "baseRef",
+        "operandRefs"
+      ],
+      "properties": {
+        "kind": {
+          "const": "boolean3d"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        },
+        "operation": {
+          "enum": [
+            "subtract",
+            "union",
+            "intersect"
+          ]
+        },
+        "baseRef": {
+          "$ref": "#/$defs/name"
+        },
+        "operandRefs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/name"
+          }
+        }
+      }
+    },
+    "refNode": {
+      "description": "A view element that points into definitions. It may not also carry a kind.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref"
+      ],
+      "properties": {
+        "ref": {
+          "$ref": "#/$defs/name"
+        },
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "placement": {
+          "$ref": "#/$defs/placement"
+        }
+      }
+    },
+    "definitionNode": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "polygon",
+            "polyline",
+            "arc",
+            "polyline3d",
+            "cuboid",
+            "cylinder",
+            "sweep",
+            "offset2d",
+            "boolean3d"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "$ref": "#/$defs/is-polygon"
+          },
+          "then": {
+            "$ref": "#/$defs/polygon"
+          }
+        },
+        {
+          "if": {
+            "$ref": "#/$defs/is-polyline"
+          },
+          "then": {
+            "$ref": "#/$defs/polyline"
+          }
+        },
+        {
+          "if": {
+            "$ref": "#/$defs/is-arc"
+          },
+          "then": {
+            "$ref": "#/$defs/arc"
+          }
+        },
+        {
+          "if": {
+            "$ref": "#/$defs/is-polyline3d"
+          },
+          "then": {
+            "$ref": "#/$defs/polyline3d"
+          }
+        },
+        {
+          "if": {
+            "$ref": "#/$defs/is-cuboid"
+          },
+          "then": {
+            "$ref": "#/$defs/cuboid"
+          }
+        },
+        {
+          "if": {
+            "$ref": "#/$defs/is-cylinder"
+          },
+          "then": {
+            "$ref": "#/$defs/cylinder"
+          }
+        },
+        {
+          "if": {
+            "$ref": "#/$defs/is-sweep"
+          },
+          "then": {
+            "$ref": "#/$defs/sweep"
+          }
+        },
+        {
+          "if": {
+            "$ref": "#/$defs/is-offset2d"
+          },
+          "then": {
+            "$ref": "#/$defs/offset2d"
+          }
+        },
+        {
+          "if": {
+            "$ref": "#/$defs/is-boolean3d"
+          },
+          "then": {
+            "$ref": "#/$defs/boolean3d"
+          }
+        }
+      ]
+    },
+    "profileViewElement": {
+      "description": "A plan element: a ref into definitions, or a polygon, polyline or arc with an id.",
+      "type": "object",
+      "if": {
+        "type": "object",
+        "required": [
+          "ref"
+        ]
+      },
+      "then": {
+        "$ref": "#/$defs/refNode"
+      },
+      "else": {
+        "type": "object",
+        "required": [
+          "kind",
+          "id"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "polygon",
+              "polyline",
+              "arc"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "$ref": "#/$defs/is-polygon"
+            },
+            "then": {
+              "$ref": "#/$defs/polygon"
+            }
+          },
+          {
+            "if": {
+              "$ref": "#/$defs/is-polyline"
+            },
+            "then": {
+              "$ref": "#/$defs/polyline"
+            }
+          },
+          {
+            "if": {
+              "$ref": "#/$defs/is-arc"
+            },
+            "then": {
+              "$ref": "#/$defs/arc"
+            }
+          }
+        ]
+      }
+    },
+    "modelViewElement": {
+      "description": "A model element: a ref into definitions, or a cuboid, cylinder or sweep with an id.",
+      "type": "object",
+      "if": {
+        "type": "object",
+        "required": [
+          "ref"
+        ]
+      },
+      "then": {
+        "$ref": "#/$defs/refNode"
+      },
+      "else": {
+        "type": "object",
+        "required": [
+          "kind",
+          "id"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "cuboid",
+              "cylinder",
+              "sweep"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "$ref": "#/$defs/is-cuboid"
+            },
+            "then": {
+              "$ref": "#/$defs/cuboid"
+            }
+          },
+          {
+            "if": {
+              "$ref": "#/$defs/is-cylinder"
+            },
+            "then": {
+              "$ref": "#/$defs/cylinder"
+            }
+          },
+          {
+            "if": {
+              "$ref": "#/$defs/is-sweep"
+            },
+            "then": {
+              "$ref": "#/$defs/sweep"
+            }
+          }
+        ]
+      }
+    },
+    "is-polygon": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "polygon"
+        }
+      }
+    },
+    "is-polyline": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "polyline"
+        }
+      }
+    },
+    "is-arc": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "arc"
+        }
+      }
+    },
+    "is-polyline3d": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "polyline3d"
+        }
+      }
+    },
+    "is-cuboid": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "cuboid"
+        }
+      }
+    },
+    "is-cylinder": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "cylinder"
+        }
+      }
+    },
+    "is-sweep": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "sweep"
+        }
+      }
+    },
+    "is-offset2d": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "offset2d"
+        }
+      }
+    },
+    "is-boolean3d": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "boolean3d"
+        }
+      }
+    }
+  }
+}

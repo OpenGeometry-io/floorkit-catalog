@@ -1,0 +1,25 @@
+{
+  "name": "floorkit-catalog",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Community catalog of Floorkit .op element definitions, with the schema and tools that keep it valid.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenGeometry-io/floorkit-catalog.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "validate": "node tools/validate.mjs",
+    "index": "node tools/build-index.mjs",
+    "index:check": "node tools/build-index.mjs --check",
+    "test": "node --test --test-reporter=spec \"test/*.test.mjs\"",
+    "check": "npm test && npm run validate && npm run index:check"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0"
+  }
+}

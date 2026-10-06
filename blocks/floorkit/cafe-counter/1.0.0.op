@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "id": "floorkit.cafe-counter",
+  "labelName": "Café Counter",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 2.7,
+    "depth": 1.6,
+    "height": 1
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "tables",
+    "catalog:placement": "free",
+    "catalog:tags": "counter, cafe, hospitality",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/cafe-counter.op#catalog-furnishing-cafe-counter",
+    "ifc:class": "IfcFurniture",
+    "mat:kick": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "serveEdge": {
+      "placement": {
+        "position": [
+          0,
+          0.95,
+          -0.9
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "serving-edge"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "front-run",
+        "kind": "polygon",
+        "color": "#8a7964",
+        "vertices": [
+          [
+            -1.35,
+            -0.9
+          ],
+          [
+            1.35,
+            -0.9
+          ],
+          [
+            1.35,
+            -0.3
+          ],
+          [
+            -1.35,
+            -0.3
+          ]
+        ]
+      },
+      {
+        "id": "return-run",
+        "kind": "polygon",
+        "color": "#8a7964",
+        "vertices": [
+          [
+            -1.35,
+            -0.3
+          ],
+          [
+            -0.75,
+            -0.3
+          ],
+          [
+            -0.75,
+            0.8
+          ],
+          [
+            -1.35,
+            0.8
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "front-cabinet",
+        "kind": "cuboid",
+        "color": "#6b5b4b",
+        "center": [
+          0,
+          0.45,
+          -0.6
+        ],
+        "width": 2.7,
+        "height": 0.9,
+        "depth": 0.6
+      },
+      {
+        "id": "front-worktop",
+        "kind": "cuboid",
+        "color": "#2e2e2e",
+        "center": [
+          0,
+          0.95,
+          -0.58
+        ],
+        "width": 2.78,
+        "height": 0.06,
+        "depth": 0.7
+      },
+      {
+        "id": "return-cabinet",
+        "kind": "cuboid",
+        "color": "#6b5b4b",
+        "center": [
+          -1.05,
+          0.45,
+          0.05
+        ],
+        "width": 0.6,
+        "height": 0.9,
+        "depth": 1.1
+      },
+      {
+        "id": "return-worktop",
+        "kind": "cuboid",
+        "color": "#2e2e2e",
+        "center": [
+          -1.03,
+          0.95,
+          0.05
+        ],
+        "width": 0.7,
+        "height": 0.06,
+        "depth": 1.18
+      },
+      {
+        "id": "kick",
+        "kind": "cuboid",
+        "color": "#3c3127",
+        "center": [
+          0,
+          0.05,
+          -0.62
+        ],
+        "width": 2.6,
+        "height": 0.1,
+        "depth": 0.5
+      }
+    ]
+  }
+}

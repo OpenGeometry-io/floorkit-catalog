@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "id": "floorkit.parked-car",
+  "labelName": "Parked Car",
+  "type": "LANDSCAPE",
+  "dimensions": {
+    "width": 1.9,
+    "depth": 4.4,
+    "height": 1.5
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "vehicles",
+    "catalog:placement": "free",
+    "catalog:tags": "car, parking",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/landscape/car.op#catalog-landscape-car",
+    "mat:glass-front": "glass",
+    "mat:glass-rear": "glass",
+    "mat:wheel-fl": "frame",
+    "mat:wheel-fr": "frame",
+    "mat:wheel-rl": "frame",
+    "mat:wheel-rr": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "body",
+        "kind": "polygon",
+        "color": "#3b6ea5",
+        "vertices": [
+          [
+            -0.85,
+            -2.2
+          ],
+          [
+            0.85,
+            -2.2
+          ],
+          [
+            0.95,
+            -1.6
+          ],
+          [
+            0.95,
+            1.6
+          ],
+          [
+            0.85,
+            2.2
+          ],
+          [
+            -0.85,
+            2.2
+          ],
+          [
+            -0.95,
+            1.6
+          ],
+          [
+            -0.95,
+            -1.6
+          ]
+        ]
+      },
+      {
+        "id": "cabin",
+        "kind": "polygon",
+        "color": "#2c5580",
+        "vertices": [
+          [
+            -0.78,
+            -1
+          ],
+          [
+            0.78,
+            -1
+          ],
+          [
+            0.78,
+            1.1
+          ],
+          [
+            -0.78,
+            1.1
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "lower-body",
+        "kind": "cuboid",
+        "color": "#3b6ea5",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "width": 1.9,
+        "height": 0.6,
+        "depth": 4.4
+      },
+      {
+        "id": "cabin",
+        "kind": "cuboid",
+        "color": "#2c5580",
+        "center": [
+          0,
+          1.08,
+          0.1
+        ],
+        "width": 1.7,
+        "height": 0.55,
+        "depth": 2.2
+      },
+      {
+        "id": "glass-front",
+        "kind": "cuboid",
+        "color": "#9fc4e0",
+        "center": [
+          0,
+          1.08,
+          1.22
+        ],
+        "width": 1.55,
+        "height": 0.42,
+        "depth": 0.06
+      },
+      {
+        "id": "glass-rear",
+        "kind": "cuboid",
+        "color": "#9fc4e0",
+        "center": [
+          0,
+          1.08,
+          -1.02
+        ],
+        "width": 1.55,
+        "height": 0.42,
+        "depth": 0.06
+      },
+      {
+        "id": "wheel-fl",
+        "kind": "cuboid",
+        "color": "#1a1a1a",
+        "center": [
+          0.92,
+          0.32,
+          1.4
+        ],
+        "width": 0.18,
+        "height": 0.5,
+        "depth": 0.7
+      },
+      {
+        "id": "wheel-fr",
+        "kind": "cuboid",
+        "color": "#1a1a1a",
+        "center": [
+          -0.92,
+          0.32,
+          1.4
+        ],
+        "width": 0.18,
+        "height": 0.5,
+        "depth": 0.7
+      },
+      {
+        "id": "wheel-rl",
+        "kind": "cuboid",
+        "color": "#1a1a1a",
+        "center": [
+          0.92,
+          0.32,
+          -1.4
+        ],
+        "width": 0.18,
+        "height": 0.5,
+        "depth": 0.7
+      },
+      {
+        "id": "wheel-rr",
+        "kind": "cuboid",
+        "color": "#1a1a1a",
+        "center": [
+          -0.92,
+          0.32,
+          -1.4
+        ],
+        "width": 0.18,
+        "height": 0.5,
+        "depth": 0.7
+      }
+    ]
+  }
+}

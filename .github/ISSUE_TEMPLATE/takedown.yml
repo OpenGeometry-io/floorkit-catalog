@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Takedown request
+description: For a rights holder who believes a block infringes their rights, or anyone who has found a licensing error.
+title: "Takedown: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **This issue is public.** Anything you write here can be read by anyone and stays in the issue's history.
+
+        **You can send the details privately instead.** Use the private route in [SECURITY.md](https://github.com/OpenGeometry-io/floorkit-catalog/blob/main/SECURITY.md#how-to-report) when a public issue would itself cause harm, or when you need to share personal details, contracts or evidence that should not be public. You can also open this issue with only the block ids and say that details follow privately.
+
+        What maintainers do, and what a takedown can and cannot do (released copies stay in their tag and in git history), is set out in [GOVERNANCE.md, "Takedowns"](https://github.com/OpenGeometry-io/floorkit-catalog/blob/main/GOVERNANCE.md#takedowns). The maintainers are not lawyers, and nothing here is legal advice.
+
+  - type: textarea
+    id: blocks
+    attributes:
+      label: Which blocks?
+      description: Each block's id and version, or its path in the repository. One per line.
+      placeholder: |
+        floorkit.simple-chair 1.0.0
+        blocks/floorkit/simple-chair/1.0.0.op
+    validations:
+      required: true
+
+  - type: dropdown
+    id: right
+    attributes:
+      label: The right you are claiming
+      options:
+        - Copyright
+        - Design right (registered or unregistered)
+        - Trademark
+        - A licensing error in this repository
+        - Other (explain below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What the protected work, design or mark is, and how the block uses it. Say whether you are the rights holder or act for them. Link evidence that can be public, and say what you will send privately.
+    validations:
+      required: true
+
+  - type: input
+    id: contact
+    attributes:
+      label: How can the maintainers reach you?
+      description: Your GitHub handle is enough, and replies will come on this issue. Do not post a phone number or postal address here; send those privately.
+      placeholder: "@your-handle"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: good-faith
+    attributes:
+      label: Statement of good faith
+      options:
+        - label: I believe in good faith that the use described above is not authorised by the rights holder, its agent or the law.
+          required: true
+        - label: The information in this request is accurate. If I claim a right, I hold it or am authorised to act for the person who does.
+          required: true

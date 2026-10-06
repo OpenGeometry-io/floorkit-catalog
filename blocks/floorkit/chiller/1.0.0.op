@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "id": "floorkit.chiller",
+  "labelName": "Chiller",
+  "type": "MEP_EQUIPMENT",
+  "dimensions": {
+    "width": 3,
+    "depth": 1.5,
+    "height": 2.2
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:tags": "data centre, cooling",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/chiller.op#catalog-datacenter-chiller",
+    "catalog:note": "IfcChiller is a real IFC4 entity — this mapping is a straight rename.",
+    "ifc:class": "IfcChiller",
+    "ifcClass": "IfcChiller",
+    "mat:chiller-fan-a": "metal",
+    "mat:chiller-fan-b": "metal"
+  },
+  "ports": [
+    {
+      "id": "chwSupply",
+      "domain": "piping",
+      "systemType": "chilledWaterSupply",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          -1,
+          0.6,
+          0.75
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "chwReturn",
+      "domain": "piping",
+      "systemType": "chilledWaterReturn",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          1,
+          0.6,
+          0.75
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "chiller-outline",
+        "kind": "polygon",
+        "color": "#c3d2dc",
+        "vertices": [
+          [
+            -1.5,
+            -0.75
+          ],
+          [
+            1.5,
+            -0.75
+          ],
+          [
+            1.5,
+            0.75
+          ],
+          [
+            -1.5,
+            0.75
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "chiller-body",
+        "kind": "cuboid",
+        "color": "#dbe6ee",
+        "center": [
+          0,
+          1.1,
+          0
+        ],
+        "width": 3,
+        "height": 2.2,
+        "depth": 1.5
+      },
+      {
+        "id": "chiller-fan-a",
+        "kind": "cylinder",
+        "color": "#8fa3b3",
+        "center": [
+          -0.7,
+          2.25,
+          0
+        ],
+        "radius": 0.45,
+        "height": 0.12
+      },
+      {
+        "id": "chiller-fan-b",
+        "kind": "cylinder",
+        "color": "#8fa3b3",
+        "center": [
+          0.7,
+          2.25,
+          0
+        ],
+        "radius": 0.45,
+        "height": 0.12
+      }
+    ]
+  }
+}

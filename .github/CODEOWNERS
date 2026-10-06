@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Who is asked to review what.
+#
+# Code-owner review is NOT required by branch protection: this file only
+# requests reviews. What a merge needs is set out in GOVERNANCE.md ("Review and
+# merge"). If "Require review from Code Owners" is ever switched on, an
+# approval from any one owner of each changed path satisfies it.
+#
+# How GitHub reads this file (about-code-owners, GitHub Docs:
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners):
+# - the LAST matching pattern wins, so the default comes first;
+# - a pull request uses this file as it is on its BASE branch, so a pull
+#   request that edits it cannot change who reviews that same pull request;
+# - every owner needs write access to the repository. A team owner must be
+#   visible and have write access itself, even if its members already do;
+# - a line with invalid syntax is skipped, and GitHub highlights it when the
+#   file is viewed on github.com;
+# - code owners work in public repositories on every plan, but in a private
+#   repository only on GitHub Pro, Team or Enterprise. Which plan the
+#   organisation is on is unverified here, so until launch this file may
+#   request no reviews at all.
+# These points are read from the docs page above, not tested on this
+# repository.
+#
+# Adding a publisher team later: once a publisher has an organisation team
+# with write access, give it its own folder, below the default, for example:
+#
+#   /blocks/<publisher>/ @OpenGeometry-io/<team>
+#
+# The paths in the last group below stay with the maintainers, because a
+# change there changes what every block is held to or how it is trusted.
+
+# Default: everything.
+* @aka-blackboots
+
+# Publisher teams go here, one /blocks/<publisher>/ line each.
+
+# Rules, trust and licensing. Changes here need the most care
+# (GOVERNANCE.md, "Review and merge").
+/schema/ @aka-blackboots
+/tools/ @aka-blackboots
+/publishers.json @aka-blackboots
+/revocations.json @aka-blackboots
+/categories.json @aka-blackboots
+/.github/ @aka-blackboots
+/REUSE.toml @aka-blackboots
+/LICENSE.md @aka-blackboots
+/LICENSES/ @aka-blackboots

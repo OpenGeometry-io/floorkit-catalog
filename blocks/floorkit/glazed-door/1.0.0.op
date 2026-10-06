@@ -1,0 +1,299 @@
+{
+  "version": 1,
+  "id": "floorkit.glazed-door",
+  "labelName": "Glazed Door Assembly",
+  "type": "DOOR",
+  "dimensions": {
+    "width": 0.98,
+    "depth": 0.14,
+    "height": 2.11
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "openings",
+    "catalog:placement": "hosted",
+    "catalog:tags": "door, vision panel",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/openings/glazed-door-assembly.op#catalog-openings-glazed-door-assembly",
+    "ifc:class": "IfcDoor",
+    "ifc:predefinedType": "DOOR",
+    "mat:frameSolid": "frame",
+    "mat:glassInset": "glass"
+  },
+  "anchors": {
+    "baseCenter": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "tagMount": {
+      "placement": {
+        "position": [
+          0,
+          1.28,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "signage-mount"
+      }
+    }
+  },
+  "definitions": {
+    "frameCenterline": {
+      "kind": "polyline",
+      "color": "#6B5543",
+      "points": [
+        [
+          -0.46,
+          -0.06
+        ],
+        [
+          -0.46,
+          0.06
+        ],
+        [
+          0.46,
+          0.06
+        ],
+        [
+          0.46,
+          -0.06
+        ]
+      ]
+    },
+    "frameOuter": {
+      "kind": "offset2d",
+      "sourceRef": "frameCenterline",
+      "distance": 0.03,
+      "output": "polyline",
+      "color": "#6B5543"
+    },
+    "frameInner": {
+      "kind": "offset2d",
+      "sourceRef": "frameCenterline",
+      "distance": -0.03,
+      "output": "polyline",
+      "color": "#6B5543"
+    },
+    "framePath": {
+      "kind": "polyline3d",
+      "points": [
+        [
+          -0.46,
+          0,
+          0
+        ],
+        [
+          -0.46,
+          2.08,
+          0
+        ],
+        [
+          0.46,
+          2.08,
+          0
+        ],
+        [
+          0.46,
+          0,
+          0
+        ]
+      ]
+    },
+    "frameSection": {
+      "kind": "polyline3d",
+      "points": [
+        [
+          -0.03,
+          0,
+          -0.07
+        ],
+        [
+          -0.03,
+          0,
+          0.07
+        ],
+        [
+          0.03,
+          0,
+          0.07
+        ],
+        [
+          0.03,
+          0,
+          -0.07
+        ],
+        [
+          -0.03,
+          0,
+          -0.07
+        ]
+      ]
+    },
+    "frameSolid": {
+      "kind": "sweep",
+      "pathRef": "framePath",
+      "profileRef": "frameSection",
+      "capStart": true,
+      "capEnd": true,
+      "color": "#6B5543"
+    },
+    "leafBase": {
+      "kind": "cuboid",
+      "center": [
+        0,
+        1.025,
+        0
+      ],
+      "width": 0.86,
+      "height": 2.05,
+      "depth": 0.042,
+      "color": "#D7D0C4"
+    },
+    "visionPanelCutter": {
+      "kind": "cuboid",
+      "center": [
+        0,
+        1.28,
+        0
+      ],
+      "width": 0.24,
+      "height": 0.76,
+      "depth": 0.08,
+      "color": "#9FC2D3"
+    },
+    "glazedLeaf": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "leafBase",
+      "operandRefs": [
+        "visionPanelCutter"
+      ],
+      "color": "#D7D0C4"
+    },
+    "glassInset": {
+      "kind": "cuboid",
+      "center": [
+        0,
+        1.28,
+        0
+      ],
+      "width": 0.24,
+      "height": 0.76,
+      "depth": 0.014,
+      "color": "#9FC2D3"
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "ref": "frameOuter"
+      },
+      {
+        "ref": "frameInner"
+      },
+      {
+        "id": "door-leaf-profile",
+        "kind": "polygon",
+        "color": "#D7D0C4",
+        "vertices": [
+          [
+            -0.43,
+            -0.021
+          ],
+          [
+            -0.43,
+            0.021
+          ],
+          [
+            0.43,
+            0.021
+          ],
+          [
+            0.43,
+            -0.021
+          ]
+        ]
+      },
+      {
+        "id": "vision-panel-profile",
+        "kind": "polygon",
+        "color": "#9FC2D3",
+        "vertices": [
+          [
+            -0.12,
+            -0.016
+          ],
+          [
+            -0.12,
+            0.016
+          ],
+          [
+            0.12,
+            0.016
+          ],
+          [
+            0.12,
+            -0.016
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "ref": "frameSolid"
+      },
+      {
+        "ref": "glazedLeaf"
+      },
+      {
+        "ref": "glassInset"
+      }
+    ]
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "id": "floorkit.kitchen-counter",
+  "labelName": "Kitchen Counter",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 2.4,
+    "depth": 0.65,
+    "height": 1.45
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "kitchen",
+    "catalog:placement": "free",
+    "catalog:tags": "counter, worktop",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/kitchen-counter.op#catalog-furnishing-kitchen-counter",
+    "ifc:class": "IfcFurniture",
+    "mat:kick": "frame",
+    "mat:hob": "frame",
+    "mat:splashback": "ceramic"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "worktop",
+        "kind": "polygon",
+        "color": "#cfc8bb",
+        "vertices": [
+          [
+            -1.2,
+            -0.32
+          ],
+          [
+            1.2,
+            -0.32
+          ],
+          [
+            1.2,
+            0.32
+          ],
+          [
+            -1.2,
+            0.32
+          ]
+        ]
+      },
+      {
+        "id": "hob",
+        "kind": "polygon",
+        "color": "#2b2b2b",
+        "vertices": [
+          [
+            0.15,
+            -0.2
+          ],
+          [
+            0.65,
+            -0.2
+          ],
+          [
+            0.65,
+            0.2
+          ],
+          [
+            0.15,
+            0.2
+          ]
+        ]
+      },
+      {
+        "id": "sink",
+        "kind": "polygon",
+        "color": "#9aa0a6",
+        "vertices": [
+          [
+            -0.7,
+            -0.18
+          ],
+          [
+            -0.3,
+            -0.18
+          ],
+          [
+            -0.3,
+            0.18
+          ],
+          [
+            -0.7,
+            0.18
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "base-cabinet",
+        "kind": "cuboid",
+        "color": "#e8e4dc",
+        "center": [
+          0,
+          0.45,
+          0
+        ],
+        "width": 2.4,
+        "height": 0.85,
+        "depth": 0.6
+      },
+      {
+        "id": "kick",
+        "kind": "cuboid",
+        "color": "#b9b2a6",
+        "center": [
+          0,
+          0.05,
+          0.02
+        ],
+        "width": 2.3,
+        "height": 0.1,
+        "depth": 0.5
+      },
+      {
+        "id": "worktop",
+        "kind": "cuboid",
+        "color": "#3a3a3a",
+        "center": [
+          0,
+          0.9,
+          0
+        ],
+        "width": 2.46,
+        "height": 0.05,
+        "depth": 0.64
+      },
+      {
+        "id": "hob",
+        "kind": "cuboid",
+        "color": "#1d1d1d",
+        "center": [
+          0.4,
+          0.93,
+          0
+        ],
+        "width": 0.5,
+        "height": 0.02,
+        "depth": 0.4
+      },
+      {
+        "id": "splashback",
+        "kind": "cuboid",
+        "color": "#d9d4c8",
+        "center": [
+          0,
+          1.2,
+          -0.29
+        ],
+        "width": 2.4,
+        "height": 0.55,
+        "depth": 0.04
+      }
+    ]
+  }
+}

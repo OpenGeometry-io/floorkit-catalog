@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Request a block
+description: Ask for an element the catalog does not have yet, such as a piece of furniture, a fixture, a door or a piece of equipment.
+title: "Block request: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Please search the open issues first, in case someone has already asked.
+
+        The catalog holds **generic** designs. Describe the kind of object, not a product: no brand names, and no iconic or named designer pieces ([CONTRIBUTING.md, "Provenance rules"](https://github.com/OpenGeometry-io/floorkit-catalog/blob/main/CONTRIBUTING.md#provenance-rules)). Do not attach manufacturer CAD or BIM files: a block may not copy their geometry.
+
+  - type: input
+    id: what
+    attributes:
+      label: What is it?
+      description: A plain name, as it would appear in a block's label.
+      placeholder: Stacking chair
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: The closest of the catalog's 13 categories (categories.json).
+      options:
+        - seating
+        - tables
+        - beds
+        - storage
+        - kitchen
+        - sanitary
+        - appliances
+        - lighting
+        - planting
+        - vehicles
+        - equipment
+        - openings
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: dimensions
+    attributes:
+      label: Dimensions
+      description: Overall width, depth and height in millimetres or metres, and any clearance or insertion point that matters. Say where each number comes from.
+      placeholder: |
+        Width 450 mm, depth 520 mm, height 800 mm; seat height 450 mm.
+        Typical sizes from two public data sheets (linked below).
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Links to public data sheets, standards or photographs that show the kind of object. Dimensions are facts and may be used; geometry may not be copied from anyone's files.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Would you like to contribute it yourself?
+      description: CONTRIBUTING.md, "Add a block", walks through it. Every commit needs a sign-off (`git commit -s`).
+      options:
+        - Yes, I will open a pull request
+        - Yes, with some help
+        - No, I am only requesting it
+    validations:
+      required: true

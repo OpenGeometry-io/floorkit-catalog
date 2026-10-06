@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "id": "floorkit.office-desk",
+  "labelName": "Office Desk",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1.6,
+    "depth": 1.5,
+    "height": 1.2
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "tables",
+    "catalog:placement": "free",
+    "catalog:tags": "desk, workstation, office",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/office-desk.op#catalog-furnishing-office-desk",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "DESK",
+    "mat:leg-left": "frame",
+    "mat:leg-right": "frame",
+    "mat:monitor-stand": "frame",
+    "mat:monitor-screen": "frame",
+    "mat:chair-seat": "soft",
+    "mat:chair-back": "soft",
+    "mat:chair-post": "metal",
+    "mat:chair-base": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "desktop",
+        "kind": "polygon",
+        "color": "#cdbf9f",
+        "vertices": [
+          [
+            -0.8,
+            -0.6
+          ],
+          [
+            0.8,
+            -0.6
+          ],
+          [
+            0.8,
+            0.2
+          ],
+          [
+            -0.8,
+            0.2
+          ]
+        ]
+      },
+      {
+        "id": "monitor",
+        "kind": "polygon",
+        "color": "#2b2b2b",
+        "vertices": [
+          [
+            -0.3,
+            -0.55
+          ],
+          [
+            0.3,
+            -0.55
+          ],
+          [
+            0.3,
+            -0.45
+          ],
+          [
+            -0.3,
+            -0.45
+          ]
+        ]
+      },
+      {
+        "id": "chair",
+        "kind": "polygon",
+        "color": "#4a4a4a",
+        "vertices": [
+          [
+            -0.27,
+            0.3
+          ],
+          [
+            0.27,
+            0.3
+          ],
+          [
+            0.27,
+            0.7
+          ],
+          [
+            -0.27,
+            0.7
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "desktop",
+        "kind": "cuboid",
+        "color": "#d8c9a8",
+        "center": [
+          0,
+          0.73,
+          -0.2
+        ],
+        "width": 1.6,
+        "height": 0.04,
+        "depth": 0.8
+      },
+      {
+        "id": "leg-left",
+        "kind": "cuboid",
+        "color": "#9c9488",
+        "center": [
+          -0.76,
+          0.36,
+          -0.2
+        ],
+        "width": 0.04,
+        "height": 0.72,
+        "depth": 0.74
+      },
+      {
+        "id": "leg-right",
+        "kind": "cuboid",
+        "color": "#9c9488",
+        "center": [
+          0.76,
+          0.36,
+          -0.2
+        ],
+        "width": 0.04,
+        "height": 0.72,
+        "depth": 0.74
+      },
+      {
+        "id": "monitor-stand",
+        "kind": "cuboid",
+        "color": "#333333",
+        "center": [
+          0,
+          0.82,
+          -0.45
+        ],
+        "width": 0.18,
+        "height": 0.14,
+        "depth": 0.1
+      },
+      {
+        "id": "monitor-screen",
+        "kind": "cuboid",
+        "color": "#1a1a1a",
+        "center": [
+          0,
+          1,
+          -0.5
+        ],
+        "width": 0.62,
+        "height": 0.36,
+        "depth": 0.04
+      },
+      {
+        "id": "chair-seat",
+        "kind": "cuboid",
+        "color": "#3f3f3f",
+        "center": [
+          0,
+          0.46,
+          0.45
+        ],
+        "width": 0.5,
+        "height": 0.06,
+        "depth": 0.5
+      },
+      {
+        "id": "chair-back",
+        "kind": "cuboid",
+        "color": "#3f3f3f",
+        "center": [
+          0,
+          0.76,
+          0.68
+        ],
+        "width": 0.5,
+        "height": 0.52,
+        "depth": 0.06
+      },
+      {
+        "id": "chair-post",
+        "kind": "cylinder",
+        "color": "#666666",
+        "center": [
+          0,
+          0.23,
+          0.45
+        ],
+        "radius": 0.04,
+        "height": 0.46
+      },
+      {
+        "id": "chair-base",
+        "kind": "cylinder",
+        "color": "#555555",
+        "center": [
+          0,
+          0.04,
+          0.45
+        ],
+        "radius": 0.28,
+        "height": 0.06
+      }
+    ]
+  }
+}

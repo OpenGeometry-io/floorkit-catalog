@@ -1,0 +1,332 @@
+{
+  "version": 1,
+  "id": "floorkit.bathtub",
+  "labelName": "Bathtub",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 1.65,
+    "depth": 0.7,
+    "height": 0.55
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:tags": "bath, bathroom",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/sanitary/bathtub.op#catalog-sanitary-bathtub",
+    "catalog:note": "Long axis along the wall at -Z; waste at the -X end.",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "BATH",
+    "mat:shell": "ceramic",
+    "mat:basin": "ceramic"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.35
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "rim",
+        "kind": "polygon",
+        "color": "#eceae4",
+        "vertices": [
+          [
+            0.825,
+            0.29
+          ],
+          [
+            0.8204,
+            0.313
+          ],
+          [
+            0.8074,
+            0.3324
+          ],
+          [
+            0.788,
+            0.3454
+          ],
+          [
+            0.765,
+            0.35
+          ],
+          [
+            -0.765,
+            0.35
+          ],
+          [
+            -0.788,
+            0.3454
+          ],
+          [
+            -0.8074,
+            0.3324
+          ],
+          [
+            -0.8204,
+            0.313
+          ],
+          [
+            -0.825,
+            0.29
+          ],
+          [
+            -0.825,
+            -0.29
+          ],
+          [
+            -0.8204,
+            -0.313
+          ],
+          [
+            -0.8074,
+            -0.3324
+          ],
+          [
+            -0.788,
+            -0.3454
+          ],
+          [
+            -0.765,
+            -0.35
+          ],
+          [
+            0.765,
+            -0.35
+          ],
+          [
+            0.788,
+            -0.3454
+          ],
+          [
+            0.8074,
+            -0.3324
+          ],
+          [
+            0.8204,
+            -0.313
+          ],
+          [
+            0.825,
+            -0.29
+          ]
+        ]
+      },
+      {
+        "id": "basin",
+        "kind": "polygon",
+        "color": "#ffffff",
+        "vertices": [
+          [
+            0.75,
+            0.16
+          ],
+          [
+            0.7409,
+            0.2059
+          ],
+          [
+            0.7149,
+            0.2449
+          ],
+          [
+            0.6759,
+            0.2709
+          ],
+          [
+            0.63,
+            0.28
+          ],
+          [
+            -0.63,
+            0.28
+          ],
+          [
+            -0.6759,
+            0.2709
+          ],
+          [
+            -0.7149,
+            0.2449
+          ],
+          [
+            -0.7409,
+            0.2059
+          ],
+          [
+            -0.75,
+            0.16
+          ],
+          [
+            -0.75,
+            -0.16
+          ],
+          [
+            -0.7409,
+            -0.2059
+          ],
+          [
+            -0.7149,
+            -0.2449
+          ],
+          [
+            -0.6759,
+            -0.2709
+          ],
+          [
+            -0.63,
+            -0.28
+          ],
+          [
+            0.63,
+            -0.28
+          ],
+          [
+            0.6759,
+            -0.2709
+          ],
+          [
+            0.7149,
+            -0.2449
+          ],
+          [
+            0.7409,
+            -0.2059
+          ],
+          [
+            0.75,
+            -0.16
+          ]
+        ]
+      },
+      {
+        "id": "waste",
+        "kind": "polygon",
+        "color": "#9aa0a6",
+        "vertices": [
+          [
+            -0.585,
+            0
+          ],
+          [
+            -0.5953,
+            0.0247
+          ],
+          [
+            -0.62,
+            0.035
+          ],
+          [
+            -0.6447,
+            0.0247
+          ],
+          [
+            -0.655,
+            0
+          ],
+          [
+            -0.6447,
+            -0.0247
+          ],
+          [
+            -0.62,
+            -0.035
+          ],
+          [
+            -0.5953,
+            -0.0247
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "shell",
+        "kind": "cuboid",
+        "color": "#f4f2ec",
+        "center": [
+          0,
+          0.275,
+          0
+        ],
+        "width": 1.65,
+        "height": 0.55,
+        "depth": 0.7
+      },
+      {
+        "id": "basin",
+        "kind": "cuboid",
+        "color": "#ffffff",
+        "center": [
+          0,
+          0.42,
+          0
+        ],
+        "width": 1.5,
+        "height": 0.3,
+        "depth": 0.56
+      }
+    ]
+  }
+}

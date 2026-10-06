@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "id": "fixture.chair",
+  "labelName": "Simple Chair",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.64,
+    "depth": 0.64,
+    "height": 0.96
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:tags": "chair, dining",
+    "catalog:basedOn": "blocks/floorkit/simple-chair/1.0.0.op",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "CHAIR",
+    "mat:leg-front-left": "frame",
+    "mat:leg-front-right": "frame",
+    "mat:leg-back-left": "frame",
+    "mat:leg-back-right": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.52,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "ref": "outline"
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "seat",
+        "kind": "cuboid",
+        "color": "#D8D8D8",
+        "center": [
+          0,
+          0.49,
+          0
+        ],
+        "width": 0.52,
+        "height": 0.06,
+        "depth": 0.48
+      },
+      {
+        "id": "backrest",
+        "kind": "cuboid",
+        "color": "#C6C6C6",
+        "center": [
+          0,
+          0.73,
+          -0.21
+        ],
+        "width": 0.48,
+        "height": 0.42,
+        "depth": 0.06
+      },
+      {
+        "id": "leg-front-left",
+        "kind": "cuboid",
+        "color": "#5A5A5A",
+        "center": [
+          -0.22,
+          0.23,
+          0.2
+        ],
+        "width": 0.06,
+        "height": 0.46,
+        "depth": 0.06
+      },
+      {
+        "id": "leg-front-right",
+        "kind": "cuboid",
+        "color": "#5A5A5A",
+        "center": [
+          0.22,
+          0.23,
+          0.2
+        ],
+        "width": 0.06,
+        "height": 0.46,
+        "depth": 0.06
+      },
+      {
+        "id": "leg-back-left",
+        "kind": "cuboid",
+        "color": "#5A5A5A",
+        "center": [
+          -0.22,
+          0.23,
+          -0.2
+        ],
+        "width": 0.06,
+        "height": 0.46,
+        "depth": 0.06
+      },
+      {
+        "id": "leg-back-right",
+        "kind": "cuboid",
+        "color": "#5A5A5A",
+        "center": [
+          0.22,
+          0.23,
+          -0.2
+        ],
+        "width": 0.06,
+        "height": 0.46,
+        "depth": 0.06
+      }
+    ]
+  },
+  "definitions": {
+    "shape": {
+      "kind": "polygon",
+      "vertices": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "outline": {
+      "kind": "offset2d",
+      "sourceRef": "shape",
+      "distance": 0.1,
+      "output": "polyline"
+    }
+  }
+}
