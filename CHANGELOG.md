@@ -8,9 +8,9 @@ Notable changes to floorkit-catalog, in the style of [Keep a Changelog 1.1.0](ht
 
 ## [Unreleased]
 
-## [0.1.0] - not yet tagged
+## [0.1.0] - 2026-10-26
 
-The first release. The owner tags it at launch ([docs/LAUNCH.md](docs/LAUNCH.md), item 4), and the date goes here in the last pull request before the tag.
+The first release, tagged at the public launch ([docs/LAUNCH.md](docs/LAUNCH.md), item 4).
 
 ### Added
 
