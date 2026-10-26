@@ -3,7 +3,8 @@ SPDX-PackageName = "floorkit-catalog"
 SPDX-PackageSupplier = "Vishwajeet Mane"
 SPDX-PackageDownloadLocation = "https://github.com/OpenGeometry-io/floorkit-catalog"
 
-# The tables never overlap: every path is classified exactly once. A new
+# Every path is classified once; the only overlap is the skill's starter
+# block, which the CC BY table overrides because it is a block. A new
 # top-level file fails `reuse lint` until it is added to one of them.
 
 # Schema, tools, tests, docs, CI and repository files: Apache-2.0.
@@ -24,6 +25,7 @@ path = [
   "package-lock.json",
   "publishers.json",
   "revocations.json",
+  ".claude/**",
   ".github/**",
   "docs/**",
   "schema/**",
@@ -36,7 +38,7 @@ SPDX-License-Identifier = "Apache-2.0"
 
 # The blocks, and the data derived from them: CC BY 4.0.
 [[annotations]]
-path = ["blocks/**", "index.json", "test/fixtures/**"]
+path = ["blocks/**", "index.json", "test/fixtures/**", ".claude/skills/author-block/starter.op"]
 precedence = "override"
 SPDX-FileCopyrightText = "2025-present Vishwajeet Mane and floorkit-catalog contributors"
 SPDX-License-Identifier = "CC-BY-4.0"

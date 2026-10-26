@@ -119,7 +119,7 @@ if (build) {
     try {
       const element = new floorkit.OpenElement(block.text);
       if (mesh) {
-        // The drafting standard's list of allowed pairs (FLO-206) joins `overlaps` here.
+        // docs/drafting-standard.md §4 says which pairs a block may list; the list itself is the block's note.
         const { overlaps } = parseNote(JSON.parse(block.text).metadata?.['catalog:note']);
         const report = meshReport(bodyParts(element), overlaps);
         mkdirSync(block.out, { recursive: true });
