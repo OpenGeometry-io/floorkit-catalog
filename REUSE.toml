@@ -41,6 +41,13 @@ precedence = "override"
 SPDX-FileCopyrightText = "2025-present Vishwajeet Mane and floorkit-catalog contributors"
 SPDX-License-Identifier = "CC-BY-4.0"
 
+# README banner images, rendered from blocks/floorkit/minimal-sofa/1.0.0.op.
+[[annotations]]
+path = "docs/images/minimal-sofa-*.png"
+precedence = "override"
+SPDX-FileCopyrightText = "2025-present Vishwajeet Mane and floorkit-catalog contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
 # Adapted from the Contributor Covenant 2.1, which its authors publish under
 # CC BY 4.0 (stated on contributor-covenant.org; not fetchable from where this
 # file was written, so re-check at launch).

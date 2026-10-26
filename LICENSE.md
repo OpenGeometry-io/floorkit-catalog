@@ -4,7 +4,7 @@ This repository holds two kinds of thing, under two licences, plus a code of con
 
 | What | Where | Licence |
 | --- | --- | --- |
-| **Blocks**: the `.op` element definitions, and data derived from them | `blocks/**`, `index.json`, `test/fixtures/**` | [CC BY 4.0](LICENSES/CC-BY-4.0.txt) |
+| **Blocks**: the `.op` element definitions, and data derived from them | `blocks/**`, `index.json`, `test/fixtures/**`, the README banner `docs/images/minimal-sofa-*.png` | [CC BY 4.0](LICENSES/CC-BY-4.0.txt) |
 | **The code of conduct**, adapted from the Contributor Covenant 2.1 | `CODE_OF_CONDUCT.md` | [CC BY 4.0](LICENSES/CC-BY-4.0.txt), as the Covenant is published |
 | **Everything else**: schema, tools, tests, docs, CI | the rest of the repository | [Apache-2.0](LICENSES/Apache-2.0.txt) |
 
