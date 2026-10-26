@@ -21,12 +21,15 @@ Blocks are CC BY 4.0. Everything else is Apache-2.0 ([LICENSE.md](LICENSE.md)).
 | `categories.json` | The 13 categories; must equal the schema's `catalog:category` enum | Maintainers, through an RFC |
 | `revocations.json` | `[{ publisher, slug, version, at, reason }]` | Maintainers |
 | `schema/op/v1.schema.json`, `schema/index/v1.schema.json` | JSON Schema 2020-12, strict and closed | Maintainers |
-| `tools/` | CLIs (`validate`, `format`, `build-index`, `immutable`, `dco`, `parity`, the seed importer) and `loader.mjs` | |
+| `tools/` | CLIs (`validate`, `format`, `build-index`, `immutable`, `dco`, `parity`, `render`, the seed importer) and `loader.mjs` | |
 | `tools/lib/op.mjs` | One block: schema, then references, limits and canonical bytes | |
 | `tools/lib/repo.mjs` | Paths, publishers, ordering | |
+| `tools/lib/floorkit.mjs`, `tools/lib/mesh.mjs` | Loading a Floorkit build from `FLOORKIT_DIR`; the mesh check of `parity.mjs --mesh` | |
+| `tools/lib/pictures.mjs` | The pictures of `render.mjs`: plan overlay, 3D views in Chromium or as SVG | |
+| `tools/lib/note.mjs` | The keywords a `catalog:note` carries for the tools (`overlap <nodeA>+<nodeB>`) | |
 | `tools/lib/catalog-index.mjs` | Building the index | |
-| `test/*.test.mjs` | `node:test` suites: `op`, `repo`, `loader`, `gates` | |
-| `test/fixtures/` | A valid block, and fixtures Floorkit itself rejects (`kernel-rejects/`) | |
+| `test/*.test.mjs` | `node:test` suites: `op`, `repo`, `loader`, `gates`, `render` (its Floorkit cases skip without `FLOORKIT_DIR`) | |
+| `test/fixtures/` | A valid block, fixtures Floorkit itself rejects (`kernel-rejects/`), and bodies for the mesh check (`mesh-rejects/`: one it rejects, one it accepts only because `catalog:note` lists the overlap) | |
 | `docs/` | The format, the RFCs (`docs/rfcs/`), the launch checklist | |
 | `.github/` | The `validate` workflow (jobs `catalog` and `reuse`), the pull request template, issue forms, `CODEOWNERS` | Maintainers |
 | `LICENSES/`, `REUSE.toml` | Licence texts, and the licence of every path | |
@@ -48,7 +51,8 @@ node tools/dco.mjs <base> <head>         # every non-merge commit signed off by 
 ```
 
 Maintainer-only, and not for agents to run unless asked:
-- `FLOORKIT_DIR=<dir with dist/index.js> node tools/parity.mjs [--build]` needs a Floorkit build.
+- `FLOORKIT_DIR=<dir with dist/index.js> node tools/parity.mjs [--build] [--mesh] [file.op ...]` needs a Floorkit build. `--build` also builds each block mirrored and prints `mirrored by Floorkit: N/N`; `--mesh` checks the built bodies and writes `renders/<publisher>/<slug>/<version>/mesh-report.json` (`renders/` is gitignored). Agents run it when the issue asks for it.
+- `FLOORKIT_DIR=<dir with dist/index.js> node tools/render.mjs [--baseline=<dir>] [file.op ...]` renders each block to `renders/<publisher>/<slug>/<version>/` (two plans, an overlay, four 3D views) and `renders/gallery.html`. The 3D views are the kernel's triangles coloured by `mat:` role, drawn by Floorkit's three.js in headless Chromium or as SVG; they are not Floorkit's OpenThree viewer. Agents run it when the issue asks for it, and say which path it printed.
 - `node tools/import-floorkit-examples.mjs <OpenPlans checkout> [--check]` needs a private repository, and rewrites the seed blocks.
 
 ## Non-negotiables
