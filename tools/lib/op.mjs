@@ -13,6 +13,10 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
+import { geometryIssues } from './geometry.mjs';
+import { parseNote } from './note.mjs';
+import { PENDING_REDRAW } from './pending-redraw.mjs';
+import { ANCHOR_ROLES, KEPT_PORT_IDS, PORTS } from './roles.mjs';
 
 const SCHEMA_URL = new URL('../../schema/op/v1.schema.json', import.meta.url);
 
@@ -310,10 +314,67 @@ function semanticIssues(definition) {
 }
 
 /**
+ * The checks a block drawn to `docs/drafting-standard.md` must pass. The
+ * `floorkit` seeds still on `PENDING_REDRAW` skip them until redrawn.
+ */
+function standardIssues(definition, text, listed) {
+  const pending = listed && listed.publisher === 'floorkit' && listed.version === '1.0.0' && Object.hasOwn(PENDING_REDRAW, listed.slug);
+  if (pending && PENDING_REDRAW[listed.slug] === sha256Hex(text)) return [];
+  const publisher = definition.id.split('.')[0];
+  const issues = [];
+  const lod = definition.metadata['catalog:lod'];
+  if (lod === undefined) issues.push({ path: '/metadata', message: 'needs "catalog:lod"' });
+  else if (publisher === 'floorkit' && lod !== '300') issues.push({ path: '/metadata/catalog:lod', message: `is "${lod}"; a floorkit block is drawn to LOD 300` });
+  const nodes = [
+    ...definition.modelView.elements.map((node, index) => [node, `/modelView/elements/${index}`]),
+    ...Object.entries(definition.definitions ?? {}).map(([key, node]) => [node, `/definitions/${key}`]),
+  ];
+  for (const [node, path] of nodes) {
+    // Floorkit mirrors only the centre of a partial cylinder (drafting standard §3).
+    if (node.kind === 'cylinder' && node.angle !== undefined && node.angle < 2 * Math.PI - 1e-4) {
+      issues.push({ path: `${path}/angle`, message: `is ${node.angle}; a cylinder must be a full turn (${(2 * Math.PI).toFixed(4)}), since a mirrored partial cylinder does not match its plan` });
+    }
+  }
+  // Anchors and ports from the standard's closed tables (§7, §8).
+  for (const [name, anchor] of Object.entries(definition.anchors ?? {})) {
+    const roles = ANCHOR_ROLES[name];
+    const role = anchor.metadata?.role;
+    if (!roles) issues.push({ path: `/anchors/${name}`, message: `is not an anchor name of the drafting standard (§7)` });
+    else if (!roles.includes(role)) issues.push({ path: `/anchors/${name}/metadata/role`, message: `is ${role === undefined ? 'missing' : `"${role}"`}; "${name}" takes ${roles.map((r) => `"${r}"`).join(' or ')}` });
+  }
+  if (!KEPT_PORT_IDS.includes(definition.id)) {
+    (definition.ports ?? []).forEach((port, index) => {
+      const want = PORTS[port.id];
+      const size = port.profile.diameter;
+      const wrong = !want ? 'is not a port id of the drafting standard (§8)'
+        : port.domain !== want.domain || port.systemType !== want.systemType ? `must be ${want.domain} / ${want.systemType}`
+        : !want.directions.includes(port.flowDirection) ? `must flow ${want.directions.join(' or ')}`
+        : port.profile.shape !== want.shape ? `must have a ${want.shape} profile`
+        : want.sizes && !want.sizes.includes(size) ? `has diameter ${size}; "${port.id}" takes ${want.sizes.join(' or ')}`
+        : want.poles && (port.profile.poles !== want.poles || port.profile.voltage !== want.voltage) ? `must be ${want.poles} pole at ${want.voltage} V`
+        : null;
+      if (wrong) issues.push({ path: `/ports/${index}`, message: `port "${port.id}" ${wrong}` });
+    });
+  }
+  // IFC (§9): Floorkit's distribution path reads only the legacy ifcClass.
+  const metadata = definition.metadata;
+  const distribution = ((definition.ports ?? []).length > 0 || definition.type === 'MEP_EQUIPMENT') && !['DOOR', 'WINDOW'].includes(definition.type);
+  if (metadata['ifc:class'] === undefined) issues.push({ path: '/metadata', message: 'needs "ifc:class"' });
+  else if (distribution && metadata.ifcClass === undefined) issues.push({ path: '/metadata', message: `needs "ifcClass": "${metadata['ifc:class']}", since a ported or MEP_EQUIPMENT block exports through Floorkit's distribution path` });
+  else if (!distribution && metadata.ifcClass !== undefined) issues.push({ path: '/metadata/ifcClass', message: 'is only for a ported or MEP_EQUIPMENT block; set ifc:class alone' });
+  const note = parseNote(metadata['catalog:note']);
+  issues.push(...note.problems.map((message) => ({ path: '/metadata/catalog:note', message })));
+  issues.push(...geometryIssues(definition, note));
+  return issues;
+}
+
+/**
  * Judge one block file's TEXT. Returns `{ ok, issues, definition? }`; an issue
  * is `{ path, message }` with `path` a JSON pointer into the definition.
+ * `listed` is the file's place under `blocks/` (`listBlocks`), which only a
+ * pending seed's own file uses, to skip the new checks.
  */
-export function checkBlockText(text) {
+export function checkBlockText(text, { listed } = {}) {
   const issues = [];
   const bytes = Buffer.byteLength(text, 'utf8');
   if (bytes > LIMITS.maxBytes) {
@@ -344,5 +405,6 @@ export function checkBlockText(text) {
   const structural = schemaIssues(definition);
   issues.push(...structural);
   if (structural.length === 0) issues.push(...semanticIssues(definition));
+  if (structural.length === 0 && issues.length === 0) issues.push(...standardIssues(definition, text, listed));
   return issues.length === 0 ? { ok: true, issues, definition } : { ok: false, issues, definition };
 }

@@ -47,10 +47,10 @@ Note keywords are lowercase phrases inside the otherwise free `catalog:note` (at
 ```text
 <height keyword> <metres>      at | ceiling | seat | rim | top | bottom | underside, then metres with two decimals: "seat 0.45"
 overlap <nodeA>+<nodeB>        two node names joined by "+", no spaces: "overlap carcass+kick"
-<marker>                       recess | carcass | slab, as a whole word
+<marker>                       recess | carcass | slab | swing, as a whole word
 ```
 
-[`format-v1.md` §7](format-v1.md#7-root-metadata) will carry the same grammar once the geometry gates land.
+[`format-v1.md` §7](format-v1.md#7-root-metadata) carries the same grammar, and `validate.mjs` reads it.
 
 | Keyword | Meaning |
 | --- | --- |
@@ -70,7 +70,7 @@ Example: `"catalog:note": "Wall-hung basin. rim 0.85, underside 0.68. Waste at t
 
 The body must read as the object from the isometric view, with the parts the category lists (section 10) at their true heights.
 
-- **At least 3 solids**, and the sum of the solids' volumes below 95 % of the bounding-box volume (the note's `carcass` or `slab` waives the volume ratio only). A body of one box is LOD 100, not a catalog block. No tool computes the ratio yet; `mesh-report.json` from `parity.mjs` lists each node's volume.
+- **At least 3 solids**, and the sum of the solids' volumes below 95 % of the bounding-box volume (the note's `carcass` or `slab` waives the volume ratio only). A body of one box is LOD 100, not a catalog block. `validate.mjs` computes the ratio from the solids' boxes ([format §9](format-v1.md#9-limits-and-why)).
 - **No part thinner than 0.01 m** in any direction (glass included, 0.010), and no part wholly hidden inside another.
 - **Every part touches** another part or a ground (section 1) within 0.001 m. No floating worktop, no car on wheels that stop short of the floor.
 - **Hollows** (bowls, baths, sinks, trays) are drawn hollow. Never put a solid box inside another box to suggest a basin. Two ways are allowed:
@@ -111,7 +111,7 @@ Everything else must be redrawn so the parts meet:
 
 The plan symbol (`profileView`) is what most users see. It follows practice for furniture and fittings (D11): a light outline at true size, no fill.
 
-- **The outline is the top-down silhouette of the body**, within 0.005 m on each side. Arcs that show a door's swing are outside this rule.
+- **The outline is the top-down silhouette of the body**, within 0.005 m on each side. Arcs that show a door's swing are outside this rule: a `DOOR` is exempt, and any other block with a swing says `swing` in its note.
 - **At 1:100 it reads by its outline plus at most two interior lines** (a seat back, a mattress turn-down, a door split). An interior line marks an edge seen from above: for a chair, the front face of the back, where it meets the seat. Detail beyond that is for 1:50 and must still read at 1:100. A block draws one symbol for both scales, so a plan that is the same at 1:50 and 1:100 is fine until plan line roles exist.
 - **Nothing finer than 0.03 m.** A gap, a lip or a line spacing under 0.03 m prints as one blot at 1:100: keep an interior line at least 0.03 m from the outline and from other lines, and leave it out for a part thinner than that.
 - **Use polygons for closed outlines**, so the plan draws as regions; loose polylines are for single lines only (a door seam, a nosing line).

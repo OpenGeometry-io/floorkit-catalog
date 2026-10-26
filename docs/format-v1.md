@@ -190,13 +190,12 @@ An anchor is a named mount point: a placement in the block's local space, plus o
 }
 ```
 
-- **Names** match `^[A-Za-z][A-Za-z0-9_-]{0,63}$`.
-  - In the seed blocks the commonest are `base` (19 blocks) and `wallFace` (8).
-  - The catalog does not fix a list.
+- **Names** match `^[A-Za-z][A-Za-z0-9_-]{0,63}$`, and come from the closed table of the [drafting standard §7](drafting-standard.md#7-anchors): 17 names, each with the roles it may take. A new name or role is added to the standard first. `op.mjs` checks every anchor against that table (`tools/lib/roles.mjs`).
 - **`placement`** is required, with `position`, `rotation` and `scale`. Floorkit turns it into a matrix with `getAnchorMatrix(name)` (`generic-element.ts:2061-2068`).
 - **`metadata`** is open: string keys matching `^[A-Za-z][A-Za-z0-9:_-]{0,63}$` and string values of at most 200 characters.
-  - The seeds use `role`, with values such as `seating-point`, `wall-contact`, `work-surface` and `faucet-mount`.
+  - Every anchor has a `role` from that table, for example `floor-contact`, `wall-contact`, `seating-point` or `tap-mount`. The seeds still on the pending list ([§9](#9-limits-and-why)) carry older values such as `work-surface` and `faucet-mount` until they are redrawn.
   - Floorkit reads none of these values. They are conventions for applications.
+  - An anchor lies on the body's surface; only `base` and `wallFace` may instead stand on the floor under the body ([§9](#9-limits-and-why)).
 - **Floorkit's handling.** An anchor that is not an object, or an empty anchor name, makes Floorkit throw (`:342-367`).
 - **Changing anchors.** Anchors are what projects attach to. Removing or renaming one is a MAJOR version change for the block; adding one is MINOR.
 
@@ -252,7 +251,7 @@ Root `metadata` is a **closed vocabulary**: any key not listed below is rejected
 
 - Every value is a string.
 - "Text" in the table means 1 or more characters, with no `<`, `>` or control characters (so no line breaks either). The upper length is given per key.
-- Floorkit reads exactly one of these keys, `ifcClass`. Everything else is for the catalog, its index and the applications that load blocks.
+- Floorkit reads two of these keys, `ifc:class` and `ifcClass`, each on its own IFC export path ([§11](#11-advisory-notes)). Everything else is for the catalog, its index and the applications that load blocks.
 - Every key travels with the definition when a project embeds it. That is why the licence and the credit live here.
 
 | Key | Required? | Format | Meaning |
@@ -263,19 +262,31 @@ Root `metadata` is a **closed vocabulary**: any key not listed below is rejected
 | `catalog:category` | yes | One of `seating`, `tables`, `beds`, `storage`, `kitchen`, `sanitary`, `appliances`, `lighting`, `planting`, `vehicles`, `equipment`, `openings`, `other` | The browsing category. [`categories.json`](../categories.json) must equal this list. |
 | `catalog:placement` | yes for `DOOR` and `WINDOW`; otherwise optional | `hosted` or `free`. It must be `hosted` for a `DOOR` or `WINDOW`, and `free` (if present) for every other type. | Whether the block sits in a wall. This is metadata only ([§11](#11-advisory-notes)). |
 | `catalog:defaultSill` | no; `WINDOW` only | A decimal number of metres as a string, e.g. `"0.9"` | The suggested sill height above the floor. |
-| `catalog:lod` | no | `100`, `200` or `300` | The level of detail the block is drawn to. Nothing in Floorkit reads it. |
+| `catalog:lod` | yes, checked by `op.mjs` (the schema makes it required once no seed is pending; [§9](#9-limits-and-why)) | `100`, `200` or `300`; a `floorkit` block must be `300` | The level of detail the block is drawn to. Nothing in Floorkit reads it. |
 | `catalog:tags` | no | Lowercase tags joined by `", "`, e.g. `"chair, dining"`. Each tag is 1–32 characters of `a-z`, `0-9`, space and `-`, and starts with a letter or digit. At most 12 tags, none repeated. | Search terms. |
 | `catalog:author` | no | text, ≤ 200 | Who drew it, if different from the attribution. |
-| `catalog:note` | no | text, ≤ 500 | An authoring note, e.g. how the block is meant to be scaled. |
+| `catalog:note` | no | text, ≤ 500, with the keywords below | An authoring note. The tools read the keywords in it. |
 | `catalog:basedOn` | no | text, ≤ 300 | Provenance: what the block was derived from. |
-| `ifc:class` | no | `^Ifc[A-Z][A-Za-z0-9]*$`, e.g. `IfcFurniture` | The IFC entity the block represents. Floorkit 0.6 does not read it. |
+| `ifc:class` | yes, checked by `op.mjs` ([§9](#9-limits-and-why)) | `^Ifc[A-Z][A-Za-z0-9]*$`, e.g. `IfcFurniture` | The IFC entity the block represents. Floorkit's freeform export reads it ([§11](#11-advisory-notes)). |
 | `ifc:predefinedType` | no; requires `ifc:class` | `^[A-Z][A-Z0-9_]*$`, e.g. `CHAIR` | The IFC predefined type. |
 | `class:uniclass2015` | no | text, ≤ 64 | A Uniclass 2015 code. |
 | `class:omniclass` | no | text, ≤ 64 | An OmniClass code. |
-| `ifcClass` | no; requires `ifc:class` and must equal it | as `ifc:class` | The legacy, unprefixed key. Floorkit 0.6's IFC export reads it, but only on its distribution-equipment path: an `MEP_EQUIPMENT` block, or a ported block that is not a door or window ([§11](#11-advisory-notes)). |
+| `ifcClass` | yes on a block with a port or of type `MEP_EQUIPMENT` (not a `DOOR` or `WINDOW`), and only there; it must equal `ifc:class` | as `ifc:class` | The legacy, unprefixed key. Floorkit's distribution-equipment path reads only this key ([§11](#11-advisory-notes)). |
 | `mat:<nodeId>` | no | `surface`, `soft`, `frame`, `metal`, `glass`, `ceramic` or `planting` | What a node is made of: a role, never a colour. `<nodeId>` must name something in the block (a view element's id, a ref's target, or a definition key). |
 
 The `catalog:` keys follow the `parti:` keys that Parti's block library uses, and the `mat:` roles are the same table Parti uses.
+
+**Note keywords.** `catalog:note` stays free text for people, but the tools read these keywords in it (`tools/lib/note.mjs`). A keyword stands anywhere in the text, set apart by a space, a comma or a full stop. The grammar, as [`docs/drafting-standard.md`](drafting-standard.md#2-dimensions-heights-and-note-keywords) §2 states it:
+
+```text
+<height keyword> <metres>      at | ceiling | seat | rim | top | bottom | underside, then metres with two decimals: "seat 0.45"
+overlap <nodeA>+<nodeB>        two node names joined by "+", no spaces: "overlap carcass+kick"
+<marker>                       recess | carcass | slab | swing, as a whole word
+```
+
+`at` and `ceiling` name the grounds of [§9](#9-limits-and-why)'s connectivity check, every height must be an exposed face of the body (a top face for `seat`, `rim`, `top` and `ceiling`, a bottom face for `bottom`, `underside` and `at`) and is written with two decimals, `recess` allows a body below the floor, `carcass` and `slab` waive the volume ratio, `swing` leaves a block's arcs out of the plan check (a door swing drawn outside the body), and `overlap` lets `parity.mjs --build --mesh` accept an interpenetrating pair. What each keyword means is the standard's §2.
+
+A marker counts wherever it stands as a whole word, prose included: a note that says "the carcass" waives the volume ratio. Write the word only when you mean it.
 
 ## 8. What Floorkit repairs, and what the catalog rejects
 
@@ -360,6 +371,26 @@ Measured in two runs in the same Linux sandbox, with `union` at every level (tim
 
 From 8 to 10 levels the construction time grew about fourfold in both runs, as two more doublings predict; the shorter chains are too noisy to show the trend. The catalog therefore counts the nodes a block would build, counting each definition once per use, and refuses more than 1,000. `test/op.test.mjs` checks that a 22-level chain, which would build about 4 million solids, is refused.
 
+**Geometry gates.** `op.mjs` also holds the body to the [drafting standard](drafting-standard.md), from the JSON alone (`tools/lib/geometry.mjs`), so CI runs them. Each solid is reduced to its bounding box with every rotation, scale and ref placement applied; a boolean counts as its base. Each failure names the node and the two numbers that disagree.
+
+| Gate | Rule | Tolerance |
+| --- | --- | --- |
+| Dimensions | The body's extent in x, y and z equals `width`, `height` and `depth` | 0.005 m |
+| Floor | No solid goes below `y = 0`, unless the note says `recess` | 0.001 m |
+| Plan | The plan's polygons, polylines, offsets and arcs span the body's x and z extent; an arc is bounded by its ends and the axes it crosses. A `DOOR` or `WINDOW`, or a block whose note says `swing`, leaves its arcs out (a swing draws outside the body). A positive `offset2d` distance lies to the left of its source's direction (x right, z up), so an inner line stays inside | 0.005 m |
+| Connected | Every solid reaches a ground through solids whose boxes touch: the floor, the wall plane at the `wallFace` anchor, the ceiling at `ceiling <m>`, the counter at `at <m>` | 0.001 m |
+| Level of detail | At least 3 solids, filling under 95 % of their bounding box; `carcass` or `slab` in the note waives the ratio only. A boolean's volume is its base's; a union's is its base's plus its operands' | 0.95 |
+| On the body | Every anchor and port lies on a solid's box surface; only `base` and `wallFace` may instead stand on the floor under the body | 0.005 m |
+| Heights | `seat`, `rim`, `top` and `ceiling` are an exposed top face, `bottom`, `underside` and `at` an exposed bottom face (one no other solid wholly covers); a height keyword needs two decimals | 0.005 m |
+| Materials | Every model node has a `mat:` role; a ref may take its definition's | none |
+| Full cylinders | A cylinder's `angle`, if given, is a full turn: Floorkit mirrors only the centre of a partial cylinder | 0.0001 rad |
+| `catalog:lod` | Set, and `300` for a `floorkit` block | none |
+| Anchors | Every anchor name and role is in the drafting standard's table (§7) | none |
+| Ports | Every port's id, domain, `systemType`, direction, profile and size is in the standard's table (§8); the data-centre seeds keep their own ids | none |
+| IFC | Every block sets `ifc:class`; a block with a port or of type `MEP_EQUIPMENT`, other than a `DOOR` or `WINDOW`, also sets `ifcClass` to the same value, and no other block sets it | none |
+
+These run after the reference and limit checks pass. A surface is a box face, so the on-the-body gate is exact for cuboids and lenient for cylinders and rotated parts. The seed blocks not yet redrawn are listed in `tools/lib/pending-redraw.mjs` with the sha256 of each file; only that file, at `blocks/floorkit/<slug>/1.0.0.op` with those bytes, skips these gates, and it still passes every other check. A new version, an edited copy or a copy outside `blocks/` gets every gate. The list only shrinks.
+
 **Other checks**, which are plain-data rules rather than size limits:
 
 - every number must be finite: `1e400` parses to `Infinity`;
@@ -408,24 +439,22 @@ These are facts about Floorkit 0.6 that no block can change. Write blocks, and t
 - In Floorkit's `BuildingModel`, "an OPBase relation resolves to a placement transform and never to a boolean" (*read*, `projects/building/model.ts:7-11`). Its troubleshooting guide (`docs/floorkit/troubleshooting.mdx`) says "A free opening or catalog relation does not implicitly cut a wall."
 - An application that wants the hole has to make it. Parti adds its own `WallOpening`. Floorkit reads neither `catalog:placement` nor `catalog:defaultSill`.
 
-**IFC export ignores most of the block** (*read*, `exporter/semantic-ifc/SemanticIfcExtractor.ts`; not executed). Floorkit 0.6 chooses the export path from the block's `type` and from whether it has ports:
+**IFC export reads the block's class on one path and the legacy key on another** (*read* in `exporter/semantic-ifc/SemanticIfcExtractor.ts` at Floorkit main `b0a084c7`; the class of each path *measured* there with ported, MEP and door probes). Floorkit chooses the export path from the block's `type` and from whether it has ports:
 
-| Block | Export path | What is exported | Lines |
+| Block | Export path | Class in the request | Lines |
 | --- | --- | --- | --- |
-| `DOOR` (with or without ports) | Floorkit's native door | a door at the native defaults, 0.9 m × 2.1 m | `:205`, `:579-600` |
-| `WINDOW` (with or without ports) | Floorkit's native window | a window at the native defaults, 1.2 m × 1.2 m, sill 0.9 m | `:207`, `:602-624` |
-| `MEP_EQUIPMENT`; or `FURNITURE`, `FIXTURE`, `APPLIANCE` or `LANDSCAPE` with at least one port | distribution equipment, with its ports | class `metadata.ifcClass`, else `IfcDistributionElement` | `:211-218`, `:328-337` |
-| `FURNITURE`, `FIXTURE`, `APPLIANCE` without ports | freeform | class `IfcFurnishingElement` | `:87-99`, `:628-660` |
-| `LANDSCAPE` without ports | freeform | class `IfcBuildingElementProxy` | `:628-660` |
+| `DOOR` (with or without ports) | Floorkit's native door | none; a door at the native defaults, 0.9 m × 2.1 m | `:265`, `:813-834` |
+| `WINDOW` (with or without ports) | Floorkit's native window | none; a window at the native defaults, 1.2 m × 1.2 m, sill 0.9 m | `:267`, `:836-860` |
+| `MEP_EQUIPMENT`; or `FURNITURE`, `FIXTURE`, `APPLIANCE` or `LANDSCAPE` with at least one port | distribution equipment, with its ports | `metadata.ifcClass`, else a data-centre default, else `IfcDistributionElement` | `:271-279`, `:383-400` |
+| `FURNITURE`, `FIXTURE`, `APPLIANCE` without ports | freeform | `ifc:class`, else `IfcFurnishingElement` | `:862-866`, `:1023-1031` |
+| `LANDSCAPE` without ports | freeform | `ifc:class`, else `IfcBuildingElementProxy` | `:1023-1031` |
 
 What follows from that table:
 
-- **A `DOOR` block does not export its own geometry.** It goes through Floorkit's native door path, which reads native door properties that an `.op` element does not have, so the door is exported at its defaults.
-- **`ifc:class` and `ifc:predefinedType` are not read.**
-  - They are recorded for tools and for a future Floorkit.
-  - The legacy `ifcClass` key is read, but only on the distribution-equipment path. That is why the five data-centre seeds (`chiller`, `crah`, `pdu`, `rear-door-heat-exchanger`, `ups`) carry both keys.
-  - The catalog requires the two keys to be equal.
-- **`IfcFurnishingElement` is deprecated for direct use in IFC4**, according to [buildingSMART's IFC4 ADD2 documentation](https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2/HTML/schema/ifcproductextension/lexical/ifcfurnishingelement.htm). That statement comes from the project's research notes; the page could not be re-read for this document, so treat it as unverified. Either way, the class choice belongs to Floorkit's exporter, and a block cannot change it.
+- **A `DOOR` block does not export its own geometry or size.** It goes through Floorkit's native door path, which reads native door properties that an `.op` element does not have.
+- **`ifc:class` is read on the freeform path**, through the element's `ifcClass` getter, which takes `ifc:class` and falls back to the legacy key.
+- **The distribution path reads only the legacy `ifcClass`.** Measured: a ported block with `ifc:class` alone exports as `IfcDistributionElement`; with both keys, as its own class. So a block with a port, or of type `MEP_EQUIPMENT`, sets `ifcClass` equal to `ifc:class`, and no other block sets it ([§9](#9-limits-and-why); [drafting standard §9](drafting-standard.md#9-ifc-class)). `ifc:predefinedType` is not read on either path.
+- **`IfcFurnishingElement` is deprecated for direct use in IFC4**, according to [buildingSMART's IFC4 ADD2 documentation](https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2/HTML/schema/ifcproductextension/lexical/ifcfurnishingelement.htm). That statement comes from the project's research notes; the page could not be re-read for this document, so treat it as unverified. A block avoids the fallback by setting `ifc:class`.
 
 **Property sets cannot live in a v1 file.**
 
@@ -438,18 +467,18 @@ What follows from that table:
 - boolean operands that are not analytic solids;
 - arrangements of solids the kernel's booleans do not cover.
 
-`validate.mjs` also does not compare `dimensions` with the geometry.
+`validate.mjs` does compare `dimensions` with the geometry, and the plan with the body ([§9](#9-limits-and-why)), but from bounding boxes only.
 
 ## 12. A complete example
 
 This block is [`test/fixtures/valid/chair.op`](../test/fixtures/valid/chair.op) cut down:
 
 - the `id` is `example.simple-chair` rather than `fixture.chair`;
-- the `base` anchor is dropped;
+- the root `placement` is dropped;
 - the leg symbols are taken out of the plan (the seat and backrest cover them);
-- the four leg cuboids are replaced by one `leg` definition that four refs place, so the four `mat:` keys become one.
+- the four leg cuboids are replaced by one `leg` definition that four refs place, so the four legs' `mat:` keys become one.
 
-It passes `node tools/validate.mjs` as it stands. Floorkit built from `681e4f1` also parsed it with nothing repaired and built it (*measured*).
+It passes `node tools/validate.mjs` as it stands, geometry gates included: its `dimensions` are the body's extent (0.52 × 0.94 × 0.48 m), its plan lies under the body, and `seat 0.52` is the seat's top face. Floorkit main `b0a084c7` parses it with nothing repaired, builds it and its mirror, and `parity.mjs --build --mesh` finds the mesh clean (*measured*).
 
 Outside `blocks/`, a file is judged on its content alone. To publish it, its `id` would have to match a path under `blocks/` and a listed publisher.
 
@@ -460,9 +489,9 @@ Outside `blocks/`, a file is judged on its content alone. To publish it, its `id
   "labelName": "Simple Chair",
   "type": "FURNITURE",
   "dimensions": {
-    "width": 0.64,
-    "depth": 0.64,
-    "height": 0.96
+    "width": 0.52,
+    "depth": 0.48,
+    "height": 0.94
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -470,13 +499,39 @@ Outside `blocks/`, a file is judged on its content alone. To publish it, its `id
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "seating",
     "catalog:placement": "free",
+    "catalog:lod": "300",
     "catalog:tags": "chair, dining",
+    "catalog:note": "seat 0.52",
     "catalog:basedOn": "blocks/floorkit/simple-chair/1.0.0.op",
     "ifc:class": "IfcFurniture",
     "ifc:predefinedType": "CHAIR",
+    "mat:seat": "surface",
+    "mat:backrest": "surface",
     "mat:leg": "frame"
   },
   "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
     "seatCenter": {
       "placement": {
         "position": [
@@ -546,19 +601,19 @@ Outside `blocks/`, a file is judged on its content alone. To publish it, its `id
         "vertices": [
           [
             -0.24,
-            -0.29
+            -0.24
           ],
           [
             -0.24,
-            -0.19
+            -0.18
           ],
           [
             0.24,
-            -0.19
+            -0.18
           ],
           [
             0.24,
-            -0.29
+            -0.24
           ]
         ]
       }
@@ -593,8 +648,8 @@ Outside `blocks/`, a file is judged on its content alone. To publish it, its `id
         "depth": 0.06
       },
       {
-        "ref": "leg",
         "id": "leg-front-left",
+        "ref": "leg",
         "placement": {
           "position": [
             -0.22,
@@ -614,8 +669,8 @@ Outside `blocks/`, a file is judged on its content alone. To publish it, its `id
         }
       },
       {
-        "ref": "leg",
         "id": "leg-front-right",
+        "ref": "leg",
         "placement": {
           "position": [
             0.22,
@@ -635,8 +690,8 @@ Outside `blocks/`, a file is judged on its content alone. To publish it, its `id
         }
       },
       {
-        "ref": "leg",
         "id": "leg-back-left",
+        "ref": "leg",
         "placement": {
           "position": [
             -0.22,
@@ -656,8 +711,8 @@ Outside `blocks/`, a file is judged on its content alone. To publish it, its `id
         }
       },
       {
-        "ref": "leg",
         "id": "leg-back-right",
+        "ref": "leg",
         "placement": {
           "position": [
             0.22,
@@ -685,7 +740,8 @@ What to notice in the example:
 
 - **Seat and backrest** appear in both views under the same ids, as plan polygons and as model cuboids.
 - **The legs.** The `leg` cuboid is authored around the origin. Each ref moves it into place, and in `modelView` a ref's placement is applied on top of the definition's own ([§4](#4-definitions-and-references)).
-- **`mat:leg`** names the definition key.
+- **`mat:leg`** names the definition key, so all four refs take that role; `mat:seat` and `mat:backrest` name view elements.
+- **Anchor roles** come from the closed table of the drafting standard: `base` is `floor-contact`, `seatCenter` is `seating-point`.
 - **There is no root `placement`.** It is optional; when present it must be the identity.
 
 ## 13. Checking a block

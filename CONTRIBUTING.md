@@ -23,7 +23,7 @@ A good block is something a designer would place in a plan without checking it f
 - **Both views agree.** The plan symbol (`profileView`) lies directly under the 3D body (`modelView`). A plan point `[x, z]` is model `(x, 0, z)` ([format §1](docs/format-v1.md#1-units-and-coordinates)).
 - **Right units.** Lengths in metres, geometry angles in radians, placement rotations in degrees.
 - **A sensible insertion point.** The origin is where the block is placed from: on the floor at the centre of the footprint, with the back at −z. An item set into or onto a counter (a hob, an inset sink) keeps the origin on the floor, starts at the counter's height and says `at 0.90` in its note; an item placed on furniture (a table lamp) stands at `y = 0` with its `base` anchor's role `surface-contact` ([drafting standard §1](docs/drafting-standard.md#1-origin-axes-and-grounds)).
-- **Honest `dimensions`.** They equal the body's overall extent ([drafting standard §2](docs/drafting-standard.md#2-dimensions-heights-and-note-keywords)). `validate.mjs` does not compare them yet, so reviewers do.
+- **Honest `dimensions`.** They equal the body's overall extent ([drafting standard §2](docs/drafting-standard.md#2-dimensions-heights-and-note-keywords)). `validate.mjs` checks them against the body's bounding box ([format §9](docs/format-v1.md#9-limits-and-why)).
 - **Useful anchors.** Name the points people attach to, such as `base` or `wallFace`, and give them a `role` in their metadata ([format §5](docs/format-v1.md#5-anchors)).
 - **Material roles.** Say what a node is made of with `mat:<nodeId>` and one of `surface`, `soft`, `frame`, `metal`, `glass`, `ceramic` or `planting`: a role, never a colour. A node's `color` is only how it is drawn.
 - **A plain label.** `labelName` describes the object ("Stacking Chair"), in 1–80 characters, with no brand name in the community tier.
@@ -76,7 +76,7 @@ Root `metadata` is a **closed vocabulary**: a key the schema does not list fails
 | `ifc:class`, `ifc:predefinedType`, `class:uniclass2015`, `class:omniclass` | no | Only where you are certain |
 | `mat:<nodeId>` | no | The material role of a node that exists in the block |
 
-An example for a chair whose nodes include `seat`, `backrest` and `leg-front-left`:
+An example for a chair whose model nodes are `seat`, `backrest` and four legs (every model node needs a `mat:` role):
 
 ```json
 "metadata": {
@@ -87,12 +87,15 @@ An example for a chair whose nodes include `seat`, `backrest` and `leg-front-lef
   "catalog:placement": "free",
   "catalog:lod": "300",
   "catalog:tags": "chair, stacking",
-  "catalog:note": "Shell seat on tubular legs. seat 0.45",
+  "catalog:note": "Shell seat on tubular legs. seat 0.52",
   "ifc:class": "IfcFurniture",
   "ifc:predefinedType": "CHAIR",
   "mat:seat": "surface",
   "mat:backrest": "surface",
-  "mat:leg-front-left": "frame"
+  "mat:leg-front-left": "frame",
+  "mat:leg-front-right": "frame",
+  "mat:leg-back-left": "frame",
+  "mat:leg-back-right": "frame"
 }
 ```
 
@@ -236,7 +239,7 @@ The [`validate` workflow](.github/workflows/validate.yml) runs on every pull req
 | --- | --- | --- | --- |
 | `catalog` | Install | `npm ci` | `package-lock.json` and `package.json` disagree |
 | `catalog` | Tests | `npm test` | Any `node:test` suite in `test/` fails |
-| `catalog` | Validate every block | `node tools/validate.mjs` (`npm run validate`) | Any block is invalid or misplaced, `publishers.json` is malformed or lacks a block's publisher, or `categories.json` disagrees with the schema |
+| `catalog` | Validate every block | `node tools/validate.mjs` (`npm run validate`) | Any block is invalid or misplaced, or fails a geometry, anchor, port or IFC gate ([format §9](docs/format-v1.md#9-limits-and-why)), `publishers.json` is malformed or lacks a block's publisher, or `categories.json` disagrees with the schema |
 | `catalog` | Index is current | `node tools/build-index.mjs --check` (`npm run index:check`) | `index.json` is not exactly what `blocks/`, `publishers.json` and `revocations.json` produce: stale, or edited by hand |
 | `catalog` | Released blocks unchanged | `node tools/immutable.mjs` | A file under `blocks/` that is in any `v*` tag was modified, deleted, renamed or re-moded, anything under `blocks/` is a symbolic link, or the clone is shallow |
 | `catalog` | Every commit signed off (DCO) (pull requests only) | `node tools/dco.mjs <base sha> <head sha>` | A non-merge commit lacks a `Signed-off-by:` naming its author |

@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "id": "fixture.dimensions",
+  "labelName": "Wrong Dimensions",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.48,
+    "depth": 0.4,
+    "height": 0.45
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "tables",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "starter, side table",
+    "catalog:note": "Starter block: a side table. top 0.45",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "TABLE",
+    "mat:top": "surface",
+    "mat:leg": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.45,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "definitions": {
+    "leg": {
+      "kind": "cuboid",
+      "center": [
+        0,
+        0.21,
+        0
+      ],
+      "width": 0.04,
+      "height": 0.42,
+      "depth": 0.04
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "top",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.2,
+            -0.2
+          ],
+          [
+            0.2,
+            -0.2
+          ],
+          [
+            0.2,
+            0.2
+          ],
+          [
+            -0.2,
+            0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.435,
+          0
+        ],
+        "width": 0.4,
+        "height": 0.03,
+        "depth": 0.4
+      },
+      {
+        "id": "leg-front-left",
+        "ref": "leg",
+        "color": "#7a5c3e",
+        "placement": {
+          "position": [
+            -0.18,
+            0,
+            0.18
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-front-right",
+        "ref": "leg",
+        "color": "#7a5c3e",
+        "placement": {
+          "position": [
+            0.18,
+            0,
+            0.18
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-left",
+        "ref": "leg",
+        "color": "#7a5c3e",
+        "placement": {
+          "position": [
+            -0.18,
+            0,
+            -0.18
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-right",
+        "ref": "leg",
+        "color": "#7a5c3e",
+        "placement": {
+          "position": [
+            0.18,
+            0,
+            -0.18
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

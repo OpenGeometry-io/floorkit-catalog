@@ -4,7 +4,10 @@
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { test } from 'node:test';
-import { LIMITS, checkBlockText, formatBlock } from '../tools/lib/op.mjs';
+import { parseNote } from '../tools/lib/note.mjs';
+import { LIMITS, checkBlockText, formatBlock, sha256Hex } from '../tools/lib/op.mjs';
+import { PENDING_REDRAW } from '../tools/lib/pending-redraw.mjs';
+import { ANCHOR_ROLES, PORTS } from '../tools/lib/roles.mjs';
 
 const fixture = (name) => readFileSync(new URL(`fixtures/${name}`, import.meta.url), 'utf8');
 const base = () => JSON.parse(fixture('valid/chair.op'));
@@ -27,7 +30,8 @@ test('the valid fixture and every seed block pass', () => {
   for (const publisher of readdirSync(root)) {
     for (const slug of readdirSync(new URL(`${publisher}/`, root))) {
       for (const file of readdirSync(new URL(`${publisher}/${slug}/`, root))) {
-        const result = checkBlockText(readFileSync(new URL(`${publisher}/${slug}/${file}`, root), 'utf8'));
+        const listed = { publisher, slug, version: file.replace(/\.op$/, '') };
+        const result = checkBlockText(readFileSync(new URL(`${publisher}/${slug}/${file}`, root), 'utf8'), { listed });
         assert.deepEqual(result.issues, [], `${publisher}/${slug}/${file}`);
         count += 1;
       }
@@ -194,7 +198,7 @@ test('the byte form is canonical and the text is plain data', () => {
   rejects(text.replace(/\n/g, '\r\n'), '/', 'not in canonical form');
   rejects(`﻿${text}`, '/', 'byte-order mark');
   rejects(text.replace('"version": 1,', '"version": 1,\n  "version": 1,'), '/', 'not in canonical form');
-  rejects(text.replace('"width": 0.64', '"width": 1e400'), '/dimensions/width', 'not a finite number');
+  rejects(text.replace('"width": 0.52', '"width": 1e400'), '/dimensions/width', 'not a finite number');
   rejects(text.replace('"role": "seating-point"', '"constructor": "seating-point"'), '/anchors/seatCenter/metadata/constructor', 'reserved key');
   rejects(text.replace('"version": 1,', '"__proto__": {},\n  "version": 1,'), '/__proto__', 'reserved key');
   rejects('{ not json', '/', 'is not JSON');
@@ -243,4 +247,186 @@ test('review regressions: deep chains, sweep operands, degenerate geometry, empt
   for (let index = 0; index < 200; index += 1) total.profileView.elements.push({ id: `p${index}`, kind: 'polygon', vertices: [[0, 0], [0.1, 0], [0, 0.1]] });
   for (let index = 0; index < 200; index += 1) total.modelView.elements.push(box(`m${index}`));
   rejects(total, '/', 'nodes; the limit is 400');
+});
+
+test('each geometry-reject fixture fails exactly its own gate, naming the node and the numbers', () => {
+  const expected = {
+    'anchor-on-floor.op': ['/anchors/seatCenter', /^anchor "seatCenter" at \(0\.000, 0\.000, 0\.000\) is 0\.\d{3} m from the nearest body surface/],
+    'arc-plan.op': ['/profileView/elements/0', /^the plan's min x is -2\.000 at "rim-a", but the body's is -0\.260/],
+    'anchor-off-body.op': ['/anchors/topCenter', /^anchor "topCenter" at \(0\.000, 0\.470, 0\.000\) is 0\.020 m from the nearest body surface, on "top"/],
+    'anchor-role.op': ['/anchors/topCenter/metadata/role', /^is "work-surface"; "topCenter" takes "top-surface"$/],
+    'below-floor.op': ['/modelView/elements/1', /^"leg-front-left" goes down to y = -0\.010, below the floor at 0\.000/],
+    'dimensions.op': ['/dimensions/width', /^is 0\.480 m but the body spans 0\.400 m in x, from "top"/],
+    'height-bottom-face.op': ['/metadata/catalog:note', /^"seat 0\.46" matches no top face; the nearest is 0\.520 on "seat"/],
+    'floating-tap.op': ['/modelView/elements/5', /^"tap" floats: .* "top", is 0\.002 m away \(tolerance 0\.001\)$/],
+    'missing-ifcclass.op': ['/metadata', /^needs "ifcClass": "IfcFurniture", since a ported or MEP_EQUIPMENT block/],
+    'missing-lod.op': ['/metadata', /^needs "catalog:lod"$/],
+    'missing-mat.op': ['/modelView/elements/1', /^"leg-front-left" has no mat: role; set "mat:leg-front-left" or "mat:leg" on its definition$/],
+    'note-decimals.op': ['/metadata/catalog:note', /^"seat 0\.5" needs metres with two decimals/],
+    'note-height.op': ['/metadata/catalog:note', /^"top 0\.47" matches no top face; the nearest is 0\.450 on "top"/],
+    'partial-cylinder.op': ['/modelView/elements/5/angle', /^is 3\.1416; a cylinder must be a full turn/],
+    'plan-off-body.op': ['/profileView/elements/0', /^the plan's min x is -0\.210 at "top", but the body's is -0\.200 at "top"/],
+    'port-id.op': ['/ports/0', /^port "cold" is not a port id of the drafting standard/],
+    'too-few-solids.op': ['/modelView', /^has 2 solid\(s\); LOD 300 needs at least 3$/],
+    'too-full.op': ['/modelView', /^the solids fill 1\.000 of their bounding box/],
+    'union-volume.op': ['/modelView', /^the solids fill 1\.0\d\d of their bounding box/],
+  };
+  const family = { 'missing-mat.op': /has no mat: role/, 'arc-plan.op': /^the plan's (min|max) [xz] is/ };
+  const dir = new URL('fixtures/geometry-rejects/', import.meta.url);
+  assert.deepEqual(readdirSync(dir).sort(), Object.keys(expected).sort());
+  for (const [name, [path, message]] of Object.entries(expected)) {
+    const { issues } = checkBlockText(readFileSync(new URL(name, dir), 'utf8'));
+    const ownGate = (issue) => issue.path === path || family[name]?.test(issue.message);
+    assert.ok(issues.length > 0 && issues.every(ownGate), `${name}: ${JSON.stringify(issues)}`);
+    assert.ok(issues.some((issue) => issue.path === path && message.test(issue.message)), `${name}: ${JSON.stringify(issues)}`);
+  }
+});
+
+test('a stacking chair of tubular legs and a shell seat passes every gate', () => {
+  const tube = (id, x, z, height) => ({ id, kind: 'cylinder', center: [x, height / 2, z], radius: 0.011, height });
+  const chair = base();
+  Object.assign(chair, { id: 'fixture.stacking-chair', dimensions: { width: 0.48, depth: 0.48, height: 0.8 } });
+  chair.metadata = { ...chair.metadata, 'catalog:note': 'Shell seat on tubular legs. seat 0.45' };
+  for (const key of Object.keys(chair.metadata)) if (key.startsWith('mat:')) delete chair.metadata[key];
+  Object.assign(chair.metadata, { 'mat:seat': 'surface', 'mat:back': 'surface' });
+  for (const leg of ['leg-front-left', 'leg-front-right', 'post-left', 'post-right']) chair.metadata[`mat:${leg}`] = 'frame';
+  chair.anchors.seatCenter.placement.position = [0, 0.45, 0];
+  chair.profileView.elements = [{ id: 'seat', kind: 'polygon', vertices: [[-0.24, -0.24], [0.24, -0.24], [0.24, 0.24], [-0.24, 0.24]] }];
+  chair.modelView.elements = [
+    { id: 'seat', kind: 'cuboid', center: [0, 0.435, 0], width: 0.48, height: 0.03, depth: 0.48 },
+    { id: 'back', kind: 'cuboid', center: [0, 0.675, -0.23], width: 0.44, height: 0.25, depth: 0.02 },
+    tube('leg-front-left', -0.21, 0.21, 0.42),
+    tube('leg-front-right', 0.21, 0.21, 0.42),
+    tube('post-left', -0.21, -0.21, 0.8),
+    tube('post-right', 0.21, -0.21, 0.8),
+  ];
+  assert.deepEqual(check(chair).issues, []);
+});
+
+test('a floorkit block not on the pending list is drawn to LOD 300', () => {
+  const block = { ...base(), id: 'floorkit.example' };
+  block.metadata = { ...block.metadata, 'catalog:lod': '200' };
+  rejects(block, '/metadata/catalog:lod', 'a floorkit block is drawn to LOD 300');
+});
+
+test('only the listed seed file itself skips the new gates: its path, version and bytes', () => {
+  const seed = readFileSync(new URL('../blocks/floorkit/simple-chair/1.0.0.op', import.meta.url), 'utf8');
+  const listed = { publisher: 'floorkit', slug: 'simple-chair', version: '1.0.0' };
+  assert.deepEqual(checkBlockText(seed, { listed }).issues, []);
+  const gated = (text, place) => assert.ok(checkBlockText(text, place).issues.some((issue) => issue.message === 'needs "catalog:lod"'));
+  gated(seed);
+  gated(seed, { listed: { ...listed, version: '1.1.0' } });
+  gated(seed.replace('"Simple Chair"', '"Simple Chaix"'), { listed });
+  gated(seed, { listed: { ...listed, slug: 'stool' } });
+});
+
+test('a block outside blocks/ that claims a seed id gets every gate', () => {
+  const fake = base();
+  Object.assign(fake, { id: 'floorkit.simple-chair', dimensions: { width: 3, depth: 3, height: 3 } });
+  delete fake.metadata['catalog:lod'];
+  fake.anchors.seatCenter.metadata.role = 'nonsense';
+  const result = check(fake);
+  for (const message of ['needs "catalog:lod"', 'is "nonsense"', 'is 3.000 m but the body spans']) {
+    assert.ok(result.issues.some((issue) => issue.message.includes(message)), message);
+  }
+});
+
+test('each pending hash is the sha256 of that seed as it is on disk', () => {
+  for (const [slug, hash] of Object.entries(PENDING_REDRAW)) {
+    const bytes = readFileSync(new URL(`../blocks/floorkit/${slug}/1.0.0.op`, import.meta.url));
+    assert.equal(sha256Hex(bytes), hash, `${slug} changed: redraw it, then take its line off the pending list`);
+  }
+});
+
+test('arcs are in the plan: a full circle of two half arcs under the body passes', () => {
+  const chair = base();
+  chair.profileView.elements.push(
+    { id: 'ring-a', kind: 'arc', center: [0, 0], radius: 0.2, startAngle: 0, sweepAngle: 3.14159265 },
+    { id: 'ring-b', kind: 'arc', center: [0, 0], radius: 0.2, startAngle: 3.14159265, sweepAngle: 3.14159265 },
+  );
+  assert.deepEqual(check(chair).issues, []);
+  chair.profileView.elements.push({ id: 'swing', kind: 'arc', center: [0.26, 0.24], radius: 0.5, startAngle: 0, sweepAngle: -1.5707963 });
+  rejects(chair, '/profileView/elements/8', 'the plan');
+  chair.metadata['catalog:note'] = 'A door swing. seat 0.52 swing';
+  assert.deepEqual(check(chair).issues, []);
+});
+
+test('an inward offset2d line stays inside its source; an outward one grows', () => {
+  const basin = base();
+  basin.definitions = { rim: { kind: 'polyline', points: [[-0.26, -0.24], [-0.26, 0.24], [0.26, 0.24], [0.26, -0.24], [-0.26, -0.24]] }, inner: { kind: 'offset2d', sourceRef: 'rim', distance: -0.04, output: 'polyline' } };
+  basin.profileView.elements.push({ ref: 'inner' });
+  assert.deepEqual(check(basin).issues, []);
+  basin.definitions.inner.distance = 0.04;
+  rejects(basin, '/profileView/elements/6', "the plan's");
+});
+
+test('the pending list names only the 26 seeds, each once, each present', () => {
+  const seeds = ['bathtub', 'cabinet', 'cafe-counter', 'chiller', 'counter-run', 'crah', 'glazed-door', 'hob', 'kitchen-counter', 'kitchen-sink',
+    'minimal-sofa', 'office-desk', 'parked-car', 'pdu', 'planter', 'rear-door-heat-exchanger', 'rectangular-bathtub', 'shower-tray',
+    'simple-chair', 'table', 'tree', 'ups', 'wash-basin', 'washing-machine', 'wc', 'wc-and-basin'];
+  for (const slug of Object.keys(PENDING_REDRAW)) {
+    assert.ok(seeds.includes(slug), `${slug} is not one of the 26 seeds`);
+    assert.ok(readdirSync(new URL(`../blocks/floorkit/${slug}/`, import.meta.url)).length > 0, `${slug} has no block`);
+  }
+});
+
+test('the note grammar reads exactly the keywords of drafting standard section 2', () => {
+  const note = parseNote('Wall-hung basin. rim 0.85, underside 0.68. Waste at the back; overlap counter+tap. recess, top 0.9, seat 0.450, slab.');
+  assert.deepEqual([...note.overlaps], ['counter+tap']);
+  assert.deepEqual(note.heights, { at: [], ceiling: [], seat: [], rim: [0.85], top: [], bottom: [], underside: [0.68] });
+  assert.deepEqual([...note.markers], ['recess', 'slab']);
+  assert.deepEqual([...parseNote('overlap carcass+kick').markers], [], 'a node name is not a marker');
+});
+
+test('IFC: every block sets ifc:class, and ifcClass only on a ported or MEP_EQUIPMENT block', () => {
+  const none = base();
+  delete none.metadata['ifc:class'];
+  delete none.metadata['ifc:predefinedType'];
+  rejects(none, '/metadata', 'needs "ifc:class"');
+  const extra = base();
+  extra.metadata.ifcClass = extra.metadata['ifc:class'];
+  rejects(extra, '/metadata/ifcClass', 'is only for a ported or MEP_EQUIPMENT block');
+});
+
+test('carcass or slab in the note waives the volume ratio, and only the ratio', () => {
+  const text = readFileSync(new URL('fixtures/geometry-rejects/too-full.op', import.meta.url), 'utf8');
+  const waived = JSON.parse(text);
+  waived.metadata['catalog:note'] = 'A carcass. top 0.45';
+  assert.deepEqual(check(waived).issues, []);
+  const few = JSON.parse(readFileSync(new URL('fixtures/geometry-rejects/too-few-solids.op', import.meta.url), 'utf8'));
+  few.metadata['catalog:note'] = 'A slab. top 0.45';
+  rejects(few, '/modelView', 'LOD 300 needs at least 3');
+});
+
+test('the anchor and port constants equal the drafting standard\'s tables', () => {
+  const standard = readFileSync(new URL('../docs/drafting-standard.md', import.meta.url), 'utf8');
+  const section = (n) => standard.slice(standard.indexOf(`## ${n}. `), standard.indexOf(`## ${n + 1}. `));
+  const cells = (line) => line.split('|').slice(1, -1).map((cell) => cell.trim());
+  const ticks = (cell) => [...cell.matchAll(/`([^`]+)`/g)].map((match) => match[1]);
+  // Every body row of a section's first table, after its "| ---" line; each must name something in backticks.
+  const rows = (n) => {
+    const lines = section(n).split('\n');
+    const start = lines.findIndex((l) => l.startsWith('| ---')) + 1;
+    const body = lines.slice(start, lines.findIndex((l, i) => i >= start && !l.startsWith('|')));
+    for (const line of body) assert.ok(ticks(cells(line)[0]).length > 0, `a row with no ticked name: ${line}`);
+    return body;
+  };
+  const anchors = {};
+  for (const line of rows(7)) {
+    const [names, role] = cells(line);
+    for (const name of ticks(names)) (anchors[name] ??= []).push(...ticks(role));
+  }
+  assert.deepEqual(anchors, Object.fromEntries(Object.entries(ANCHOR_ROLES).map(([k, v]) => [k, [...v]])));
+  const ports = {};
+  for (const line of rows(8)) {
+    const [id, domain, systemType, direction, profile] = cells(line);
+    const shape = profile.split(/[ ,]/)[0];
+    const port = { domain: ticks(domain)[0], systemType: ticks(systemType)[0], directions: [...new Set(ticks(direction))], shape };
+    if (shape === 'round') port.sizes = [...profile.matchAll(/0\.\d+/g)].map((m) => Number(m[0]));
+    if (shape === 'electrical') Object.assign(port, { poles: Number(profile.match(/(\d+) pole/)[1]), voltage: Number(profile.match(/(\d+) V/)[1]) });
+    if (profile === 'as `flow`') Object.assign(port, { shape: 'round', sizes: ports.flow.sizes });
+    ports[ticks(id)[0]] = port;
+  }
+  const sorted = (o) => JSON.parse(JSON.stringify(o, (k, v) => (Array.isArray(v) ? [...v].sort() : v)));
+  assert.deepEqual(sorted(ports), sorted(PORTS));
 });

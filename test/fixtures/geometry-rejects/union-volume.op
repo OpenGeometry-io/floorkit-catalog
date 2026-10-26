@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "id": "fixture.union-volume",
+  "labelName": "Union Volume",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.52,
+    "depth": 0.48,
+    "height": 0.94
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "chair, dining",
+    "catalog:note": "top 0.94",
+    "catalog:basedOn": "blocks/floorkit/simple-chair/1.0.0.op",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "CHAIR",
+    "mat:seat": "surface",
+    "mat:backrest": "surface",
+    "mat:leg-front-left": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.94,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "seat",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.26,
+            -0.24
+          ],
+          [
+            0.26,
+            -0.24
+          ],
+          [
+            0.26,
+            0.24
+          ],
+          [
+            -0.26,
+            0.24
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "seat",
+        "ref": "body"
+      },
+      {
+        "id": "backrest",
+        "kind": "cuboid",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "width": 0.05,
+        "height": 0.1,
+        "depth": 0.05
+      },
+      {
+        "id": "leg-front-left",
+        "kind": "cuboid",
+        "center": [
+          0.1,
+          0.05,
+          0
+        ],
+        "width": 0.05,
+        "height": 0.1,
+        "depth": 0.05
+      }
+    ]
+  },
+  "definitions": {
+    "lower": {
+      "kind": "cuboid",
+      "center": [
+        0,
+        0.235,
+        0
+      ],
+      "width": 0.52,
+      "height": 0.47,
+      "depth": 0.48
+    },
+    "upper": {
+      "kind": "cuboid",
+      "center": [
+        0,
+        0.705,
+        0
+      ],
+      "width": 0.52,
+      "height": 0.47,
+      "depth": 0.48
+    },
+    "body": {
+      "kind": "boolean3d",
+      "operation": "union",
+      "baseRef": "lower",
+      "operandRefs": [
+        "upper"
+      ]
+    }
+  }
+}
