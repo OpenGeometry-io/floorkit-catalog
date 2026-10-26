@@ -1,101 +1,113 @@
 # floorkit-catalog
 
-A shared library of building elements for [Floorkit](https://ploterr.com/floorkit): chairs, sanitaryware, kitchen runs, doors and data-centre equipment. Each one is a plain JSON `.op` file that anyone can read, contribute to and reuse.
+Free, reusable building blocks for [Floorkit](https://ploterr.com/floorkit): furniture, sanitaryware, kitchen runs, doors, planting, vehicles and data-centre equipment. Each block is one plain JSON `.op` file with a plan symbol, a 3D body and named anchors.
 
-> **Status: private preview, v0.1.0 not yet tagged.** Everything here is written for the public launch. Until then the links below that point at this repository and at jsDelivr will not resolve for outsiders. [docs/LAUNCH.md](docs/LAUNCH.md) is the go-public checklist.
+- **26 blocks in 10 categories** in v0.1.0, listed in [`index.json`](index.json).
+- **A released block never changes.** A fix is a new version in a new file, so a URL pinned to a tag always serves the same bytes.
+- **Stricter than Floorkit.** The catalog refuses anything Floorkit would silently repair, so a block draws exactly as written.
+- **Blocks are CC BY 4.0; the tools are Apache-2.0.** See [Licence](#licence).
 
-- **26 blocks** in 10 categories, seeded from the Floorkit v0.6.1 example catalog. See [`index.json`](index.json).
-- **One file per block version**, held to a strict [schema](schema/op/v1.schema.json) that is stricter than Floorkit's own parser. A block always says exactly what Floorkit will draw.
-- **An index** giving every block's size, SHA-256 and licence, so a loader can verify a block before using it.
-- **A reference loader** ([`tools/loader.mjs`](tools/loader.mjs)) that fetches a block and refuses it if it has been tampered with, is oversized or has been revoked.
-- **CC BY 4.0 content, Apache-2.0 tools.** See [LICENSE.md](LICENSE.md).
+> **Coding agents:** read [AGENTS.md](AGENTS.md) before you change anything in this repository.
+
+## Where the blocks are
+
+jsDelivr serves the catalog from its release tags. Pin a tag, never a branch:
+
+```text
+https://cdn.jsdelivr.net/gh/OpenGeometry-io/floorkit-catalog@v0.1.0/
+```
+
+| Under that URL | What |
+| --- | --- |
+| `index.json` | Every block: `id`, `version`, `labelName`, `type`, `category`, `tags`, `dimensions` (metres), `license`, `path`, `bytes` and `sha256` |
+| `blocks/<publisher>/<slug>/<version>.op` | One block, for example `blocks/floorkit/bathtub/1.0.0.op` |
+| `tools/loader.mjs` | The reference loader |
+
+A block's `id` is `<publisher>.<slug>`, for example `floorkit.bathtub`.
 
 ## Use a block in Floorkit
 
+The reference loader fetches a block and checks it against `index.json` before it returns the text. Copy [`tools/loader.mjs`](tools/loader.mjs) into your project: it has no dependencies and runs unchanged in browsers and in Node 22.
+
 ```js
-import { OpenElement } from '@opengeometry/floorkit';
-import { openCatalog } from './loader.mjs'; // tools/loader.mjs from this repository
+import { BuildingSession, OpenElement } from '@opengeometry/floorkit';
+import { openCatalog } from './loader.mjs';
 
 const catalog = await openCatalog({
   baseUrl: 'https://cdn.jsdelivr.net/gh/OpenGeometry-io/floorkit-catalog@v0.1.0/',
 });
-const { text } = await catalog.load('floorkit.simple-chair');
-const chair = new OpenElement(text);
+const { entry, text } = await catalog.load('floorkit.bathtub');
+
+// In a building model, Floorkit names the block by its path below blocks/.
+const uri = entry.path.replace(/^blocks\//, ''); // 'floorkit/bathtub/1.0.0.op'
+const session = new BuildingSession(model, { assetSources: { [uri]: text } }); // model: your BuildingModel
+session.apply(
+  { kind: 'add-asset', assetId: 'bathtub', asset: { kind: 'external-op', uri } },
+  session.revision,
+);
+
+// On its own, as one element:
+const bathtub = new OpenElement(text);
 ```
 
-- **Pin a tag (`@v0.1.0`).** A released block never changes, so a tagged URL always serves the same bytes.
-- **What `load` checks.** It verifies each file against `index.json` (byte count and SHA-256) and against its own `id` and version before returning it.
-- **What `load` refuses.** Any redirect, a path outside the catalog, and a revoked block. Each failure is a `CatalogError` with a `code`.
-- **Without the loader.** You can fetch an `.op` file yourself and pass its text to `new OpenElement(text)` or `parseOpenElementDefinition(text)`, but then nothing checks what you received.
-- **Signing.** The index itself is not signed yet; see [RFC 0001](docs/rfcs/0001-catalog-and-loader.md).
+Place copies of the asset with `add-element`, as in Floorkit's [Place furniture](https://docs.ploterr.com/floorkit/guides/place-furniture) guide.
 
-You don't need Floorkit to use the blocks. They are plain JSON, documented in [docs/format-v1.md](docs/format-v1.md).
+- **`load` checks** the byte count, the SHA-256, the `id` and the version against `index.json`. It refuses any redirect, a path outside the catalog, an oversized file and a revoked block, each with a `CatalogError` `code` ([list](SECURITY.md#what-the-catalog-already-defends-against)).
+- **`index.json` itself is not signed yet** ([RFC 0001](docs/rfcs/0001-catalog-and-loader.md)). Without the loader, nothing checks what you fetch.
 
 ## What a block looks like
+
+Plain JSON, documented in [docs/format-v1.md](docs/format-v1.md). You don't need Floorkit to read it. Shortened from `blocks/floorkit/simple-chair/1.0.0.op`:
 
 ```jsonc
 {
   "version": 1,
-  "id": "floorkit.simple-chair",            // <publisher>.<slug>, matching its path
+  "id": "floorkit.simple-chair",                                   // <publisher>.<slug>, matching its path
   "labelName": "Simple Chair",
   "type": "FURNITURE",
   "dimensions": { "width": 0.64, "depth": 0.64, "height": 0.96 },  // metres
-  "metadata": {
-    "catalog:version": "1.0.0",
-    "catalog:license": "CC-BY-4.0",
-    "catalog:attribution": "Vishwajeet Mane",
-    "catalog:category": "seating",
-    "ifc:class": "IfcFurniture",
-    "mat:leg-front-left": "frame"
-    // …
-  },
-  "anchors": { "seatCenter": { "placement": { /* … */ } } },     // named mount points
-  "profileView": { "elements": [ /* plan symbol: polygons, polylines, arcs */ ] },
-  "modelView":   { "elements": [ /* 3D body: cuboids, cylinders, sweeps */ ] }
+  "metadata": { "catalog:version": "1.0.0", "catalog:category": "seating", "ifc:class": "IfcFurniture" },
+  "anchors": { "seatCenter": { /* … */ } },                        // named mount points
+  "profileView": { "elements": [ /* plan symbol */ ] },
+  "modelView": { "elements": [ /* 3D body */ ] }
 }
 ```
 
-The file lives at `blocks/floorkit/simple-chair/1.0.0.op`.
-
-## Layout
-
-| Path | What |
-| --- | --- |
-| `blocks/<publisher>/<slug>/<x.y.z>.op` | The blocks. Immutable once released in a tag; a fix is a new version |
-| `index.json` | Generated by `tools/build-index.mjs`; never edit it by hand |
-| `publishers.json`, `categories.json`, `revocations.json` | Who may publish, the 13 categories, and withdrawn versions |
-| `schema/` | JSON Schemas for a block (`op/v1`) and for the index (`index/v1`) |
-| `tools/` | Validator, formatter, index builder, loader, CI gates, Floorkit parity check, seed importer |
-| `test/` | `node:test` suites and fixtures |
-| `docs/` | The format, the RFCs and the launch checklist |
-
-## Check your work
+## Work on the catalog
 
 You need Node 22 or later.
 
 ```sh
 npm ci
-npm run check                                # tests, every block, and the index is current
-node tools/validate.mjs path/to/block.op     # one file, with path-qualified errors
-node tools/format.mjs path/to/block.op       # rewrite into the one accepted byte form
-node tools/build-index.mjs                   # regenerate index.json after adding a block
+npm run check                              # tests, every block valid, index.json current
+node tools/validate.mjs path/to/block.op   # check one file, with path-qualified errors
+node tools/format.mjs path/to/block.op     # rewrite a block into its one accepted byte form
+npm run index                              # regenerate index.json after adding a block
 ```
 
-Maintainers can also hold the catalog against Floorkit itself with `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs --build`. It checks that Floorkit accepts every block, changes none of its values, and builds it with the real geometry kernel. At v0.1.0 against Floorkit built from source: 26/26 accepted, 26/26 unchanged, and 26/26 built.
+Maintainers with a Floorkit build can also check every block in Floorkit itself: `FLOORKIT_DIR=<dir with dist/index.js> node tools/parity.mjs --build`.
+
+| Path | What |
+| --- | --- |
+| `blocks/<publisher>/<slug>/<x.y.z>.op` | The blocks. Immutable once in a tag |
+| `index.json` | Generated by `npm run index`; never edit it by hand |
+| `publishers.json`, `categories.json`, `revocations.json` | Who may publish, the 13 categories, withdrawn versions |
+| `schema/` | JSON Schemas for a block (`op/v1`) and the index (`index/v1`) |
+| `tools/` | Validator, formatter, index builder, loader, CI gates, Floorkit parity check |
+| `test/` | `node:test` suites and fixtures |
+| `docs/` | The format, the RFCs and the launch checklist |
 
 ## Contribute
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md). In short:
-- add `blocks/<you>/<slug>/1.0.0.op`;
-- run `npm run check`;
-- sign off every commit (`git commit -s`);
-- open a pull request and fill in its provenance section.
+Add `blocks/<you>/<slug>/1.0.0.op`, run `npm run check`, sign off every commit (`git commit -s`) and open a pull request with its provenance section filled in. Only self-authored work is accepted: no geometry copied from manufacturer or BIM-portal files, and no brand names in community labels.
 
-Only self-authored work is accepted: no geometry copied from manufacturer or BIM-portal files, and no brand names in community labels. [GOVERNANCE.md](GOVERNANCE.md) covers tiers, releases, revocation and takedowns. [SECURITY.md](SECURITY.md) covers reporting problems privately.
+- [CONTRIBUTING.md](CONTRIBUTING.md): the full steps and what CI checks.
+- [GOVERNANCE.md](GOVERNANCE.md): publisher tiers, releases, revocation and takedowns.
+- [SECURITY.md](SECURITY.md): report a vulnerability privately.
 
 ## Licence
 
-- **Blocks** (and `index.json` and the test fixtures derived from them): [CC BY 4.0](LICENSES/CC-BY-4.0.txt). Credit the catalog with:
+- **Blocks**, `index.json` and the test fixtures derived from them: [CC BY 4.0](LICENSES/CC-BY-4.0.txt). Credit the catalog with:
 
   ```text
   "floorkit-catalog" by Vishwajeet Mane and floorkit-catalog contributors,
@@ -106,9 +118,9 @@ Only self-authored work is accepted: no geometry copied from manufacturer or BIM
 - **Schema, tools, tests and docs:** [Apache-2.0](LICENSES/Apache-2.0.txt).
 - **Floorkit** is licensed separately and is not part of this repository. You don't need a Floorkit licence key to use the blocks.
 
-See [LICENSE.md](LICENSE.md) for what the licences do and do not grant.
+[LICENSE.md](LICENSE.md) says what the licences do and do not grant.
 
-## Where this is going
+## Plans
 
-- [RFC 0001: catalog and loader](docs/rfcs/0001-catalog-and-loader.md). Why this repository exists, the integrity model, distribution (jsDelivr now; an npm package and a signed index later), moving the loader into the Floorkit SDK, and reading the catalog from Parti.
-- [RFC 0002: toward Revit-family-like blocks](docs/rfcs/0002-parametric-families.md). What `.op` would need to work like a Revit family: parameters, types, type catalogs, safe formulas, detail levels and IFC types. It also covers what should not be copied.
+- [RFC 0001: catalog and loader](docs/rfcs/0001-catalog-and-loader.md): the trust model, distribution (an npm package and a signed index later) and moving the loader into the Floorkit SDK.
+- [RFC 0002: toward Revit-family-like blocks](docs/rfcs/0002-parametric-families.md): what `.op` would need to work like a Revit family, and what should not be copied.

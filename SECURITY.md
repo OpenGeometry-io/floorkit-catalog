@@ -36,8 +36,6 @@
 
 The same private route takes a takedown request that should not be public ([GOVERNANCE.md](GOVERNANCE.md#takedowns)) and a conduct report ([CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)). Say which kind of report it is.
 
-### After the public launch
-
 Use GitHub's private vulnerability reporting on this repository:
 
 1. Open <https://github.com/OpenGeometry-io/floorkit-catalog/security>.
@@ -47,12 +45,6 @@ Use GitHub's private vulnerability reporting on this repository:
    - how to reproduce it: a block, a command or a script;
    - the impact;
    - a fix, if you have one in mind.
-
-### Before the public launch
-
-<!-- Remove this section at launch: docs/LAUNCH.md, item 4. -->
-
-The repository is private until launch, and GitHub's private vulnerability reporting is not available on a private repository ([docs/LAUNCH.md](docs/LAUNCH.md) item 3). Until then, report directly to the maintainer, [@aka-blackboots](https://github.com/aka-blackboots), through a private channel you already share with them. Do not put the details in an issue, even in the private repository, because every collaborator can read it.
 
 ## What happens next
 
