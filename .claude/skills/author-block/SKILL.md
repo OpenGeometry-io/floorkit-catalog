@@ -59,7 +59,7 @@ cp .claude/skills/author-block/starter.op blocks/<publisher>/<slug>/1.0.0.op
 - Lengths in **metres**. Geometry angles (arc, cylinder `angle`) in **radians**. Placement `rotation` in **degrees**.
 - Model space is `[x, y, z]`, y up; the block stands on `y = 0` unless it sits on something.
 - A plan point `[x, z]` is model `(x, 0, z)`: the second number is model **z**, not y.
-- `dimensions`: `width` along x, `depth` along z, `height` along y, equal to the body's overall extent within 0.005 m ([standard §2](../../../docs/drafting-standard.md#2-dimensions-heights-and-note-keywords)). Seat, rim and underside heights go in `catalog:note` as keywords (`seat 0.45`).
+- `dimensions`: `width` along x, `depth` along z, `height` along y, equal to the body's overall extent within 0.005 m ([standard §2](../../../docs/drafting-standard.md#2-dimensions-heights-and-note-keywords)); `validate.mjs` checks it, with the plan, the floor and that no part floats ([format §9](../../../docs/format-v1.md#9-limits-and-why)). Seat, rim and underside heights go in `catalog:note` as keywords (`seat 0.45`).
 - The origin is the insertion point: on the floor at the centre of the footprint, with the back at −z ([standard §1](../../../docs/drafting-standard.md#1-origin-axes-and-grounds)).
 - A placement needs all of `position`, `rotation`, `scale`. A root `placement` is optional and must be the identity.
 

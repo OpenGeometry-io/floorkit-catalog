@@ -104,7 +104,7 @@ export function checkListedBlock(root, block, publishers) {
   } catch {
     return { text: '', definition: undefined, issues: [{ path: '/', message: 'is not valid UTF-8' }] };
   }
-  const result = checkBlockText(text);
+  const result = checkBlockText(text, { listed: block });
   const issues = [...result.issues];
   if (!publishers.has(block.publisher)) {
     issues.push({ path: '/', message: `publisher "${block.publisher}" is not in publishers.json` });

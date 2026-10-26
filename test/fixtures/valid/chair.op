@@ -4,9 +4,9 @@
   "labelName": "Simple Chair",
   "type": "FURNITURE",
   "dimensions": {
-    "width": 0.64,
-    "depth": 0.64,
-    "height": 0.96
+    "width": 0.52,
+    "depth": 0.48,
+    "height": 0.94
   },
   "placement": {
     "position": [
@@ -31,10 +31,14 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "seating",
     "catalog:placement": "free",
+    "catalog:lod": "300",
     "catalog:tags": "chair, dining",
+    "catalog:note": "seat 0.52",
     "catalog:basedOn": "blocks/floorkit/simple-chair/1.0.0.op",
     "ifc:class": "IfcFurniture",
     "ifc:predefinedType": "CHAIR",
+    "mat:seat": "surface",
+    "mat:backrest": "surface",
     "mat:leg-front-left": "frame",
     "mat:leg-front-right": "frame",
     "mat:leg-back-left": "frame",
@@ -58,6 +62,9 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
     },
     "seatCenter": {
@@ -115,19 +122,19 @@
         "vertices": [
           [
             -0.24,
-            -0.29
+            -0.24
           ],
           [
             -0.24,
-            -0.19
+            -0.18
           ],
           [
             0.24,
-            -0.19
+            -0.18
           ],
           [
             0.24,
-            -0.29
+            -0.24
           ]
         ]
       },
@@ -138,19 +145,19 @@
         "vertices": [
           [
             -0.25,
-            0.19
+            0.17
           ],
           [
             -0.25,
-            0.25
+            0.23
           ],
           [
             -0.19,
-            0.25
+            0.23
           ],
           [
             -0.19,
-            0.19
+            0.17
           ]
         ]
       },
@@ -161,19 +168,19 @@
         "vertices": [
           [
             0.19,
-            0.19
+            0.17
           ],
           [
             0.19,
-            0.25
+            0.23
           ],
           [
             0.25,
-            0.25
+            0.23
           ],
           [
             0.25,
-            0.19
+            0.17
           ]
         ]
       },
@@ -184,19 +191,19 @@
         "vertices": [
           [
             -0.25,
-            -0.25
+            -0.23
           ],
           [
             -0.25,
-            -0.19
+            -0.17
           ],
           [
             -0.19,
-            -0.19
+            -0.17
           ],
           [
             -0.19,
-            -0.25
+            -0.23
           ]
         ]
       },
@@ -207,19 +214,19 @@
         "vertices": [
           [
             0.19,
-            -0.25
+            -0.23
           ],
           [
             0.19,
-            -0.19
+            -0.17
           ],
           [
             0.25,
-            -0.19
+            -0.17
           ],
           [
             0.25,
-            -0.25
+            -0.23
           ]
         ]
       }
