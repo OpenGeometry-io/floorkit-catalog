@@ -46,12 +46,13 @@ test('stray files, bad names and symlinks under blocks/ are reported', () => {
   put('blocks/floorkit/simple-chair/1.0.0.op', chair());
   put('blocks/floorkit/simple-chair/latest.op', chair());
   put('blocks/floorkit/README.md', '# no\n');
-  put('blocks/Floorkit/chair/1.0.0.op', chair());
+  // A bad-case publisher folder; not a case of an existing one, which collides on a case-insensitive disk.
+  put('blocks/Acme/chair/1.0.0.op', chair());
   symlinkSync('1.0.0.op', path.join(root, 'blocks/floorkit/simple-chair/1.0.1.op'));
   const { blocks, misplaced } = listBlocks(root);
   assert.deepEqual(blocks.map((block) => block.file), ['blocks/floorkit/simple-chair/1.0.0.op']);
   assert.deepEqual(misplaced.map((item) => item.file).sort(), [
-    'blocks/Floorkit/chair/1.0.0.op',
+    'blocks/Acme/chair/1.0.0.op',
     'blocks/floorkit/README.md',
     'blocks/floorkit/simple-chair/1.0.1.op',
     'blocks/floorkit/simple-chair/latest.op',

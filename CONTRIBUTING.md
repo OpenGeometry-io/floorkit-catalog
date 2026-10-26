@@ -242,7 +242,16 @@ The [`validate` workflow](.github/workflows/validate.yml) runs on every pull req
 
 Locally, `npm ci && npm run check` covers the first four steps, and `reuse lint` the last, if you have the [REUSE tool](https://reuse.software/) installed. Two things CI does **not** do:
 
-- **Hold blocks to Floorkit itself.** `tools/parity.mjs` needs a Floorkit build, and `@opengeometry/floorkit` is not on npm yet, so maintainers run it.
+- **Hold blocks to Floorkit itself.** `tools/parity.mjs` needs a Floorkit build, and `@opengeometry/floorkit` is not on npm yet, so maintainers run it:
+
+  | Command | Fails when |
+  | --- | --- |
+  | `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs [file.op ...]` | Floorkit rejects a block or changes one of its values, or accepts a fixture in `test/fixtures/kernel-rejects/` (whole catalog only) |
+  | `... node tools/parity.mjs --build [file.op ...]` | The kernel cannot build a block, or cannot build it placed in a project mirrored (`scale [-1, 1, 1]`) |
+  | `... node tools/parity.mjs --mesh [file.op ...]` | A built 3D node is not a closed, consistently wound, outward, single shell with area, or two nodes interpenetrate by more than 1 mm and `catalog:note` does not list the pair as `overlap <nodeA>+<nodeB>`. Writes `renders/<publisher>/<slug>/<version>/mesh-report.json` (`renders/` is not committed) |
+  | `... node tools/render.mjs [--baseline=<dir>] [file.op ...]` | A block does not parse, build or draw. Writes `renders/<publisher>/<slug>/<version>/` with `plan-1-50.svg` and `plan-1-100.svg` (Floorkit's plan extractor and paper emitter), `overlay.svg` (the plan symbol over the top-down projection of the body) and `iso`, `iso-ne`, `front` and `side`, plus `renders/gallery.html`. Those four 3D views are **not** Floorkit's OpenThree viewer: they are the kernel's triangles, coloured by each node's `mat:` role, drawn by Floorkit's own three.js in headless Chromium (PNG), or as SVG from the mesh with painter's-order hidden faces when no Chromium starts. The tool prints which. Chromium is `FLOORKIT_CHROMIUM` (`none` turns it off), else the newest Playwright headless shell in the user's cache. `--baseline=<dir>` copies a `<publisher>/<slug>/<version>/` tree of earlier pictures to `renders/baseline/`, which the gallery shows as a "before" column |
+
+  With files named, only those files are checked and the exit code covers only them. Pull requests attach the PNGs; `renders/` is never committed. `npm test` runs the Floorkit cases of `test/render.test.mjs` only when `FLOORKIT_DIR` is set; without it they skip.
 - **Judge provenance or appearance.** That is review.
 
 ## Review
@@ -254,7 +263,7 @@ Locally, `npm ci && npm run check` covers the first four steps, and `reuse lint`
   - that the plan symbol and the body look right and sit at the right height;
   - the label, type, category and tags;
   - the semver bump of a new version.
-- **Maintainers may also run** `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs --build`, which checks that Floorkit accepts the block, changes none of its values, and builds it with the real geometry kernel.
+- **Maintainers may also run** `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs --mesh <file.op>`, which checks that Floorkit accepts the block, changes none of its values, builds it (and its mirror) with the real geometry kernel, and that the body is made of proper solids.
 - **Expect questions about provenance.** They are not an accusation; the catalog can only pass on rights its contributors hold.
 
 ## Changing tools, schema or docs
