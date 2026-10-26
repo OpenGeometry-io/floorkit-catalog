@@ -22,8 +22,8 @@ A good block is something a designer would place in a plan without checking it f
 - **It says exactly what it draws.** The catalog rejects anything Floorkit would silently repair ([format §8](docs/format-v1.md#8-what-floorkit-repairs-and-what-the-catalog-rejects)), so a valid block is drawn as written.
 - **Both views agree.** The plan symbol (`profileView`) lies directly under the 3D body (`modelView`). A plan point `[x, z]` is model `(x, 0, z)` ([format §1](docs/format-v1.md#1-units-and-coordinates)).
 - **Right units.** Lengths in metres, geometry angles in radians, placement rotations in degrees.
-- **A sensible insertion point.** The origin is where the block is placed from. Most blocks stand on `y = 0`; a block that sits on something starts higher (the seed `floorkit.hob` starts at 0.91 m).
-- **Honest `dimensions`.** They should match the geometry. `validate.mjs` does not compare them, so reviewers do.
+- **A sensible insertion point.** The origin is where the block is placed from: on the floor at the centre of the footprint, with the back at −z. An item set into or onto a counter (a hob, an inset sink) keeps the origin on the floor, starts at the counter's height and says `at 0.90` in its note; an item placed on furniture (a table lamp) stands at `y = 0` with its `base` anchor's role `surface-contact` ([drafting standard §1](docs/drafting-standard.md#1-origin-axes-and-grounds)).
+- **Honest `dimensions`.** They equal the body's overall extent ([drafting standard §2](docs/drafting-standard.md#2-dimensions-heights-and-note-keywords)). `validate.mjs` does not compare them yet, so reviewers do.
 - **Useful anchors.** Name the points people attach to, such as `base` or `wallFace`, and give them a `role` in their metadata ([format §5](docs/format-v1.md#5-anchors)).
 - **Material roles.** Say what a node is made of with `mat:<nodeId>` and one of `surface`, `soft`, `frame`, `metal`, `glass`, `ceramic` or `planting`: a role, never a colour. A node's `color` is only how it is drawn.
 - **A plain label.** `labelName` describes the object ("Stacking Chair"), in 1–80 characters, with no brand name in the community tier.
@@ -31,6 +31,8 @@ A good block is something a designer would place in a plan without checking it f
 - **Small.** The limits are 256 KB, 400 nodes, and 1,000 nodes once references are expanded ([format §9](docs/format-v1.md#9-limits-and-why)). The largest seed block is 8,474 bytes with 22 nodes.
 
 ## Add a block
+
+Draw the block to the [drafting standard](docs/drafting-standard.md): it says where the origin goes, which heights are true, which parts the body needs, what the plan shows, and which roles, colours, anchors, ports and IFC class to use. Using Claude Code or another coding agent? The [`author-block` skill](.claude/skills/author-block/SKILL.md) walks through these steps in order.
 
 ### 1. Set up
 
@@ -56,7 +58,7 @@ blocks/<publisher>/<slug>/1.0.0.op
 - A new block starts at version `1.0.0`.
 - The block's `id` must be `<publisher>.<slug>`, for example `your-name.stacking-chair`.
 
-Use [docs/format-v1.md](docs/format-v1.md) (§12 is a complete example) and [`test/fixtures/valid/chair.op`](test/fixtures/valid/chair.op) as references for the structure.
+Start from a copy of [`.claude/skills/author-block/starter.op`](.claude/skills/author-block/starter.op), not from a seed block: the seeds under `blocks/floorkit/` predate the [drafting standard](docs/drafting-standard.md) and carry old anchor roles. [docs/format-v1.md](docs/format-v1.md) §12 is a complete example of the structure.
 
 ### 3. Fill in the metadata
 
@@ -83,14 +85,14 @@ An example for a chair whose nodes include `seat`, `backrest` and `leg-front-lef
   "catalog:attribution": "Your Name",
   "catalog:category": "seating",
   "catalog:placement": "free",
-  "catalog:lod": "200",
+  "catalog:lod": "300",
   "catalog:tags": "chair, stacking",
-  "catalog:note": "Seat height 450 mm.",
+  "catalog:note": "Shell seat on tubular legs. seat 0.45",
   "ifc:class": "IfcFurniture",
   "ifc:predefinedType": "CHAIR",
-  "mat:seat": "soft",
-  "mat:backrest": "soft",
-  "mat:leg-front-left": "metal"
+  "mat:seat": "surface",
+  "mat:backrest": "surface",
+  "mat:leg-front-left": "frame"
 }
 ```
 
@@ -158,8 +160,8 @@ A change is a new file beside the old one, with a version chosen by semver:
 | Bump | When |
 | --- | --- |
 | **MAJOR** (`2.0.0`) | An anchor, port or id is removed or renamed, or the footprint or insertion point changes in a way that would move instances already placed |
-| **MINOR** (`1.1.0`) | Anchors, ports or types are added |
-| **PATCH** (`1.0.1`) | The label, a colour or metadata changes |
+| **MINOR** (`1.1.0`) | Anchors, ports or types are added; or a drawing-only change (a plan line, a body part, a `mat:` or anchor role) that moves no anchor, port or insertion point |
+| **PATCH** (`1.0.1`) | The label, a colour or other metadata changes |
 
 If your change fits none of these rows, say so in the pull request and a maintainer decides.
 
@@ -248,7 +250,7 @@ Locally, `npm ci && npm run check` covers the first four steps, and `reuse lint`
   | --- | --- |
   | `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs [file.op ...]` | Floorkit rejects a block or changes one of its values, or accepts a fixture in `test/fixtures/kernel-rejects/` (whole catalog only) |
   | `... node tools/parity.mjs --build [file.op ...]` | The kernel cannot build a block, or cannot build it placed in a project mirrored (`scale [-1, 1, 1]`) |
-  | `... node tools/parity.mjs --mesh [file.op ...]` | A built 3D node is not a closed, consistently wound, outward, single shell with area, or two nodes interpenetrate by more than 1 mm and `catalog:note` does not list the pair as `overlap <nodeA>+<nodeB>`. Writes `renders/<publisher>/<slug>/<version>/mesh-report.json` (`renders/` is not committed) |
+  | `... node tools/parity.mjs --build --mesh [file.op ...]` | A built 3D node is not a closed, consistently wound, outward, single shell with area, or two nodes interpenetrate by more than 1 mm and `catalog:note` does not list the pair as `overlap <nodeA>+<nodeB>`. Writes `renders/<publisher>/<slug>/<version>/mesh-report.json` (`renders/` is not committed) |
   | `... node tools/render.mjs [--baseline=<dir>] [file.op ...]` | A block does not parse, build or draw. Writes `renders/<publisher>/<slug>/<version>/` with `plan-1-50.svg` and `plan-1-100.svg` (Floorkit's plan extractor and paper emitter), `overlay.svg` (the plan symbol over the top-down projection of the body) and `iso`, `iso-ne`, `front` and `side`, plus `renders/gallery.html`. Those four 3D views are **not** Floorkit's OpenThree viewer: they are the kernel's triangles, coloured by each node's `mat:` role, drawn by Floorkit's own three.js in headless Chromium (PNG), or as SVG from the mesh with painter's-order hidden faces when no Chromium starts. The tool prints which. Chromium is `FLOORKIT_CHROMIUM` (`none` turns it off), else the newest Playwright headless shell in the user's cache. `--baseline=<dir>` copies a `<publisher>/<slug>/<version>/` tree of earlier pictures to `renders/baseline/`, which the gallery shows as a "before" column |
 
   With files named, only those files are checked and the exit code covers only them. Pull requests attach the PNGs; `renders/` is never committed. `npm test` runs the Floorkit cases of `test/render.test.mjs` only when `FLOORKIT_DIR` is set; without it they skip.
@@ -263,7 +265,7 @@ Locally, `npm ci && npm run check` covers the first four steps, and `reuse lint`
   - that the plan symbol and the body look right and sit at the right height;
   - the label, type, category and tags;
   - the semver bump of a new version.
-- **Maintainers may also run** `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs --mesh <file.op>`, which checks that Floorkit accepts the block, changes none of its values, builds it (and its mirror) with the real geometry kernel, and that the body is made of proper solids.
+- **Maintainers may also run** `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs --build --mesh <file.op>`, which checks that Floorkit accepts the block, changes none of its values, builds it (and its mirror) with the real geometry kernel, and that the body is made of proper solids.
 - **Expect questions about provenance.** They are not an accusation; the catalog can only pass on rights its contributors hold.
 
 ## Changing tools, schema or docs

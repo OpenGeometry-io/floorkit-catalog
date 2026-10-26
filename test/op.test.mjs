@@ -33,7 +33,13 @@ test('the valid fixture and every seed block pass', () => {
       }
     }
   }
-  assert.equal(count, 26);
+  const index = JSON.parse(readFileSync(new URL('../index.json', import.meta.url), 'utf8'));
+  assert.equal(count, index.entries.length, 'blocks/ and index.json list different numbers of blocks');
+});
+
+test('the author-block skill\'s starter template passes', () => {
+  const starter = readFileSync(new URL('../.claude/skills/author-block/starter.op', import.meta.url), 'utf8');
+  assert.deepEqual(checkBlockText(starter).issues, []);
 });
 
 test('every Floorkit kernel-reject fixture is rejected by the catalog too', () => {
