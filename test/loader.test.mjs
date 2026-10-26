@@ -12,6 +12,7 @@ import { CatalogError, openCatalog } from '../tools/loader.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const realIndex = JSON.parse(readFileSync(path.join(ROOT, 'index.json'), 'utf8'));
+const liveCount = realIndex.entries.filter((entry) => !entry.revoked).length;
 const chairPath = 'blocks/floorkit/simple-chair/1.0.0.op';
 const chairBytes = readFileSync(path.join(ROOT, chairPath));
 
@@ -130,7 +131,7 @@ async function refusal(promise, code) {
 
 test('loads and verifies every block in the real catalog', async () => {
   const catalog = await openCatalog({ baseUrl: `${origin}/good/` });
-  assert.equal(catalog.list().length, 26);
+  assert.equal(catalog.list().length, liveCount);
   for (const entry of catalog.list()) {
     const { text, definition } = await catalog.load(entry.id);
     assert.equal(definition.id, entry.id);
@@ -153,8 +154,8 @@ test('refuses more bytes than the index promised, while streaming', async () => 
 test('refuses a revoked entry, and hides it from list()', async () => {
   const catalog = await openCatalog({ baseUrl: `${origin}/revoked/` });
   await refusal(catalog.load('floorkit.simple-chair'), 'revoked');
-  assert.equal(catalog.list().length, 25);
-  assert.equal(catalog.list({ includeRevoked: true }).length, 26);
+  assert.equal(catalog.list().length, liveCount - 1);
+  assert.equal(catalog.list({ includeRevoked: true }).length, realIndex.entries.length);
 });
 
 test('refuses an entry path that leaves the catalog root', async () => {

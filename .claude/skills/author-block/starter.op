@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "id": "your-name.your-slug",
+  "labelName": "Starter Block",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.5,
+    "depth": 0.4,
+    "height": 0.45
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Your Name",
+    "catalog:category": "other",
+    "catalog:placement": "free",
+    "catalog:tags": "starter",
+    "mat:body": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "body",
+        "kind": "polygon",
+        "color": "#D8D8D8",
+        "vertices": [
+          [
+            -0.25,
+            -0.2
+          ],
+          [
+            -0.25,
+            0.2
+          ],
+          [
+            0.25,
+            0.2
+          ],
+          [
+            0.25,
+            -0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "body",
+        "kind": "cuboid",
+        "color": "#D8D8D8",
+        "center": [
+          0,
+          0.225,
+          0
+        ],
+        "width": 0.5,
+        "height": 0.45,
+        "depth": 0.4
+      }
+    ]
+  }
+}

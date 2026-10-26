@@ -33,7 +33,12 @@ test('the valid fixture and every seed block pass', () => {
       }
     }
   }
-  assert.equal(count, 26);
+  assert.ok(count >= 26, 'the seed set shrank');
+});
+
+test('the author-block skill\'s starter template passes', () => {
+  const starter = readFileSync(new URL('../.claude/skills/author-block/starter.op', import.meta.url), 'utf8');
+  assert.deepEqual(checkBlockText(starter).issues, []);
 });
 
 test('every Floorkit kernel-reject fixture is rejected by the catalog too', () => {

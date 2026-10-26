@@ -11,6 +11,8 @@ A catalog of Floorkit `.op` element definitions ("blocks"): plain JSON files, ea
 
 Blocks are CC BY 4.0. Everything else is Apache-2.0 ([LICENSE.md](LICENSE.md)).
 
+**Authoring a block?** Follow the [`author-block` skill](.claude/skills/author-block/SKILL.md), from choosing the path to the pull request.
+
 ## Layout
 
 | Path | What | Who writes it |

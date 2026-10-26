@@ -32,6 +32,8 @@ A good block is something a designer would place in a plan without checking it f
 
 ## Add a block
 
+Using Claude Code or another coding agent? The [`author-block` skill](.claude/skills/author-block/SKILL.md) walks through these steps in order.
+
 ### 1. Set up
 
 Fork the repository on GitHub, then:

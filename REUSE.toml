@@ -24,6 +24,7 @@ path = [
   "package-lock.json",
   "publishers.json",
   "revocations.json",
+  ".claude/**",
   ".github/**",
   "docs/**",
   "schema/**",
