@@ -41,6 +41,7 @@ The [`author-block` skill](../.claude/skills/author-block/SKILL.md) is the order
 - **`dimensions` are the overall extent of the body**: `width` = the body's x extent, `depth` = z, `height` = y, from the lowest to the highest point of any solid, each within 0.005 m. A tap, a fan disc or a handle that stands proud is part of the extent.
 - **A part height that matters is a note keyword, not a dimension.** A seat at 0.45 m, a rim at 0.85 m, an underside at 1.40 m: write them in `catalog:note`.
 - **Heights are true.** A keyword's value must equal the height of a horizontal face of the body within 0.005 m.
+- **`bottom` is the casing's lowest face.** Connections that hang below the casing (pipe stubs, valves, cable tails, flues) are not its bottom, though they count in `height`: `floorkit.boiler` says `bottom 1.20` with its stubs down to 1.15, and `floorkit.radiator` says `bottom 0.15` with its valves down to 0.10.
 
 Note keywords are lowercase phrases inside the otherwise free `catalog:note` (at most 500 characters). They may stand anywhere in the text, separated from it by a space, a comma or a full stop. The grammar:
 
@@ -59,12 +60,20 @@ overlap <nodeA>+<nodeB>        two node names joined by "+", no spaces: "overlap
 | `seat <m>` | Top of the seat |
 | `rim <m>` | Top of the rim of a basin, bath, WC pan or sink |
 | `top <m>` | Top of a working or serving surface |
-| `bottom <m>`, `underside <m>` | Lowest face of a wall-hung or ceiling-hung item |
+| `bottom <m>`, `underside <m>` | Lowest face of a wall-hung or ceiling-hung item; for `bottom`, the lowest face of its casing, connections excepted |
 | `recess` | Part of the body goes below `y = 0` on purpose (a level-access shower) |
 | `carcass`, `slab` | The block is a box by nature (a cabinet carcass, a clearance slab); exempt only from the volume ratio in section 3. The 3-solid minimum and the parts of section 10 still apply |
 | `overlap <a>+<b>` | Nodes `a` and `b` may interpenetrate (section 4) |
 
 Example: `"catalog:note": "Wall-hung basin. rim 0.85, underside 0.68. Waste at the back; overlap counter+tap."`
+
+**The prose is parsed too.** `tools/lib/note.mjs` reads the whole note, not only the phrases meant as keywords:
+
+- A height keyword followed by one space and a number is read as a height wherever it stands, unless a letter, a digit, `_`, `+` or `-` comes right before it. "Mounted at 1.80" is read as `at 1.80`: a counter plane, which must then match a bottom face. A number without two decimals is refused: "at 1.8" or "at 3 points" fails `validate.mjs`.
+- A marker counts wherever it stands as a lowercase word with no letter, digit, `_`, `+` or `-` right before or after it. "The carcass sits on a plinth" says `carcass` and waives the volume ratio; "a door swing" says `swing` and takes the arcs out of the plan check. `carcasses`, `recessed` and `swings` are not markers, and neither is a node name inside `overlap carcass+kick`.
+- Matching is case-sensitive: only the lowercase words are read.
+
+So word the prose so that neither happens by accident: put a word between a height word and its number ("mounted about 1.80 to its middle", as `floorkit.wall-light` says), and use another word for a marker you do not mean ("case", "body", "floor marking", "door arc").
 
 ## 3. The body at LOD 300
 
@@ -77,11 +86,13 @@ The body must read as the object from the isometric view, with the parts the cat
   - a boolean in an arrangement measured to build: a vertical through-hole cut from a cuboid or a cylinder by a cuboid or a cylinder, or a cylinder minus a narrower coaxial cylinder. A cuboid minus a cylinder that crosses one of its side faces does not build;
   - plate with hole plus liner: the rim as a plate with a through-hole, and the bowl below it as separate thin walls and a floor that touch the plate's underside.
   Booleans take only `cuboid`, `cylinder` or another `boolean3d` as operands ([format §4](format-v1.md#4-definitions-and-references)). Every block with a boolean is built by a maintainer with `parity.mjs --build --mesh` before it merges.
+- **Cutter sizes.** A coaxial cutter (a cylinder minus a narrower coaxial cylinder) must be exactly as tall as its base and level with it: a taller one builds open shells. Every ring in the catalog is drawn so: the pan and seat rings of `floorkit.wc` (0.20 and 0.02 high, cutter and base alike) and the bowl liners of the basins. A through-hole cutter in a plate goes 0.01 m past each face of the plate: `floorkit.wash-basin` cuts its 0.02 rim plate with a cylinder 0.04 high on the same centre.
 - **Sweeps** only in the case the gates bound as OpenGeometry's `sweep.rs` builds it, as in `floorkit.glazed-door`: the profile centred on its vertex average at the origin (within 0.001 m) and facing +y, the path starting straight up, in one vertical plane, with no turn over 90°. `validate.mjs` refuses any other sweep.
-- **Cylinders** stand on their axis along y. A cylinder that lies down (a porthole, a wheel, a rail) is turned 90° about x by its `placement.rotation` (`[90, 0, 0]`), which is measured; a turn about z is unverified, so a rail along x is a cuboid or is built and checked by a maintainer.
+- **Cylinders** stand on their axis along y. A cylinder that lies down is turned 90° by its `placement.rotation`: about x (`[90, 0, 0]`, axis along z: a porthole, as in `floorkit.washing-machine`) or about z (`[0, 0, 90]`, axis along x: a wheel, as in `floorkit.parked-car`). Both are measured to build and to mirror with `parity.mjs --build --mesh`.
+- **A lying cylinder needs an even side count.** The kernel builds a cylinder as a prism whose number of sides grows with the radius (measured on Floorkit main `b0a084c7`: radius 0.30 gives 20 sides, 0.31 to 0.33 give 21, 0.34 to 0.36 give 22). Turned about x or z, a prism with an odd count does not land on the reflection of its unmirrored build when a project mirrors the block, so a mirrored wheel can leave the floor. Pick a radius that gives an even count, as the car's wheels (0.30) and the bicycle's (0.35) do, and check it with `parity.mjs --build --mesh`.
 - **No partial cylinders.** A cylinder with `angle` below a full turn must not be used: when a project mirrors the block (`scale [-1, 1, 1]`), Floorkit moves its centre but does not flip its arc, so the body lands up to its full width off the mirrored plan (measured: 400 mm for a quarter cylinder of radius 0.4). A half cylinder may be drawn as a full cylinder minus a cuboid, but that arrangement is unverified: a maintainer must build it, mirror included, with `parity.mjs --build --mesh` before it merges.
-- **Thin round parts render polygonal.** The kernel builds a small cylinder as a prism (measured with `parity.mjs --build --mesh` against Floorkit main `b0a084c7`, height 0.42): radius 0.011 gives 4 sides (12 triangles, volume 2·r²·h), 0.02 gives 6, 0.04 gives 8, 0.1 gives 12. A tubular leg at radius 0.011 therefore renders square; from radius 0.04 its section is an octagon or finer.
-- **Rotations.** Measured to build and to mirror correctly: a cylinder turned 90° about x; a cuboid turned about y; a ref turned about y by any angle (72° measured). A positive angle about y turns +x towards −z. A turn about z, a tilt of a cuboid about x (splayed legs) and a turn about two axes are unverified: draw parts upright, or have a maintainer build them.
+- **Thin round parts render polygonal.** The kernel builds a small cylinder as a prism (measured with `parity.mjs --build --mesh` against Floorkit main `b0a084c7`, height 0.42): radius 0.011 gives 4 sides (12 triangles, volume 2·r²·h), 0.02 gives 6, 0.04 gives 8, 0.1 gives 12. A tubular leg at radius 0.011 therefore renders square; from radius 0.04 its section is an octagon or finer. A round part under radius about 0.04 is accepted as a prism: draw it at its true size, not larger to look round, and say so in one line of the note, as `floorkit.wash-basin` does: `Parts under radius 0.04 build as polygonal prisms at true size.`
+- **Rotations.** Measured to build and to mirror correctly: a cylinder turned 90° about x or about z, with an even side count; a cuboid turned about y; a ref turned about y by any angle (72° measured). A positive angle about y turns +x towards −z. A cuboid turned about z, a tilt of a cuboid about x (splayed legs) and a turn about two axes are unverified: draw parts upright, or have a maintainer build them.
 - **Mirroring.** Every block may be mirrored by a project. Floorkit mirrors the body and the plan, but not anchors or ports: an anchor or port off `x = 0` stays where it was. Put anchors on `x = 0` where the object allows; where it cannot (a tap at one end of a bath), say so in the note.
 - **Reuse** repeated parts (legs, castors, burners) as one `definitions` entry and refs.
 - **Numbers.** Every size comes from section 11: the key-dimension table, or a source the author names in `catalog:basedOn`.
@@ -113,6 +124,7 @@ Everything else must be redrawn so the parts meet:
 The plan symbol (`profileView`) is what most users see. It follows practice for furniture and fittings (D11): a light outline at true size, no fill.
 
 - **The outline is the top-down silhouette of the body**, within 0.005 m on each side. Arcs that show a door's swing are outside this rule: a `DOOR` is exempt, and any other block with a swing says `swing` in its note.
+- **Proud parts are in the silhouette.** The outline follows a handle that stands proud of a front: `floorkit.fridge-freezer` draws its outline to z 0.325, the front face of its handles, 0.03 in front of the doors.
 - **At 1:100 it reads by its outline plus at most two interior lines** (a seat back, a mattress turn-down, a door split). An interior line marks an edge seen from above: for a chair, the front face of the back, where it meets the seat. Detail beyond that is for 1:50 and must still read at 1:100. A block draws one symbol for both scales, so a plan that is the same at 1:50 and 1:100 is fine until plan line roles exist.
 - **Nothing finer than 0.03 m.** A gap, a lip or a line spacing under 0.03 m prints as one blot at 1:100: keep an interior line at least 0.03 m from the outline and from other lines, and leave it out for a part thinner than that: a shell back thinner than 0.03 m is drawn by the silhouette alone, not thickened to earn its line.
 - **Use polygons for closed outlines**, so the plan draws as regions; loose polylines are for single lines only (a door seam, a nosing line).
@@ -185,6 +197,7 @@ Ports are optional; a block that has them follows this table. **Port ids are sho
 | `flue` | `hvac` | `exhaustAir` | `source` | round 0.100 | Boilers |
 | `power` | `electrical` | `power` | `sink` | electrical, 1 pole, 230 V (verify) | Luminaires, appliances that are wired in |
 
+- **Amperage on `power`.** A `power` port on an appliance with its own dedicated circuit states `amperage`: `floorkit.cooker` and `floorkit.hob` give 32. A luminaire on a lighting circuit leaves `amperage` out and says so in its note, as `floorkit.downlight`, `floorkit.pendant-light`, `floorkit.wall-light` and `floorkit.ceiling-luminaire-1200` do. The kept data-centre ports keep the values they had in the seeds, since their ids and values are unchanged: `floorkit.pdu` (`in` 400, `outA` and `outB` 32) and `floorkit.ups` (`in` and `out` 400) set `amperage` and no `voltage`.
 - The `systemType` values are the ones Floorkit maps to IFC's distribution system types; any other value exports as `USERDEFINED`.
 - A port sits on a face of the body, with its +z pointing out of the body. This is the catalog's convention; how Floorkit orients an element's own port is unverified ([format §6](format-v1.md#6-ports)).
 - Every size in the table is to verify: they are the nominal conventions of BS EN 12056-2 and Approved Document H (sanitary pipework) and UK domestic practice. The author checks the source for the fitting drawn, writes it in `catalog:basedOn`, and says in the pull request if it was not checked.
@@ -207,10 +220,10 @@ One row per category in [`categories.json`](../categories.json). "1:100" is what
 | `storage` | Carcass outline, door split | Door leaves; a wardrobe's rail centreline | Carcass panels, plinth, doors or drawer fronts, handles, shelves or rail | `IfcFurniture` `SHELF`, `FILECABINET` (verify), else `USERDEFINED` |
 | `kitchen` | Unit outline, worktop nosing line; a sink's bowl | Bowl inner line, drainer, tap | Plinth, carcass, doors, worktop; a sink's rim plate, hollow bowl and tap | `IfcFurniture`; a sink `IfcSanitaryTerminal` `SINK` |
 | `sanitary` | The fitting's outline by BS 8541-2: WC pan and cistern, basin rim, bath outline, tray square | Bowl or basin inner line, waste, tap; a tray's falls | Hollow pan, bowl, bath or tray; rim; cistern and seat; pedestal or bracket; tap | `IfcSanitaryTerminal` `TOILETPAN`, `WASHHANDBASIN`, `BATH`, `SHOWER`, `BIDET`, `URINAL` |
-| `appliances` | Casing outline, front line | Hob rings, a washer's door circle, a fridge's door swing | Casing, door or front, control strip, hob rings, porthole turned about x | `IfcElectricAppliance` (`ELECTRICCOOKER`, `DISHWASHER`, `WASHINGMACHINE`, `FREEZER`, `TUMBLEDRYER`); a television `IfcAudioVisualAppliance` `DISPLAY` |
-| `lighting` | Circle and cross (point source); rectangle and diagonal cross (linear) | Shade outline | Rose or canopy, rod or cable, shade or body; a floor lamp's base | `IfcLightFixture` `POINTSOURCE`, `DIRECTIONSOURCE` (verify) |
+| `appliances` | Casing outline, front line | Hob rings, a washer's door circle, a fridge's door swing | Casing, door or front, control strip, hob rings, porthole turned about x | `IfcElectricAppliance` (`ELECTRICCOOKER`, `DISHWASHER`, `WASHINGMACHINE`, `FREEZER`, `FRIDGE_FREEZER`, `TUMBLEDRYER`); a television `IfcAudioVisualAppliance` `DISPLAY` |
+| `lighting` | Circle and cross (point source); a small circle, the trim, with the lamp circle inside it and no cross (downlight); the box outline with a half circle inside it (wall light); rectangle and diagonal cross (linear) | Shade outline | Rose or canopy, rod or cable, shade or body; a floor lamp's base | `IfcLightFixture` `POINTSOURCE`, `DIRECTIONSOURCE` (verify) |
 | `planting` | Canopy circle and trunk circle; a planter's trough outline and inner line | Plant positions | Trunk, canopy as stacked cylinders; a planter's sides, floor, soil and plants | `IfcGeographicElement` `VEGETATION` (verify); planters `IfcFurniture` `USERDEFINED` |
-| `vehicles` | Body outline with chamfered ends, windscreen lines | Mirrors, wheel arches | Body, cabin, glazing, four wheels turned about x and touching the floor | `IfcBuildingElementProxy` `USERDEFINED` until a vehicle class is confirmed (verify) |
+| `vehicles` | Body outline with chamfered ends, windscreen lines | Mirrors, wheel arches | Body, cabin, glazing, four wheels, cylinders turned about z, touching the floor | `IfcBuildingElementProxy` `USERDEFINED` until a vehicle class is confirmed (verify) |
 | `equipment` | Casing outline, access side line | Grilles, fans, panel splits | Casing, panels or grilles, fans, stubs at every port | Its own class (`IfcChiller`, `IfcBoiler`, `IfcSpaceHeater` `RADIATOR`, `IfcTank` `STORAGE`, `IfcElectricAppliance` `PHOTOCOPIER` or `FREESTANDINGWATERCOOLER` …); with `ifcClass` too when ported or `MEP_EQUIPMENT` (section 9) |
 | `openings` | Jamb and frame lines, leaf open at 90°, swing arc | Glazing lines, threshold | Frame, leaf, glazing, ironmongery | `IfcDoor`; `catalog:placement: "hosted"` |
 | `other` | Outline and centre cross (clearance zones) | Turning circle or approach zone | A 0.010 m floor slab, note `slab` | `IfcBuildingElementProxy` `USERDEFINED` |
@@ -293,7 +306,7 @@ Version 1 of the format cannot express these. Draw the closest honest thing and 
 - **A body is mandatory**: a clearance zone is a 0.010 m floor slab with the note keyword `slab`.
 - **No mounting height in plan**: heights are baked into the body and stated in the note.
 - **Items that sit on other items** stand at `y = 0` with `base` role `surface-contact` (a table lamp); a microwave on a worktop is not a block.
-- **Fittings smaller than about 0.15 m** (toilet roll holders, grab rails, switches, monitors) are not blocks.
+- **Fittings smaller than about 0.15 m** (toilet roll holders, grab rails, switches, monitors) are not blocks. A downlight is the exception: it is a block, as a ceiling luminaire, although it is smaller (`floorkit.downlight` is 0.09 × 0.09 × 0.03).
 - **No sphere, revolve, cone or fillet**: approximate with cylinders and cuboids.
 - **Boolean pockets** beyond the measured arrangements are unverified (section 3).
 - **One colour per node**: glass is a pale solid.
