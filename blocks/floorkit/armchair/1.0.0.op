@@ -1,0 +1,291 @@
+{
+  "version": 1,
+  "id": "floorkit.armchair",
+  "labelName": "Armchair",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.8,
+    "depth": 0.85,
+    "height": 0.8
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "armchair, chair, living",
+    "catalog:note": "Upholstered armchair: base on four feet, arms 0.13 wide, back, seat cushion. seat 0.42, arm tops 0.20 above the seat.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified; seat height 0.42 unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "CHAIR",
+    "mat:base": "frame",
+    "mat:arm-left": "soft",
+    "mat:arm-right": "soft",
+    "mat:back": "soft",
+    "mat:seat-cushion": "soft",
+    "mat:foot": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.42,
+          0.09
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "definitions": {
+    "foot": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.05,
+        0
+      ],
+      "width": 0.05,
+      "height": 0.1,
+      "depth": 0.05
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.4,
+            -0.425
+          ],
+          [
+            0.4,
+            -0.425
+          ],
+          [
+            0.4,
+            0.425
+          ],
+          [
+            -0.4,
+            0.425
+          ]
+        ]
+      },
+      {
+        "id": "seat-line",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.27,
+            0.425
+          ],
+          [
+            -0.27,
+            -0.245
+          ],
+          [
+            0.27,
+            -0.245
+          ],
+          [
+            0.27,
+            0.425
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "foot-front-left",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            -0.375,
+            0,
+            0.4
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "foot-front-right",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            0.375,
+            0,
+            0.4
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "foot-back-left",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            -0.375,
+            0,
+            -0.4
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "foot-back-right",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            0.375,
+            0,
+            -0.4
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "base",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.2,
+          0
+        ],
+        "width": 0.8,
+        "height": 0.2,
+        "depth": 0.85
+      },
+      {
+        "id": "arm-left",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          -0.335,
+          0.46,
+          0
+        ],
+        "width": 0.13,
+        "height": 0.32,
+        "depth": 0.85
+      },
+      {
+        "id": "arm-right",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0.335,
+          0.46,
+          0
+        ],
+        "width": 0.13,
+        "height": 0.32,
+        "depth": 0.85
+      },
+      {
+        "id": "back",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.55,
+          -0.335
+        ],
+        "width": 0.54,
+        "height": 0.5,
+        "depth": 0.18
+      },
+      {
+        "id": "seat-cushion",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.36,
+          0.09
+        ],
+        "width": 0.54,
+        "height": 0.12,
+        "depth": 0.67
+      }
+    ]
+  }
+}

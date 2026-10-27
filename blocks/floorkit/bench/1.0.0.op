@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "id": "floorkit.bench",
+  "labelName": "Bench",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1.2,
+    "depth": 0.4,
+    "height": 0.45
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "bench, seat, hall, dining",
+    "catalog:note": "Backless bench: a slab on two panel legs. seat 0.45",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:slab": "surface",
+    "mat:legPanel": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.45,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "definitions": {
+    "legPanel": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.205,
+        0
+      ],
+      "width": 0.04,
+      "height": 0.41,
+      "depth": 0.36
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.6,
+            -0.2
+          ],
+          [
+            0.6,
+            -0.2
+          ],
+          [
+            0.6,
+            0.2
+          ],
+          [
+            -0.6,
+            0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "slab",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.43,
+          0
+        ],
+        "width": 1.2,
+        "height": 0.04,
+        "depth": 0.4
+      },
+      {
+        "id": "leg-left",
+        "ref": "legPanel",
+        "placement": {
+          "position": [
+            -0.54,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-right",
+        "ref": "legPanel",
+        "placement": {
+          "position": [
+            0.54,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -2,6 +2,64 @@
   "schema": "floorkit.catalog/v1",
   "entries": [
     {
+      "id": "floorkit.armchair",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "armchair",
+      "version": "1.0.0",
+      "labelName": "Armchair",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "armchair",
+        "chair",
+        "living"
+      ],
+      "dimensions": {
+        "width": 0.8,
+        "depth": 0.85,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/armchair/1.0.0.op",
+      "bytes": 5243,
+      "sha256": "76fbb51da5b0ef26c5e1881d64c2e645ce299c5ca7e7e82c0005c1594fdfb4c4",
+      "contentHash": "8ea8656e3feb1fb0e6fc696b75066e212eaeab2a3c654d7468ea7be499d0fd02"
+    },
+    {
+      "id": "floorkit.bar-stool",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bar-stool",
+      "version": "1.0.0",
+      "labelName": "Bar Stool",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "stool",
+        "bar",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.38,
+        "depth": 0.38,
+        "height": 0.75
+      },
+      "path": "blocks/floorkit/bar-stool/1.0.0.op",
+      "bytes": 3193,
+      "sha256": "4e33b6fecf627e27c9ca294d41eeb6dbea0bfef3a5bfed0bafb9b12eef817fd2",
+      "contentHash": "3bb33435a5d019ca28a154e2fbc86bfd6934050aec3e260cc589fa548b841b70"
+    },
+    {
       "id": "floorkit.bathtub",
       "publisher": {
         "id": "floorkit",
@@ -28,6 +86,36 @@
       "bytes": 5506,
       "sha256": "12474e20c6d8fe103ea47697fdbfc1c4ef459402d9d2f88bcb72a4988bb16aae",
       "contentHash": "155e1bf000a14ae3d2a8f35360f2045d219abef66d91592dda103b64af53520c"
+    },
+    {
+      "id": "floorkit.bench",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bench",
+      "version": "1.0.0",
+      "labelName": "Bench",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bench",
+        "seat",
+        "hall",
+        "dining"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 0.4,
+        "height": 0.45
+      },
+      "path": "blocks/floorkit/bench/1.0.0.op",
+      "bytes": 3005,
+      "sha256": "c5ad5ec6dbe894e97327592481e0a9026057318dd20f43caeb621a946423a76c",
+      "contentHash": "93bc4a547447d3ba9a2387851b22924981a271c3f7c8d189e47ef1e7a2606095"
     },
     {
       "id": "floorkit.cabinet",
@@ -383,7 +471,7 @@
       },
       "slug": "minimal-sofa",
       "version": "1.0.0",
-      "labelName": "Minimal Sofa",
+      "labelName": "Three-Seat Sofa",
       "type": "FURNITURE",
       "category": "seating",
       "license": "CC-BY-4.0",
@@ -391,17 +479,48 @@
       "tags": [
         "sofa",
         "couch",
+        "three-seat",
         "living"
       ],
       "dimensions": {
-        "width": 2.32,
-        "depth": 0.98,
-        "height": 0.78
+        "width": 2.2,
+        "depth": 0.9,
+        "height": 0.8
       },
       "path": "blocks/floorkit/minimal-sofa/1.0.0.op",
-      "bytes": 5667,
-      "sha256": "f3114b05c6c96fcd12aa800a130771e7bda7cd5fbfcb7632e184e8d5cc79df40",
-      "contentHash": "56ac92489cb795d7189bd2262d81df2b554a0ee4d810fc662e109099f4224ed0"
+      "bytes": 8001,
+      "sha256": "ca16422b0e0be6f63a14b67ecf18532cbe1b550e8678fa2d4d20ce3a89bccbd5",
+      "contentHash": "69c437e74ba9a0d883258a13517b591aab9d6013644189f7e8cef64f4fcb619e"
+    },
+    {
+      "id": "floorkit.office-chair",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "office-chair",
+      "version": "1.0.0",
+      "labelName": "Office Chair",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "chair",
+        "office",
+        "swivel",
+        "task"
+      ],
+      "dimensions": {
+        "width": 0.65,
+        "depth": 0.65,
+        "height": 1
+      },
+      "path": "blocks/floorkit/office-chair/1.0.0.op",
+      "bytes": 11158,
+      "sha256": "0e0f8c50362b218d857b3561a8cb206934906d5ca5dd75db86d7f36a0158f68d",
+      "contentHash": "bf62a9f34a951297ae07e2d792d575255c4d7cfbe53e4121ee0e3a88131d55bf"
     },
     {
       "id": "floorkit.office-desk",
@@ -640,7 +759,7 @@
       },
       "slug": "simple-chair",
       "version": "1.0.0",
-      "labelName": "Simple Chair",
+      "labelName": "Dining Chair",
       "type": "FURNITURE",
       "category": "seating",
       "license": "CC-BY-4.0",
@@ -650,14 +769,73 @@
         "dining"
       ],
       "dimensions": {
-        "width": 0.64,
-        "depth": 0.64,
-        "height": 0.96
+        "width": 0.45,
+        "depth": 0.52,
+        "height": 0.85
       },
       "path": "blocks/floorkit/simple-chair/1.0.0.op",
-      "bytes": 5386,
-      "sha256": "c05bdce899138afb3662726bf17106d3466490d8e3352dcc7bb2361ffe53c879",
-      "contentHash": "bc5377754883cdf00fd25a87d86b465e30f4440c49017be9795319c8bc4927a1"
+      "bytes": 5175,
+      "sha256": "5051461d675c43bd6683a5efd59acba9b257a71724f6e46c98498ecfd6264b17",
+      "contentHash": "211eb62b995bb76e876f8a644ae10d9eeb31f6f0637bba3b9cc83c41997910b1"
+    },
+    {
+      "id": "floorkit.sofa-2-seat",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "sofa-2-seat",
+      "version": "1.0.0",
+      "labelName": "Two-Seat Sofa",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "sofa",
+        "couch",
+        "two-seat",
+        "living"
+      ],
+      "dimensions": {
+        "width": 1.6,
+        "depth": 0.9,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/sofa-2-seat/1.0.0.op",
+      "bytes": 6844,
+      "sha256": "289e0c0486c9b83819009bd2be5522103da50c4c60f0b10a0a886e3ebb91136d",
+      "contentHash": "e33af17636ec13dacff0ab3d26bec6f7418d2fb4781cbbbe7ba9a9f4a4d4cc00"
+    },
+    {
+      "id": "floorkit.stacking-chair",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "stacking-chair",
+      "version": "1.0.0",
+      "labelName": "Stacking Chair",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "chair",
+        "stacking",
+        "dining"
+      ],
+      "dimensions": {
+        "width": 0.53,
+        "depth": 0.55,
+        "height": 0.82
+      },
+      "path": "blocks/floorkit/stacking-chair/1.0.0.op",
+      "bytes": 5828,
+      "sha256": "95cfd720899a1ea7e9d25565831e340e0bde689128fa64b61295fc7c99325bdd",
+      "contentHash": "021d65840810c61ca45e8d780d8345ddc421b14bf54b4d973f6c49b9d010ad5e"
     },
     {
       "id": "floorkit.table",

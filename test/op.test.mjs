@@ -310,19 +310,19 @@ test('a floorkit block not on the pending list is drawn to LOD 300', () => {
 });
 
 test('only the listed seed file itself skips the new gates: its path, version and bytes', () => {
-  const seed = readFileSync(new URL('../blocks/floorkit/simple-chair/1.0.0.op', import.meta.url), 'utf8');
-  const listed = { publisher: 'floorkit', slug: 'simple-chair', version: '1.0.0' };
+  const seed = readFileSync(new URL('../blocks/floorkit/ups/1.0.0.op', import.meta.url), 'utf8');
+  const listed = { publisher: 'floorkit', slug: 'ups', version: '1.0.0' };
   assert.deepEqual(checkBlockText(seed, { listed }).issues, []);
   const gated = (text, place) => assert.ok(checkBlockText(text, place).issues.some((issue) => issue.message === 'needs "catalog:lod"'));
   gated(seed);
   gated(seed, { listed: { ...listed, version: '1.1.0' } });
-  gated(seed.replace('"Simple Chair"', '"Simple Chaix"'), { listed });
+  gated(seed.replace('"UPS"', '"UPX"'), { listed });
   gated(seed, { listed: { ...listed, slug: 'stool' } });
 });
 
 test('a block outside blocks/ that claims a seed id gets every gate', () => {
   const fake = base();
-  Object.assign(fake, { id: 'floorkit.simple-chair', dimensions: { width: 3, depth: 3, height: 3 } });
+  Object.assign(fake, { id: 'floorkit.ups', dimensions: { width: 3, depth: 3, height: 3 } });
   delete fake.metadata['catalog:lod'];
   fake.anchors.seatCenter.metadata.role = 'nonsense';
   const result = check(fake);

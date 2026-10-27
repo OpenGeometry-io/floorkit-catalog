@@ -1,0 +1,369 @@
+{
+  "version": 1,
+  "id": "floorkit.sofa-2-seat",
+  "labelName": "Two-Seat Sofa",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1.6,
+    "depth": 0.9,
+    "height": 0.8
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "sofa, couch, two-seat, living",
+    "catalog:note": "Two-seat sofa: base on four feet, arms 0.17 wide, back frame, two back and two seat cushions. seat 0.42, arm tops 0.20 above the seat. Mirrored, the seatLeft and seatRight anchors stay where they are, since Floorkit does not mirror anchors.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified; seat height 0.42 unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "SOFA",
+    "mat:base": "frame",
+    "mat:arm-left": "soft",
+    "mat:arm-right": "soft",
+    "mat:back-frame": "frame",
+    "mat:back-cushion-left": "soft",
+    "mat:back-cushion-right": "soft",
+    "mat:seat-cushion-left": "soft",
+    "mat:seat-cushion-right": "soft",
+    "mat:foot": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "seatLeft": {
+      "placement": {
+        "position": [
+          -0.315,
+          0.42,
+          0.125
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    },
+    "seatRight": {
+      "placement": {
+        "position": [
+          0.315,
+          0.42,
+          0.125
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "definitions": {
+    "foot": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.05,
+        0
+      ],
+      "width": 0.05,
+      "height": 0.1,
+      "depth": 0.05
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.8,
+            -0.45
+          ],
+          [
+            0.8,
+            -0.45
+          ],
+          [
+            0.8,
+            0.45
+          ],
+          [
+            -0.8,
+            0.45
+          ]
+        ]
+      },
+      {
+        "id": "seat-line",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.63,
+            0.45
+          ],
+          [
+            -0.63,
+            -0.2
+          ],
+          [
+            0.63,
+            -0.2
+          ],
+          [
+            0.63,
+            0.45
+          ]
+        ]
+      },
+      {
+        "id": "cushion-split-1",
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            -0.2
+          ],
+          [
+            0,
+            0.45
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "foot-front-left",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            -0.775,
+            0,
+            0.425
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "foot-front-right",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            0.775,
+            0,
+            0.425
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "foot-back-left",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            -0.775,
+            0,
+            -0.425
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "foot-back-right",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            0.775,
+            0,
+            -0.425
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "base",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.2,
+          0
+        ],
+        "width": 1.6,
+        "height": 0.2,
+        "depth": 0.9
+      },
+      {
+        "id": "arm-left",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          -0.715,
+          0.46,
+          0
+        ],
+        "width": 0.17,
+        "height": 0.32,
+        "depth": 0.9
+      },
+      {
+        "id": "arm-right",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0.715,
+          0.46,
+          0
+        ],
+        "width": 0.17,
+        "height": 0.32,
+        "depth": 0.9
+      },
+      {
+        "id": "back-frame",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.55,
+          -0.405
+        ],
+        "width": 1.26,
+        "height": 0.5,
+        "depth": 0.09
+      },
+      {
+        "id": "back-cushion-left",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          -0.315,
+          0.51,
+          -0.28
+        ],
+        "width": 0.63,
+        "height": 0.42,
+        "depth": 0.16
+      },
+      {
+        "id": "back-cushion-right",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0.315,
+          0.51,
+          -0.28
+        ],
+        "width": 0.63,
+        "height": 0.42,
+        "depth": 0.16
+      },
+      {
+        "id": "seat-cushion-left",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          -0.315,
+          0.36,
+          0.125
+        ],
+        "width": 0.63,
+        "height": 0.12,
+        "depth": 0.65
+      },
+      {
+        "id": "seat-cushion-right",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0.315,
+          0.36,
+          0.125
+        ],
+        "width": 0.63,
+        "height": 0.12,
+        "depth": 0.65
+      }
+    ]
+  }
+}
