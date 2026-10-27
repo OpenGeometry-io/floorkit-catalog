@@ -70,7 +70,7 @@ Example: `"catalog:note": "Wall-hung basin. rim 0.85, underside 0.68. Waste at t
 
 The body must read as the object from the isometric view, with the parts the category lists (section 10) at their true heights.
 
-- **At least 3 solids**, and the sum of the solids' volumes below 95 % of the bounding-box volume (the note's `carcass` or `slab` waives the volume ratio only). A body of one box is LOD 100, not a catalog block. `validate.mjs` computes the ratio from the solids' boxes ([format §9](format-v1.md#9-limits-and-why)).
+- **At least 3 solids**, and the sum of the solids' volumes below 95 % of the bounding-box volume (the note's `carcass` or `slab` waives the volume ratio only). A body of one box is LOD 100. `validate.mjs` holds a block to both rules when its `catalog:lod` is `300`; a block declaring 100 or 200 is not held to them. `validate.mjs` computes the ratio from the solids' boxes ([format §9](format-v1.md#9-limits-and-why)).
 - **No part thinner than 0.01 m** in any direction (glass included, 0.010), and no part wholly hidden inside another.
 - **Every part touches** another part or a ground (section 1) within 0.001 m. No floating worktop, no car on wheels that stop short of the floor.
 - **Hollows** (bowls, baths, sinks, trays) are drawn hollow. Never put a solid box inside another box to suggest a basin. Two ways are allowed:

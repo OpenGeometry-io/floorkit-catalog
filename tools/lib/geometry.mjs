@@ -12,8 +12,8 @@
  * (d) every solid is joined to a ground through solids whose boxes touch within
  *     0.001 m; grounds are the floor, the wall plane at `wallFace`, and the
  *     planes the note names with `ceiling <m>` and `at <m>`;
- * (e) at least 3 solids, filling under 95 % of their box (the note's `carcass`
- *     or `slab` waives the ratio only);
+ * (e) for `catalog:lod` "300" only: at least 3 solids, filling under 95 % of
+ *     their box (the note's `carcass` or `slab` waives the ratio only);
  * (f) every anchor and port lies on a solid's surface within 0.005 m; only
  *     `base` and `wallFace` may instead stand on the floor under the body;
  * (g) `seat`, `rim`, `top` and `ceiling` match an exposed top face, and
@@ -258,9 +258,11 @@ export function geometryIssues(definition, note) {
 
   // (e) the LOD floor
   const body = { min: [0, 1, 2].map((i) => extreme(i, 'min').box.min[i]), max: [0, 1, 2].map((i) => extreme(i, 'max').box.max[i]) };
-  if (solids.length < MIN_SOLIDS) issues.push({ path: '/modelView', message: `has ${solids.length} solid(s); LOD 300 needs at least ${MIN_SOLIDS}` });
+  // (e) binds only a block drawn to LOD 300 (owner decision 2026-10-27).
+  const lod300 = definition.metadata['catalog:lod'] === '300';
+  if (lod300 && solids.length < MIN_SOLIDS) issues.push({ path: '/modelView', message: `has ${solids.length} solid(s); LOD 300 needs at least ${MIN_SOLIDS}` });
   const fill = solids.reduce((sum, s) => sum + s.box.volume, 0) / body.max.reduce((v, hi, i) => v * (hi - body.min[i]), 1);
-  if (fill >= MAX_FILL && !note.markers.has('carcass') && !note.markers.has('slab')) {
+  if (lod300 && fill >= MAX_FILL && !note.markers.has('carcass') && !note.markers.has('slab')) {
     issues.push({ path: '/modelView', message: `the solids fill ${fill.toFixed(3)} of their bounding box; below ${MAX_FILL} is LOD 300 unless the note says "carcass" or "slab"` });
   }
 

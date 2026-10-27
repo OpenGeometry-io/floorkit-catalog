@@ -463,3 +463,22 @@ test('a sweep outside the case the catalog can bound is refused, naming the rule
   }
   assert.deepEqual(check(door()).issues, []);
 });
+
+test('gate (e) binds only a block drawn to LOD 300 (owner decision 2026-10-27); every other gate binds all', () => {
+  const box = (lod) => {
+    const block = base();
+    Object.assign(block, { id: 'acme.storage-box', dimensions: { width: 0.5, depth: 0.5, height: 0.5 } });
+    block.metadata = Object.fromEntries(Object.entries(block.metadata).filter(([key]) => !key.startsWith('mat:') && key !== 'catalog:note'));
+    Object.assign(block.metadata, { 'catalog:lod': lod, 'mat:box': 'surface' });
+    block.anchors = { base: block.anchors.base };
+    block.profileView.elements = [{ id: 'box', kind: 'polygon', vertices: [[-0.25, -0.25], [0.25, -0.25], [0.25, 0.25], [-0.25, 0.25]] }];
+    block.modelView.elements = [{ id: 'box', kind: 'cuboid', center: [0, 0.25, 0], width: 0.5, height: 0.5, depth: 0.5 }];
+    return block;
+  };
+  assert.deepEqual(check(box('200')).issues, []);
+  rejects(box('300'), '/modelView', 'LOD 300 needs at least 3');
+  rejects(box('300'), '/modelView', 'the solids fill 1.000 of their bounding box');
+  const wrong = box('200');
+  wrong.dimensions.height = 0.6;
+  rejects(wrong, '/dimensions/height', 'is 0.600 m but the body spans 0.500 m');
+});
