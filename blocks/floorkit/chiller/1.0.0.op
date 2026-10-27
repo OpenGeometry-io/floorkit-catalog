@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "data centre, cooling",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/chiller.op#catalog-datacenter-chiller; 3.00 x 1.50 x 2.20 is the seed's size, not checked against a published source (unverified)",
+    "catalog:basedOn": "The chiller in the Floorkit SDK's example catalog, redrawn to the drafting standard; 3.00 x 1.50 x 2.20 is that example's size, not checked against a published source (unverified)",
     "catalog:note": "Air-cooled chiller on a skid: four condenser fans on top, control panel and the two chilled-water stubs on the front (+z). Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcChiller",
     "ifc:predefinedType": "AIRCOOLED",

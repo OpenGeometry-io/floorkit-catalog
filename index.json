@@ -538,9 +538,9 @@
         "height": 2.2
       },
       "path": "blocks/floorkit/chiller/1.0.0.op",
-      "bytes": 8552,
-      "sha256": "f72735c95335527295f91c050eb15a51acd2a82722479b58a52b8a07acd0a714",
-      "contentHash": "fd86a1be47408b585d69fbb4dcde16e520c6acfb81b63be0ba2b0fffa1067e13"
+      "bytes": 8529,
+      "sha256": "98c9a07310eda4467ef6b0f5a121aa5fa9391f2cf4fb4feb2718f7b2c928dfef",
+      "contentHash": "d2111fd064e9d3d3ee3b12641772c1247c5341b624a2c9295cb34e398b5d12a2"
     },
     {
       "id": "floorkit.cloakroom-basin",
@@ -718,9 +718,9 @@
         "height": 2
       },
       "path": "blocks/floorkit/crah/1.0.0.op",
-      "bytes": 9125,
-      "sha256": "9a20d3701861846f2e201c2910aacf357aaad08694d74561357f54328269c17c",
-      "contentHash": "d9c92775a04630791df6d96899e00e58f8addcf75c8ed9c6e47931f2c728b0e3"
+      "bytes": 9110,
+      "sha256": "46867c0ef852a13ee340847e809ae04a1696c15d63f843905e3edf8d6dbfe82f",
+      "contentHash": "f567833a3276d1bbb8e19c4c03a0b4bd1e242782de6264fd0da1524357851ea5"
     },
     {
       "id": "floorkit.desk-pedestal",
@@ -1014,9 +1014,9 @@
         "height": 2.11
       },
       "path": "blocks/floorkit/glazed-door/1.0.0.op",
-      "bytes": 5269,
-      "sha256": "10c317debe0546780d2ba6fe4271bf479f5b73cb7fa720689c868b4bb5413c3c",
-      "contentHash": "4685de254ef54e9dcd04c6a4b42933b53fe6c5e47db2adf2e9829f06aedbda90"
+      "bytes": 5329,
+      "sha256": "6e6af8656e3375b665cc52d748e3d2590b4c95d178e2f9ba2a0b82f73855f198",
+      "contentHash": "d7351c73443e8303c989f5d1a7bfe10ec18fdc528e06fdc44ff81194cf36f098"
     },
     {
       "id": "floorkit.hob",
@@ -1342,9 +1342,9 @@
         "height": 1.9
       },
       "path": "blocks/floorkit/pdu/1.0.0.op",
-      "bytes": 6672,
-      "sha256": "f85add68b821cf85f448c421452906cb3deca015134662c6a3f734bd4fda8130",
-      "contentHash": "492a8ed9e0a40eb24e29a6ef439a9417e02d9182ad51d7d95f703ffbd13ecfe5"
+      "bytes": 6653,
+      "sha256": "86c4efdbf66eb70b78bd500e8af6388795ec46c892cba93ddbde03d1ee4be496",
+      "contentHash": "8f0b6ab48420357ac62e3947b72ed5c293444b3a609616c3c3c5a7dbc9b783ad"
     },
     {
       "id": "floorkit.pendant-light",
@@ -1522,8 +1522,8 @@
       },
       "path": "blocks/floorkit/rear-door-heat-exchanger/1.0.0.op",
       "bytes": 6930,
-      "sha256": "d01e535681b96efd19b5fb2b4aa920c85cf7146b5cecf263bae15e02f1876a3a",
-      "contentHash": "b5ee656aa89d4f9f198dc76374d145132d0ecc471186dfdc684ab903f56bc572"
+      "sha256": "51f8f361a4eac8becb21f4e49971b037f8fa97b5a1e48403390f69027d8f45c9",
+      "contentHash": "b6a8e66f1149fe7839d1c488b69c78170f8895cc1f8b723cf85bacc41974de9d"
     },
     {
       "id": "floorkit.round-table",
@@ -2025,9 +2025,9 @@
         "height": 1.9
       },
       "path": "blocks/floorkit/ups/1.0.0.op",
-      "bytes": 7849,
-      "sha256": "574010dc2ce304064ec478c9dea2a7b0aa8311f83223a3dabe98a41fffa38a4a",
-      "contentHash": "4406fd243ec2c3008ff703828ee24b8b2e0cc64ac61c7a5afbff609e182d7f10"
+      "bytes": 7830,
+      "sha256": "595b67fb8c17eb45dac624ca0040c2e1c29e2d27b21b309d316abe96aea1e6c2",
+      "contentHash": "dee924a8cad8b96f6fcab9b9c456fb2a6f0633163e63c0dc5c2225c331dc8e8b"
     },
     {
       "id": "floorkit.urinal",

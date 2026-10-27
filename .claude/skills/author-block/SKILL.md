@@ -50,7 +50,7 @@ mkdir -p blocks/<publisher>/<slug>
 cp .claude/skills/author-block/starter.op blocks/<publisher>/<slug>/1.0.0.op
 ```
 
-[`starter.op`](starter.op) is a minimal side table drawn to the standard: a top and four legs (one `definitions` entry and four refs) and nothing else, no aprons or rails, so a real table adds the parts its category row lists. It has `catalog:lod` 300, a `mat:` role and palette colour on every part, `base` and `topCenter` anchors with roles, a `top 0.45` height in the note, `mat:leg` once on the definition, and a `catalog:basedOn` to replace. Copy the starter, not a seed block: the seeds under `blocks/floorkit/` predate the standard and carry old anchor roles. Replace its `id`, `labelName`, `dimensions`, metadata and geometry; it is just as good to write the file from scratch, since `format.mjs` fixes the layout. Another reference: [format §12](../../../docs/format-v1.md#12-a-complete-example). Never edit a released block; make a new version ([§9](#9-a-new-version-of-an-existing-block)).
+[`starter.op`](starter.op) is a minimal side table drawn to the standard: a top and four legs (one `definitions` entry and four refs) and nothing else, no aprons or rails, so a real table adds the parts its category row lists. It has `catalog:lod` 300, a `mat:` role and palette colour on every part, `base` and `topCenter` anchors with roles, a `top 0.45` height in the note, `mat:leg` once on the definition, and a `catalog:basedOn` to replace. Copy the starter. The blocks under `blocks/floorkit/` are drawn to the same standard, and show what each category's body and plan look like. Replace its `id`, `labelName`, `dimensions`, metadata and geometry; it is just as good to write the file from scratch, since `format.mjs` fixes the layout. Another reference: [format §12](../../../docs/format-v1.md#12-a-complete-example). Never edit a released block; make a new version ([§9](#9-a-new-version-of-an-existing-block)).
 
 ## 4. Get units and axes right
 
@@ -95,7 +95,7 @@ Root `metadata` is a closed vocabulary and every value is a string ([format §7]
 
 ## 7. Limits
 
-256 KB per file, 400 nodes, 1,000 nodes once refs are expanded, 1,024 points per list, 64 ports ([format §9](../../../docs/format-v1.md#9-limits-and-why)). The largest seed is 8,474 bytes with 22 nodes; stay near that.
+256 KB per file, 400 nodes, 1,000 nodes once refs are expanded, 1,024 points per list, 64 ports ([format §9](../../../docs/format-v1.md#9-limits-and-why)). The largest block in the catalog, `floorkit.cot`, is 22,690 bytes with 63 nodes; stay near that.
 
 ## 8. Format, validate, index, check
 

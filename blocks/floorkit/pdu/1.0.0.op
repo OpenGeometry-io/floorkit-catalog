@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "data centre, power",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/pdu.op#catalog-datacenter-pdu; 0.60 x 0.80 x 1.90 is the seed's size, not checked against a published source (unverified)",
+    "catalog:basedOn": "The PDU in the Floorkit SDK's example catalog, redrawn to the drafting standard; 0.60 x 0.80 x 1.90 is that example's size, not checked against a published source (unverified)",
     "catalog:note": "Floor PDU, a cabinet carcass: one 400 A input at the front, two 32 A breakered outputs at the back sized to a rack inlet so they connect without a transition. Breaker panel door on the front, cable entry stubs under the doors. Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcElectricDistributionBoard",
     "ifc:predefinedType": "DISTRIBUTIONBOARD",

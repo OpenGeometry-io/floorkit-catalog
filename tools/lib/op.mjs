@@ -15,7 +15,6 @@ import { readFileSync } from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
 import { geometryIssues, sweepIssue } from './geometry.mjs';
 import { parseNote } from './note.mjs';
-import { PENDING_REDRAW } from './pending-redraw.mjs';
 import { ANCHOR_ROLES, KEPT_PORT_IDS, PORTS } from './roles.mjs';
 
 const SCHEMA_URL = new URL('../../schema/op/v1.schema.json', import.meta.url);
@@ -314,17 +313,14 @@ function semanticIssues(definition) {
 }
 
 /**
- * The checks a block drawn to `docs/drafting-standard.md` must pass. The
- * `floorkit` seeds still on `PENDING_REDRAW` skip them until redrawn.
+ * The checks a block drawn to `docs/drafting-standard.md` must pass. The schema
+ * already requires `catalog:lod`; a `floorkit` block must be drawn to LOD 300.
  */
-function standardIssues(definition, text, listed) {
-  const pending = listed && listed.publisher === 'floorkit' && listed.version === '1.0.0' && Object.hasOwn(PENDING_REDRAW, listed.slug);
-  if (pending && PENDING_REDRAW[listed.slug] === sha256Hex(text)) return [];
+function standardIssues(definition) {
   const publisher = definition.id.split('.')[0];
   const issues = [];
   const lod = definition.metadata['catalog:lod'];
-  if (lod === undefined) issues.push({ path: '/metadata', message: 'needs "catalog:lod"' });
-  else if (publisher === 'floorkit' && lod !== '300') issues.push({ path: '/metadata/catalog:lod', message: `is "${lod}"; a floorkit block is drawn to LOD 300` });
+  if (publisher === 'floorkit' && lod !== '300') issues.push({ path: '/metadata/catalog:lod', message: `is "${lod}"; a floorkit block is drawn to LOD 300` });
   const nodes = [
     ...definition.modelView.elements.map((node, index) => [node, `/modelView/elements/${index}`]),
     ...Object.entries(definition.definitions ?? {}).map(([key, node]) => [node, `/definitions/${key}`]),
@@ -373,10 +369,8 @@ function standardIssues(definition, text, listed) {
 /**
  * Judge one block file's TEXT. Returns `{ ok, issues, definition? }`; an issue
  * is `{ path, message }` with `path` a JSON pointer into the definition.
- * `listed` is the file's place under `blocks/` (`listBlocks`), which only a
- * pending seed's own file uses, to skip the new checks.
  */
-export function checkBlockText(text, { listed } = {}) {
+export function checkBlockText(text) {
   const issues = [];
   const bytes = Buffer.byteLength(text, 'utf8');
   if (bytes > LIMITS.maxBytes) {
@@ -407,6 +401,6 @@ export function checkBlockText(text, { listed } = {}) {
   const structural = schemaIssues(definition);
   issues.push(...structural);
   if (structural.length === 0) issues.push(...semanticIssues(definition));
-  if (structural.length === 0 && issues.length === 0) issues.push(...standardIssues(definition, text, listed));
+  if (structural.length === 0 && issues.length === 0) issues.push(...standardIssues(definition));
   return issues.length === 0 ? { ok: true, issues, definition } : { ok: false, issues, definition };
 }

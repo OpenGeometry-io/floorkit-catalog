@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "data centre, air handler, cooling",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/crah.op#catalog-datacenter-crah; 1.20 x 0.90 x 2.00 is the seed's size, not checked against a published source (unverified)",
+    "catalog:basedOn": "The CRAH unit in the Floorkit SDK's example catalog, redrawn to the drafting standard; 1.20 x 0.90 x 2.00 is that example's size, not checked against a published source (unverified)",
     "catalog:note": "Downflow computer-room air handler: supply air leaves through the collar under the unit into the floor void, return air enters the collar on the back. Air-side ports carry the 600 hall module as their nominal section. Coil section behind, filter section and door in front, chilled-water stubs on the front. Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcUnitaryEquipment",
     "ifc:predefinedType": "AIRHANDLER",

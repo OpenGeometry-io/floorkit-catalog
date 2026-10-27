@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "data centre, cooling, rdhx",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/rdhx.op#catalog-datacenter-rdhx; 0.60 x 0.16 x 2.00 is the seed's size, not checked against a published source (unverified)",
+    "catalog:basedOn": "The rear-door heat exchanger in the Floorkit SDK's example catalog, redrawn to the drafting standard; 0.60 x 0.16 x 2.00 is that example's size, not checked against a published source (unverified)",
     "catalog:note": "Rear-door heat exchanger: a water-cooling coil in a door frame hung on two hinges from a rack's hot face (-z); the header box at the foot carries the chilled-water stubs. IfcCoil.WATERCOOLINGCOIL is the exact IFC4 member. The hinges of radius 0.02 build as 6-sided prisms. Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcCoil",
     "ifc:predefinedType": "WATERCOOLINGCOIL",
