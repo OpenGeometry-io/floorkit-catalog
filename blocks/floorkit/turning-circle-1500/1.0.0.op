@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "id": "floorkit.turning-circle-1500",
+  "labelName": "Wheelchair Turning Circle 1500",
+  "type": "LANDSCAPE",
+  "dimensions": {
+    "width": 1.5,
+    "depth": 1.5,
+    "height": 0.02
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "other",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "turning circle, wheelchair, clearance, accessibility",
+    "catalog:note": "Wheelchair turning circle, 1.50 diameter. Floor marking; drawn solid, dashed in practice. The body is a 0.01 floor slab with 0.01 marking bars for the centre cross, so the note says slab. ADA asks for 1.525 (60 in).",
+    "catalog:basedOn": "1.50 diameter: BS 8300-2 (not read, unverified). ADA 2010 Standards (access-board.gov) 304.3.1: 60 in (1525 mm) diameter minimum, read",
+    "mat:slab": "surface",
+    "mat:barX": "surface",
+    "mat:barBack": "surface",
+    "mat:barFront": "surface",
+    "ifc:class": "IfcBuildingElementProxy",
+    "ifc:predefinedType": "USERDEFINED"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "circle-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.75,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "circle-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.75,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "cross-x",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.05,
+            0
+          ],
+          [
+            0.05,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "cross-z",
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            -0.05
+          ],
+          [
+            0,
+            0.05
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "slab",
+        "kind": "cylinder",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.005,
+          0
+        ],
+        "radius": 0.75,
+        "height": 0.01
+      },
+      {
+        "id": "barX",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.015,
+          0
+        ],
+        "width": 0.1,
+        "height": 0.01,
+        "depth": 0.02
+      },
+      {
+        "id": "barBack",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.015,
+          -0.03
+        ],
+        "width": 0.02,
+        "height": 0.01,
+        "depth": 0.04
+      },
+      {
+        "id": "barFront",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.015,
+          0.03
+        ],
+        "width": 0.02,
+        "height": 0.01,
+        "depth": 0.04
+      }
+    ]
+  }
+}

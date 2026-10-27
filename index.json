@@ -1910,6 +1910,36 @@
       "contentHash": "88397487daf08846ecd67c88c8bb57fd0ba74d5f9a203e943b276576ba885efd"
     },
     {
+      "id": "floorkit.turning-circle-1500",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "turning-circle-1500",
+      "version": "1.0.0",
+      "labelName": "Wheelchair Turning Circle 1500",
+      "type": "LANDSCAPE",
+      "category": "other",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "turning circle",
+        "wheelchair",
+        "clearance",
+        "accessibility"
+      ],
+      "dimensions": {
+        "width": 1.5,
+        "depth": 1.5,
+        "height": 0.02
+      },
+      "path": "blocks/floorkit/turning-circle-1500/1.0.0.op",
+      "bytes": 3320,
+      "sha256": "32edd5aaa6874cfd629591d4648376bba8a42c658e5456582975174eed233bc2",
+      "contentHash": "c2c666aa3fe27544f27eb6697e9587a1fac23483933128ecad676260a3a8f1ae"
+    },
+    {
       "id": "floorkit.ups",
       "publisher": {
         "id": "floorkit",
@@ -2234,6 +2264,66 @@
       "bytes": 6393,
       "sha256": "c729179c8c043bb4e6fb6fce28ac7819db7db5bb6b22f4b9af740162cf393fac",
       "contentHash": "db98e31a82300d6237280f943ceff3a9cbc195741d22437e7d79a9c83a76c880"
+    },
+    {
+      "id": "floorkit.wheelchair",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wheelchair",
+      "version": "1.0.0",
+      "labelName": "Wheelchair",
+      "type": "LANDSCAPE",
+      "category": "other",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wheelchair",
+        "accessibility",
+        "clearance"
+      ],
+      "dimensions": {
+        "width": 0.7,
+        "depth": 1.2,
+        "height": 1.1
+      },
+      "path": "blocks/floorkit/wheelchair/1.0.0.op",
+      "bytes": 12611,
+      "sha256": "94f5a64a2074947985f97944ba2b20eac21d5930237414a97da04a856619adb1",
+      "contentHash": "4d3ddf3c6a6278ab19dd1ade69867d0dd3ff19c86158ad3538c4448335cde494"
+    },
+    {
+      "id": "floorkit.wheelchair-space",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wheelchair-space",
+      "version": "1.0.0",
+      "labelName": "Wheelchair Space",
+      "type": "LANDSCAPE",
+      "category": "other",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wheelchair space",
+        "wheelchair",
+        "clearance",
+        "accessibility",
+        "seating"
+      ],
+      "dimensions": {
+        "width": 0.9,
+        "depth": 1.4,
+        "height": 0.02
+      },
+      "path": "blocks/floorkit/wheelchair-space/1.0.0.op",
+      "bytes": 3387,
+      "sha256": "145514040874e28855b5f17cfbf9200ea2716bc7d0237696f99e2aa8798361c4",
+      "contentHash": "ecea623df4712bc7416ed878a3f0e872ff4f7d96b2eb429b6b339aff85e2e5e0"
     }
   ]
 }
