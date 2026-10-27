@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "id": "floorkit.dishwasher",
+  "labelName": "Dishwasher",
+  "type": "APPLIANCE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.6,
+    "height": 0.85
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "appliances",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "dishwasher, kitchen",
+    "catalog:note": "Freestanding dishwasher on the 600 module with its own top, top 0.85; drop-down door with a handle, control strip above it, recessed kick. Water and waste connect on the back on x = 0.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: dishwasher 0.60 x 0.60 x 0.85. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcElectricAppliance",
+    "ifc:predefinedType": "DISHWASHER",
+    "ifcClass": "IfcElectricAppliance",
+    "mat:kick": "metal",
+    "mat:casing": "metal",
+    "mat:top": "surface",
+    "mat:door": "surface",
+    "mat:controlStrip": "surface",
+    "mat:handle": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.05,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.3,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.3,
+            -0.3
+          ],
+          [
+            0.3,
+            -0.3
+          ],
+          [
+            0.3,
+            0.3
+          ],
+          [
+            -0.3,
+            0.3
+          ]
+        ]
+      },
+      {
+        "id": "doorLine",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.3,
+            0.27
+          ],
+          [
+            0.3,
+            0.27
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "kick",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.05,
+          -0.05
+        ],
+        "width": 0.6,
+        "height": 0.1,
+        "depth": 0.5
+      },
+      {
+        "id": "casing",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.465,
+          -0.025
+        ],
+        "width": 0.6,
+        "height": 0.73,
+        "depth": 0.55
+      },
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.84,
+          0
+        ],
+        "width": 0.6,
+        "height": 0.02,
+        "depth": 0.6
+      },
+      {
+        "id": "door",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.415,
+          0.26
+        ],
+        "width": 0.596,
+        "height": 0.624,
+        "depth": 0.02
+      },
+      {
+        "id": "controlStrip",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.7785,
+          0.26
+        ],
+        "width": 0.596,
+        "height": 0.097,
+        "depth": 0.02
+      },
+      {
+        "id": "handle",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.69,
+          0.2825
+        ],
+        "width": 0.3,
+        "height": 0.02,
+        "depth": 0.025
+      }
+    ]
+  }
+}

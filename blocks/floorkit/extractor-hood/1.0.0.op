@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "id": "floorkit.extractor-hood",
+  "labelName": "Extractor Hood",
+  "type": "APPLIANCE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.5,
+    "height": 0.85
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "appliances",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "extractor hood, cooker hood, chimney, overhead, kitchen",
+    "catalog:note": "Overhead chimney extractor hood on the wall above the hob: canopy with a grease filter underneath and a control strip at the front, chimney to the ceiling. bottom 1.55, ceiling 2.40. The plan draws its outline only: Floorkit draws every block line with one pen, so the usual dashed line cannot be drawn.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: extractor hood 0.60 x 0.50 x 0.15, bottom 1.55; ceiling 2.40; exhaust 0.150 from the drafting standard, unverified",
+    "ifc:class": "IfcElectricAppliance",
+    "ifc:predefinedType": "USERDEFINED",
+    "ifcClass": "IfcElectricAppliance",
+    "mat:canopy": "metal",
+    "mat:filter": "metal",
+    "mat:controlStrip": "surface",
+    "mat:chimney": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.25
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "ceilingContact": {
+      "placement": {
+        "position": [
+          0,
+          2.4,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "ceiling-contact"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "exhaust",
+      "domain": "hvac",
+      "systemType": "exhaustAir",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          2.4,
+          -0.125
+        ],
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.15
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.3,
+            -0.25
+          ],
+          [
+            0.3,
+            -0.25
+          ],
+          [
+            0.3,
+            0.25
+          ],
+          [
+            -0.3,
+            0.25
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "canopy",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.64,
+          0
+        ],
+        "width": 0.6,
+        "height": 0.12,
+        "depth": 0.5
+      },
+      {
+        "id": "filter",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.565,
+          -0.005
+        ],
+        "width": 0.56,
+        "height": 0.03,
+        "depth": 0.45
+      },
+      {
+        "id": "controlStrip",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          1.565,
+          0.235
+        ],
+        "width": 0.6,
+        "height": 0.03,
+        "depth": 0.03
+      },
+      {
+        "id": "chimney",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          2.05,
+          -0.125
+        ],
+        "width": 0.26,
+        "height": 0.7,
+        "depth": 0.25
+      }
+    ]
+  }
+}

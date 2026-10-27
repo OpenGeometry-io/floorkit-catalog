@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "id": "floorkit.television",
+  "labelName": "Television",
+  "type": "APPLIANCE",
+  "dimensions": {
+    "width": 1.23,
+    "depth": 0.06,
+    "height": 0.71
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "appliances",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "television, tv, screen, wall-hung, living room",
+    "catalog:note": "Wall-hung 55 inch 16:9 television on a flat bracket, back to the wall. bottom 0.85, so its middle is about 1.20 above the floor. Screen 1.218 x 0.685 behind a thin bezel.",
+    "catalog:basedOn": "Screen size computed from a 55 inch (1.397 m) 16:9 diagonal: 1.218 x 0.685; bezel, depth and the 1.20 middle height are generic practice, not checked against a published source (unverified)",
+    "ifc:class": "IfcAudioVisualAppliance",
+    "ifc:predefinedType": "DISPLAY",
+    "mat:bracket": "metal",
+    "mat:panel": "metal",
+    "mat:screen": "glass"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.615,
+            -0.03
+          ],
+          [
+            0.615,
+            -0.03
+          ],
+          [
+            0.615,
+            0.03
+          ],
+          [
+            -0.615,
+            0.03
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "bracket",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.2,
+          -0.02
+        ],
+        "width": 0.4,
+        "height": 0.3,
+        "depth": 0.02
+      },
+      {
+        "id": "panel",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.205,
+          0.005
+        ],
+        "width": 1.23,
+        "height": 0.71,
+        "depth": 0.03
+      },
+      {
+        "id": "screen",
+        "kind": "cuboid",
+        "color": "#a8d0e6",
+        "center": [
+          0,
+          1.205,
+          0.025
+        ],
+        "width": 1.218,
+        "height": 0.685,
+        "depth": 0.01
+      }
+    ]
+  }
+}
