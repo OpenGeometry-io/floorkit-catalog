@@ -8,35 +8,51 @@
     "depth": 0.9,
     "height": 2
   },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
-  },
   "metadata": {
     "catalog:version": "1.0.0",
     "catalog:license": "CC-BY-4.0",
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "equipment",
     "catalog:placement": "free",
+    "catalog:lod": "300",
     "catalog:tags": "data centre, air handler, cooling",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/crah.op#catalog-datacenter-crah",
-    "catalog:note": "Downflow computer-room air handler. Air-side ports carry the 600 hall module as their nominal section: nothing ducts onto a rack or a tile, so the coupling is tile-pitched and every air connection matches exactly.",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/crah.op#catalog-datacenter-crah; 1.20 x 0.90 x 2.00 is the seed's size, not checked against a published source (unverified)",
+    "catalog:note": "Downflow computer-room air handler: supply air leaves through the collar under the unit into the floor void, return air enters the collar on the back. Air-side ports carry the 600 hall module as their nominal section. Coil section behind, filter section and door in front, chilled-water stubs on the front. Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcUnitaryEquipment",
+    "ifc:predefinedType": "AIRHANDLER",
     "ifcClass": "IfcUnitaryEquipment",
-    "mat:crah-grille": "metal"
+    "mat:foot": "frame",
+    "mat:supplyCollar": "metal",
+    "mat:coilSection": "metal",
+    "mat:filterSection": "metal",
+    "mat:filterDoor": "surface",
+    "mat:returnCollar": "metal",
+    "mat:chwInStub": "metal",
+    "mat:chwOutStub": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
   },
   "ports": [
     {
@@ -150,72 +166,332 @@
       }
     }
   ],
+  "definitions": {
+    "foot": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.05,
+        0
+      ],
+      "width": 0.05,
+      "height": 0.1,
+      "depth": 0.05
+    }
+  },
   "profileView": {
     "elements": [
       {
-        "id": "crah-outline",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#b9c4cf",
         "vertices": [
           [
             -0.6,
+            -0.4
+          ],
+          [
+            -0.3,
+            -0.4
+          ],
+          [
+            -0.3,
             -0.45
           ],
           [
-            0.6,
+            0.3,
             -0.45
           ],
           [
+            0.3,
+            -0.4
+          ],
+          [
             0.6,
+            -0.4
+          ],
+          [
+            0.6,
+            0.35
+          ],
+          [
+            0.498,
+            0.35
+          ],
+          [
+            0.498,
             0.45
+          ],
+          [
+            0.402,
+            0.45
+          ],
+          [
+            0.402,
+            0.35
+          ],
+          [
+            0.35,
+            0.35
+          ],
+          [
+            0.35,
+            0.38
+          ],
+          [
+            -0.35,
+            0.38
+          ],
+          [
+            -0.35,
+            0.35
+          ],
+          [
+            -0.402,
+            0.35
+          ],
+          [
+            -0.402,
+            0.45
+          ],
+          [
+            -0.498,
+            0.45
+          ],
+          [
+            -0.498,
+            0.35
           ],
           [
             -0.6,
-            0.45
+            0.35
           ]
         ]
       },
       {
-        "id": "crah-fan",
-        "kind": "arc",
-        "color": "#7d8b99",
-        "center": [
-          0,
-          0
-        ],
-        "radius": 0.3,
-        "startAngle": 0,
-        "sweepAngle": 6.2831853
+        "id": "section-split",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.6,
+            0.05
+          ],
+          [
+            0.6,
+            0.05
+          ]
+        ]
       }
     ]
   },
   "modelView": {
     "elements": [
       {
-        "id": "crah-body",
-        "kind": "cuboid",
-        "color": "#d5dde4",
-        "center": [
-          0,
-          1,
-          0
-        ],
-        "width": 1.2,
-        "height": 2,
-        "depth": 0.9
+        "id": "footBackLeft",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            -0.575,
+            0,
+            -0.375
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
-        "id": "crah-grille",
+        "id": "footBackRight",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            0.575,
+            0,
+            -0.375
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "footFrontLeft",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            -0.575,
+            0,
+            0.325
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "footFrontRight",
+        "ref": "foot",
+        "placement": {
+          "position": [
+            0.575,
+            0,
+            0.325
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "supplyCollar",
         "kind": "cuboid",
-        "color": "#8c98a4",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.05,
+          0
+        ],
+        "width": 0.6,
+        "height": 0.1,
+        "depth": 0.6
+      },
+      {
+        "id": "coilSection",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.05,
+          -0.175
+        ],
+        "width": 1.2,
+        "height": 1.9,
+        "depth": 0.45
+      },
+      {
+        "id": "filterSection",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.05,
+          0.2
+        ],
+        "width": 1.2,
+        "height": 1.9,
+        "depth": 0.3
+      },
+      {
+        "id": "filterDoor",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          1.1,
+          0.365
+        ],
+        "width": 0.7,
+        "height": 1.6,
+        "depth": 0.03
+      },
+      {
+        "id": "returnCollar",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
         "center": [
           0,
           1.7,
-          -0.45
+          -0.425
         ],
-        "width": 0.9,
-        "height": 0.5,
-        "depth": 0.04
+        "width": 0.6,
+        "height": 0.6,
+        "depth": 0.05
+      },
+      {
+        "id": "chwInStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.048,
+        "height": 0.1,
+        "placement": {
+          "position": [
+            -0.45,
+            0.25,
+            0.4
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "chwOutStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.048,
+        "height": 0.1,
+        "placement": {
+          "position": [
+            0.45,
+            0.25,
+            0.4
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }

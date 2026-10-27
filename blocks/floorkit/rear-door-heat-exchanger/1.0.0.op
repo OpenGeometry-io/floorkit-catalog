@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.rear-door-heat-exchanger",
-  "labelName": "Rear-Door HX",
+  "labelName": "Rear-Door Heat Exchanger",
   "type": "MEP_EQUIPMENT",
   "dimensions": {
     "width": 0.6,
     "depth": 0.16,
     "height": 2
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,13 +14,44 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "equipment",
     "catalog:placement": "free",
+    "catalog:lod": "300",
     "catalog:tags": "data centre, cooling, rdhx",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/rdhx.op#catalog-datacenter-rdhx",
-    "catalog:note": "Rear-door heat exchanger: a water-cooling coil hung on a rack's hot face. IfcCoil.WATERCOOLINGCOIL is the exact IFC4 member.",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/rdhx.op#catalog-datacenter-rdhx; 0.60 x 0.16 x 2.00 is the seed's size, not checked against a published source (unverified)",
+    "catalog:note": "Rear-door heat exchanger: a water-cooling coil in a door frame hung on two hinges from a rack's hot face (-z); the header box at the foot carries the chilled-water stubs. IfcCoil.WATERCOOLINGCOIL is the exact IFC4 member. The hinges of radius 0.02 build as 6-sided prisms. Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcCoil",
     "ifc:predefinedType": "WATERCOOLINGCOIL",
     "ifcClass": "IfcCoil",
-    "mat:rdhx-body": "metal"
+    "mat:header": "metal",
+    "mat:stile": "frame",
+    "mat:topRail": "frame",
+    "mat:coilFace": "metal",
+    "mat:hinge": "metal",
+    "mat:chwInStub": "metal",
+    "mat:chwOutStub": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
   },
   "ports": [
     {
@@ -95,23 +109,71 @@
       }
     }
   ],
+  "definitions": {
+    "stile": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        1.075,
+        0
+      ],
+      "width": 0.05,
+      "height": 1.65,
+      "depth": 0.08
+    },
+    "hinge": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        -0.28,
+        0.075,
+        -0.06
+      ],
+      "radius": 0.02,
+      "height": 0.15
+    }
+  },
   "profileView": {
     "elements": [
       {
-        "id": "rdhx-outline",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#9fc0d4",
         "vertices": [
           [
             -0.3,
             -0.08
           ],
           [
-            0.3,
+            -0.26,
             -0.08
           ],
           [
+            -0.26,
+            -0.04
+          ],
+          [
             0.3,
+            -0.04
+          ],
+          [
+            0.3,
+            0.08
+          ],
+          [
+            0.2,
+            0.08
+          ],
+          [
+            0.2,
+            0.04
+          ],
+          [
+            -0.2,
+            0.04
+          ],
+          [
+            -0.2,
             0.08
           ],
           [
@@ -125,17 +187,185 @@
   "modelView": {
     "elements": [
       {
-        "id": "rdhx-body",
+        "id": "header",
         "kind": "cuboid",
-        "color": "#b7d3e5",
+        "color": "#9aa3ab",
         "center": [
           0,
-          1,
+          0.125,
           0
         ],
         "width": 0.6,
-        "height": 2,
-        "depth": 0.16
+        "height": 0.25,
+        "depth": 0.08
+      },
+      {
+        "id": "stileLeft",
+        "ref": "stile",
+        "placement": {
+          "position": [
+            -0.275,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "stileRight",
+        "ref": "stile",
+        "placement": {
+          "position": [
+            0.275,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "topRail",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          1.95,
+          0
+        ],
+        "width": 0.6,
+        "height": 0.1,
+        "depth": 0.08
+      },
+      {
+        "id": "coilFace",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.075,
+          0
+        ],
+        "width": 0.5,
+        "height": 1.65,
+        "depth": 0.02
+      },
+      {
+        "id": "hingeLower",
+        "ref": "hinge",
+        "placement": {
+          "position": [
+            0,
+            0.4,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hingeUpper",
+        "ref": "hinge",
+        "placement": {
+          "position": [
+            0,
+            1.5,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "chwInStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.048,
+        "height": 0.04,
+        "placement": {
+          "position": [
+            -0.25,
+            0.15,
+            0.06
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "chwOutStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.048,
+        "height": 0.04,
+        "placement": {
+          "position": [
+            0.25,
+            0.15,
+            0.06
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }

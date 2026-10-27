@@ -279,7 +279,7 @@ export function geometryIssues(definition, note) {
   ];
   for (const [label, path, p, mayStandOnFloor] of points) {
     const nearest = solids.reduce((best, s) => (away(p, s.box) < away(p, best.box) ? s : best));
-    if (away(p, nearest.box) > DIMENSION_TOLERANCE && !(mayStandOnFloor && onFloorUnder(p))) {
+    if (away(p, nearest.box) > DIMENSION_TOLERANCE + 1e-9 && !(mayStandOnFloor && onFloorUnder(p))) { // float slack: 0.425 - 0.42 is 0.005000000000000004
       issues.push({ path, message: `${label} at ${where(p)} is ${mm(away(p, nearest.box))} m from the nearest body surface, on "${nearest.name}" (tolerance ${DIMENSION_TOLERANCE})` });
     }
   }

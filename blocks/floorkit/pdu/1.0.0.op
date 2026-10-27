@@ -8,34 +8,50 @@
     "depth": 0.8,
     "height": 1.9
   },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
-  },
   "metadata": {
     "catalog:version": "1.0.0",
     "catalog:license": "CC-BY-4.0",
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "equipment",
     "catalog:placement": "free",
+    "catalog:lod": "300",
     "catalog:tags": "data centre, power",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/pdu.op#catalog-datacenter-pdu",
-    "catalog:note": "Floor PDU: one 400 A input, two 32 A breakered outputs sized to a rack inlet so they connect without a transition.",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/pdu.op#catalog-datacenter-pdu; 0.60 x 0.80 x 1.90 is the seed's size, not checked against a published source (unverified)",
+    "catalog:note": "Floor PDU, a cabinet carcass: one 400 A input at the front, two 32 A breakered outputs at the back sized to a rack inlet so they connect without a transition. Breaker panel door on the front, cable entry stubs under the doors. Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcElectricDistributionBoard",
-    "ifcClass": "IfcElectricDistributionBoard"
+    "ifc:predefinedType": "DISTRIBUTIONBOARD",
+    "ifcClass": "IfcElectricDistributionBoard",
+    "mat:plinth": "frame",
+    "mat:casing": "metal",
+    "mat:breakerPanel": "surface",
+    "mat:rearPanel": "surface",
+    "mat:inStub": "metal",
+    "mat:outAStub": "metal",
+    "mat:outBStub": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
   },
   "ports": [
     {
@@ -126,25 +142,70 @@
   "profileView": {
     "elements": [
       {
-        "id": "pdu-outline",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#d8cfc0",
         "vertices": [
           [
             -0.3,
+            -0.36
+          ],
+          [
+            -0.25,
+            -0.36
+          ],
+          [
+            -0.25,
             -0.4
           ],
           [
-            0.3,
+            0.25,
             -0.4
           ],
           [
+            0.25,
+            -0.36
+          ],
+          [
             0.3,
+            -0.36
+          ],
+          [
+            0.3,
+            0.36
+          ],
+          [
+            0.25,
+            0.36
+          ],
+          [
+            0.25,
             0.4
+          ],
+          [
+            -0.25,
+            0.4
+          ],
+          [
+            -0.25,
+            0.36
           ],
           [
             -0.3,
-            0.4
+            0.36
+          ]
+        ]
+      },
+      {
+        "id": "access-line",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.25,
+            0.36
+          ],
+          [
+            0.25,
+            0.36
           ]
         ]
       }
@@ -153,17 +214,143 @@
   "modelView": {
     "elements": [
       {
-        "id": "pdu-body",
+        "id": "plinth",
         "kind": "cuboid",
-        "color": "#e8e0d2",
+        "color": "#7a5c3e",
         "center": [
           0,
-          0.95,
+          0.05,
+          0
+        ],
+        "width": 0.56,
+        "height": 0.1,
+        "depth": 0.68
+      },
+      {
+        "id": "casing",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1,
           0
         ],
         "width": 0.6,
-        "height": 1.9,
-        "depth": 0.8
+        "height": 1.8,
+        "depth": 0.72
+      },
+      {
+        "id": "breakerPanel",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          1.1,
+          0.38
+        ],
+        "width": 0.5,
+        "height": 1.4,
+        "depth": 0.04
+      },
+      {
+        "id": "rearPanel",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          1.1,
+          -0.38
+        ],
+        "width": 0.5,
+        "height": 1.4,
+        "depth": 0.04
+      },
+      {
+        "id": "inStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.04,
+        "height": 0.02,
+        "placement": {
+          "position": [
+            0,
+            0.15,
+            0.37
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "outAStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.04,
+        "height": 0.02,
+        "placement": {
+          "position": [
+            -0.15,
+            0.15,
+            -0.37
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "outBStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.04,
+        "height": 0.02,
+        "placement": {
+          "position": [
+            0.15,
+            0.15,
+            -0.37
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }
