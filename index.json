@@ -154,25 +154,27 @@
       },
       "slug": "cafe-counter",
       "version": "1.0.0",
-      "labelName": "Café Counter",
+      "labelName": "Serving Counter",
       "type": "FURNITURE",
       "category": "tables",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "counter",
+        "serving",
         "cafe",
+        "bar",
         "hospitality"
       ],
       "dimensions": {
-        "width": 2.7,
-        "depth": 1.6,
-        "height": 1
+        "width": 2.4,
+        "depth": 0.7,
+        "height": 1.1
       },
       "path": "blocks/floorkit/cafe-counter/1.0.0.op",
-      "bytes": 3476,
-      "sha256": "03e3729b4be40040a9b57dd9d22693e84a1c657cf485fb50ea297a97d172c2ec",
-      "contentHash": "f5fa20d12b86f47799128771cae42613880c6c260b539b947921aec6bc07551e"
+      "bytes": 4352,
+      "sha256": "dbeb9a5927f72ab54aad43dbcc5ebcec075f12399a1a7d89b545b312a085b033",
+      "contentHash": "5b33bb80d4177e81731e964ef3c14a5ca147dd264b4fc7d8eab50d2c336c5349"
     },
     {
       "id": "floorkit.ceiling-luminaire-1200",
@@ -234,6 +236,35 @@
       "contentHash": "797d2564eb6f39faae1dcff270c6b3fbf990e53fcee4c0f1e11df0f32b1064f2"
     },
     {
+      "id": "floorkit.coffee-table",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "coffee-table",
+      "version": "1.0.0",
+      "labelName": "Coffee Table",
+      "type": "FURNITURE",
+      "category": "tables",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "table",
+        "coffee",
+        "living"
+      ],
+      "dimensions": {
+        "width": 1.1,
+        "depth": 0.6,
+        "height": 0.42
+      },
+      "path": "blocks/floorkit/coffee-table/1.0.0.op",
+      "bytes": 4835,
+      "sha256": "7f49ebbcfc46431f2804af34582e8069d16b7b77dd6301d72cf6ca0fb4eff9c6",
+      "contentHash": "e8e1323e34cf7caee386a5c6f55c625242af2f8a7dd6a36f97e59816a68629b6"
+    },
+    {
       "id": "floorkit.counter-run",
       "publisher": {
         "id": "floorkit",
@@ -290,6 +321,35 @@
       "bytes": 4140,
       "sha256": "cc1a3ed5fea2b5dff5b6bb25298b4e51e25ee91d42ccbf74fbb6c6c9da3d9672",
       "contentHash": "183f8e3f969af58f0c2c70ac25c8effc14038043a43de2085db05ba1207edb7c"
+    },
+    {
+      "id": "floorkit.dining-table-4",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "dining-table-4",
+      "version": "1.0.0",
+      "labelName": "Dining Table for 4",
+      "type": "FURNITURE",
+      "category": "tables",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "table",
+        "dining",
+        "four-seat"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 0.8,
+        "height": 0.75
+      },
+      "path": "blocks/floorkit/dining-table-4/1.0.0.op",
+      "bytes": 4944,
+      "sha256": "5d573dac32bad5c5e9ea44fd712f30a738f4b3674c5d98053356aac18399e1b1",
+      "contentHash": "33a6aba1b2ee0420510c6d1207140186d03cd5ff8a81e7caa8442d3bb7455652"
     },
     {
       "id": "floorkit.downlight",
@@ -463,6 +523,36 @@
       "contentHash": "de82e26734e506f71483ef34db4ceb686c2278dd6bc76f89be47aee250bc4e18"
     },
     {
+      "id": "floorkit.meeting-table",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "meeting-table",
+      "version": "1.0.0",
+      "labelName": "Meeting Table",
+      "type": "FURNITURE",
+      "category": "tables",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "table",
+        "meeting",
+        "conference",
+        "office"
+      ],
+      "dimensions": {
+        "width": 2,
+        "depth": 1,
+        "height": 0.74
+      },
+      "path": "blocks/floorkit/meeting-table/1.0.0.op",
+      "bytes": 3301,
+      "sha256": "6dec6f1f055b9ffe98f381c07e8f2d3fee7df4a208b9c5016622626e90357230",
+      "contentHash": "afa5afeac5cb3f626696812f434defd6eec96223990c0fc91d1d7d7c718d04b9"
+    },
+    {
       "id": "floorkit.minimal-sofa",
       "publisher": {
         "id": "floorkit",
@@ -531,25 +621,25 @@
       },
       "slug": "office-desk",
       "version": "1.0.0",
-      "labelName": "Office Desk",
+      "labelName": "Desk",
       "type": "FURNITURE",
       "category": "tables",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "desk",
-        "workstation",
-        "office"
+        "office",
+        "workstation"
       ],
       "dimensions": {
         "width": 1.6,
-        "depth": 1.5,
-        "height": 1.2
+        "depth": 0.8,
+        "height": 0.74
       },
       "path": "blocks/floorkit/office-desk/1.0.0.op",
-      "bytes": 4679,
-      "sha256": "a9e0e0e242fbcf9b7e5702f5ab0bc5d5c2fada3116addb7f38cffee6a384f7c3",
-      "contentHash": "d41fb4eecbb14412c1e848b55e6240e7674ddae7f8e7d0242f5f3b8b458e072a"
+      "bytes": 4147,
+      "sha256": "c6e57bfe85f17d363eaa3d971f676f41e39834a148e1f7d952afe1dcab128a00",
+      "contentHash": "f450393716aa40ee162f0468a0c2c11beff55298bdf489027a5d2667d49d04b8"
     },
     {
       "id": "floorkit.parked-car",
@@ -723,6 +813,36 @@
       "contentHash": "e607238ec08fab55c9ce17f89b01639661d3c65cd55a51beb74dcd3a6f6db597"
     },
     {
+      "id": "floorkit.round-table",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "round-table",
+      "version": "1.0.0",
+      "labelName": "Round Table",
+      "type": "FURNITURE",
+      "category": "tables",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "table",
+        "round",
+        "dining",
+        "pedestal"
+      ],
+      "dimensions": {
+        "width": 1.1,
+        "depth": 1.1,
+        "height": 0.75
+      },
+      "path": "blocks/floorkit/round-table/1.0.0.op",
+      "bytes": 2639,
+      "sha256": "8dde296121ecf2178c75555e000ef51344d5deaec0efaacbc7a61eb3a34427d2",
+      "contentHash": "754d81ea2e79edabd613b9e569de9c80a6732b917bbf03d6117fe83259425e26"
+    },
+    {
       "id": "floorkit.shower-tray",
       "publisher": {
         "id": "floorkit",
@@ -846,24 +966,25 @@
       },
       "slug": "table",
       "version": "1.0.0",
-      "labelName": "Table",
+      "labelName": "Dining Table for 6",
       "type": "FURNITURE",
       "category": "tables",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
+        "table",
         "dining",
-        "table"
+        "six-seat"
       ],
       "dimensions": {
-        "width": 1.68,
-        "depth": 1.18,
-        "height": 0.84
+        "width": 1.8,
+        "depth": 0.9,
+        "height": 0.75
       },
       "path": "blocks/floorkit/table/1.0.0.op",
-      "bytes": 8474,
-      "sha256": "7a6105fd8bdbf544ea3dd3fc68bed7a7f6cda1cdb7936adf37c6ec452148df10",
-      "contentHash": "291d123701648ae57e6fde7a35ff4a6c646cc247812da1c7db93ee0f123150a1"
+      "bytes": 4935,
+      "sha256": "4981dd9a16dd3076acd950038bf07bff23bc4b1f558a5770cd0d55ebacce4c04",
+      "contentHash": "ef31cb45829a06634c53f5e647c3dec708b00c851efbf37f0f6f2bff31619a04"
     },
     {
       "id": "floorkit.table-lamp",
