@@ -118,6 +118,37 @@
       "contentHash": "93bc4a547447d3ba9a2387851b22924981a271c3f7c8d189e47ef1e7a2606095"
     },
     {
+      "id": "floorkit.boiler",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "boiler",
+      "version": "1.0.0",
+      "labelName": "Wall-Hung Combination Boiler",
+      "type": "MEP_EQUIPMENT",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "boiler",
+        "combi boiler",
+        "heating",
+        "hot water",
+        "gas"
+      ],
+      "dimensions": {
+        "width": 0.45,
+        "depth": 0.35,
+        "height": 1.25
+      },
+      "path": "blocks/floorkit/boiler/1.0.0.op",
+      "bytes": 7506,
+      "sha256": "24527d486918321bb0d8d643b63d8ea712a72bb1167431730ce4b4c39ed9dd3f",
+      "contentHash": "5971f27dd895ea7324036ad69bd4da3197c8cdac31e17297d7515c427965088c"
+    },
+    {
       "id": "floorkit.cabinet",
       "publisher": {
         "id": "floorkit",
@@ -468,6 +499,37 @@
       "contentHash": "a85191b3bcb823fcf3b995e6933ed9bfe86228e08473ea837e64a676c4513453"
     },
     {
+      "id": "floorkit.hot-water-cylinder",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "hot-water-cylinder",
+      "version": "1.0.0",
+      "labelName": "Hot Water Cylinder",
+      "type": "MEP_EQUIPMENT",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "hot water cylinder",
+        "cylinder",
+        "hot water",
+        "heating",
+        "storage"
+      ],
+      "dimensions": {
+        "width": 0.55,
+        "depth": 0.6,
+        "height": 1.5
+      },
+      "path": "blocks/floorkit/hot-water-cylinder/1.0.0.op",
+      "bytes": 6471,
+      "sha256": "e560404c516e7e90995587fff721f8ae07ec15b6a2c315b482acb95b67ce3ca7",
+      "contentHash": "1e9bff010f44bb5926cd2fe4dca5eaa5bad28f491a39d9e777e4bdcda6d6f756"
+    },
+    {
       "id": "floorkit.kitchen-counter",
       "publisher": {
         "id": "floorkit",
@@ -728,6 +790,36 @@
       "contentHash": "15a8c6d8d25a36b2b0ee284c6883fe2cd86f4c19c8fa28ee210d39e8324a886e"
     },
     {
+      "id": "floorkit.photocopier",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "photocopier",
+      "version": "1.0.0",
+      "labelName": "Photocopier",
+      "type": "APPLIANCE",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "photocopier",
+        "copier",
+        "printer",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.7,
+        "height": 1.1
+      },
+      "path": "blocks/floorkit/photocopier/1.0.0.op",
+      "bytes": 4565,
+      "sha256": "12b9b1f7c2d5ac5a2bddf1b076a8ac725f2c56e73377371df715309591554202",
+      "contentHash": "b8dd1a0097a89aaa577baf173f3ad238e62cef17316370b9955fae417da1176c"
+    },
+    {
       "id": "floorkit.planter",
       "publisher": {
         "id": "floorkit",
@@ -754,6 +846,35 @@
       "bytes": 3153,
       "sha256": "486968838091c77210c1a42fc64b7de30b3c0844020e22d06f66679c648334c9",
       "contentHash": "50684d8d1132040d8625300b5cdbf607b6402e7560045d5bd4ca5e48ac4a500e"
+    },
+    {
+      "id": "floorkit.radiator",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "radiator",
+      "version": "1.0.0",
+      "labelName": "Radiator",
+      "type": "MEP_EQUIPMENT",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "radiator",
+        "heating",
+        "panel radiator"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 0.1,
+        "height": 0.65
+      },
+      "path": "blocks/floorkit/radiator/1.0.0.op",
+      "bytes": 6338,
+      "sha256": "fe29a1e80762ec0d898088939525910ce92e1dc7c4fab6018dcf10c20f3e96df",
+      "contentHash": "b24c52aad157f1140a6df74e7e97ba48e186e94ccd64d664abe4e7a888c2d8d1"
     },
     {
       "id": "floorkit.rear-door-heat-exchanger",
@@ -1157,6 +1278,35 @@
       "bytes": 3838,
       "sha256": "de1ccbaff45473de4678e116296210f60204b50d4d40c7a32ac1ff28088477b4",
       "contentHash": "8ef3936c1158dc875414f5bdc09ca159ea971175fe91c28cda29032871c362a4"
+    },
+    {
+      "id": "floorkit.water-cooler",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "water-cooler",
+      "version": "1.0.0",
+      "labelName": "Water Cooler",
+      "type": "APPLIANCE",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "water cooler",
+        "drinking water",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 1.1
+      },
+      "path": "blocks/floorkit/water-cooler/1.0.0.op",
+      "bytes": 4762,
+      "sha256": "c94d532219258a73474afa4cfbd4be2b4b03b47e1d5110e79279659c66fce73c",
+      "contentHash": "64dfd276b8e0bf0ef10d268b73a6c2546230d0c0d657e629b1ee235ec86a4e71"
     },
     {
       "id": "floorkit.wc",
