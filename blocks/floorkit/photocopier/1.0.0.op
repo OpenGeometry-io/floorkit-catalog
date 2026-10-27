@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "id": "floorkit.photocopier",
+  "labelName": "Photocopier",
+  "type": "APPLIANCE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.7,
+    "height": 1.1
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "photocopier, copier, printer, office",
+    "catalog:note": "Floor-standing office photocopier: paper deck with three trays at the front, document feeder on top, output tray on the +x side. The plan line marks the output tray.",
+    "catalog:basedOn": "Photocopier 0.60 x 0.70 x 1.10, generic practice size, not checked against a published source (unverified). IfcElectricApplianceTypeEnum PHOTOCOPIER (IFC4.3 docs, buildingSMART IFC4.3.x-development)",
+    "ifc:class": "IfcElectricAppliance",
+    "ifc:predefinedType": "PHOTOCOPIER",
+    "mat:deck": "metal",
+    "mat:engine": "metal",
+    "mat:tray": "surface",
+    "mat:feeder": "surface",
+    "mat:outputTray": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "definitions": {
+    "tray": {
+      "kind": "cuboid",
+      "color": "#d8d2c4",
+      "center": [
+        -0.05,
+        0.075,
+        0.34
+      ],
+      "width": 0.5,
+      "height": 0.15,
+      "depth": 0.02
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.3,
+            -0.35
+          ],
+          [
+            0.2,
+            -0.35
+          ],
+          [
+            0.2,
+            -0.25
+          ],
+          [
+            0.3,
+            -0.25
+          ],
+          [
+            0.3,
+            0.2
+          ],
+          [
+            0.2,
+            0.2
+          ],
+          [
+            0.2,
+            0.35
+          ],
+          [
+            -0.3,
+            0.35
+          ]
+        ]
+      },
+      {
+        "id": "output-tray",
+        "kind": "polyline",
+        "points": [
+          [
+            0.2,
+            -0.25
+          ],
+          [
+            0.2,
+            0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "deck",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          -0.05,
+          0.275,
+          -0.01
+        ],
+        "width": 0.5,
+        "height": 0.55,
+        "depth": 0.68
+      },
+      {
+        "id": "trayLower",
+        "ref": "tray",
+        "placement": {
+          "position": [
+            0,
+            0.03,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "trayMiddle",
+        "ref": "tray",
+        "placement": {
+          "position": [
+            0,
+            0.2,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "trayUpper",
+        "ref": "tray",
+        "placement": {
+          "position": [
+            0,
+            0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "engine",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          -0.05,
+          0.775,
+          -0.01
+        ],
+        "width": 0.5,
+        "height": 0.45,
+        "depth": 0.68
+      },
+      {
+        "id": "feeder",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          -0.05,
+          1.05,
+          -0.015
+        ],
+        "width": 0.48,
+        "height": 0.1,
+        "depth": 0.63
+      },
+      {
+        "id": "outputTray",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0.25,
+          0.71,
+          -0.025
+        ],
+        "width": 0.1,
+        "height": 0.02,
+        "depth": 0.45
+      }
+    ]
+  }
+}
