@@ -1,0 +1,580 @@
+{
+  "version": 1,
+  "id": "floorkit.shower-enclosure",
+  "labelName": "Shower Enclosure",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.9,
+    "depth": 0.9,
+    "height": 2
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "shower, shower enclosure, bathroom",
+    "catalog:note": "Corner shower enclosure on a tray: rim 0.04. The back wall is on wallFace and the left side (-x) is a wall too; mirror the block for the other hand. Glass 0.010 stands on the tray rim, 0.03 in from its edge, 0.002 clear of the door frame: a fixed panel and a door at the front, a side panel at +x. The door frame is one sweep; the door swings out (swing). A valve, a riser and a head on the back wall; the riser builds as a prism.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, verify; EN 14527 for the tray), not read, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified; height 2.00 practice size, unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "SHOWER",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:tray-floor": "ceramic",
+    "mat:tray-rim-back": "ceramic",
+    "mat:tray-rim-front": "ceramic",
+    "mat:tray-rim-left": "ceramic",
+    "mat:tray-rim-right": "ceramic",
+    "mat:gully": "metal",
+    "mat:glass-fixed": "glass",
+    "mat:glass-side": "glass",
+    "mat:door": "glass",
+    "mat:valve": "metal",
+    "mat:riser": "metal",
+    "mat:head": "metal",
+    "mat:doorFrame": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.035,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          0,
+          1.1,
+          -0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.03,
+          1.1,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.03,
+          1.1,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
+  "definitions": {
+    "doorFramePath": {
+      "kind": "polyline3d",
+      "points": [
+        [
+          -0.1,
+          0.04,
+          0.42
+        ],
+        [
+          -0.1,
+          1.99,
+          0.42
+        ],
+        [
+          0.42,
+          1.99,
+          0.42
+        ],
+        [
+          0.42,
+          0.04,
+          0.42
+        ]
+      ]
+    },
+    "doorFrameSection": {
+      "kind": "polyline3d",
+      "points": [
+        [
+          -0.01,
+          0,
+          -0.01
+        ],
+        [
+          -0.01,
+          0,
+          0.01
+        ],
+        [
+          0.01,
+          0,
+          0.01
+        ],
+        [
+          0.01,
+          0,
+          -0.01
+        ],
+        [
+          -0.01,
+          0,
+          -0.01
+        ]
+      ]
+    },
+    "doorFrame": {
+      "kind": "sweep",
+      "pathRef": "doorFramePath",
+      "profileRef": "doorFrameSection",
+      "capStart": true,
+      "capEnd": true,
+      "color": "#7a5c3e"
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.45,
+            -0.45
+          ],
+          [
+            0.45,
+            -0.45
+          ],
+          [
+            0.45,
+            0.45
+          ],
+          [
+            -0.45,
+            0.45
+          ]
+        ]
+      },
+      {
+        "id": "fall-1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.45,
+            -0.45
+          ],
+          [
+            -0.0318,
+            -0.0318
+          ]
+        ]
+      },
+      {
+        "id": "fall-2",
+        "kind": "polyline",
+        "points": [
+          [
+            0.45,
+            -0.45
+          ],
+          [
+            0.0318,
+            -0.0318
+          ]
+        ]
+      },
+      {
+        "id": "fall-3",
+        "kind": "polyline",
+        "points": [
+          [
+            0.45,
+            0.45
+          ],
+          [
+            0.0318,
+            0.0318
+          ]
+        ]
+      },
+      {
+        "id": "fall-4",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.45,
+            0.45
+          ],
+          [
+            -0.0318,
+            0.0318
+          ]
+        ]
+      },
+      {
+        "id": "gully-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.045,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "gully-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.045,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "glass-front",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.45,
+            0.42
+          ],
+          [
+            0.42,
+            0.42
+          ]
+        ]
+      },
+      {
+        "id": "glass-side",
+        "kind": "polyline",
+        "points": [
+          [
+            0.42,
+            -0.45
+          ],
+          [
+            0.42,
+            0.42
+          ]
+        ]
+      },
+      {
+        "id": "door-swing",
+        "kind": "arc",
+        "center": [
+          0.41,
+          0.42
+        ],
+        "radius": 0.5,
+        "startAngle": 3.14159265,
+        "sweepAngle": 1.570796325
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "tray-floor",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.0125,
+          0
+        ],
+        "width": 0.9,
+        "height": 0.025,
+        "depth": 0.9
+      },
+      {
+        "id": "tray-rim-back",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.0325,
+          -0.425
+        ],
+        "width": 0.9,
+        "height": 0.015,
+        "depth": 0.05
+      },
+      {
+        "id": "tray-rim-front",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.0325,
+          0.425
+        ],
+        "width": 0.9,
+        "height": 0.015,
+        "depth": 0.05
+      },
+      {
+        "id": "tray-rim-left",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          -0.425,
+          0.0325,
+          0
+        ],
+        "width": 0.05,
+        "height": 0.015,
+        "depth": 0.8
+      },
+      {
+        "id": "tray-rim-right",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0.425,
+          0.0325,
+          0
+        ],
+        "width": 0.05,
+        "height": 0.015,
+        "depth": 0.8
+      },
+      {
+        "id": "gully",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.03,
+          0
+        ],
+        "radius": 0.045,
+        "height": 0.01
+      },
+      {
+        "id": "door-frame",
+        "ref": "doorFrame"
+      },
+      {
+        "id": "glass-fixed",
+        "kind": "cuboid",
+        "color": "#a8d0e6",
+        "center": [
+          -0.281,
+          1.02,
+          0.42
+        ],
+        "width": 0.338,
+        "height": 1.96,
+        "depth": 0.01
+      },
+      {
+        "id": "glass-side",
+        "kind": "cuboid",
+        "color": "#a8d0e6",
+        "center": [
+          0.42,
+          1.02,
+          -0.021
+        ],
+        "width": 0.01,
+        "height": 1.96,
+        "depth": 0.858
+      },
+      {
+        "id": "door",
+        "kind": "cuboid",
+        "color": "#a8d0e6",
+        "center": [
+          0.16,
+          1.009,
+          0.42
+        ],
+        "width": 0.496,
+        "height": 1.938,
+        "depth": 0.01
+      },
+      {
+        "id": "valve",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.1,
+          -0.425
+        ],
+        "width": 0.12,
+        "height": 0.1,
+        "depth": 0.05
+      },
+      {
+        "id": "riser",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0.2,
+          1.4,
+          -0.438
+        ],
+        "radius": 0.012,
+        "height": 1
+      },
+      {
+        "id": "head",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0.2,
+          1.91,
+          -0.38
+        ],
+        "radius": 0.06,
+        "height": 0.02
+      }
+    ]
+  }
+}

@@ -1,0 +1,457 @@
+{
+  "version": 1,
+  "id": "floorkit.shower-level-access",
+  "labelName": "Level-Access Shower",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 1.2,
+    "depth": 1.2,
+    "height": 2
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "shower, level access, accessible, wet room, bathroom",
+    "catalog:note": "Level-access shower: a wet area 1.20 x 1.20 with a floor finish 0.010 thick and a square gully flush in it, a fold-down seat on two brackets at seat 0.48, a valve, a riser rail to 2.00 (the overall height) and a handset on the back wall (wallFace). The seat is 0.45 x 0.40. Rail and handset build as prisms. Seat and fittings sit off the centreline: a mirrored copy keeps the anchors and ports where they are.",
+    "catalog:basedOn": "BS 8300-2 and Approved Document M (wet area 1.20 x 1.20, seat 0.48), not read, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified; height 2.00 and seat 0.45 x 0.40 practice sizes, unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "SHOWER",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:gully": "metal",
+    "mat:seat": "surface",
+    "mat:valve": "metal",
+    "mat:riser-rail": "metal",
+    "mat:handset": "metal",
+    "mat:floorSlab": "ceramic",
+    "mat:bracket": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.01,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          0.1,
+          1.1,
+          -0.55
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          -0.3,
+          0.48,
+          -0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.13,
+          1.1,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.07,
+          1.1,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
+  "definitions": {
+    "floorBase": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.005,
+        0
+      ],
+      "width": 1.2,
+      "height": 0.01,
+      "depth": 1.2
+    },
+    "gullyCut": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.005,
+        0
+      ],
+      "width": 0.15,
+      "height": 0.03,
+      "depth": 0.15
+    },
+    "floorSlab": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "floorBase",
+      "operandRefs": [
+        "gullyCut"
+      ],
+      "color": "#f2f1ec"
+    },
+    "bracket": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.35,
+        -0.45
+      ],
+      "width": 0.02,
+      "height": 0.2,
+      "depth": 0.3
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.6,
+            -0.6
+          ],
+          [
+            0.6,
+            -0.6
+          ],
+          [
+            0.6,
+            0.6
+          ],
+          [
+            -0.6,
+            0.6
+          ]
+        ]
+      },
+      {
+        "id": "gully",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.07,
+            -0.07
+          ],
+          [
+            0.07,
+            -0.07
+          ],
+          [
+            0.07,
+            0.07
+          ],
+          [
+            -0.07,
+            0.07
+          ]
+        ]
+      },
+      {
+        "id": "seat",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.525,
+            -0.6
+          ],
+          [
+            -0.075,
+            -0.6
+          ],
+          [
+            -0.075,
+            -0.2
+          ],
+          [
+            -0.525,
+            -0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "floor",
+        "ref": "floorSlab"
+      },
+      {
+        "id": "gully",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.005,
+          0
+        ],
+        "width": 0.14,
+        "height": 0.01,
+        "depth": 0.14
+      },
+      {
+        "id": "seat",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          -0.3,
+          0.465,
+          -0.4
+        ],
+        "width": 0.45,
+        "height": 0.03,
+        "depth": 0.4
+      },
+      {
+        "id": "bracket-left",
+        "ref": "bracket",
+        "placement": {
+          "position": [
+            -0.5,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bracket-right",
+        "ref": "bracket",
+        "placement": {
+          "position": [
+            -0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "valve",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0.1,
+          1.1,
+          -0.575
+        ],
+        "width": 0.12,
+        "height": 0.1,
+        "depth": 0.05
+      },
+      {
+        "id": "riser-rail",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0.35,
+          1.4,
+          -0.588
+        ],
+        "radius": 0.012,
+        "height": 1.2
+      },
+      {
+        "id": "handset",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0.35,
+          1.5,
+          -0.546
+        ],
+        "radius": 0.03,
+        "height": 0.2
+      }
+    ]
+  }
+}

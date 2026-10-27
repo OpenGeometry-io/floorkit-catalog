@@ -9,7 +9,4 @@
  * their redraw, and the file is deleted once it is empty.
  */
 export const PENDING_REDRAW = Object.freeze({
-  bathtub: '12474e20c6d8fe103ea47697fdbfc1c4ef459402d9d2f88bcb72a4988bb16aae',
-  'rectangular-bathtub': '6bd72cb0e46cb6e0f6833155fab36c0d3f73f66fd7f7f1e0be1349268ab10270',
-  'shower-tray': 'd908bde1230cf1a4c2400fa1b37263befb4f8b88101bb7ea1b2f00043a2e0513',
 });
