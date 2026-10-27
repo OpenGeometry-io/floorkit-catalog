@@ -379,7 +379,7 @@ From 8 to 10 levels the construction time grew about fourfold in both runs, as t
 | Floor | No solid goes below `y = 0`, unless the note says `recess` | 0.001 m |
 | Plan | The plan's polygons, polylines, offsets and arcs span the body's x and z extent; an arc is bounded by its ends and the axes it crosses. A `DOOR` or `WINDOW`, or a block whose note says `swing`, leaves its arcs out (a swing draws outside the body). A positive `offset2d` distance lies to the left of its source's direction (x right, z up), so an inner line stays inside | 0.005 m |
 | Connected | Every solid reaches a ground through solids whose boxes touch: the floor, the wall plane at the `wallFace` anchor, the ceiling at `ceiling <m>`, the counter at `at <m>` | 0.001 m |
-| Level of detail | At least 3 solids, filling under 95 % of their bounding box; `carcass` or `slab` in the note waives the ratio only. A boolean's volume is its base's; a union's is its base's plus its operands' | 0.95 |
+| Level of detail | A block with `catalog:lod` `300` (and only such a block) has at least 3 solids, filling under 95 % of their bounding box; `carcass` or `slab` in the note waives the ratio only. A boolean's volume is its base's; a union's is its base's plus its operands' | 0.95 |
 | On the body | Every anchor and port lies on a solid's box surface; only `base` and `wallFace` may instead stand on the floor under the body | 0.005 m |
 | Heights | `seat`, `rim`, `top` and `ceiling` are an exposed top face, `bottom`, `underside` and `at` an exposed bottom face (one no other solid wholly covers); a height keyword needs two decimals | 0.005 m |
 | Materials | Every model node has a `mat:` role; a ref may take its definition's | none |
