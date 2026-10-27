@@ -87,6 +87,37 @@
       "contentHash": "f5fa20d12b86f47799128771cae42613880c6c260b539b947921aec6bc07551e"
     },
     {
+      "id": "floorkit.ceiling-luminaire-1200",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "ceiling-luminaire-1200",
+      "version": "1.0.0",
+      "labelName": "Linear Ceiling Luminaire 1200",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "light",
+        "luminaire",
+        "linear",
+        "ceiling",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 0.3,
+        "height": 0.08
+      },
+      "path": "blocks/floorkit/ceiling-luminaire-1200/1.0.0.op",
+      "bytes": 4667,
+      "sha256": "23da35a3381cd674d28427cb5eb92a30dfdb64627cc98c2aa2d29b039763cc30",
+      "contentHash": "bb20a548fc3d252c1f776a064311c71f42c05291df875c68ff420dcbe22ed4c5"
+    },
+    {
       "id": "floorkit.chiller",
       "publisher": {
         "id": "floorkit",
@@ -171,6 +202,66 @@
       "bytes": 4140,
       "sha256": "cc1a3ed5fea2b5dff5b6bb25298b4e51e25ee91d42ccbf74fbb6c6c9da3d9672",
       "contentHash": "183f8e3f969af58f0c2c70ac25c8effc14038043a43de2085db05ba1207edb7c"
+    },
+    {
+      "id": "floorkit.downlight",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "downlight",
+      "version": "1.0.0",
+      "labelName": "Downlight",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "light",
+        "downlight",
+        "ceiling",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.09,
+        "depth": 0.09,
+        "height": 0.03
+      },
+      "path": "blocks/floorkit/downlight/1.0.0.op",
+      "bytes": 3874,
+      "sha256": "c7a7d8cf0364e4d6dd5c3008a7f0c0c7a05b43e359c63227411d3c34c2d8c5e8",
+      "contentHash": "800d4f68d9460412437fd40e9e3ea8329b9be964a4c8b9c53e7d0ddaf5644890"
+    },
+    {
+      "id": "floorkit.floor-lamp",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "floor-lamp",
+      "version": "1.0.0",
+      "labelName": "Floor Lamp",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "lamp",
+        "floor lamp",
+        "standard lamp",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.4,
+        "depth": 0.4,
+        "height": 1.6
+      },
+      "path": "blocks/floorkit/floor-lamp/1.0.0.op",
+      "bytes": 2904,
+      "sha256": "24ad2b1f04eff6414aa222ef65e76e627151c70f2316029cb0614ada325bee78",
+      "contentHash": "8477135b51d57ee80795dd2367efc6bb2b3833d13b8644d6f25ba92d4d8ee7ac"
     },
     {
       "id": "floorkit.glazed-door",
@@ -398,6 +489,36 @@
       "contentHash": "a036bd3e375c9aa2d36fad394ac897ecc68a0f1868b2921766bef58318ba2dd4"
     },
     {
+      "id": "floorkit.pendant-light",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "pendant-light",
+      "version": "1.0.0",
+      "labelName": "Pendant Light",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "light",
+        "pendant",
+        "ceiling",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.4,
+        "depth": 0.4,
+        "height": 0.4
+      },
+      "path": "blocks/floorkit/pendant-light/1.0.0.op",
+      "bytes": 4121,
+      "sha256": "747aa68f5c861575fb60cf15b25c680d59deb2fdf881bda6817d744c96ff4ebe",
+      "contentHash": "15a8c6d8d25a36b2b0ee284c6883fe2cd86f4c19c8fa28ee210d39e8324a886e"
+    },
+    {
       "id": "floorkit.planter",
       "publisher": {
         "id": "floorkit",
@@ -567,6 +688,36 @@
       "contentHash": "291d123701648ae57e6fde7a35ff4a6c646cc247812da1c7db93ee0f123150a1"
     },
     {
+      "id": "floorkit.table-lamp",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "table-lamp",
+      "version": "1.0.0",
+      "labelName": "Table Lamp",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "lamp",
+        "table lamp",
+        "bedside",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.3,
+        "depth": 0.3,
+        "height": 0.5
+      },
+      "path": "blocks/floorkit/table-lamp/1.0.0.op",
+      "bytes": 2909,
+      "sha256": "c891076fd187c905bd37e8b3387593ecdce845266f15a418a56a6e3f7b7afc7c",
+      "contentHash": "7dd4f20f6985a280d4ff0671b85954dd02c5f4eff37688f54005209067c4e56c"
+    },
+    {
       "id": "floorkit.tree",
       "publisher": {
         "id": "floorkit",
@@ -621,6 +772,35 @@
       "bytes": 2901,
       "sha256": "5d9cede96ba9abac4af431d1ccb29b0e19b375410b25506abbbeb453ee839bd6",
       "contentHash": "304e7db43e09d1837cfd5f8e2c8d905e0b5a68c058e0bdee10c01a5afb822a66"
+    },
+    {
+      "id": "floorkit.wall-light",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wall-light",
+      "version": "1.0.0",
+      "labelName": "Wall Light",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "light",
+        "wall light",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.2,
+        "depth": 0.1,
+        "height": 0.25
+      },
+      "path": "blocks/floorkit/wall-light/1.0.0.op",
+      "bytes": 4400,
+      "sha256": "7e790c8669f15eee24861f3b6d834603c6a38b44ee990535ac470483f2cdad38",
+      "contentHash": "a6a1bcae3218469faaa3150e6b72014126296ae0c297f5645f4f4ed6e7e49db3"
     },
     {
       "id": "floorkit.wash-basin",
