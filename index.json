@@ -161,24 +161,25 @@
       },
       "slug": "bathtub",
       "version": "1.0.0",
-      "labelName": "Bathtub",
+      "labelName": "Bath",
       "type": "FIXTURE",
       "category": "sanitary",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "bath",
+        "bathtub",
         "bathroom"
       ],
       "dimensions": {
-        "width": 1.65,
+        "width": 1.7,
         "depth": 0.7,
-        "height": 0.55
+        "height": 0.65
       },
       "path": "blocks/floorkit/bathtub/1.0.0.op",
-      "bytes": 5506,
-      "sha256": "12474e20c6d8fe103ea47697fdbfc1c4ef459402d9d2f88bcb72a4988bb16aae",
-      "contentHash": "155e1bf000a14ae3d2a8f35360f2045d219abef66d91592dda103b64af53520c"
+      "bytes": 9610,
+      "sha256": "1f7bfa8e8ddc52e36af1f0e8ddff9abf917e9daa8348b241ecdfc968b1ddf65a",
+      "contentHash": "acc5a24c303471b1c6ae4111fad840a24d3dd4184b7b57c219f071cc9ae72438"
     },
     {
       "id": "floorkit.bedside-table",
@@ -269,6 +270,34 @@
       "bytes": 7458,
       "sha256": "bf617045b5cf29904882249e7f2319270b981e302a66b90d701e80506eea4c7b",
       "contentHash": "d222a609402fe3549b0695cdaad2e33828d3d176d74ba1321459387be1e58541"
+    },
+    {
+      "id": "floorkit.bidet",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bidet",
+      "version": "1.0.0",
+      "labelName": "Bidet",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bidet",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.37,
+        "depth": 0.56,
+        "height": 0.48
+      },
+      "path": "blocks/floorkit/bidet/1.0.0.op",
+      "bytes": 7385,
+      "sha256": "b106ddfe419554aeb6e038f7c7eb4bb05c256ee71886b1898ba7ee8f3d2a589e",
+      "contentHash": "b3c5e518592c75643240bc0a4fedc3d5f3a4c903fbb2c5632d6501e7fafa91e0"
     },
     {
       "id": "floorkit.boiler",
@@ -1497,34 +1526,6 @@
       "contentHash": "b5ee656aa89d4f9f198dc76374d145132d0ecc471186dfdc684ab903f56bc572"
     },
     {
-      "id": "floorkit.rectangular-bathtub",
-      "publisher": {
-        "id": "floorkit",
-        "name": "Floorkit",
-        "tier": "official"
-      },
-      "slug": "rectangular-bathtub",
-      "version": "1.0.0",
-      "labelName": "Rectangular Bathtub",
-      "type": "FIXTURE",
-      "category": "sanitary",
-      "license": "CC-BY-4.0",
-      "attribution": "Vishwajeet Mane",
-      "tags": [
-        "bath",
-        "bathroom"
-      ],
-      "dimensions": {
-        "width": 1.7,
-        "depth": 0.75,
-        "height": 0.6
-      },
-      "path": "blocks/floorkit/rectangular-bathtub/1.0.0.op",
-      "bytes": 8149,
-      "sha256": "6bd72cb0e46cb6e0f6833155fab36c0d3f73f66fd7f7f1e0be1349268ab10270",
-      "contentHash": "e607238ec08fab55c9ce17f89b01639661d3c65cd55a51beb74dcd3a6f6db597"
-    },
-    {
       "id": "floorkit.round-table",
       "publisher": {
         "id": "floorkit",
@@ -1555,6 +1556,66 @@
       "contentHash": "754d81ea2e79edabd613b9e569de9c80a6732b917bbf03d6117fe83259425e26"
     },
     {
+      "id": "floorkit.shower-enclosure",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-enclosure",
+      "version": "1.0.0",
+      "labelName": "Shower Enclosure",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower",
+        "shower enclosure",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.9,
+        "depth": 0.9,
+        "height": 2
+      },
+      "path": "blocks/floorkit/shower-enclosure/1.0.0.op",
+      "bytes": 10729,
+      "sha256": "795f91d8865edfa034e2e98d13fa7431100530f5f893a0a50ccc69ce2c2f28b1",
+      "contentHash": "cfed5935b29e3838ca602230ecf9d18b95f8fab3fee095217c18438d35e7e96f"
+    },
+    {
+      "id": "floorkit.shower-level-access",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-level-access",
+      "version": "1.0.0",
+      "labelName": "Level-Access Shower",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower",
+        "level access",
+        "accessible",
+        "wet room",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 1.2,
+        "height": 2
+      },
+      "path": "blocks/floorkit/shower-level-access/1.0.0.op",
+      "bytes": 8384,
+      "sha256": "e23c888033d32827a8023f2955ebbaea279a4f1dea31ce2cbe2d3e5e2eaaa982",
+      "contentHash": "0cd67734274016dc6c3b9d6f55e0762381effb344f068ec34e5f76ffb5de6569"
+    },
+    {
       "id": "floorkit.shower-tray",
       "publisher": {
         "id": "floorkit",
@@ -1569,18 +1630,19 @@
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
+        "shower tray",
         "shower",
         "bathroom"
       ],
       "dimensions": {
         "width": 0.9,
         "depth": 0.9,
-        "height": 0.06
+        "height": 0.04
       },
       "path": "blocks/floorkit/shower-tray/1.0.0.op",
-      "bytes": 3478,
-      "sha256": "d908bde1230cf1a4c2400fa1b37263befb4f8b88101bb7ea1b2f00043a2e0513",
-      "contentHash": "8d98b187078893faa6b53ffe4718541e99eec3ba4c5380730d9d689350af1624"
+      "bytes": 6128,
+      "sha256": "812f47b20739c3b79f92a5b6463403aa354a194a74b7f17f99a20ace9f788442",
+      "contentHash": "d7b9575e8a8f3508685f7a1f73c8792d507bf5eee879b8585d85e11285cf4ff5"
     },
     {
       "id": "floorkit.sideboard",

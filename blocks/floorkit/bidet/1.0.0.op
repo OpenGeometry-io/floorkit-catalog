@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "id": "floorkit.bidet",
+  "labelName": "Bidet",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.37,
+    "depth": 0.56,
+    "height": 0.48
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "bidet, bathroom",
+    "catalog:note": "Floor-standing bidet: a rim plate with a round bowl cut through it, a liner ring and a bowl floor below, on a pedestal and a rear body to the floor. rim 0.40. A pillar mixer 0.08 high on the rim makes the overall height 0.48; it builds as a prism.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, verify; EN 14528 for bidets), not read, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "BIDET",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:bowl-floor": "ceramic",
+    "mat:pedestal": "ceramic",
+    "mat:rear-body": "ceramic",
+    "mat:tap": "metal",
+    "mat:plate": "ceramic",
+    "mat:liner": "ceramic"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          0,
+          0.4,
+          -0.18
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.25,
+          0.08
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.03,
+          0.3,
+          -0.28
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.03,
+          0.3,
+          -0.28
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0,
+          0.06
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.032
+      }
+    }
+  ],
+  "definitions": {
+    "plateBase": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.385,
+        0
+      ],
+      "width": 0.37,
+      "height": 0.03,
+      "depth": 0.56
+    },
+    "plateCut": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.385,
+        0.08
+      ],
+      "radius": 0.14,
+      "height": 0.05
+    },
+    "plate": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "plateBase",
+      "operandRefs": [
+        "plateCut"
+      ],
+      "color": "#f2f1ec"
+    },
+    "linerBase": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.31,
+        0.08
+      ],
+      "radius": 0.15,
+      "height": 0.12
+    },
+    "linerCut": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.31,
+        0.08
+      ],
+      "radius": 0.14,
+      "height": 0.12
+    },
+    "liner": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "linerBase",
+      "operandRefs": [
+        "linerCut"
+      ],
+      "color": "#f2f1ec"
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.185,
+            -0.28
+          ],
+          [
+            0.185,
+            -0.28
+          ],
+          [
+            0.185,
+            0.28
+          ],
+          [
+            -0.185,
+            0.28
+          ]
+        ]
+      },
+      {
+        "id": "bowl-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0.08
+        ],
+        "radius": 0.14,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "bowl-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0.08
+        ],
+        "radius": 0.14,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tap-a",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.18
+        ],
+        "radius": 0.02,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tap-b",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.18
+        ],
+        "radius": 0.02,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "plate",
+        "ref": "plate"
+      },
+      {
+        "id": "bowl-liner",
+        "ref": "liner"
+      },
+      {
+        "id": "bowl-floor",
+        "kind": "cylinder",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.24,
+          0.08
+        ],
+        "radius": 0.15,
+        "height": 0.02
+      },
+      {
+        "id": "pedestal",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.115,
+          0.06
+        ],
+        "width": 0.24,
+        "height": 0.23,
+        "depth": 0.28
+      },
+      {
+        "id": "rear-body",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.185,
+          -0.18
+        ],
+        "width": 0.37,
+        "height": 0.37,
+        "depth": 0.2
+      },
+      {
+        "id": "tap",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.44,
+          -0.18
+        ],
+        "radius": 0.02,
+        "height": 0.08
+      }
+    ]
+  }
+}
