@@ -149,6 +149,36 @@
       "contentHash": "155e1bf000a14ae3d2a8f35360f2045d219abef66d91592dda103b64af53520c"
     },
     {
+      "id": "floorkit.bedside-table",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bedside-table",
+      "version": "1.0.0",
+      "labelName": "Bedside Table",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bedside table",
+        "nightstand",
+        "cabinet",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 0.45,
+        "depth": 0.4,
+        "height": 0.55
+      },
+      "path": "blocks/floorkit/bedside-table/1.0.0.op",
+      "bytes": 4946,
+      "sha256": "7a43ecfc7444acf4c1860c4dd21eb35f50c41bd6ebf0320eac0bd81571745fd4",
+      "contentHash": "b55f180a48b9037010fc378c88ed468ae870b817aa6dfcff98244abe0f0a3d0e"
+    },
+    {
       "id": "floorkit.bench",
       "publisher": {
         "id": "floorkit",
@@ -208,6 +238,37 @@
       "bytes": 7506,
       "sha256": "24527d486918321bb0d8d643b63d8ea712a72bb1167431730ce4b4c39ed9dd3f",
       "contentHash": "5971f27dd895ea7324036ad69bd4da3197c8cdac31e17297d7515c427965088c"
+    },
+    {
+      "id": "floorkit.bunk-bed",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bunk-bed",
+      "version": "1.0.0",
+      "labelName": "Bunk Bed",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bed",
+        "bunk",
+        "single",
+        "bedroom",
+        "children"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 2.1,
+        "height": 1.6
+      },
+      "path": "blocks/floorkit/bunk-bed/1.0.0.op",
+      "bytes": 9505,
+      "sha256": "1d45050ae6f0f34381cd90e74e712f714a24d4bdb357d7eccf2b45c2fa87a589",
+      "contentHash": "1572d0a7816e5ff7562159856120cfa367d7580407c0148dcc8f350935bbe10e"
     },
     {
       "id": "floorkit.cabinet",
@@ -388,6 +449,37 @@
       "contentHash": "d4760246517300ef65fb596021a8098f740774de9f0a4b1a07c886569dcb2fb7"
     },
     {
+      "id": "floorkit.cot",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "cot",
+      "version": "1.0.0",
+      "labelName": "Cot",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "cot",
+        "bed",
+        "baby",
+        "nursery",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 0.66,
+        "depth": 1.26,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/cot/1.0.0.op",
+      "bytes": 22690,
+      "sha256": "4b50b3bd40a39a34ca5a5d574bca6cfb8a6a84280ac425bf2f9386e1815242c0",
+      "contentHash": "e78f87e4376ba14590b52119336c3e8161ea953186da538ed755a3f935ff6f43"
+    },
+    {
       "id": "floorkit.crah",
       "publisher": {
         "id": "floorkit",
@@ -444,6 +536,35 @@
       "bytes": 4944,
       "sha256": "5d573dac32bad5c5e9ea44fd712f30a738f4b3674c5d98053356aac18399e1b1",
       "contentHash": "33a6aba1b2ee0420510c6d1207140186d03cd5ff8a81e7caa8442d3bb7455652"
+    },
+    {
+      "id": "floorkit.double-bed",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "double-bed",
+      "version": "1.0.0",
+      "labelName": "Double Bed",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bed",
+        "double",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 1.5,
+        "depth": 2.1,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/double-bed/1.0.0.op",
+      "bytes": 6833,
+      "sha256": "578aa3cead4999ec9872f4eca0f2491fb8ffe15a5f92a4003b5045f6f7d95df5",
+      "contentHash": "fcc0fc2a7d30c4a58f6571a751a02468cc39b3716a4225c47ec82af10c7346f2"
     },
     {
       "id": "floorkit.downlight",
@@ -591,6 +712,36 @@
       "bytes": 6471,
       "sha256": "e560404c516e7e90995587fff721f8ae07ec15b6a2c315b482acb95b67ce3ca7",
       "contentHash": "1e9bff010f44bb5926cd2fe4dca5eaa5bad28f491a39d9e777e4bdcda6d6f756"
+    },
+    {
+      "id": "floorkit.king-bed",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "king-bed",
+      "version": "1.0.0",
+      "labelName": "King-Size Bed",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bed",
+        "king-size",
+        "double",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 1.7,
+        "depth": 2.1,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/king-bed/1.0.0.op",
+      "bytes": 6898,
+      "sha256": "d2e541b044e3cf9a7509389544930d7eb9cdd39d997e4bbfa0e77587a6d54cbb",
+      "contentHash": "5e1490f6b5cc0551632b06367463932f3ab6081c65f66b3c79eaab7aaed3871a"
     },
     {
       "id": "floorkit.kitchen-counter",
@@ -1087,6 +1238,35 @@
       "bytes": 5175,
       "sha256": "5051461d675c43bd6683a5efd59acba9b257a71724f6e46c98498ecfd6264b17",
       "contentHash": "211eb62b995bb76e876f8a644ae10d9eeb31f6f0637bba3b9cc83c41997910b1"
+    },
+    {
+      "id": "floorkit.single-bed",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "single-bed",
+      "version": "1.0.0",
+      "labelName": "Single Bed",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bed",
+        "single",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 2.1,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/single-bed/1.0.0.op",
+      "bytes": 6180,
+      "sha256": "63ceca9c16d68eb08bd40387c28268d23bdd02fe738df47e73b1581a339cd084",
+      "contentHash": "676b9d8f8d043e0e49525e0412ae9bbec932256e99ba2cd2e453386cb85665c9"
     },
     {
       "id": "floorkit.sofa-2-seat",
