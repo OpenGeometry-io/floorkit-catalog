@@ -121,6 +121,38 @@
       "contentHash": "9350763a5a19fc2a9718df007602ea07442503bec5f578cdcf4014296d3f8166"
     },
     {
+      "id": "floorkit.basin-accessible",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "basin-accessible",
+      "version": "1.0.0",
+      "labelName": "Accessible Basin",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "basin",
+        "wash basin",
+        "accessible",
+        "wheelchair",
+        "wall-hung",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.55,
+        "height": 0.39
+      },
+      "path": "blocks/floorkit/basin-accessible/1.0.0.op",
+      "bytes": 8844,
+      "sha256": "a8bc359af4ae47faa0eb383c915524716a23fe2259edbc674d182d22aff6ac8b",
+      "contentHash": "0651ad2499fe422388d2bae9a3e0e6cfdc23cc9ce64f0655aaee47b6b71a59a2"
+    },
+    {
       "id": "floorkit.bathtub",
       "publisher": {
         "id": "floorkit",
@@ -417,6 +449,36 @@
       "bytes": 3050,
       "sha256": "c922e3ad1dd70eea4a6087953c333f32e8a371db828638cd7ef499310a48bc82",
       "contentHash": "797d2564eb6f39faae1dcff270c6b3fbf990e53fcee4c0f1e11df0f32b1064f2"
+    },
+    {
+      "id": "floorkit.cloakroom-basin",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "cloakroom-basin",
+      "version": "1.0.0",
+      "labelName": "Cloakroom Basin",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "basin",
+        "cloakroom basin",
+        "wall-hung",
+        "cloakroom"
+      ],
+      "dimensions": {
+        "width": 0.45,
+        "depth": 0.35,
+        "height": 0.47
+      },
+      "path": "blocks/floorkit/cloakroom-basin/1.0.0.op",
+      "bytes": 8228,
+      "sha256": "a30913e9cd16788876aeea51c17ba401929d60986886567172656ac573d60b67",
+      "contentHash": "1c316da8014f01a5a6ee71c4512a8ca7451270f02d110a73f1e770080de904f3"
     },
     {
       "id": "floorkit.coffee-table",
@@ -1539,6 +1601,35 @@
       "contentHash": "304e7db43e09d1837cfd5f8e2c8d905e0b5a68c058e0bdee10c01a5afb822a66"
     },
     {
+      "id": "floorkit.urinal",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "urinal",
+      "version": "1.0.0",
+      "labelName": "Urinal",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "urinal",
+        "wall-hung",
+        "washroom"
+      ],
+      "dimensions": {
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.65
+      },
+      "path": "blocks/floorkit/urinal/1.0.0.op",
+      "bytes": 5909,
+      "sha256": "5930df0b263a0c416c843c0b07abee9e14a940811508bbb0fd9df4ea3dc18ccc",
+      "contentHash": "dc6d0910ed9f3c9d49c617ff5a0b1e701be09ddfa899d13f7eb5f1efe4503b1d"
+    },
+    {
       "id": "floorkit.wall-light",
       "publisher": {
         "id": "floorkit",
@@ -1614,18 +1705,19 @@
       "attribution": "Vishwajeet Mane",
       "tags": [
         "basin",
-        "sink",
+        "wash basin",
+        "pedestal",
         "bathroom"
       ],
       "dimensions": {
-        "width": 0.45,
-        "depth": 0.55,
-        "height": 0.85
+        "width": 0.55,
+        "depth": 0.45,
+        "height": 0.97
       },
       "path": "blocks/floorkit/wash-basin/1.0.0.op",
-      "bytes": 5389,
-      "sha256": "7e6a86b061addfbbe16d44fb5f279811f7b9614159a0cdd551b9a215dbe917fa",
-      "contentHash": "0c593bdaae68e2b30d994954e555bc287e1ef1c994d3b343fadea775e7e8d107"
+      "bytes": 7749,
+      "sha256": "ba08c0c46973316d927e86f9e479b59572a7cc5a725883231422bf359a5f1d2a",
+      "contentHash": "1b64fc1fc568495218fb7014701f1e56dfaa3bc987b2a6ab2c44aee648219b72"
     },
     {
       "id": "floorkit.washing-machine",
@@ -1693,55 +1785,87 @@
       },
       "slug": "wc",
       "version": "1.0.0",
-      "labelName": "WC Pan",
+      "labelName": "WC",
       "type": "FIXTURE",
       "category": "sanitary",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "toilet",
         "wc",
+        "toilet",
+        "close-coupled",
         "bathroom"
       ],
       "dimensions": {
-        "width": 0.38,
-        "depth": 0.66,
+        "width": 0.37,
+        "depth": 0.65,
         "height": 0.78
       },
       "path": "blocks/floorkit/wc/1.0.0.op",
-      "bytes": 3607,
-      "sha256": "3b9cdee775210c9a1be3a60f3baaf50863f43c2522c6b738b6f6c2a68c198df8",
-      "contentHash": "ef0fd2d0bb93e57142cc1f83d37056029f64002b88ff684e74845273e7aa9746"
+      "bytes": 7401,
+      "sha256": "c315e11a1db419c592491dfa57a15508cd85e1eea988dca0e9d1f586ca4faf96",
+      "contentHash": "b12a635cc32aa4eaa6ea5b77c8648868f2cc1af4be810f5f36ca900fd42b8aab"
     },
     {
-      "id": "floorkit.wc-and-basin",
+      "id": "floorkit.wc-accessible",
       "publisher": {
         "id": "floorkit",
         "name": "Floorkit",
         "tier": "official"
       },
-      "slug": "wc-and-basin",
+      "slug": "wc-accessible",
       "version": "1.0.0",
-      "labelName": "WC and Basin",
-      "type": "FURNITURE",
+      "labelName": "Accessible WC",
+      "type": "FIXTURE",
       "category": "sanitary",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "wc",
         "toilet",
-        "basin",
-        "cloakroom"
+        "accessible",
+        "wheelchair",
+        "bathroom"
       ],
       "dimensions": {
-        "width": 1.5,
-        "depth": 0.7,
-        "height": 0.85
+        "width": 0.38,
+        "depth": 0.75,
+        "height": 0.8
       },
-      "path": "blocks/floorkit/wc-and-basin/1.0.0.op",
-      "bytes": 3543,
-      "sha256": "4d15484bb9b5e4eecd894feffff694ef3304f1e9699530c2147b0e2403c1a049",
-      "contentHash": "4a25ab1ea11f804342248e1dc8790eb5b54f046612a6a507cc97be1927c779d4"
+      "path": "blocks/floorkit/wc-accessible/1.0.0.op",
+      "bytes": 7844,
+      "sha256": "5d6024bf66ec468bab5a73ab99a2d53e517cb70a0a3ebcc09e848d49ed96641c",
+      "contentHash": "f65b25cc18daf4828dfee04d15e65d1e1b7cc1019e3adb28902e9c194dfd04bc"
+    },
+    {
+      "id": "floorkit.wc-wall-hung",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wc-wall-hung",
+      "version": "1.0.0",
+      "labelName": "Wall-hung WC",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wc",
+        "toilet",
+        "wall-hung",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.36,
+        "depth": 0.54,
+        "height": 0.63
+      },
+      "path": "blocks/floorkit/wc-wall-hung/1.0.0.op",
+      "bytes": 6393,
+      "sha256": "c729179c8c043bb4e6fb6fce28ac7819db7db5bb6b22f4b9af740162cf393fac",
+      "contentHash": "db98e31a82300d6237280f943ceff3a9cbc195741d22437e7d79a9c83a76c880"
     }
   ]
 }

@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "id": "floorkit.urinal",
+  "labelName": "Urinal",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.35,
+    "depth": 0.35,
+    "height": 0.65
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "urinal, wall-hung, washroom",
+    "catalog:note": "Wall-hung urinal, a hood open at the front: back panel, two cheeks, top, bowl floor and front lip. bottom 0.35, rim 0.60. The plan draws the bowl as a half circle inside the box outline; the body is a box hood, since a half cylinder does not mirror.",
+    "catalog:basedOn": "0.35 x 0.35 x 0.65, bottom 0.35 and rim 0.60 are generic practice sizes, not checked against a published source (unverified). Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "URINAL",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:backPanel": "ceramic",
+    "mat:cheek": "ceramic",
+    "mat:hoodTop": "ceramic",
+    "mat:bowlFloor": "ceramic",
+    "mat:lip": "ceramic"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.4,
+          0.015
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.38,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.95,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "cheek": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.675,
+        0.015
+      ],
+      "width": 0.02,
+      "height": 0.65,
+      "depth": 0.32
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.175,
+            -0.175
+          ],
+          [
+            0.175,
+            -0.175
+          ],
+          [
+            0.175,
+            0.175
+          ],
+          [
+            -0.175,
+            0.175
+          ]
+        ]
+      },
+      {
+        "id": "backFace",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.175,
+            -0.145
+          ],
+          [
+            0.175,
+            -0.145
+          ]
+        ]
+      },
+      {
+        "id": "bowl",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.145
+        ],
+        "radius": 0.145,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "backPanel",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.675,
+          -0.16
+        ],
+        "width": 0.35,
+        "height": 0.65,
+        "depth": 0.03
+      },
+      {
+        "id": "cheekLeft",
+        "ref": "cheek",
+        "placement": {
+          "position": [
+            -0.165,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "cheekRight",
+        "ref": "cheek",
+        "placement": {
+          "position": [
+            0.165,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hoodTop",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.985,
+          0.015
+        ],
+        "width": 0.31,
+        "height": 0.03,
+        "depth": 0.32
+      },
+      {
+        "id": "bowlFloor",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.375,
+          0.015
+        ],
+        "width": 0.31,
+        "height": 0.05,
+        "depth": 0.32
+      },
+      {
+        "id": "lip",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.5,
+          0.165
+        ],
+        "width": 0.31,
+        "height": 0.2,
+        "depth": 0.02
+      }
+    ]
+  }
+}

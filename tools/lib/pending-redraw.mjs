@@ -19,8 +19,5 @@ export const PENDING_REDRAW = Object.freeze({
   'rectangular-bathtub': '6bd72cb0e46cb6e0f6833155fab36c0d3f73f66fd7f7f1e0be1349268ab10270',
   'shower-tray': 'd908bde1230cf1a4c2400fa1b37263befb4f8b88101bb7ea1b2f00043a2e0513',
   ups: '5d9cede96ba9abac4af431d1ccb29b0e19b375410b25506abbbeb453ee839bd6',
-  'wash-basin': '7e6a86b061addfbbe16d44fb5f279811f7b9614159a0cdd551b9a215dbe917fa',
   'washing-machine': 'de1ccbaff45473de4678e116296210f60204b50d4d40c7a32ac1ff28088477b4',
-  wc: '3b9cdee775210c9a1be3a60f3baaf50863f43c2522c6b738b6f6c2a68c198df8',
-  'wc-and-basin': '4d15484bb9b5e4eecd894feffff694ef3304f1e9699530c2147b0e2403c1a049',
 });

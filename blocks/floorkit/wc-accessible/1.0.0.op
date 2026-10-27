@@ -1,0 +1,408 @@
+{
+  "version": 1,
+  "id": "floorkit.wc-accessible",
+  "labelName": "Accessible WC",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.38,
+    "depth": 0.75,
+    "height": 0.8
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "wc, toilet, accessible, wheelchair, bathroom",
+    "catalog:note": "Accessible WC, lid open: seat 0.48, rim 0.46, pan front 0.75 from the wall. The transfer side and the lever flush are at +x; a mirrored copy keeps flushSide at +x, so mirror it with care. Grab rails are not drawn. The pan is a ring that abuts a rear block at its tangent.",
+    "catalog:basedOn": "Approved Document M and BS 8300-2 via the drafting standard key dimensions: seat 0.48, pan front 0.75 from the wall (checked in secondary summaries only, not in the documents); width 0.38 practice, unverified. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "TOILETPAN",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:foot": "ceramic",
+    "mat:panRear": "ceramic",
+    "mat:bowlFloor": "ceramic",
+    "mat:bowl": "ceramic",
+    "mat:seat": "surface",
+    "mat:seatBack": "surface",
+    "mat:lid": "surface",
+    "mat:cistern": "ceramic",
+    "mat:flushLever": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.375
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "flushSide": {
+      "placement": {
+        "position": [
+          0.19,
+          0.48,
+          0.185
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "transfer-side"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "soil",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.3,
+          -0.375
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.72,
+          -0.375
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "bowlSolid": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.36,
+        0.185
+      ],
+      "radius": 0.19,
+      "height": 0.2
+    },
+    "bowlCore": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.36,
+        0.185
+      ],
+      "radius": 0.14,
+      "height": 0.2
+    },
+    "bowl": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "bowlSolid",
+      "operandRefs": [
+        "bowlCore"
+      ],
+      "color": "#f2f1ec"
+    },
+    "seatSolid": {
+      "kind": "cylinder",
+      "color": "#d8d2c4",
+      "center": [
+        0,
+        0.47,
+        0.185
+      ],
+      "radius": 0.19,
+      "height": 0.02
+    },
+    "seatCore": {
+      "kind": "cylinder",
+      "color": "#d8d2c4",
+      "center": [
+        0,
+        0.47,
+        0.185
+      ],
+      "radius": 0.11,
+      "height": 0.02
+    },
+    "seat": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "seatSolid",
+      "operandRefs": [
+        "seatCore"
+      ],
+      "color": "#d8d2c4"
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.19,
+            -0.375
+          ],
+          [
+            0.19,
+            -0.375
+          ],
+          [
+            0.19,
+            -0.005
+          ],
+          [
+            -0.19,
+            -0.005
+          ]
+        ]
+      },
+      {
+        "id": "cisternFront",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.19,
+            -0.205
+          ],
+          [
+            0.19,
+            -0.205
+          ]
+        ]
+      },
+      {
+        "id": "panA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.185
+        ],
+        "radius": 0.19,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "panB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.185
+        ],
+        "radius": 0.19,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "seatInnerA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.185
+        ],
+        "radius": 0.11,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "seatInnerB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.185
+        ],
+        "radius": 0.11,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "foot",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.12,
+          -0.065
+        ],
+        "width": 0.24,
+        "height": 0.24,
+        "depth": 0.62
+      },
+      {
+        "id": "panRear",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.35,
+          -0.19
+        ],
+        "width": 0.38,
+        "height": 0.22,
+        "depth": 0.37
+      },
+      {
+        "id": "bowlFloor",
+        "kind": "cylinder",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.25,
+          0.185
+        ],
+        "radius": 0.19,
+        "height": 0.02
+      },
+      {
+        "id": "bowl",
+        "ref": "bowl"
+      },
+      {
+        "id": "seat",
+        "ref": "seat"
+      },
+      {
+        "id": "seatBack",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.47,
+          -0.095
+        ],
+        "width": 0.38,
+        "height": 0.02,
+        "depth": 0.18
+      },
+      {
+        "id": "lid",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.58,
+          -0.195
+        ],
+        "width": 0.38,
+        "height": 0.24,
+        "depth": 0.02
+      },
+      {
+        "id": "cistern",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.63,
+          -0.29
+        ],
+        "width": 0.38,
+        "height": 0.34,
+        "depth": 0.17
+      },
+      {
+        "id": "flushLever",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0.12,
+          0.75,
+          -0.195
+        ],
+        "width": 0.1,
+        "height": 0.02,
+        "depth": 0.02
+      }
+    ]
+  }
+}
