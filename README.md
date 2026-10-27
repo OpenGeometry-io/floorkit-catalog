@@ -124,3 +124,4 @@ Add `blocks/<you>/<slug>/1.0.0.op`, run `npm run check`, sign off every commit (
 
 - [RFC 0001: catalog and loader](docs/rfcs/0001-catalog-and-loader.md): the trust model, distribution (an npm package and a signed index later) and moving the loader into the Floorkit SDK.
 - [RFC 0002: toward Revit-family-like blocks](docs/rfcs/0002-parametric-families.md): what `.op` would need to work like a Revit family, and what should not be copied.
+- [RFC 0003: plan line roles](docs/rfcs/0003-plan-line-roles.md): an optional `lineRole` on a plan node, so a block can draw outline, detail, overhead, hidden and swing lines, each with its own pen.
