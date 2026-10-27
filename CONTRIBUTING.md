@@ -76,7 +76,7 @@ Root `metadata` is a **closed vocabulary**: a key the schema does not list fails
 | `ifc:class`, `ifc:predefinedType`, `class:uniclass2015`, `class:omniclass` | no | Only where you are certain |
 | `mat:<nodeId>` | no | The material role of a node that exists in the block |
 
-An example for a chair whose model nodes are `seat`, `backrest` and four legs (every model node needs a `mat:` role):
+An example for a chair whose model nodes are `seat`, `backrest` and four legs (every model node needs a `mat:` role). It is sized from [`test/fixtures/valid/chair.op`](test/fixtures/valid/chair.op), whose seat top is at 0.52, so its `seat 0.52` is that fixture's height, not a rule against the standard's 0.45:
 
 ```json
 "metadata": {

@@ -77,9 +77,10 @@ The body must read as the object from the isometric view, with the parts the cat
   - a boolean in an arrangement measured to build: a vertical through-hole cut from a cuboid or a cylinder by a cuboid or a cylinder, or a cylinder minus a narrower coaxial cylinder. A cuboid minus a cylinder that crosses one of its side faces does not build;
   - plate with hole plus liner: the rim as a plate with a through-hole, and the bowl below it as separate thin walls and a floor that touch the plate's underside.
   Booleans take only `cuboid`, `cylinder` or another `boolean3d` as operands ([format §4](format-v1.md#4-definitions-and-references)). Every block with a boolean is built by a maintainer with `parity.mjs --build --mesh` before it merges.
-- **Sweeps** only in the orientation of `floorkit.glazed-door`: profile in the x–z plane around the origin, path starting vertically. Other orientations are unverified.
+- **Sweeps** only in the case the gates bound as OpenGeometry's `sweep.rs` builds it, as in `floorkit.glazed-door`: the profile centred on its vertex average at the origin (within 0.001 m) and facing +y, the path starting straight up, in one vertical plane, with no turn over 90°. `validate.mjs` refuses any other sweep.
 - **Cylinders** stand on their axis along y. A cylinder that lies down (a porthole, a wheel, a rail) is turned 90° about x by its `placement.rotation` (`[90, 0, 0]`), which is measured; a turn about z is unverified, so a rail along x is a cuboid or is built and checked by a maintainer.
 - **No partial cylinders.** A cylinder with `angle` below a full turn must not be used: when a project mirrors the block (`scale [-1, 1, 1]`), Floorkit moves its centre but does not flip its arc, so the body lands up to its full width off the mirrored plan (measured: 400 mm for a quarter cylinder of radius 0.4). A half cylinder may be drawn as a full cylinder minus a cuboid, but that arrangement is unverified: a maintainer must build it, mirror included, with `parity.mjs --build --mesh` before it merges.
+- **Thin round parts render polygonal.** The kernel builds a small cylinder as a prism (measured with `parity.mjs --build --mesh` against Floorkit main `b0a084c7`, height 0.42): radius 0.011 gives 4 sides (12 triangles, volume 2·r²·h), 0.02 gives 6, 0.04 gives 8, 0.1 gives 12. A tubular leg at radius 0.011 therefore renders square; from radius 0.04 its section is an octagon or finer.
 - **Rotations.** Measured to build and to mirror correctly: a cylinder turned 90° about x; a cuboid turned about y; a ref turned about y by any angle (72° measured). A positive angle about y turns +x towards −z. A turn about z, a tilt of a cuboid about x (splayed legs) and a turn about two axes are unverified: draw parts upright, or have a maintainer build them.
 - **Mirroring.** Every block may be mirrored by a project. Floorkit mirrors the body and the plan, but not anchors or ports: an anchor or port off `x = 0` stays where it was. Put anchors on `x = 0` where the object allows; where it cannot (a tap at one end of a bath), say so in the note.
 - **Reuse** repeated parts (legs, castors, burners) as one `definitions` entry and refs.
@@ -113,7 +114,7 @@ The plan symbol (`profileView`) is what most users see. It follows practice for 
 
 - **The outline is the top-down silhouette of the body**, within 0.005 m on each side. Arcs that show a door's swing are outside this rule: a `DOOR` is exempt, and any other block with a swing says `swing` in its note.
 - **At 1:100 it reads by its outline plus at most two interior lines** (a seat back, a mattress turn-down, a door split). An interior line marks an edge seen from above: for a chair, the front face of the back, where it meets the seat. Detail beyond that is for 1:50 and must still read at 1:100. A block draws one symbol for both scales, so a plan that is the same at 1:50 and 1:100 is fine until plan line roles exist.
-- **Nothing finer than 0.03 m.** A gap, a lip or a line spacing under 0.03 m prints as one blot at 1:100: keep an interior line at least 0.03 m from the outline and from other lines, and leave it out for a part thinner than that.
+- **Nothing finer than 0.03 m.** A gap, a lip or a line spacing under 0.03 m prints as one blot at 1:100: keep an interior line at least 0.03 m from the outline and from other lines, and leave it out for a part thinner than that: a shell back thinner than 0.03 m is drawn by the silhouette alone, not thickened to earn its line.
 - **Use polygons for closed outlines**, so the plan draws as regions; loose polylines are for single lines only (a door seam, a nosing line).
 - **Circles.** Draw a full circle as two `arc`s of π each. A single `arc` of 2π does not appear on Floorkit's paper SVG (measured against Floorkit main `b0a084c7`: its path starts and ends at the same point, so it draws nothing). Two half arcs each run between two different points and draw (measured the same way, with `tools/render.mjs` on a probe: `M 18 14 A 3 3 0 0 0 12 14` and `M 12 14 A 3 3 0 0 0 18 14` beside the empty `M 17 14 A 2 2 0 1 0 17 14`).
 - **One pen.** Floorkit draws every block line with one pen (0.18 mm measured; doors 0.25 mm), in black; node colour never reaches the plan, and there are no dashed or hidden lines. So:
@@ -137,7 +138,7 @@ Every model node has a `mat:` role, and its `color` is the role's colour from th
 
 A role names what the part is in the object, not only its material: a steel chair leg is `frame`, a steel tap `metal`; an upholstered seat is `soft`, a plastic or plywood shell seat `surface`.
 
-**`mat:` on refs.** A ref takes the role of its definition: put `mat:<definitionKey>` once for all the refs that place it, and give a ref its own `mat:<refId>` only when that copy differs. Every model node that is not a ref has its own key. The format allows all three targets ([format §7](format-v1.md#7-root-metadata)).
+**`mat:` on refs.** A ref takes the role of its definition: put `mat:<definitionKey>` once for all the refs that place it, and give a ref its own `mat:<refId>` only when that copy differs. Every model node that is not a ref has its own key. The format allows all three targets ([format §7](format-v1.md#7-root-metadata)). A ref's `color` follows the same rule: set it once on the definition, and on a ref only when that copy differs.
 
 Plan nodes need no colour: the paper plan draws every line in black.
 
@@ -214,11 +215,13 @@ One row per category in [`categories.json`](../categories.json). "1:100" is what
 | `openings` | Jamb and frame lines, leaf open at 90°, swing arc | Glazing lines, threshold | Frame, leaf, glazing, ironmongery | `IfcDoor`; `catalog:placement: "hosted"` |
 | `other` | Outline and centre cross (clearance zones) | Turning circle or approach zone | A 0.010 m floor slab, note `slab` | `IfcBuildingElementProxy` `USERDEFINED` |
 
+`floorkit.glazed-door` is the one opening kept as is: it does not meet the `openings` row (no open leaf or swing in plan, no ironmongery) and stays so until the openings debt is taken up.
+
 ## 11. Where the numbers come from
 
 Sizes and heights come from published sources, never from a manufacturer's CAD or BIM file ([CONTRIBUTING, Provenance rules](../CONTRIBUTING.md#provenance-rules)).
 
-**The rule.** A number comes from the key-dimension table below, or from a source the author names in `catalog:basedOn`. A number marked "verify" may be drawn; the pull request then says it is unverified. Stop and ask only when neither the table nor a source you can name gives the number. When the table is the source, `catalog:basedOn` says so: `"Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified"`.
+**The rule.** Key dimensions (the overall size and the named heights) come from the key-dimension table below, or from a source the author names in `catalog:basedOn`; a number marked "verify" may be drawn, and the pull request then says it is unverified. Secondary sizes (thicknesses, insets, rails) are the author's choice within this standard's minima and the parts of §10. Stop and ask only for a key dimension with no source. When the table is the source, `catalog:basedOn` says so: `"Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified"`.
 
 The sources this catalog uses:
 
@@ -299,7 +302,7 @@ Version 1 of the format cannot express these. Draw the closest honest thing and 
 ## 14. Labels, attribution and versions
 
 - **Labels** are plain British English, capitalised as a title, with no brand: "Wash Basin", "Tumble Dryer", "Wardrobe".
-- **Tags.** The object's common name first, then its type and the room or use, with words already used in the catalog: `"chair, stacking, dining"`. No brand, and no material unless it tells two blocks apart.
+- **Tags.** The object's common name first, then its type and the room or use, with words already used in the catalog where one fits, else a new descriptive tag (lowercase, British English): `"chair, stacking, dining"`. No brand, and no material unless it tells two blocks apart.
 - **Attribution.** `catalog:attribution` names who drew the block. A redrawn `floorkit` block keeps `"Vishwajeet Mane"`.
 - **Versions** follow [CONTRIBUTING, Publish a new version](../CONTRIBUTING.md#publish-a-new-version-of-a-block):
 

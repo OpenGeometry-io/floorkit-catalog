@@ -89,7 +89,7 @@ Catalog bounds on every placement:
 
 - In `generic-element.ts` the numbers only drive fallbacks: the two above, and a plan-export outline drawn when the plan yields nothing (`:2136-2149`; *read*). A catalog block always has both views, so none of these fallbacks applies to it.
 - The catalog copies them into `index.json`.
-- `validate.mjs` does **not** compare them with the geometry.
+- `validate.mjs` compares them with the body's bounding box, within 0.005 m ([§9](#9-limits-and-why)).
 
 **Why the root placement must be the identity:** a project or an `.opbase` places the block; the block never places itself.
 
@@ -266,7 +266,7 @@ Root `metadata` is a **closed vocabulary**: any key not listed below is rejected
 | `catalog:tags` | no | Lowercase tags joined by `", "`, e.g. `"chair, dining"`. Each tag is 1–32 characters of `a-z`, `0-9`, space and `-`, and starts with a letter or digit. At most 12 tags, none repeated. | Search terms. |
 | `catalog:author` | no | text, ≤ 200 | Who drew it, if different from the attribution. |
 | `catalog:note` | no | text, ≤ 500, with the keywords below | An authoring note. The tools read the keywords in it. |
-| `catalog:basedOn` | no | text, ≤ 300 | Provenance: what the block was derived from. |
+| `catalog:basedOn` | no | text, ≤ 300 | Provenance: the standard, data sheet or reference the dimensions come from, or the source file of a derived block. |
 | `ifc:class` | yes, checked by `op.mjs` ([§9](#9-limits-and-why)) | `^Ifc[A-Z][A-Za-z0-9]*$`, e.g. `IfcFurniture` | The IFC entity the block represents. Floorkit's freeform export reads it ([§11](#11-advisory-notes)). |
 | `ifc:predefinedType` | no; requires `ifc:class` | `^[A-Z][A-Z0-9_]*$`, e.g. `CHAIR` | The IFC predefined type. |
 | `class:uniclass2015` | no | text, ≤ 64 | A Uniclass 2015 code. |
@@ -502,7 +502,7 @@ Outside `blocks/`, a file is judged on its content alone. To publish it, its `id
     "catalog:lod": "300",
     "catalog:tags": "chair, dining",
     "catalog:note": "seat 0.52",
-    "catalog:basedOn": "blocks/floorkit/simple-chair/1.0.0.op",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified",
     "ifc:class": "IfcFurniture",
     "ifc:predefinedType": "CHAIR",
     "mat:seat": "surface",

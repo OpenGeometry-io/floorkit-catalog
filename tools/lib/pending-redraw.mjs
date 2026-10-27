@@ -15,7 +15,6 @@ export const PENDING_REDRAW = Object.freeze({
   chiller: 'c922e3ad1dd70eea4a6087953c333f32e8a371db828638cd7ef499310a48bc82',
   'counter-run': 'e4b9c95ebcdd2a74335441e3bf376a2bb80fa153d0032da0a8f1c69fc3e85232',
   crah: 'cc1a3ed5fea2b5dff5b6bb25298b4e51e25ee91d42ccbf74fbb6c6c9da3d9672',
-  'glazed-door': '371095af08643162e690ccb8431a4f31b80e1ccdbfdd5978457bf7ad6b5d613e',
   hob: 'd40e26c0d431ea6715fc84caa85aae10ee3e2960e70decf6a5155c7f041fcc61',
   'kitchen-counter': '0a996aef9b7515c92dcf725731c4ae09e1c7da59a0a1a52b893da97721dd07a2',
   'kitchen-sink': '249d8afba0592a834d9886c649235ccad429b920be18a29e8d14a8d8e4d1102c',

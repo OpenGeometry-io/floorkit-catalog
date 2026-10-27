@@ -22,8 +22,8 @@
  *
  * Boxes are conservative for rotated parts. A boolean's box is its base's (a
  * union's spans all its parts); its volume is the base's, a union's the base's
- * plus its operands'. A sweep's profile is not turned along its path (the
- * glazed-door orientation only). A surface is a box face, so (f) is exact for
+ * plus its operands'. A sweep's profile, drawn facing +y as in the glazed-door
+ * frame, is turned along each path segment; its corners are not mitred. A surface is a box face, so (f) is exact for
  * cuboids and lenient elsewhere.
  */
 const DIMENSION_TOLERANCE = 0.005;
@@ -54,6 +54,8 @@ const compose = (outer, inner) => ({
   t: [0, 1, 2].map((i) => outer.m[i][0] * inner.t[0] + outer.m[i][1] * inner.t[1] + outer.m[i][2] * inner.t[2] + outer.t[i]),
 });
 const apply = (map, p) => [0, 1, 2].map((i) => map.m[i][0] * p[0] + map.m[i][1] * p[1] + map.m[i][2] * p[2] + map.t[i]);
+const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
 const det = ({ m }) => Math.abs(m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) - m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) + m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]));
 const boxOf = (points) => ({
   min: [0, 1, 2].map((i) => Math.min(...points.map((p) => p[i]))),
@@ -84,17 +86,26 @@ function solidBox(node, map, definitions) {
     return { min: c.map((v, i) => v - half[i]), max: c.map((v, i) => v + half[i]), volume: Math.PI * node.radius ** 2 * node.height * det(own) };
   }
   if (node.kind === 'sweep') {
-    const curve = (inline, ref) => {
-      if (inline) return inline;
-      const def = definitions[ref];
-      return def ? def.points.map((p) => apply(placementMap(def.placement), p)) : [[0, 0, 0]];
-    };
-    const path = curve(node.path, node.pathRef);
-    const profile = curve(node.profile, node.profileRef);
+    const { path, profile } = sweepCurves(node, definitions);
     // Profile area (in x-z, as the glazed-door orientation has it) times path length.
     const area = Math.abs(profile.reduce((sum, q, i) => sum + q[0] * profile[(i + 1) % profile.length][2] - profile[(i + 1) % profile.length][0] * q[2], 0)) / 2;
     const length = path.slice(1).reduce((sum, q, i) => sum + Math.hypot(q[0] - path[i][0], q[1] - path[i][1], q[2] - path[i][2]), 0);
-    return { ...boxOf(path.flatMap((p) => profile.map((q) => apply(own, [p[0] + q[0], p[1] + q[1], p[2] + q[2]])))), volume: area * length * det(own) };
+    // Only the case sweepIssue admits: along each segment the profile is turned so that +y points
+    // down the segment (Rodrigues' rotation about y × t), which matches OpenGeometry's sweep.rs there.
+    const turned = path.slice(1).flatMap((q, i) => {
+      const t = sub(q, path[i]).map((v, _, d) => v / (Math.hypot(...d) || 1));
+      const k = [t[2], 0, -t[0]];
+      const sin = Math.hypot(...k);
+      const turn = sin < 1e-9
+        ? (v) => (t[1] >= 0 ? v : [-v[0], -v[1], v[2]])
+        : (v) => {
+          const u = k.map((c) => c / sin);
+          const [kv, kdv] = [cross(u, v), u[0] * v[0] + u[1] * v[1] + u[2] * v[2]];
+          return [0, 1, 2].map((j) => v[j] * t[1] + kv[j] * sin + u[j] * kdv * (1 - t[1]));
+        };
+      return [path[i], q].flatMap((p) => profile.map((v) => turn(v)).map((v) => apply(own, [p[0] + v[0], p[1] + v[1], p[2] + v[2]])));
+    });
+    return { ...boxOf(turned.length ? turned : path.map((p) => apply(own, p))), volume: area * length * det(own) };
   }
   if (node.kind === 'boolean3d') {
     const box = (ref) => (definitions[ref] ? solidBox(definitions[ref], own, definitions) : null);
@@ -106,6 +117,34 @@ function solidBox(node, map, definitions) {
     return parts.reduce((acc, b) => ({ min: acc.min.map((v, i) => pick[0](v, b.min[i])), max: acc.max.map((v, i) => pick[1](v, b.max[i])), volume }), base);
   }
   return null;
+}
+
+/** A sweep's path (repeated points dropped) and profile (a closing repeat dropped), in definition space. */
+function sweepCurves(node, definitions) {
+  const curve = (inline, ref) => inline ?? definitions[ref]?.points.map((p) => apply(placementMap(definitions[ref].placement), p)) ?? [[0, 0, 0]];
+  const same = (a, b) => a.every((v, i) => Math.abs(v - b[i]) < 1e-9);
+  const path = curve(node.path, node.pathRef).filter((p, i, all) => i === 0 || !same(p, all[i - 1]));
+  const profile = curve(node.profile, node.profileRef);
+  return { path, profile: profile.length > 1 && same(profile[0], profile.at(-1)) ? profile.slice(0, -1) : profile };
+}
+
+/**
+ * Why a sweep is outside the one case the gates bound exactly, or null. OpenGeometry's sweep.rs centres
+ * the profile on its vertex average and orients it from its normal and the path's first direction.
+ */
+export function sweepIssue(node, definitions) {
+  const { path, profile } = sweepCurves(node, definitions);
+  const centre = [0, 1, 2].map((i) => profile.reduce((sum, p) => sum + p[i], 0) / profile.length);
+  const newell = profile.reduce((n, a, i) => { const b = profile[(i + 1) % profile.length]; return [n[0] + (a[1] - b[1]) * (a[2] + b[2]), n[1] + (a[2] - b[2]) * (a[0] + b[0]), n[2] + (a[0] - b[0]) * (a[1] + b[1])]; }, [0, 0, 0]);
+  const dirs = path.slice(1).map((q, i) => sub(q, path[i]).map((v, _, d) => v / Math.hypot(...d)));
+  const across = path.map((p) => [p[0] - path[0][0], p[2] - path[0][2]]).find(([x, z]) => Math.hypot(x, z) > 1e-9);
+  const why = centre.some((v) => Math.abs(v) > 0.001) ? `its profile is not centred on its vertex average at the origin (it is at ${centre.map(mm).join(', ')}; tolerance 0.001)`
+    : !(newell[1] > 0 && Math.hypot(newell[0], newell[2]) < 1e-9 * Math.abs(newell[1])) ? 'its profile does not face +y (wind it the other way, in the x–z plane)'
+    : !(dirs[0]?.[1] > 1 - 1e-9) ? 'its path does not start straight up (+y)'
+    : across && path.some((p) => Math.abs(across[0] * (p[2] - path[0][2]) - across[1] * (p[0] - path[0][0])) > 1e-9) ? 'its path is not in one vertical plane'
+    : dirs.slice(1).some((d, i) => d[0] * dirs[i][0] + d[1] * dirs[i][1] + d[2] * dirs[i][2] < -1e-9) ? 'its path turns by more than 90°'
+    : null;
+  return why && `is a sweep the gates cannot bound: ${why}. A sweep must match OpenGeometry's sweep.rs case: profile centred at the origin and facing +y, path starting straight up, in one vertical plane, no turn over 90°`;
 }
 
 /** Plan points of one profile node in block space (x, z), in drawing order; arcs only when `arcs`. */
