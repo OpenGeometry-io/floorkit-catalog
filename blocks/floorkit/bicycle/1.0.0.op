@@ -1,0 +1,390 @@
+{
+  "version": 1,
+  "id": "floorkit.bicycle",
+  "labelName": "Bicycle",
+  "type": "LANDSCAPE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 1.8,
+    "height": 1.05
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "vehicles",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "bicycle, cycle, cycle parking, vehicle",
+    "catalog:note": "Bicycle, front to +z, wheels as solid discs on the floor. The frame is drawn with upright and level tubes, since tilted parts are unverified. The plan is the two wheels, the frame line, the saddle and the handlebar. Parts under radius 0.04 build as polygonal prisms at true size.",
+    "catalog:basedOn": "Bicycle 0.60 x 1.80 x 1.05, generic practice size, not checked against a published source (unverified). No vehicle class in IFC4 ADD2 TC1 (buildingSMART Standards-builds), so IfcBuildingElementProxy USERDEFINED",
+    "ifc:class": "IfcBuildingElementProxy",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:wheel": "metal",
+    "mat:chainstayLeft": "frame",
+    "mat:chainstayRight": "frame",
+    "mat:bottomBracket": "frame",
+    "mat:seatTube": "frame",
+    "mat:topTube": "frame",
+    "mat:headTube": "frame",
+    "mat:forkCrown": "frame",
+    "mat:forkLeft": "frame",
+    "mat:forkRight": "frame",
+    "mat:stem": "metal",
+    "mat:handlebar": "metal",
+    "mat:saddle": "soft"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "definitions": {
+    "wheel": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.35,
+      "height": 0.04
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "wheel-rear",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.02,
+            -0.9
+          ],
+          [
+            0.02,
+            -0.9
+          ],
+          [
+            0.02,
+            -0.2
+          ],
+          [
+            -0.02,
+            -0.2
+          ]
+        ]
+      },
+      {
+        "id": "saddle",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.08,
+            -0.17
+          ],
+          [
+            0.08,
+            -0.17
+          ],
+          [
+            0.08,
+            0.08
+          ],
+          [
+            -0.08,
+            0.08
+          ]
+        ]
+      },
+      {
+        "id": "frame",
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            0.08
+          ],
+          [
+            0,
+            0.2
+          ]
+        ]
+      },
+      {
+        "id": "wheel-front",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.02,
+            0.2
+          ],
+          [
+            0.02,
+            0.2
+          ],
+          [
+            0.02,
+            0.9
+          ],
+          [
+            -0.02,
+            0.9
+          ]
+        ]
+      },
+      {
+        "id": "handlebar",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.3,
+            0.55
+          ],
+          [
+            0.3,
+            0.55
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "wheelRear",
+        "ref": "wheel",
+        "placement": {
+          "position": [
+            0,
+            0.35,
+            -0.55
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "wheelFront",
+        "ref": "wheel",
+        "placement": {
+          "position": [
+            0,
+            0.35,
+            0.55
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "chainstayLeft",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.0275,
+          0.35,
+          -0.325
+        ],
+        "width": 0.015,
+        "height": 0.04,
+        "depth": 0.45
+      },
+      {
+        "id": "chainstayRight",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.0275,
+          0.35,
+          -0.325
+        ],
+        "width": 0.015,
+        "height": 0.04,
+        "depth": 0.45
+      },
+      {
+        "id": "bottomBracket",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.35,
+          -0.075
+        ],
+        "width": 0.07,
+        "height": 0.1,
+        "depth": 0.05
+      },
+      {
+        "id": "seatTube",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.675,
+          -0.075
+        ],
+        "width": 0.03,
+        "height": 0.55,
+        "depth": 0.03
+      },
+      {
+        "id": "saddle",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.975,
+          -0.045
+        ],
+        "width": 0.16,
+        "height": 0.05,
+        "depth": 0.25
+      },
+      {
+        "id": "topTube",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.82,
+          0.23
+        ],
+        "width": 0.03,
+        "height": 0.04,
+        "depth": 0.58
+      },
+      {
+        "id": "headTube",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.86,
+          0.55
+        ],
+        "width": 0.04,
+        "height": 0.24,
+        "depth": 0.06
+      },
+      {
+        "id": "forkCrown",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.73,
+          0.55
+        ],
+        "width": 0.07,
+        "height": 0.02,
+        "depth": 0.06
+      },
+      {
+        "id": "forkLeft",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.0275,
+          0.535,
+          0.55
+        ],
+        "width": 0.015,
+        "height": 0.37,
+        "depth": 0.04
+      },
+      {
+        "id": "forkRight",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.0275,
+          0.535,
+          0.55
+        ],
+        "width": 0.015,
+        "height": 0.37,
+        "depth": 0.04
+      },
+      {
+        "id": "stem",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.995,
+          0.55
+        ],
+        "width": 0.03,
+        "height": 0.03,
+        "depth": 0.04
+      },
+      {
+        "id": "handlebar",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.02,
+        "height": 0.6,
+        "placement": {
+          "position": [
+            0,
+            1.03,
+            0.55
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

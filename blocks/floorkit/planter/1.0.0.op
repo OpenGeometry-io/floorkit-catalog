@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.planter",
-  "labelName": "Planter Box",
-  "type": "LANDSCAPE",
+  "labelName": "Planter",
+  "type": "FURNITURE",
   "dimensions": {
     "width": 1.4,
     "depth": 0.5,
     "height": 0.9
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,12 +14,19 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "planting",
     "catalog:placement": "free",
-    "catalog:tags": "planter, shrub",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/landscape/planter.op#catalog-landscape-planter",
-    "mat:soil": "frame",
-    "mat:shrub-left": "planting",
-    "mat:shrub-mid": "planting",
-    "mat:shrub-right": "planting"
+    "catalog:lod": "300",
+    "catalog:tags": "planter, trough, shrub, planting",
+    "catalog:note": "Planter trough 0.60 high with 0.03 walls and a floor, filled with soil to 0.05 below the rim; three shrubs stand on the soil. The plan is the trough outline, its inner line and the three plant positions.",
+    "catalog:basedOn": "Planter 1.40 x 0.50 x 0.90, trough 0.60 high, generic practice size, not checked against a published source (unverified). IfcFurnitureTypeEnum USERDEFINED per the drafting standard planting row",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:sideBack": "surface",
+    "mat:sideFront": "surface",
+    "mat:end": "surface",
+    "mat:floor": "surface",
+    "mat:soil": "planting",
+    "mat:shrubLow": "planting",
+    "mat:shrubHigh": "planting"
   },
   "anchors": {
     "base": {
@@ -58,16 +48,73 @@
         ]
       },
       "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "soilTop": {
+      "placement": {
+        "position": [
+          0,
+          0.55,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
         "role": "planting-point"
       }
+    }
+  },
+  "definitions": {
+    "end": {
+      "kind": "cuboid",
+      "color": "#d8d2c4",
+      "center": [
+        0,
+        0.3,
+        0
+      ],
+      "width": 0.03,
+      "height": 0.6,
+      "depth": 0.44
+    },
+    "shrubLow": {
+      "kind": "cylinder",
+      "color": "#5e8f4e",
+      "center": [
+        0,
+        0.65,
+        0
+      ],
+      "radius": 0.18,
+      "height": 0.2
+    },
+    "shrubHigh": {
+      "kind": "cylinder",
+      "color": "#5e8f4e",
+      "center": [
+        0,
+        0.825,
+        0
+      ],
+      "radius": 0.12,
+      "height": 0.15
     }
   },
   "profileView": {
     "elements": [
       {
-        "id": "box",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#8a7456",
         "vertices": [
           [
             -0.7,
@@ -88,93 +135,316 @@
         ]
       },
       {
-        "id": "greenery",
+        "id": "inner",
         "kind": "polygon",
-        "color": "#4E9C63",
         "vertices": [
           [
-            -0.6,
-            -0.18
+            -0.67,
+            -0.22
           ],
           [
-            0.6,
-            -0.18
+            0.67,
+            -0.22
           ],
           [
-            0.6,
-            0.18
+            0.67,
+            0.22
           ],
           [
-            -0.6,
-            0.18
+            -0.67,
+            0.22
           ]
         ]
+      },
+      {
+        "id": "plant-1-a",
+        "kind": "arc",
+        "center": [
+          -0.45,
+          0
+        ],
+        "radius": 0.18,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "plant-1-b",
+        "kind": "arc",
+        "center": [
+          -0.45,
+          0
+        ],
+        "radius": 0.18,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "plant-2-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.18,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "plant-2-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.18,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "plant-3-a",
+        "kind": "arc",
+        "center": [
+          0.45,
+          0
+        ],
+        "radius": 0.18,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "plant-3-b",
+        "kind": "arc",
+        "center": [
+          0.45,
+          0
+        ],
+        "radius": 0.18,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
       }
     ]
   },
   "modelView": {
     "elements": [
       {
-        "id": "box",
+        "id": "sideBack",
         "kind": "cuboid",
-        "color": "#7a6a55",
+        "color": "#d8d2c4",
         "center": [
           0,
-          0.25,
-          0
+          0.3,
+          -0.235
         ],
         "width": 1.4,
-        "height": 0.5,
-        "depth": 0.5
+        "height": 0.6,
+        "depth": 0.03
+      },
+      {
+        "id": "sideFront",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.3,
+          0.235
+        ],
+        "width": 1.4,
+        "height": 0.6,
+        "depth": 0.03
+      },
+      {
+        "id": "endLeft",
+        "ref": "end",
+        "placement": {
+          "position": [
+            -0.685,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "endRight",
+        "ref": "end",
+        "placement": {
+          "position": [
+            0.685,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "floor",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.015,
+          0
+        ],
+        "width": 1.34,
+        "height": 0.03,
+        "depth": 0.44
       },
       {
         "id": "soil",
         "kind": "cuboid",
-        "color": "#3b2c20",
+        "color": "#5e8f4e",
         "center": [
           0,
-          0.52,
+          0.29,
           0
         ],
-        "width": 1.3,
-        "height": 0.06,
-        "depth": 0.42
+        "width": 1.34,
+        "height": 0.52,
+        "depth": 0.44
       },
       {
-        "id": "shrub-left",
-        "kind": "cylinder",
-        "color": "#4E9C63",
-        "center": [
-          -0.42,
-          0.72,
-          0
-        ],
-        "radius": 0.24,
-        "height": 0.46
+        "id": "shrub1Low",
+        "ref": "shrubLow",
+        "placement": {
+          "position": [
+            -0.45,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
-        "id": "shrub-mid",
-        "kind": "cylinder",
-        "color": "#57a86d",
-        "center": [
-          0,
-          0.76,
-          0.02
-        ],
-        "radius": 0.26,
-        "height": 0.52
+        "id": "shrub1High",
+        "ref": "shrubHigh",
+        "placement": {
+          "position": [
+            -0.45,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
-        "id": "shrub-right",
-        "kind": "cylinder",
-        "color": "#4E9C63",
-        "center": [
-          0.44,
-          0.72,
-          -0.02
-        ],
-        "radius": 0.24,
-        "height": 0.46
+        "id": "shrub2Low",
+        "ref": "shrubLow",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "shrub2High",
+        "ref": "shrubHigh",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "shrub3Low",
+        "ref": "shrubLow",
+        "placement": {
+          "position": [
+            0.45,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "shrub3High",
+        "ref": "shrubHigh",
+        "placement": {
+          "position": [
+            0.45,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }
