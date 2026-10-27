@@ -1,0 +1,617 @@
+{
+  "version": 1,
+  "id": "floorkit.office-chair",
+  "labelName": "Office Chair",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.65,
+    "depth": 0.65,
+    "height": 1
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "chair, office, swivel, task",
+    "catalog:note": "Swivel work chair drawn with its seat set to seat 0.45; EN 1335-1 asks for a seat height adjustable over about 0.40 to 0.51 (unverified). Five-star base on castors, arm tops 0.22 above the seat. Castors of radius 0.025 build as prisms.",
+    "catalog:basedOn": "EN 1335-1 (office work chair) for the overall size and seat height range, unverified; drafting standard key dimensions",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "CHAIR",
+    "mat:hub": "frame",
+    "mat:column": "frame",
+    "mat:mechanism": "frame",
+    "mat:seat": "soft",
+    "mat:back-link": "frame",
+    "mat:back-spine": "frame",
+    "mat:back": "soft",
+    "mat:arm-bracket-left": "frame",
+    "mat:arm-bracket-right": "frame",
+    "mat:arm-post-left": "frame",
+    "mat:arm-post-right": "frame",
+    "mat:armrest-left": "soft",
+    "mat:armrest-right": "soft",
+    "mat:leg": "frame",
+    "mat:castor": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.45,
+          -0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "definitions": {
+    "leg": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0.1875,
+        0.07,
+        0
+      ],
+      "width": 0.275,
+      "height": 0.04,
+      "depth": 0.05
+    },
+    "castor": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0.3,
+        0.025,
+        0
+      ],
+      "radius": 0.025,
+      "height": 0.05
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.24,
+            -0.325
+          ],
+          [
+            0.24,
+            -0.325
+          ],
+          [
+            0.24,
+            0.205
+          ],
+          [
+            -0.24,
+            0.205
+          ]
+        ]
+      },
+      {
+        "id": "back-line",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.24,
+            -0.265
+          ],
+          [
+            0.24,
+            -0.265
+          ]
+        ]
+      },
+      {
+        "id": "armrest-left",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.325,
+            -0.22
+          ],
+          [
+            -0.27,
+            -0.22
+          ],
+          [
+            -0.27,
+            0.04
+          ],
+          [
+            -0.325,
+            0.04
+          ]
+        ]
+      },
+      {
+        "id": "armrest-right",
+        "kind": "polygon",
+        "vertices": [
+          [
+            0.27,
+            -0.22
+          ],
+          [
+            0.325,
+            -0.22
+          ],
+          [
+            0.325,
+            0.04
+          ],
+          [
+            0.27,
+            0.04
+          ]
+        ]
+      },
+      {
+        "id": "spoke-front",
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            0.205
+          ],
+          [
+            0,
+            0.325
+          ]
+        ]
+      },
+      {
+        "id": "spoke-front-right",
+        "kind": "polyline",
+        "points": [
+          [
+            0.24,
+            0.077981
+          ],
+          [
+            0.309093,
+            0.100431
+          ]
+        ]
+      },
+      {
+        "id": "spoke-front-left",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.24,
+            0.077981
+          ],
+          [
+            -0.309093,
+            0.100431
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "castor-front",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            -90,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "castor-front-right",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            -18,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "castor-back-right",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            54,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "castor-back-left",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            126,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "castor-front-left",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            198,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-front",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            -90,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-front-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            -18,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            54,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            126,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-front-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            198,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hub",
+        "kind": "cylinder",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.075,
+          0
+        ],
+        "radius": 0.05,
+        "height": 0.05
+      },
+      {
+        "id": "column",
+        "kind": "cylinder",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.215,
+          0
+        ],
+        "radius": 0.025,
+        "height": 0.23
+      },
+      {
+        "id": "mechanism",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.35,
+          0
+        ],
+        "width": 0.2,
+        "height": 0.04,
+        "depth": 0.2
+      },
+      {
+        "id": "seat",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.41,
+          -0.03
+        ],
+        "width": 0.48,
+        "height": 0.08,
+        "depth": 0.47
+      },
+      {
+        "id": "back-link",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.345,
+          -0.1925
+        ],
+        "width": 0.06,
+        "height": 0.03,
+        "depth": 0.185
+      },
+      {
+        "id": "back-spine",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.44,
+          -0.305
+        ],
+        "width": 0.06,
+        "height": 0.22,
+        "depth": 0.04
+      },
+      {
+        "id": "back",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.775,
+          -0.295
+        ],
+        "width": 0.48,
+        "height": 0.45,
+        "depth": 0.06
+      },
+      {
+        "id": "arm-bracket-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.20625,
+          0.345,
+          0
+        ],
+        "width": 0.2125,
+        "height": 0.03,
+        "depth": 0.04
+      },
+      {
+        "id": "arm-bracket-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.20625,
+          0.345,
+          0
+        ],
+        "width": 0.2125,
+        "height": 0.03,
+        "depth": 0.04
+      },
+      {
+        "id": "arm-post-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.2975,
+          0.5,
+          0
+        ],
+        "width": 0.03,
+        "height": 0.28,
+        "depth": 0.04
+      },
+      {
+        "id": "arm-post-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.2975,
+          0.5,
+          0
+        ],
+        "width": 0.03,
+        "height": 0.28,
+        "depth": 0.04
+      },
+      {
+        "id": "armrest-left",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          -0.2975,
+          0.655,
+          -0.09
+        ],
+        "width": 0.055,
+        "height": 0.03,
+        "depth": 0.26
+      },
+      {
+        "id": "armrest-right",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0.2975,
+          0.655,
+          -0.09
+        ],
+        "width": 0.055,
+        "height": 0.03,
+        "depth": 0.26
+      }
+    ]
+  }
+}
