@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "id": "floorkit.potted-plant",
+  "labelName": "Potted Plant",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.4,
+    "depth": 0.4,
+    "height": 1.2
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "planting",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "plant, pot, potted plant, indoor, planting",
+    "catalog:note": "Indoor plant in a round pot: soil in the pot, a short stem and two tiers of foliage. The plan is the foliage circle and the pot circle. Parts under radius 0.04 build as polygonal prisms at true size.",
+    "catalog:basedOn": "Potted plant 0.40 diameter x 1.20, generic practice size, not checked against a published source (unverified). IfcFurnitureTypeEnum USERDEFINED per the drafting standard planting row",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:pot": "surface",
+    "mat:soil": "planting",
+    "mat:stem": "frame",
+    "mat:foliageLow": "planting",
+    "mat:foliageHigh": "planting"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "soilTop": {
+      "placement": {
+        "position": [
+          0,
+          0.37,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "planting-point"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "foliage-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.2,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "foliage-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.2,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "pot-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.15,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "pot-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.15,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "pot",
+        "kind": "cylinder",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.175,
+          0
+        ],
+        "radius": 0.15,
+        "height": 0.35
+      },
+      {
+        "id": "soil",
+        "kind": "cylinder",
+        "color": "#5e8f4e",
+        "center": [
+          0,
+          0.36,
+          0
+        ],
+        "radius": 0.13,
+        "height": 0.02
+      },
+      {
+        "id": "stem",
+        "kind": "cylinder",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.435,
+          0
+        ],
+        "radius": 0.02,
+        "height": 0.13
+      },
+      {
+        "id": "foliageLow",
+        "kind": "cylinder",
+        "color": "#5e8f4e",
+        "center": [
+          0,
+          0.725,
+          0
+        ],
+        "radius": 0.2,
+        "height": 0.45
+      },
+      {
+        "id": "foliageHigh",
+        "kind": "cylinder",
+        "color": "#5e8f4e",
+        "center": [
+          0,
+          1.075,
+          0
+        ],
+        "radius": 0.12,
+        "height": 0.25
+      }
+    ]
+  }
+}

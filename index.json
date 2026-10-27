@@ -209,6 +209,36 @@
       "contentHash": "93bc4a547447d3ba9a2387851b22924981a271c3f7c8d189e47ef1e7a2606095"
     },
     {
+      "id": "floorkit.bicycle",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bicycle",
+      "version": "1.0.0",
+      "labelName": "Bicycle",
+      "type": "LANDSCAPE",
+      "category": "vehicles",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bicycle",
+        "cycle",
+        "cycle parking",
+        "vehicle"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 1.8,
+        "height": 1.05
+      },
+      "path": "blocks/floorkit/bicycle/1.0.0.op",
+      "bytes": 7458,
+      "sha256": "bf617045b5cf29904882249e7f2319270b981e302a66b90d701e80506eea4c7b",
+      "contentHash": "d222a609402fe3549b0695cdaad2e33828d3d176d74ba1321459387be1e58541"
+    },
+    {
       "id": "floorkit.boiler",
       "publisher": {
         "id": "floorkit",
@@ -939,17 +969,18 @@
       "attribution": "Vishwajeet Mane",
       "tags": [
         "car",
-        "parking"
+        "parking",
+        "vehicle"
       ],
       "dimensions": {
-        "width": 1.9,
-        "depth": 4.4,
-        "height": 1.5
+        "width": 1.8,
+        "depth": 4.5,
+        "height": 1.45
       },
       "path": "blocks/floorkit/parked-car/1.0.0.op",
-      "bytes": 4159,
-      "sha256": "4408c2f884abec21dd30421c2e58dbe7158793735fc541e52ba86059a63ebfe6",
-      "contentHash": "ca3fac82fe85a96e9567bf85aa95fd03a87cd9ab1460b1d5e27b28fcbc1589c8"
+      "bytes": 6409,
+      "sha256": "2acd0488af9de8c71dc973efb43f308c30269de53dc9efeb6914d84d3f7b29d6",
+      "contentHash": "8a5722a5c6ddb1c225c9aa5f331096d23828fd3a785d71acda4ca083623f7081"
     },
     {
       "id": "floorkit.pdu",
@@ -1048,14 +1079,16 @@
       },
       "slug": "planter",
       "version": "1.0.0",
-      "labelName": "Planter Box",
-      "type": "LANDSCAPE",
+      "labelName": "Planter",
+      "type": "FURNITURE",
       "category": "planting",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "planter",
-        "shrub"
+        "trough",
+        "shrub",
+        "planting"
       ],
       "dimensions": {
         "width": 1.4,
@@ -1063,9 +1096,40 @@
         "height": 0.9
       },
       "path": "blocks/floorkit/planter/1.0.0.op",
-      "bytes": 3153,
-      "sha256": "486968838091c77210c1a42fc64b7de30b3c0844020e22d06f66679c648334c9",
-      "contentHash": "50684d8d1132040d8625300b5cdbf607b6402e7560045d5bd4ca5e48ac4a500e"
+      "bytes": 8191,
+      "sha256": "3cf7e41a0ff5986bc14bf4a7de930262e0aa3e54d4692f59f8b6d69b618aa09b",
+      "contentHash": "f87c8a7a9cdb3a0c8bfd365c47de25dc66ca547d2aeefdecab55af729f59561c"
+    },
+    {
+      "id": "floorkit.potted-plant",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "potted-plant",
+      "version": "1.0.0",
+      "labelName": "Potted Plant",
+      "type": "FURNITURE",
+      "category": "planting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "plant",
+        "pot",
+        "potted plant",
+        "indoor",
+        "planting"
+      ],
+      "dimensions": {
+        "width": 0.4,
+        "depth": 0.4,
+        "height": 1.2
+      },
+      "path": "blocks/floorkit/potted-plant/1.0.0.op",
+      "bytes": 3803,
+      "sha256": "161e695733247d0fe35e6af9b9fae76238e35320896de3676b0f0c0872b2b10f",
+      "contentHash": "c917c8778808c571b9998a060fa008fc57eb8c98a6c461386c24fc3b50d23d74"
     },
     {
       "id": "floorkit.radiator",
@@ -1426,14 +1490,15 @@
       },
       "slug": "tree",
       "version": "1.0.0",
-      "labelName": "Landscape Tree",
+      "labelName": "Tree",
       "type": "LANDSCAPE",
       "category": "planting",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "tree",
-        "landscape"
+        "landscape",
+        "planting"
       ],
       "dimensions": {
         "width": 2.8,
@@ -1441,9 +1506,9 @@
         "height": 4
       },
       "path": "blocks/floorkit/tree/1.0.0.op",
-      "bytes": 3451,
-      "sha256": "2a983280ccde8fd6769d603688e52d5395926bd13e6927cdd1a6a2e26fdf1434",
-      "contentHash": "5416f96c97357142c2c4e3a0b33eaca88e0500b99cce95dd9049b622e71e4289"
+      "bytes": 3534,
+      "sha256": "0ce337e612fb68d27505f08a9fdf272410dfcb0e75990d8c102020225583f8ca",
+      "contentHash": "76a9eed40c920e8ba227d1250bbc836460ebfd56f7bed01500a1ea5b86cfc81a"
     },
     {
       "id": "floorkit.ups",

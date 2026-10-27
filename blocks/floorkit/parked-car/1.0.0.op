@@ -4,26 +4,9 @@
   "labelName": "Parked Car",
   "type": "LANDSCAPE",
   "dimensions": {
-    "width": 1.9,
-    "depth": 4.4,
-    "height": 1.5
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
+    "width": 1.8,
+    "depth": 4.5,
+    "height": 1.45
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,14 +14,18 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "vehicles",
     "catalog:placement": "free",
-    "catalog:tags": "car, parking",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/landscape/car.op#catalog-landscape-car",
-    "mat:glass-front": "glass",
-    "mat:glass-rear": "glass",
-    "mat:wheel-fl": "frame",
-    "mat:wheel-fr": "frame",
-    "mat:wheel-rl": "frame",
-    "mat:wheel-rr": "frame"
+    "catalog:lod": "300",
+    "catalog:tags": "car, parking, vehicle",
+    "catalog:note": "Medium car, front to +z, four wheels on the floor with a 2.70 wheelbase. A parking bay for it is 2.40 x 4.80 (Metric Handbook, unverified). The plan is the body outline with stepped bumper ends, the windscreen line and the rear-screen line; the screens are drawn upright, since a tilted part is unverified.",
+    "catalog:basedOn": "Medium car 1.80 x 4.50 x 1.45 (Neufert, unverified); bay 2.40 x 4.80 (Metric Handbook, unverified). No vehicle class in IFC4 ADD2 TC1 (buildingSMART Standards-builds), so IfcBuildingElementProxy USERDEFINED",
+    "ifc:class": "IfcBuildingElementProxy",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:chassis": "surface",
+    "mat:upperBody": "surface",
+    "mat:glazing": "glass",
+    "mat:roof": "surface",
+    "mat:bumper": "metal",
+    "mat:wheel": "metal"
   },
   "anchors": {
     "base": {
@@ -58,70 +45,118 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
+    }
+  },
+  "definitions": {
+    "wheel": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.3,
+      "height": 0.2
+    },
+    "bumper": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.35,
+        0
+      ],
+      "width": 1.6,
+      "height": 0.2,
+      "depth": 0.05
     }
   },
   "profileView": {
     "elements": [
       {
-        "id": "body",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#3b6ea5",
         "vertices": [
           [
-            -0.85,
+            -0.8,
+            -2.25
+          ],
+          [
+            0.8,
+            -2.25
+          ],
+          [
+            0.8,
             -2.2
           ],
           [
-            0.85,
+            0.9,
             -2.2
           ],
           [
-            0.95,
-            -1.6
-          ],
-          [
-            0.95,
-            1.6
-          ],
-          [
-            0.85,
+            0.9,
             2.2
           ],
           [
-            -0.85,
+            0.8,
             2.2
           ],
           [
-            -0.95,
-            1.6
+            0.8,
+            2.25
           ],
           [
-            -0.95,
-            -1.6
+            -0.8,
+            2.25
+          ],
+          [
+            -0.8,
+            2.2
+          ],
+          [
+            -0.9,
+            2.2
+          ],
+          [
+            -0.9,
+            -2.2
+          ],
+          [
+            -0.8,
+            -2.2
           ]
         ]
       },
       {
-        "id": "cabin",
-        "kind": "polygon",
-        "color": "#2c5580",
-        "vertices": [
+        "id": "windscreen",
+        "kind": "polyline",
+        "points": [
           [
-            -0.78,
-            -1
+            -0.75,
+            0.8
           ],
           [
-            0.78,
-            -1
+            0.75,
+            0.8
+          ]
+        ]
+      },
+      {
+        "id": "rear-screen",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.75,
+            -1.1
           ],
           [
-            0.78,
-            1.1
-          ],
-          [
-            -0.78,
-            1.1
+            0.75,
+            -1.1
           ]
         ]
       }
@@ -130,108 +165,182 @@
   "modelView": {
     "elements": [
       {
-        "id": "lower-body",
+        "id": "chassis",
         "kind": "cuboid",
-        "color": "#3b6ea5",
+        "color": "#d8d2c4",
         "center": [
           0,
-          0.5,
+          0.375,
           0
         ],
-        "width": 1.9,
-        "height": 0.6,
+        "width": 1.4,
+        "height": 0.45,
         "depth": 4.4
       },
       {
-        "id": "cabin",
+        "id": "upperBody",
         "kind": "cuboid",
-        "color": "#2c5580",
+        "color": "#d8d2c4",
         "center": [
           0,
-          1.08,
-          0.1
+          0.775,
+          0
         ],
-        "width": 1.7,
-        "height": 0.55,
-        "depth": 2.2
+        "width": 1.8,
+        "height": 0.35,
+        "depth": 4.4
       },
       {
-        "id": "glass-front",
+        "id": "glazing",
         "kind": "cuboid",
-        "color": "#9fc4e0",
+        "color": "#a8d0e6",
         "center": [
           0,
-          1.08,
-          1.22
+          1.15,
+          -0.15
         ],
-        "width": 1.55,
-        "height": 0.42,
-        "depth": 0.06
+        "width": 1.5,
+        "height": 0.4,
+        "depth": 1.9
       },
       {
-        "id": "glass-rear",
+        "id": "roof",
         "kind": "cuboid",
-        "color": "#9fc4e0",
+        "color": "#d8d2c4",
         "center": [
           0,
-          1.08,
-          -1.02
+          1.4,
+          -0.15
         ],
-        "width": 1.55,
-        "height": 0.42,
-        "depth": 0.06
+        "width": 1.5,
+        "height": 0.1,
+        "depth": 1.7
       },
       {
-        "id": "wheel-fl",
-        "kind": "cuboid",
-        "color": "#1a1a1a",
-        "center": [
-          0.92,
-          0.32,
-          1.4
-        ],
-        "width": 0.18,
-        "height": 0.5,
-        "depth": 0.7
+        "id": "bumperFront",
+        "ref": "bumper",
+        "placement": {
+          "position": [
+            0,
+            0,
+            2.225
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
-        "id": "wheel-fr",
-        "kind": "cuboid",
-        "color": "#1a1a1a",
-        "center": [
-          -0.92,
-          0.32,
-          1.4
-        ],
-        "width": 0.18,
-        "height": 0.5,
-        "depth": 0.7
+        "id": "bumperRear",
+        "ref": "bumper",
+        "placement": {
+          "position": [
+            0,
+            0,
+            -2.225
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
-        "id": "wheel-rl",
-        "kind": "cuboid",
-        "color": "#1a1a1a",
-        "center": [
-          0.92,
-          0.32,
-          -1.4
-        ],
-        "width": 0.18,
-        "height": 0.5,
-        "depth": 0.7
+        "id": "wheelFrontLeft",
+        "ref": "wheel",
+        "placement": {
+          "position": [
+            -0.8,
+            0.3,
+            1.35
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
-        "id": "wheel-rr",
-        "kind": "cuboid",
-        "color": "#1a1a1a",
-        "center": [
-          -0.92,
-          0.32,
-          -1.4
-        ],
-        "width": 0.18,
-        "height": 0.5,
-        "depth": 0.7
+        "id": "wheelFrontRight",
+        "ref": "wheel",
+        "placement": {
+          "position": [
+            0.8,
+            0.3,
+            1.35
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "wheelRearLeft",
+        "ref": "wheel",
+        "placement": {
+          "position": [
+            -0.8,
+            0.3,
+            -1.35
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "wheelRearRight",
+        "ref": "wheel",
+        "placement": {
+          "position": [
+            0.8,
+            0.3,
+            -1.35
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }
