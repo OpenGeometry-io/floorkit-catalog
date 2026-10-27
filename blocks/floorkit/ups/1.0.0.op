@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "data centre, power",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/ups.op#catalog-datacenter-ups; 1.20 x 0.85 x 1.90 is the seed's size, not checked against a published source (unverified)",
+    "catalog:basedOn": "The UPS in the Floorkit SDK's example catalog, redrawn to the drafting standard; 1.20 x 0.85 x 1.90 is that example's size, not checked against a published source (unverified)",
     "catalog:note": "UPS line-up, a cabinet carcass: the UPS cabinet (-x) beside its battery cabinet (+x), vent slots on top, input and output cable stubs at the front under the doors. IFC4 has a real UPS member on IfcElectricFlowStorageDeviceTypeEnum, so this one maps exactly. Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcElectricFlowStorageDevice",
     "ifc:predefinedType": "UPS",

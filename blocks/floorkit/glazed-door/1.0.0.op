@@ -34,7 +34,7 @@
     "catalog:lod": "300",
     "catalog:tags": "door, vision panel",
     "catalog:note": "Glass in its leaf and the leaf in its frame: overlap glassInset+glazedLeaf, overlap frameSolid+glazedLeaf.",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/openings/glazed-door-assembly.op#catalog-openings-glazed-door-assembly",
+    "catalog:basedOn": "The glazed door assembly in the Floorkit SDK's example catalog, redrawn to the drafting standard; 0.98 x 0.14 x 2.11 is that example's size, not checked against a published source (unverified)",
     "ifc:class": "IfcDoor",
     "ifc:predefinedType": "DOOR",
     "mat:frameSolid": "frame",

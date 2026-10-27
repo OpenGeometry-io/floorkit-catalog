@@ -16,7 +16,7 @@ The format itself is documented in [docs/format-v1.md](docs/format-v1.md). Tiers
 
 ## What makes a good block
 
-A good block is something a designer would place in a plan without checking it first.
+A good block is something a designer would place in a plan without checking it first. The [drafting standard](docs/drafting-standard.md) says how one is drawn, per category, and every block under `blocks/floorkit/` is drawn to it. Two checklists hold a block to it before review: the [LOD 300 review checklist](.claude/skills/author-block/references/lod300-checklist.md), ticked against the pictures `tools/render.mjs` draws, and the checklist in the [pull request template](.github/PULL_REQUEST_TEMPLATE.md).
 
 - **Generic and self-authored.** You drew it, from your own measurements or public data-sheet dimensions. See [Provenance rules](#provenance-rules).
 - **It says exactly what it draws.** The catalog rejects anything Floorkit would silently repair ([format §8](docs/format-v1.md#8-what-floorkit-repairs-and-what-the-catalog-rejects)), so a valid block is drawn as written.
@@ -27,8 +27,8 @@ A good block is something a designer would place in a plan without checking it f
 - **Useful anchors.** Name the points people attach to, such as `base` or `wallFace`, and give them a `role` in their metadata ([format §5](docs/format-v1.md#5-anchors)).
 - **Material roles.** Say what a node is made of with `mat:<nodeId>` and one of `surface`, `soft`, `frame`, `metal`, `glass`, `ceramic` or `planting`: a role, never a colour. A node's `color` is only how it is drawn.
 - **A plain label.** `labelName` describes the object ("Stacking Chair"), in 1–80 characters, with no brand name in the community tier.
-- **The right type and category.** A `DOOR` or `WINDOW` has `catalog:placement: "hosted"`. That is metadata only: Floorkit 0.6 never cuts a wall for an `.op` element ([format §11](docs/format-v1.md#11-advisory-notes)).
-- **Small.** The limits are 256 KB, 400 nodes, and 1,000 nodes once references are expanded ([format §9](docs/format-v1.md#9-limits-and-why)). The largest seed block is 8,474 bytes with 22 nodes.
+- **The right type and category.** A `DOOR` or `WINDOW` has `catalog:placement: "hosted"`. That is metadata only: Floorkit never cuts a wall for an `.op` element ([format §11](docs/format-v1.md#11-advisory-notes)).
+- **Small.** The limits are 256 KB, 400 nodes, and 1,000 nodes once references are expanded ([format §9](docs/format-v1.md#9-limits-and-why)). The largest block in the catalog, `floorkit.cot`, is 22,690 bytes with 63 nodes.
 
 ## Add a block
 
@@ -58,7 +58,7 @@ blocks/<publisher>/<slug>/1.0.0.op
 - A new block starts at version `1.0.0`.
 - The block's `id` must be `<publisher>.<slug>`, for example `your-name.stacking-chair`.
 
-Start from a copy of [`.claude/skills/author-block/starter.op`](.claude/skills/author-block/starter.op), not from a seed block: the seeds under `blocks/floorkit/` predate the [drafting standard](docs/drafting-standard.md) and carry old anchor roles. [docs/format-v1.md](docs/format-v1.md) §12 is a complete example of the structure.
+Start from a copy of [`.claude/skills/author-block/starter.op`](.claude/skills/author-block/starter.op). The blocks under `blocks/floorkit/` are drawn to the same [drafting standard](docs/drafting-standard.md), and show what each category's body and plan look like. [docs/format-v1.md](docs/format-v1.md) §12 is a complete example of the structure.
 
 ### 3. Fill in the metadata
 
@@ -71,8 +71,9 @@ Root `metadata` is a **closed vocabulary**: a key the schema does not list fails
 | `catalog:attribution` | yes | Who the block credits: your name, or the name you contribute under |
 | `catalog:category` | yes | One of the 13 in [`categories.json`](categories.json) |
 | `catalog:placement` | for `DOOR` and `WINDOW` | `"hosted"` for a door or window; `"free"` (or nothing) otherwise |
+| `catalog:lod` | yes | `"100"`, `"200"` or `"300"`: the level of detail of the body. A `"300"` block takes the LOD 300 gate, and a `floorkit` block is always `"300"` ([format §9](docs/format-v1.md#9-limits-and-why)) |
 | `catalog:tags` | no | Lowercase, joined by `", "`, at most 12, no repeats |
-| `catalog:lod`, `catalog:defaultSill`, `catalog:author`, `catalog:note`, `catalog:basedOn` | no | See [format §7](docs/format-v1.md#7-root-metadata) |
+| `catalog:defaultSill`, `catalog:author`, `catalog:note`, `catalog:basedOn` | no | See [format §7](docs/format-v1.md#7-root-metadata) |
 | `ifc:class`, `ifc:predefinedType`, `class:uniclass2015`, `class:omniclass` | no | Only where you are certain |
 | `mat:<nodeId>` | no | The material role of a node that exists in the block |
 

@@ -396,7 +396,8 @@
         "catalog:version",
         "catalog:license",
         "catalog:attribution",
-        "catalog:category"
+        "catalog:category",
+        "catalog:lod"
       ],
       "properties": {
         "catalog:version": {

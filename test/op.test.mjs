@@ -5,8 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { test } from 'node:test';
 import { parseNote } from '../tools/lib/note.mjs';
-import { LIMITS, checkBlockText, formatBlock, sha256Hex } from '../tools/lib/op.mjs';
-import { PENDING_REDRAW } from '../tools/lib/pending-redraw.mjs';
+import { LIMITS, checkBlockText, formatBlock } from '../tools/lib/op.mjs';
 import { ANCHOR_ROLES, PORTS } from '../tools/lib/roles.mjs';
 
 const fixture = (name) => readFileSync(new URL(`fixtures/${name}`, import.meta.url), 'utf8');
@@ -30,8 +29,7 @@ test('the valid fixture and every seed block pass', () => {
   for (const publisher of readdirSync(root)) {
     for (const slug of readdirSync(new URL(`${publisher}/`, root))) {
       for (const file of readdirSync(new URL(`${publisher}/${slug}/`, root))) {
-        const listed = { publisher, slug, version: file.replace(/\.op$/, '') };
-        const result = checkBlockText(readFileSync(new URL(`${publisher}/${slug}/${file}`, root), 'utf8'), { listed });
+        const result = checkBlockText(readFileSync(new URL(`${publisher}/${slug}/${file}`, root), 'utf8'));
         assert.deepEqual(result.issues, [], `${publisher}/${slug}/${file}`);
         count += 1;
       }
@@ -260,7 +258,7 @@ test('each geometry-reject fixture fails exactly its own gate, naming the node a
     'height-bottom-face.op': ['/metadata/catalog:note', /^"seat 0\.46" matches no top face; the nearest is 0\.520 on "seat"/],
     'floating-tap.op': ['/modelView/elements/5', /^"tap" floats: .* "top", is 0\.002 m away \(tolerance 0\.001\)$/],
     'missing-ifcclass.op': ['/metadata', /^needs "ifcClass": "IfcFurniture", since a ported or MEP_EQUIPMENT block/],
-    'missing-lod.op': ['/metadata', /^needs "catalog:lod"$/],
+    'missing-lod.op': ['/metadata', /^must have required property 'catalog:lod'$/],
     'missing-mat.op': ['/modelView/elements/1', /^"leg-front-left" has no mat: role; set "mat:leg-front-left" or "mat:leg" on its definition$/],
     'note-decimals.op': ['/metadata/catalog:note', /^"seat 0\.5" needs metres with two decimals/],
     'note-height.op': ['/metadata/catalog:note', /^"top 0\.47" matches no top face; the nearest is 0\.450 on "top"/],
@@ -303,23 +301,19 @@ test('a stacking chair of tubular legs and a shell seat passes every gate', () =
   assert.deepEqual(check(chair).issues, []);
 });
 
-test('a floorkit block not on the pending list is drawn to LOD 300', () => {
+test('a floorkit block is drawn to LOD 300', () => {
   const block = { ...base(), id: 'floorkit.example' };
   block.metadata = { ...block.metadata, 'catalog:lod': '200' };
   rejects(block, '/metadata/catalog:lod', 'a floorkit block is drawn to LOD 300');
 });
 
-// Any seed still on the pending list shows the skip; once the list is empty there is no skip left to show.
-const pendingSlug = Object.keys(PENDING_REDRAW)[0];
-test('only the listed seed file itself skips the new gates: its path, version and bytes', { skip: pendingSlug ? false : 'the pending list is empty' }, () => {
-  const seed = readFileSync(new URL(`../blocks/floorkit/${pendingSlug}/1.0.0.op`, import.meta.url), 'utf8');
-  const listed = { publisher: 'floorkit', slug: pendingSlug, version: '1.0.0' };
-  assert.deepEqual(checkBlockText(seed, { listed }).issues, []);
-  const gated = (text, place) => assert.ok(checkBlockText(text, place).issues.some((issue) => issue.message === 'needs "catalog:lod"'));
-  gated(seed);
-  gated(seed, { listed: { ...listed, version: '1.1.0' } });
-  gated(formatBlock({ ...JSON.parse(seed), labelName: 'Changed Label' }), { listed });
-  gated(seed, { listed: { ...listed, slug: 'stool' } });
+test('the schema requires catalog:lod on every block, whatever its publisher', () => {
+  for (const id of ['fixture.chair', 'floorkit.example', 'acme.example']) {
+    const block = { ...base(), id };
+    block.metadata = { ...block.metadata };
+    delete block.metadata['catalog:lod'];
+    rejects(block, '/metadata', "must have required property 'catalog:lod'");
+  }
 });
 
 test('gate (f) allows float noise on its 0.005 m tolerance, and nothing more', () => {
@@ -335,24 +329,6 @@ test('gate (f) allows float noise on its 0.005 m tolerance, and nothing more', (
   assert.deepEqual(inside(0.005 + 1e-12), []);
   assert.equal(inside(0.005 + 1e-6).length, 1);
   assert.match(inside(0.006)[0]?.message ?? '', /^anchor "seatCenter" at .* is 0\.006 m from the nearest body surface/);
-});
-
-test('a block outside blocks/ that claims a seed id gets every gate', () => {
-  const fake = base();
-  Object.assign(fake, { id: 'floorkit.ups', dimensions: { width: 3, depth: 3, height: 3 } });
-  delete fake.metadata['catalog:lod'];
-  fake.anchors.seatCenter.metadata.role = 'nonsense';
-  const result = check(fake);
-  for (const message of ['needs "catalog:lod"', 'is "nonsense"', 'is 3.000 m but the body spans']) {
-    assert.ok(result.issues.some((issue) => issue.message.includes(message)), message);
-  }
-});
-
-test('each pending hash is the sha256 of that seed as it is on disk', () => {
-  for (const [slug, hash] of Object.entries(PENDING_REDRAW)) {
-    const bytes = readFileSync(new URL(`../blocks/floorkit/${slug}/1.0.0.op`, import.meta.url));
-    assert.equal(sha256Hex(bytes), hash, `${slug} changed: redraw it, then take its line off the pending list`);
-  }
 });
 
 test('arcs are in the plan: a full circle of two half arcs under the body passes', () => {
@@ -375,16 +351,6 @@ test('an inward offset2d line stays inside its source; an outward one grows', ()
   assert.deepEqual(check(basin).issues, []);
   basin.definitions.inner.distance = 0.04;
   rejects(basin, '/profileView/elements/6', "the plan's");
-});
-
-test('the pending list names only the 26 seeds, each once, each present', () => {
-  const seeds = ['bathtub', 'cabinet', 'cafe-counter', 'chiller', 'counter-run', 'crah', 'glazed-door', 'hob', 'kitchen-counter', 'kitchen-sink',
-    'minimal-sofa', 'office-desk', 'parked-car', 'pdu', 'planter', 'rear-door-heat-exchanger', 'rectangular-bathtub', 'shower-tray',
-    'simple-chair', 'table', 'tree', 'ups', 'wash-basin', 'washing-machine', 'wc', 'wc-and-basin'];
-  for (const slug of Object.keys(PENDING_REDRAW)) {
-    assert.ok(seeds.includes(slug), `${slug} is not one of the 26 seeds`);
-    assert.ok(readdirSync(new URL(`../blocks/floorkit/${slug}/`, import.meta.url)).length > 0, `${slug} has no block`);
-  }
 });
 
 test('the note grammar reads exactly the keywords of drafting standard section 2', () => {
