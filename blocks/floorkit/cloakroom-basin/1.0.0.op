@@ -1,0 +1,446 @@
+{
+  "version": 1,
+  "id": "floorkit.cloakroom-basin",
+  "labelName": "Cloakroom Basin",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.45,
+    "depth": 0.35,
+    "height": 0.47
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "basin, cloakroom basin, wall-hung, cloakroom",
+    "catalog:note": "Wall-hung cloakroom basin, no pedestal; a bottle trap below the bowl with a waste arm to the wall. rim 0.85, underside 0.50. Parts under radius 0.04 build as polygonal prisms at true size.",
+    "catalog:basedOn": "0.45 x 0.35 is a generic practice size, not checked against a published source (unverified); rim 0.85 as the drafting standard wash basin; EN 14688 not read. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "WASHHANDBASIN",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:plate": "ceramic",
+    "mat:liner": "ceramic",
+    "mat:bowlFloor": "ceramic",
+    "mat:tapStem": "metal",
+    "mat:tapSpout": "metal",
+    "mat:trap": "metal",
+    "mat:wasteArm": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          0,
+          0.85,
+          -0.13
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.7,
+          0.035
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.55,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.032
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.01,
+          0.83,
+          -0.13
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.01,
+          0.83,
+          -0.13
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "plateBase": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.84,
+        0
+      ],
+      "width": 0.45,
+      "height": 0.02,
+      "depth": 0.35
+    },
+    "bowlCut": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.84,
+        0.035
+      ],
+      "radius": 0.11,
+      "height": 0.04
+    },
+    "plate": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "plateBase",
+      "operandRefs": [
+        "bowlCut"
+      ],
+      "color": "#f2f1ec"
+    },
+    "linerSolid": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.765,
+        0.035
+      ],
+      "radius": 0.12,
+      "height": 0.13
+    },
+    "linerCore": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.765,
+        0.035
+      ],
+      "radius": 0.11,
+      "height": 0.13
+    },
+    "liner": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "linerSolid",
+      "operandRefs": [
+        "linerCore"
+      ],
+      "color": "#f2f1ec"
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.225,
+            -0.175
+          ],
+          [
+            0.225,
+            -0.175
+          ],
+          [
+            0.225,
+            0.175
+          ],
+          [
+            -0.225,
+            0.175
+          ]
+        ]
+      },
+      {
+        "id": "bowlA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.035
+        ],
+        "radius": 0.11,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "bowlB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.035
+        ],
+        "radius": 0.11,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tapA",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.13
+        ],
+        "radius": 0.015,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tapB",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.13
+        ],
+        "radius": 0.015,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "plate",
+        "ref": "plate"
+      },
+      {
+        "id": "liner",
+        "ref": "liner"
+      },
+      {
+        "id": "bowlFloor",
+        "kind": "cylinder",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.695,
+          0.035
+        ],
+        "radius": 0.12,
+        "height": 0.01
+      },
+      {
+        "id": "tapStem",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.91,
+          -0.13
+        ],
+        "radius": 0.015,
+        "height": 0.12
+      },
+      {
+        "id": "tapSpout",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.01,
+        "height": 0.08,
+        "placement": {
+          "position": [
+            0,
+            0.96,
+            -0.075
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "trap",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.595,
+          0.035
+        ],
+        "radius": 0.035,
+        "height": 0.19
+      },
+      {
+        "id": "wasteArm",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.016,
+        "height": 0.175,
+        "placement": {
+          "position": [
+            0,
+            0.55,
+            -0.0875
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

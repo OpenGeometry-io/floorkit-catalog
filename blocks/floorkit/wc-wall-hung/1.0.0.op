@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "id": "floorkit.wc-wall-hung",
+  "labelName": "Wall-hung WC",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.36,
+    "depth": 0.54,
+    "height": 0.63
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "wc, toilet, wall-hung, bathroom",
+    "catalog:note": "Wall-hung WC, its cistern concealed in the wall; lid open against the wall. bottom 0.15, rim 0.40, seat 0.42. The plan shows the pan only. The pan is a ring that abuts a rear block at its tangent, over a floor disc.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice), unverified: wall-hung WC rim 0.40, bottom 0.15 and seat 0.42 practice, unverified; 0.36 x 0.54 generic practice size, not checked against a published source; EN 997 not read. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "TOILETPAN",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:panRear": "ceramic",
+    "mat:bowlFloor": "ceramic",
+    "mat:bowl": "ceramic",
+    "mat:seat": "surface",
+    "mat:seatBack": "surface",
+    "mat:lid": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.27
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "soil",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.18,
+          -0.27
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.25,
+          -0.27
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "bowlSolid": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.285,
+        0.09
+      ],
+      "radius": 0.18,
+      "height": 0.23
+    },
+    "bowlCore": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.285,
+        0.09
+      ],
+      "radius": 0.14,
+      "height": 0.23
+    },
+    "bowl": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "bowlSolid",
+      "operandRefs": [
+        "bowlCore"
+      ],
+      "color": "#f2f1ec"
+    },
+    "seatSolid": {
+      "kind": "cylinder",
+      "color": "#d8d2c4",
+      "center": [
+        0,
+        0.41,
+        0.09
+      ],
+      "radius": 0.18,
+      "height": 0.02
+    },
+    "seatCore": {
+      "kind": "cylinder",
+      "color": "#d8d2c4",
+      "center": [
+        0,
+        0.41,
+        0.09
+      ],
+      "radius": 0.11,
+      "height": 0.02
+    },
+    "seat": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "seatSolid",
+      "operandRefs": [
+        "seatCore"
+      ],
+      "color": "#d8d2c4"
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.18,
+            -0.27
+          ],
+          [
+            0.18,
+            -0.27
+          ],
+          [
+            0.18,
+            -0.09
+          ],
+          [
+            -0.18,
+            -0.09
+          ]
+        ]
+      },
+      {
+        "id": "panA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.09
+        ],
+        "radius": 0.18,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "panB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.09
+        ],
+        "radius": 0.18,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "seatInnerA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.09
+        ],
+        "radius": 0.11,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "seatInnerB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.09
+        ],
+        "radius": 0.11,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "panRear",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.275,
+          -0.18
+        ],
+        "width": 0.36,
+        "height": 0.25,
+        "depth": 0.18
+      },
+      {
+        "id": "bowlFloor",
+        "kind": "cylinder",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.16,
+          0.09
+        ],
+        "radius": 0.18,
+        "height": 0.02
+      },
+      {
+        "id": "bowl",
+        "ref": "bowl"
+      },
+      {
+        "id": "seat",
+        "ref": "seat"
+      },
+      {
+        "id": "seatBack",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.41,
+          -0.17
+        ],
+        "width": 0.36,
+        "height": 0.02,
+        "depth": 0.16
+      },
+      {
+        "id": "lid",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.59,
+          -0.26
+        ],
+        "width": 0.36,
+        "height": 0.38,
+        "depth": 0.02
+      }
+    ]
+  }
+}
