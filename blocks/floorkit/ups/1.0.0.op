@@ -8,36 +8,51 @@
     "depth": 0.85,
     "height": 1.9
   },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
-  },
   "metadata": {
     "catalog:version": "1.0.0",
     "catalog:license": "CC-BY-4.0",
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "equipment",
     "catalog:placement": "free",
+    "catalog:lod": "300",
     "catalog:tags": "data centre, power",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/ups.op#catalog-datacenter-ups",
-    "catalog:note": "IFC4 has a real UPS member on IfcElectricFlowStorageDeviceTypeEnum, so this one maps exactly.",
+    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/ups.op#catalog-datacenter-ups; 1.20 x 0.85 x 1.90 is the seed's size, not checked against a published source (unverified)",
+    "catalog:note": "UPS line-up, a cabinet carcass: the UPS cabinet (-x) beside its battery cabinet (+x), vent slots on top, input and output cable stubs at the front under the doors. IFC4 has a real UPS member on IfcElectricFlowStorageDeviceTypeEnum, so this one maps exactly. Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcElectricFlowStorageDevice",
     "ifc:predefinedType": "UPS",
     "ifcClass": "IfcElectricFlowStorageDevice",
-    "mat:ups-panel": "frame"
+    "mat:plinth": "frame",
+    "mat:upsCabinet": "metal",
+    "mat:batteryCabinet": "metal",
+    "mat:upsDoor": "surface",
+    "mat:batteryDoor": "surface",
+    "mat:ventSlot": "metal",
+    "mat:inStub": "metal",
+    "mat:outStub": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
   },
   "ports": [
     {
@@ -97,12 +112,25 @@
       }
     }
   ],
+  "definitions": {
+    "ventSlot": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        -0.3,
+        1.895,
+        0
+      ],
+      "width": 0.4,
+      "height": 0.01,
+      "depth": 0.04
+    }
+  },
   "profileView": {
     "elements": [
       {
-        "id": "ups-outline",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#cfd6c8",
         "vertices": [
           [
             -0.6,
@@ -121,36 +149,273 @@
             0.425
           ]
         ]
+      },
+      {
+        "id": "cabinet-split",
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            -0.425
+          ],
+          [
+            0,
+            0.425
+          ]
+        ]
       }
     ]
   },
   "modelView": {
     "elements": [
       {
-        "id": "ups-body",
+        "id": "plinth",
         "kind": "cuboid",
-        "color": "#e2e8dc",
+        "color": "#7a5c3e",
         "center": [
           0,
-          0.95,
-          0
+          0.05,
+          -0.015
         ],
-        "width": 1.2,
-        "height": 1.9,
-        "depth": 0.85
+        "width": 1.16,
+        "height": 0.1,
+        "depth": 0.78
       },
       {
-        "id": "ups-panel",
+        "id": "upsCabinet",
         "kind": "cuboid",
-        "color": "#4d5a63",
+        "color": "#9aa3ab",
+        "center": [
+          -0.3,
+          0.995,
+          -0.015
+        ],
+        "width": 0.6,
+        "height": 1.79,
+        "depth": 0.82
+      },
+      {
+        "id": "batteryCabinet",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0.3,
+          0.995,
+          -0.015
+        ],
+        "width": 0.6,
+        "height": 1.79,
+        "depth": 0.82
+      },
+      {
+        "id": "upsDoor",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          -0.3,
+          1.075,
+          0.41
+        ],
+        "width": 0.6,
+        "height": 1.55,
+        "depth": 0.03
+      },
+      {
+        "id": "batteryDoor",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0.3,
+          1.075,
+          0.41
+        ],
+        "width": 0.6,
+        "height": 1.55,
+        "depth": 0.03
+      },
+      {
+        "id": "ventSlot1",
+        "ref": "ventSlot",
+        "placement": {
+          "position": [
+            0,
+            0,
+            -0.3
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ventSlot2",
+        "ref": "ventSlot",
+        "placement": {
+          "position": [
+            0,
+            0,
+            -0.2
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ventSlot3",
+        "ref": "ventSlot",
+        "placement": {
+          "position": [
+            0,
+            0,
+            -0.1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ventSlot4",
+        "ref": "ventSlot",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ventSlot5",
+        "ref": "ventSlot",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0.1
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ventSlot6",
+        "ref": "ventSlot",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0.2
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "inStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
         "center": [
           0,
-          1.5,
-          -0.43
+          0,
+          0
         ],
-        "width": 0.5,
-        "height": 0.35,
-        "depth": 0.03
+        "radius": 0.04,
+        "height": 0.025,
+        "placement": {
+          "position": [
+            -0.3,
+            0.2,
+            0.4075
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "outStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.04,
+        "height": 0.025,
+        "placement": {
+          "position": [
+            0.3,
+            0.2,
+            0.4075
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }

@@ -309,15 +309,32 @@ test('a floorkit block not on the pending list is drawn to LOD 300', () => {
   rejects(block, '/metadata/catalog:lod', 'a floorkit block is drawn to LOD 300');
 });
 
-test('only the listed seed file itself skips the new gates: its path, version and bytes', () => {
-  const seed = readFileSync(new URL('../blocks/floorkit/ups/1.0.0.op', import.meta.url), 'utf8');
-  const listed = { publisher: 'floorkit', slug: 'ups', version: '1.0.0' };
+// Any seed still on the pending list shows the skip; once the list is empty there is no skip left to show.
+const pendingSlug = Object.keys(PENDING_REDRAW)[0];
+test('only the listed seed file itself skips the new gates: its path, version and bytes', { skip: pendingSlug ? false : 'the pending list is empty' }, () => {
+  const seed = readFileSync(new URL(`../blocks/floorkit/${pendingSlug}/1.0.0.op`, import.meta.url), 'utf8');
+  const listed = { publisher: 'floorkit', slug: pendingSlug, version: '1.0.0' };
   assert.deepEqual(checkBlockText(seed, { listed }).issues, []);
   const gated = (text, place) => assert.ok(checkBlockText(text, place).issues.some((issue) => issue.message === 'needs "catalog:lod"'));
   gated(seed);
   gated(seed, { listed: { ...listed, version: '1.1.0' } });
-  gated(seed.replace('"UPS"', '"UPX"'), { listed });
+  gated(formatBlock({ ...JSON.parse(seed), labelName: 'Changed Label' }), { listed });
   gated(seed, { listed: { ...listed, slug: 'stool' } });
+});
+
+test('gate (f) allows float noise on its 0.005 m tolerance, and nothing more', () => {
+  const chair = base();
+  const seat = chair.modelView.elements.find((node) => node.id === 'seat');
+  const face = seat.center[2] + seat.depth / 2;
+  const top = seat.center[1] + seat.height / 2;
+  const inside = (depth) => {
+    chair.anchors.seatCenter.placement.position = [0, top - 0.01, face - depth];
+    return check(chair).issues.filter((issue) => issue.path === '/anchors/seatCenter');
+  };
+  assert.deepEqual(inside(0.425 - 0.42), []); // 0.005000000000000004, as a port 0.005 inside a face at 0.425
+  assert.deepEqual(inside(0.005 + 1e-12), []);
+  assert.equal(inside(0.005 + 1e-6).length, 1);
+  assert.match(inside(0.006)[0]?.message ?? '', /^anchor "seatCenter" at .* is 0\.006 m from the nearest body surface/);
 });
 
 test('a block outside blocks/ that claims a seed id gets every gate', () => {
