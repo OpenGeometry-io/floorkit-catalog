@@ -1,0 +1,277 @@
+{
+  "version": 1,
+  "id": "floorkit.bedside-table",
+  "labelName": "Bedside Table",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.45,
+    "depth": 0.4,
+    "height": 0.55
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "beds",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "bedside table, nightstand, cabinet, bedroom",
+    "catalog:note": "Bedside table: a cabinet with one drawer on four short legs; the top overhangs the drawer front and its handle. top 0.55",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:carcass": "frame",
+    "mat:top": "surface",
+    "mat:drawer-front": "frame",
+    "mat:handle": "metal",
+    "mat:leg": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.55,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "definitions": {
+    "leg": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.05,
+        0
+      ],
+      "width": 0.04,
+      "height": 0.1,
+      "depth": 0.04
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "top",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.225,
+            -0.2
+          ],
+          [
+            0.225,
+            -0.2
+          ],
+          [
+            0.225,
+            0.2
+          ],
+          [
+            -0.225,
+            0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "leg-front-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.195,
+            0,
+            0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-front-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.195,
+            0,
+            0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.195,
+            0,
+            -0.16
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.195,
+            0,
+            -0.16
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "carcass",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.315,
+          -0.025
+        ],
+        "width": 0.43,
+        "height": 0.43,
+        "depth": 0.35
+      },
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.54,
+          0
+        ],
+        "width": 0.45,
+        "height": 0.02,
+        "depth": 0.4
+      },
+      {
+        "id": "drawer-front",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.44,
+          0.16
+        ],
+        "width": 0.4,
+        "height": 0.16,
+        "depth": 0.02
+      },
+      {
+        "id": "handle",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.44,
+          0.18
+        ],
+        "width": 0.12,
+        "height": 0.02,
+        "depth": 0.02
+      }
+    ]
+  }
+}

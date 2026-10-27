@@ -1,0 +1,385 @@
+{
+  "version": 1,
+  "id": "floorkit.king-bed",
+  "labelName": "King-Size Bed",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1.7,
+    "depth": 2.1,
+    "height": 0.9
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "beds",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "bed, king-size, double, bedroom",
+    "catalog:note": "King-size bed, mattress 1.60 x 2.00 (the EU size; a UK king is 1.50 x 2.00, unverified): headboard to the floor at the head, a bed base on four legs, mattress, a duvet turned down 0.60 from the head. top 0.50 is the mattress (unverified).",
+    "catalog:basedOn": "EU common bed sizes, unverified (UK sizes differ; EN 1334 is the measurement method, not the sizes); drafting standard key dimensions",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "BED",
+    "mat:headboard": "surface",
+    "mat:frame": "frame",
+    "mat:mattress": "soft",
+    "mat:duvet": "soft",
+    "mat:pillow-left": "soft",
+    "mat:pillow-right": "soft",
+    "mat:leg": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "headWall": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -1.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "sleepingSurface": {
+      "placement": {
+        "position": [
+          0,
+          0.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "sleeping-surface"
+      }
+    }
+  },
+  "definitions": {
+    "leg": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.075,
+        0
+      ],
+      "width": 0.05,
+      "height": 0.15,
+      "depth": 0.05
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "frame",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.85,
+            -1.05
+          ],
+          [
+            0.85,
+            -1.05
+          ],
+          [
+            0.85,
+            1.05
+          ],
+          [
+            -0.85,
+            1.05
+          ]
+        ]
+      },
+      {
+        "id": "mattress",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.8,
+            -1
+          ],
+          [
+            0.8,
+            -1
+          ],
+          [
+            0.8,
+            1
+          ],
+          [
+            -0.8,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "pillow-left",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.75,
+            -0.96
+          ],
+          [
+            -0.05,
+            -0.96
+          ],
+          [
+            -0.05,
+            -0.56
+          ],
+          [
+            -0.75,
+            -0.56
+          ]
+        ]
+      },
+      {
+        "id": "pillow-right",
+        "kind": "polygon",
+        "vertices": [
+          [
+            0.05,
+            -0.96
+          ],
+          [
+            0.75,
+            -0.96
+          ],
+          [
+            0.75,
+            -0.56
+          ],
+          [
+            0.05,
+            -0.56
+          ]
+        ]
+      },
+      {
+        "id": "turn-down",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.8,
+            -0.4
+          ],
+          [
+            0.8,
+            -0.4
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "headboard",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.45,
+          -1.025
+        ],
+        "width": 1.7,
+        "height": 0.9,
+        "depth": 0.05
+      },
+      {
+        "id": "leg-head-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.825,
+            0,
+            -0.975
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-head-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.825,
+            0,
+            -0.975
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-foot-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.825,
+            0,
+            1.025
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-foot-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.825,
+            0,
+            1.025
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "frame",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.225,
+          0.025
+        ],
+        "width": 1.7,
+        "height": 0.15,
+        "depth": 2.05
+      },
+      {
+        "id": "mattress",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.4,
+          0
+        ],
+        "width": 1.6,
+        "height": 0.2,
+        "depth": 2
+      },
+      {
+        "id": "duvet",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.515,
+          0.3
+        ],
+        "width": 1.6,
+        "height": 0.03,
+        "depth": 1.4
+      },
+      {
+        "id": "pillow-left",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          -0.4,
+          0.56,
+          -0.76
+        ],
+        "width": 0.7,
+        "height": 0.12,
+        "depth": 0.4
+      },
+      {
+        "id": "pillow-right",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0.4,
+          0.56,
+          -0.76
+        ],
+        "width": 0.7,
+        "height": 0.12,
+        "depth": 0.4
+      }
+    ]
+  }
+}
