@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "id": "floorkit.meeting-table",
+  "labelName": "Meeting Table",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 2,
+    "depth": 1,
+    "height": 0.74
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "tables",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "table, meeting, conference, office",
+    "catalog:note": "Meeting table: a top on two panel legs joined by a rail under the top on the centreline. top 0.74",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "TABLE",
+    "mat:top": "surface",
+    "mat:rail": "frame",
+    "mat:legPanel": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.74,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "definitions": {
+    "legPanel": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.355,
+        0
+      ],
+      "width": 0.04,
+      "height": 0.71,
+      "depth": 0.7
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "top",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -1,
+            -0.5
+          ],
+          [
+            1,
+            -0.5
+          ],
+          [
+            1,
+            0.5
+          ],
+          [
+            -1,
+            0.5
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.725,
+          0
+        ],
+        "width": 2,
+        "height": 0.03,
+        "depth": 1
+      },
+      {
+        "id": "leg-left",
+        "ref": "legPanel",
+        "placement": {
+          "position": [
+            -0.87,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-right",
+        "ref": "legPanel",
+        "placement": {
+          "position": [
+            0.87,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "rail",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.66,
+          0
+        ],
+        "width": 1.7,
+        "height": 0.1,
+        "depth": 0.04
+      }
+    ]
+  }
+}
