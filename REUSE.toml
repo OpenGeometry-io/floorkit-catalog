@@ -28,6 +28,7 @@ path = [
   ".claude/**",
   ".github/**",
   "docs/**",
+  "examples/**",
   "schema/**",
   "test/*.mjs",
   "tools/**",
