@@ -510,6 +510,36 @@
       "contentHash": "e8e1323e34cf7caee386a5c6f55c625242af2f8a7dd6a36f97e59816a68629b6"
     },
     {
+      "id": "floorkit.cooker",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "cooker",
+      "version": "1.0.0",
+      "labelName": "Cooker",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "cooker",
+        "oven",
+        "electric",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/cooker/1.0.0.op",
+      "bytes": 8711,
+      "sha256": "0de65350d1d4b3112125f6a537ab2474bfc00c49a62eba52fe62115adc3dac0b",
+      "contentHash": "fbff010f77f09110c1658ba45419e3b8a70881acf7bc618b63c2f8afee55b0a1"
+    },
+    {
       "id": "floorkit.corner-base-unit",
       "publisher": {
         "id": "floorkit",
@@ -630,6 +660,34 @@
       "contentHash": "33a6aba1b2ee0420510c6d1207140186d03cd5ff8a81e7caa8442d3bb7455652"
     },
     {
+      "id": "floorkit.dishwasher",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "dishwasher",
+      "version": "1.0.0",
+      "labelName": "Dishwasher",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "dishwasher",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.85
+      },
+      "path": "blocks/floorkit/dishwasher/1.0.0.op",
+      "bytes": 4840,
+      "sha256": "e9ab853485b56548bba9562963fe954d007f010a56e977a4a8ae88abb001faf9",
+      "contentHash": "5956f1f8fcfd1a984115519ff19dc52a6bd4b32abcfed1d755c1018b80ada44a"
+    },
+    {
       "id": "floorkit.double-bed",
       "publisher": {
         "id": "floorkit",
@@ -689,6 +747,37 @@
       "contentHash": "800d4f68d9460412437fd40e9e3ea8329b9be964a4c8b9c53e7d0ddaf5644890"
     },
     {
+      "id": "floorkit.extractor-hood",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "extractor-hood",
+      "version": "1.0.0",
+      "labelName": "Extractor Hood",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "extractor hood",
+        "cooker hood",
+        "chimney",
+        "overhead",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.5,
+        "height": 0.85
+      },
+      "path": "blocks/floorkit/extractor-hood/1.0.0.op",
+      "bytes": 4154,
+      "sha256": "d1543c83749e8215696fbab1a435e1892f78dc70d083f9cdfb668e307a67dbb3",
+      "contentHash": "41616510e5a9e1ff16c555da41a88b20180947c1545857d51b518eeb57d6b039"
+    },
+    {
       "id": "floorkit.floor-lamp",
       "publisher": {
         "id": "floorkit",
@@ -717,6 +806,36 @@
       "bytes": 2904,
       "sha256": "24ad2b1f04eff6414aa222ef65e76e627151c70f2316029cb0614ada325bee78",
       "contentHash": "8477135b51d57ee80795dd2367efc6bb2b3833d13b8644d6f25ba92d4d8ee7ac"
+    },
+    {
+      "id": "floorkit.fridge-freezer",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "fridge-freezer",
+      "version": "1.0.0",
+      "labelName": "Fridge Freezer",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "fridge freezer",
+        "fridge",
+        "freezer",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.65,
+        "height": 1.85
+      },
+      "path": "blocks/floorkit/fridge-freezer/1.0.0.op",
+      "bytes": 4151,
+      "sha256": "c6aaeb2709fe5db0f67606c27526a558dbf28bc8d22256c99044f49fe48b5f6b",
+      "contentHash": "62b17c497b66c39f4a3ed758738ad92121ffb9748b2fb3ac6f52d71ffef56320"
     },
     {
       "id": "floorkit.glazed-door",
@@ -755,14 +874,16 @@
       },
       "slug": "hob",
       "version": "1.0.0",
-      "labelName": "Kitchen Hob",
+      "labelName": "Hob",
       "type": "APPLIANCE",
       "category": "appliances",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "kitchen",
-        "cooktop"
+        "hob",
+        "cooktop",
+        "electric",
+        "kitchen"
       ],
       "dimensions": {
         "width": 0.6,
@@ -770,9 +891,9 @@
         "height": 0.05
       },
       "path": "blocks/floorkit/hob/1.0.0.op",
-      "bytes": 5686,
-      "sha256": "d40e26c0d431ea6715fc84caa85aae10ee3e2960e70decf6a5155c7f041fcc61",
-      "contentHash": "a85191b3bcb823fcf3b995e6933ed9bfe86228e08473ea837e64a676c4513453"
+      "bytes": 6494,
+      "sha256": "2f88412d7206ac26d70106dca179d53864ea01e8564b1e31391eca0ac1b1a8e2",
+      "contentHash": "8e11539915b0600c6118bc6243f957442739795398986182187be967fe7dd2f9"
     },
     {
       "id": "floorkit.hot-water-cylinder",
@@ -1544,6 +1665,37 @@
       "contentHash": "8df9177019c940ffafcf79c59d839c3f29c20c8eb6092049715c1ee4cd3d8ddd"
     },
     {
+      "id": "floorkit.television",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "television",
+      "version": "1.0.0",
+      "labelName": "Television",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "television",
+        "tv",
+        "screen",
+        "wall-hung",
+        "living room"
+      ],
+      "dimensions": {
+        "width": 1.23,
+        "depth": 0.06,
+        "height": 0.71
+      },
+      "path": "blocks/floorkit/television/1.0.0.op",
+      "bytes": 2882,
+      "sha256": "5ba2017ba26c5c56c2541b10bd1d51cacfc2b552b71a589a6970110900476f17",
+      "contentHash": "07109b0d36a8e0404338c4ef0dba1220ee162283087ee7dc609b1843a6d49539"
+    },
+    {
       "id": "floorkit.tree",
       "publisher": {
         "id": "floorkit",
@@ -1571,6 +1723,36 @@
       "bytes": 3534,
       "sha256": "0ce337e612fb68d27505f08a9fdf272410dfcb0e75990d8c102020225583f8ca",
       "contentHash": "76a9eed40c920e8ba227d1250bbc836460ebfd56f7bed01500a1ea5b86cfc81a"
+    },
+    {
+      "id": "floorkit.tumble-dryer",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "tumble-dryer",
+      "version": "1.0.0",
+      "labelName": "Tumble Dryer",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "tumble dryer",
+        "dryer",
+        "laundry",
+        "utility"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.85
+      },
+      "path": "blocks/floorkit/tumble-dryer/1.0.0.op",
+      "bytes": 5888,
+      "sha256": "c18e8b497fe2bf4cfc01ea077ec82c165d5ab14a7d935d0f032b5ac6aa791bb2",
+      "contentHash": "88397487daf08846ecd67c88c8bb57fd0ba74d5f9a203e943b276576ba885efd"
     },
     {
       "id": "floorkit.ups",
@@ -1734,6 +1916,7 @@
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
+        "washing machine",
         "laundry",
         "utility"
       ],
@@ -1743,9 +1926,9 @@
         "height": 0.85
       },
       "path": "blocks/floorkit/washing-machine/1.0.0.op",
-      "bytes": 3838,
-      "sha256": "de1ccbaff45473de4678e116296210f60204b50d4d40c7a32ac1ff28088477b4",
-      "contentHash": "8ef3936c1158dc875414f5bdc09ca159ea971175fe91c28cda29032871c362a4"
+      "bytes": 5903,
+      "sha256": "7ad166487ce8deb0eca61b04ba66b4e78369d5259ae8d68b0c562e60d6b7ff9a",
+      "contentHash": "0c81600960777f0b272d0f2d5e21ff6ee8819606a9d35b6d135728deaacbfb55"
     },
     {
       "id": "floorkit.water-cooler",
