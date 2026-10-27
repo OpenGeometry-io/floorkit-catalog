@@ -1,0 +1,290 @@
+{
+  "version": 1,
+  "id": "floorkit.base-unit-1000",
+  "labelName": "Base Unit 1000",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1,
+    "depth": 0.6,
+    "height": 0.9
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "kitchen",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "base unit, kitchen unit, cabinet, double, kitchen",
+    "catalog:note": "Base unit on the 1000 module. top 0.90. Worktop 0.04 on a cabinet with a plinth 0.15 high set back 0.05 behind the doors. 2 doors, one door definition.",
+    "catalog:basedOn": "EN 1116 co-ordinating sizes as given in the drafting standard key dimensions (600 module, worktop 0.90, worktop 0.04); EN 1116 itself not read, unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:plinth": "frame",
+    "mat:carcass": "frame",
+    "mat:worktop": "surface",
+    "mat:door": "frame",
+    "mat:handle": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.9,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "definitions": {
+    "door": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.505,
+        0.26
+      ],
+      "width": 0.496,
+      "height": 0.704,
+      "depth": 0.02
+    },
+    "handle": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.79,
+        0.2825
+      ],
+      "width": 0.16,
+      "height": 0.02,
+      "depth": 0.025
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.5,
+            -0.3
+          ],
+          [
+            0.5,
+            -0.3
+          ],
+          [
+            0.5,
+            0.3
+          ],
+          [
+            -0.5,
+            0.3
+          ]
+        ]
+      },
+      {
+        "id": "nosing",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.5,
+            0.27
+          ],
+          [
+            0.5,
+            0.27
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "plinth",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.075,
+          -0.04
+        ],
+        "width": 1,
+        "height": 0.15,
+        "depth": 0.52
+      },
+      {
+        "id": "carcass",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.505,
+          -0.025
+        ],
+        "width": 1,
+        "height": 0.71,
+        "depth": 0.55
+      },
+      {
+        "id": "worktop",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.88,
+          0
+        ],
+        "width": 1,
+        "height": 0.04,
+        "depth": 0.6
+      },
+      {
+        "id": "doorLeft",
+        "ref": "door",
+        "placement": {
+          "position": [
+            -0.25,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "doorRight",
+        "ref": "door",
+        "placement": {
+          "position": [
+            0.25,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handleLeft",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            -0.25,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handleRight",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0.25,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

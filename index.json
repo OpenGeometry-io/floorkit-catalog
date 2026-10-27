@@ -60,6 +60,67 @@
       "contentHash": "3bb33435a5d019ca28a154e2fbc86bfd6934050aec3e260cc589fa548b841b70"
     },
     {
+      "id": "floorkit.base-unit-1000",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "base-unit-1000",
+      "version": "1.0.0",
+      "labelName": "Base Unit 1000",
+      "type": "FURNITURE",
+      "category": "kitchen",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "base unit",
+        "kitchen unit",
+        "cabinet",
+        "double",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 0.6,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/base-unit-1000/1.0.0.op",
+      "bytes": 5204,
+      "sha256": "e9033c94b5a50ce21190e51419c00e096a4938e8a99a2b8772a83dbff5677086",
+      "contentHash": "c2f57064d15de7b03bcd80ca2e5cd2a949e9b7bb8bff131cd522c593e4377b14"
+    },
+    {
+      "id": "floorkit.base-unit-600",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "base-unit-600",
+      "version": "1.0.0",
+      "labelName": "Base Unit 600",
+      "type": "FURNITURE",
+      "category": "kitchen",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "base unit",
+        "kitchen unit",
+        "cabinet",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/base-unit-600/1.0.0.op",
+      "bytes": 3848,
+      "sha256": "e9f00bf3fabeb46f0910ae1ec48d5cbf25c9caa79e51aff8c0e53e580afb593c",
+      "contentHash": "9350763a5a19fc2a9718df007602ea07442503bec5f578cdcf4014296d3f8166"
+    },
+    {
       "id": "floorkit.bathtub",
       "publisher": {
         "id": "floorkit",
@@ -296,33 +357,35 @@
       "contentHash": "e8e1323e34cf7caee386a5c6f55c625242af2f8a7dd6a36f97e59816a68629b6"
     },
     {
-      "id": "floorkit.counter-run",
+      "id": "floorkit.corner-base-unit",
       "publisher": {
         "id": "floorkit",
         "name": "Floorkit",
         "tier": "official"
       },
-      "slug": "counter-run",
+      "slug": "corner-base-unit",
       "version": "1.0.0",
-      "labelName": "Kitchen Counter Run",
+      "labelName": "Corner Base Unit",
       "type": "FURNITURE",
       "category": "kitchen",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "counter",
-        "worktop",
-        "base units"
+        "corner unit",
+        "base unit",
+        "kitchen unit",
+        "cabinet",
+        "kitchen"
       ],
       "dimensions": {
-        "width": 1,
-        "depth": 0.6,
-        "height": 0.92
+        "width": 0.9,
+        "depth": 0.9,
+        "height": 0.9
       },
-      "path": "blocks/floorkit/counter-run/1.0.0.op",
-      "bytes": 2938,
-      "sha256": "e4b9c95ebcdd2a74335441e3bf376a2bb80fa153d0032da0a8f1c69fc3e85232",
-      "contentHash": "359b6e4f341f06c3d8791529e77411da731e4648f4773cf48d2e58344dce15e8"
+      "path": "blocks/floorkit/corner-base-unit/1.0.0.op",
+      "bytes": 6519,
+      "sha256": "7241b385e9e0b3cb4aaef80476a605b1376c053e7f59babf087604ae36ef90fb",
+      "contentHash": "d4760246517300ef65fb596021a8098f740774de9f0a4b1a07c886569dcb2fb7"
     },
     {
       "id": "floorkit.crah",
@@ -538,24 +601,27 @@
       },
       "slug": "kitchen-counter",
       "version": "1.0.0",
-      "labelName": "Kitchen Counter",
+      "labelName": "Kitchen Island",
       "type": "FURNITURE",
       "category": "kitchen",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "counter",
-        "worktop"
+        "island",
+        "kitchen island",
+        "worktop",
+        "breakfast bar",
+        "kitchen"
       ],
       "dimensions": {
-        "width": 2.4,
-        "depth": 0.65,
-        "height": 1.45
+        "width": 1.8,
+        "depth": 0.9,
+        "height": 0.9
       },
       "path": "blocks/floorkit/kitchen-counter/1.0.0.op",
-      "bytes": 3524,
-      "sha256": "0a996aef9b7515c92dcf725731c4ae09e1c7da59a0a1a52b893da97721dd07a2",
-      "contentHash": "d094ede755bbb3011eba20f1f5d98deb62c6263c9553636cbdc34c142c2e782a"
+      "bytes": 6288,
+      "sha256": "0b7129f4bc760879cda4bd3709de6b542b8551f3ea142073fe7dd6ed54eb943c",
+      "contentHash": "601c282b39b858a958dc00d9f9cf5d2389b9947614ef2987fb4a434b98c7df46"
     },
     {
       "id": "floorkit.kitchen-sink",
@@ -572,17 +638,20 @@
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "sink"
+        "sink",
+        "inset sink",
+        "drainer",
+        "kitchen"
       ],
       "dimensions": {
-        "width": 0.6,
+        "width": 0.86,
         "depth": 0.5,
-        "height": 0.2
+        "height": 0.44
       },
       "path": "blocks/floorkit/kitchen-sink/1.0.0.op",
-      "bytes": 3836,
-      "sha256": "249d8afba0592a834d9886c649235ccad429b920be18a29e8d14a8d8e4d1102c",
-      "contentHash": "de82e26734e506f71483ef34db4ceb686c2278dd6bc76f89be47aee250bc4e18"
+      "bytes": 9393,
+      "sha256": "02d92af66cdd583ebf5e54d84039b84a2c2a956735328868a86ae25b57e07514",
+      "contentHash": "95abf4f52f2f640cf6dbd927dea2b0326d8df69d4a09c6421a3eda4582130561"
     },
     {
       "id": "floorkit.meeting-table",
@@ -1138,6 +1207,37 @@
       "contentHash": "7dd4f20f6985a280d4ff0671b85954dd02c5f4eff37688f54005209067c4e56c"
     },
     {
+      "id": "floorkit.tall-unit-600",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "tall-unit-600",
+      "version": "1.0.0",
+      "labelName": "Tall Unit 600",
+      "type": "FURNITURE",
+      "category": "kitchen",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "tall unit",
+        "larder",
+        "kitchen unit",
+        "cabinet",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 2.1
+      },
+      "path": "blocks/floorkit/tall-unit-600/1.0.0.op",
+      "bytes": 4905,
+      "sha256": "17a9e248380493fee5ed246584fa86cf1f308e0e93328114c4ad41edb2929aa3",
+      "contentHash": "8df9177019c940ffafcf79c59d839c3f29c20c8eb6092049715c1ee4cd3d8ddd"
+    },
+    {
       "id": "floorkit.tree",
       "publisher": {
         "id": "floorkit",
@@ -1221,6 +1321,37 @@
       "bytes": 4400,
       "sha256": "7e790c8669f15eee24861f3b6d834603c6a38b44ee990535ac470483f2cdad38",
       "contentHash": "a6a1bcae3218469faaa3150e6b72014126296ae0c297f5645f4f4ed6e7e49db3"
+    },
+    {
+      "id": "floorkit.wall-unit-600",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wall-unit-600",
+      "version": "1.0.0",
+      "labelName": "Wall Unit 600",
+      "type": "FURNITURE",
+      "category": "kitchen",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wall unit",
+        "kitchen unit",
+        "cabinet",
+        "overhead",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.35,
+        "height": 0.72
+      },
+      "path": "blocks/floorkit/wall-unit-600/1.0.0.op",
+      "bytes": 2885,
+      "sha256": "0abc4202249783eb35e72eae3ab8160e8493831efde49d67ae917733e4e9d2b9",
+      "contentHash": "bffaf36609297451cbc54408acdb9766b5051552a26f8d23419255a8d805dfb7"
     },
     {
       "id": "floorkit.wash-basin",
