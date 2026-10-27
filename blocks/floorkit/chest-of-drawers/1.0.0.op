@@ -1,0 +1,360 @@
+{
+  "version": 1,
+  "id": "floorkit.chest-of-drawers",
+  "labelName": "Chest of Drawers",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.8,
+    "depth": 0.45,
+    "height": 0.9
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "storage",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "chest of drawers, drawers, storage, bedroom",
+    "catalog:note": "Chest of four drawers: a body on a recessed plinth, four drawer fronts (one definition) with handles, a top that overhangs the fronts and handles. top 0.90",
+    "catalog:basedOn": "Neufert, Architects' Data, as given in the drafting standard key dimensions; Neufert itself not read, unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:plinth": "frame",
+    "mat:carcass": "frame",
+    "mat:top": "surface",
+    "mat:front": "frame",
+    "mat:handle": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.225
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.9,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "definitions": {
+    "front": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.0975,
+        0.19
+      ],
+      "width": 0.796,
+      "height": 0.195,
+      "depth": 0.02
+    },
+    "handle": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.1,
+        0.2125
+      ],
+      "width": 0.16,
+      "height": 0.02,
+      "depth": 0.025
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.4,
+            -0.225
+          ],
+          [
+            0.4,
+            -0.225
+          ],
+          [
+            0.4,
+            0.225
+          ],
+          [
+            -0.4,
+            0.225
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "plinth",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.04,
+          -0.0275
+        ],
+        "width": 0.76,
+        "height": 0.08,
+        "depth": 0.355
+      },
+      {
+        "id": "carcass",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.48,
+          -0.0225
+        ],
+        "width": 0.8,
+        "height": 0.8,
+        "depth": 0.405
+      },
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.89,
+          0
+        ],
+        "width": 0.8,
+        "height": 0.02,
+        "depth": 0.45
+      },
+      {
+        "id": "drawer-front-1",
+        "ref": "front",
+        "placement": {
+          "position": [
+            0,
+            0.08,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "drawer-front-2",
+        "ref": "front",
+        "placement": {
+          "position": [
+            0,
+            0.28,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "drawer-front-3",
+        "ref": "front",
+        "placement": {
+          "position": [
+            0,
+            0.48,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "drawer-front-4",
+        "ref": "front",
+        "placement": {
+          "position": [
+            0,
+            0.68,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-1",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0.08,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-2",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0.28,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-3",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0.48,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-4",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0.68,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

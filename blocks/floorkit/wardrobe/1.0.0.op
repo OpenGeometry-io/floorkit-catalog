@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "id": "floorkit.wardrobe",
+  "labelName": "Wardrobe",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1,
+    "depth": 0.6,
+    "height": 2.1
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "storage",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "wardrobe, cupboard, storage, bedroom",
+    "catalog:note": "Two-door wardrobe, 0.60 deep for hanging: a case of panels with a recessed kick board, a top shelf, a hanging rail (a square bar) between the sides, two doors with handles. The handles stand 0.025 proud of the doors, inside the plan outline.",
+    "catalog:basedOn": "Neufert, Architects' Data, as given in the drafting standard key dimensions; Neufert itself not read, unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:side-left": "frame",
+    "mat:side-right": "frame",
+    "mat:back": "frame",
+    "mat:bottom": "frame",
+    "mat:kick": "frame",
+    "mat:top": "frame",
+    "mat:top-shelf": "surface",
+    "mat:rail": "metal",
+    "mat:door": "frame",
+    "mat:handle": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "definitions": {
+    "door": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        1.09,
+        0.265
+      ],
+      "width": 0.496,
+      "height": 2.02,
+      "depth": 0.02
+    },
+    "handle": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        1.15,
+        0.2875
+      ],
+      "width": 0.02,
+      "height": 0.3,
+      "depth": 0.025
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.5,
+            -0.3
+          ],
+          [
+            0.5,
+            -0.3
+          ],
+          [
+            0.5,
+            0.3
+          ],
+          [
+            -0.5,
+            0.3
+          ]
+        ]
+      },
+      {
+        "id": "door-split",
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            -0.3
+          ],
+          [
+            0,
+            0.3
+          ]
+        ]
+      },
+      {
+        "id": "rail-centreline",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.45,
+            -0.0125
+          ],
+          [
+            0.45,
+            -0.0125
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "side-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.49,
+          1.05,
+          -0.0225
+        ],
+        "width": 0.02,
+        "height": 2.1,
+        "depth": 0.555
+      },
+      {
+        "id": "side-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.49,
+          1.05,
+          -0.0225
+        ],
+        "width": 0.02,
+        "height": 2.1,
+        "depth": 0.555
+      },
+      {
+        "id": "back",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          1.08,
+          -0.29
+        ],
+        "width": 0.96,
+        "height": 2,
+        "depth": 0.02
+      },
+      {
+        "id": "bottom",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.09,
+          -0.0125
+        ],
+        "width": 0.96,
+        "height": 0.02,
+        "depth": 0.535
+      },
+      {
+        "id": "kick",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.04,
+          0.215
+        ],
+        "width": 0.96,
+        "height": 0.08,
+        "depth": 0.02
+      },
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          2.09,
+          -0.0225
+        ],
+        "width": 0.96,
+        "height": 0.02,
+        "depth": 0.555
+      },
+      {
+        "id": "top-shelf",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          1.81,
+          -0.0225
+        ],
+        "width": 0.96,
+        "height": 0.02,
+        "depth": 0.515
+      },
+      {
+        "id": "rail",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.715,
+          -0.0125
+        ],
+        "width": 0.96,
+        "height": 0.03,
+        "depth": 0.03
+      },
+      {
+        "id": "door-left",
+        "ref": "door",
+        "placement": {
+          "position": [
+            -0.25,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "door-right",
+        "ref": "door",
+        "placement": {
+          "position": [
+            0.25,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-left",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            -0.05,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-right",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0.05,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

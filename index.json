@@ -302,6 +302,38 @@
       "contentHash": "5971f27dd895ea7324036ad69bd4da3197c8cdac31e17297d7515c427965088c"
     },
     {
+      "id": "floorkit.bookshelf",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bookshelf",
+      "version": "1.0.0",
+      "labelName": "Bookshelf",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bookshelf",
+        "bookcase",
+        "shelving",
+        "storage",
+        "living",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.8,
+        "depth": 0.3,
+        "height": 2
+      },
+      "path": "blocks/floorkit/bookshelf/1.0.0.op",
+      "bytes": 5483,
+      "sha256": "b68c4dfc2189a46d115c3782a0ebc355c6240b0d546924354285c1a31850d096",
+      "contentHash": "bb5168073bd772e4c36db4249bb1edf6f07806cb0431a624a905b1ad99df8047"
+    },
+    {
       "id": "floorkit.bunk-bed",
       "publisher": {
         "id": "floorkit",
@@ -341,24 +373,25 @@
       },
       "slug": "cabinet",
       "version": "1.0.0",
-      "labelName": "Cabinet",
+      "labelName": "Cupboard",
       "type": "FURNITURE",
       "category": "storage",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "cupboard",
-        "sideboard"
+        "cabinet",
+        "storage"
       ],
       "dimensions": {
-        "width": 1.18,
-        "depth": 0.42,
-        "height": 1.28
+        "width": 1,
+        "depth": 0.45,
+        "height": 1.3
       },
       "path": "blocks/floorkit/cabinet/1.0.0.op",
-      "bytes": 8025,
-      "sha256": "208c3d4abd991faf3113d92c1977a9720297cd8d97aa84d1220f81df5166160c",
-      "contentHash": "02ddbf128299e57c3e79836fb772ed1036050789a52197e169910e092e03ee2c"
+      "bytes": 6038,
+      "sha256": "8658915b221a7f9add950d789e3a5cc5d089a9a631a9d87c55d82ee07959eb6f",
+      "contentHash": "97a021f820b08c4dba5fed17bff5547d0d5fb1efd2758b05956dd201bf2f09c2"
     },
     {
       "id": "floorkit.cafe-counter",
@@ -421,6 +454,36 @@
       "bytes": 4667,
       "sha256": "23da35a3381cd674d28427cb5eb92a30dfdb64627cc98c2aa2d29b039763cc30",
       "contentHash": "bb20a548fc3d252c1f776a064311c71f42c05291df875c68ff420dcbe22ed4c5"
+    },
+    {
+      "id": "floorkit.chest-of-drawers",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "chest-of-drawers",
+      "version": "1.0.0",
+      "labelName": "Chest of Drawers",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "chest of drawers",
+        "drawers",
+        "storage",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 0.8,
+        "depth": 0.45,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/chest-of-drawers/1.0.0.op",
+      "bytes": 6352,
+      "sha256": "d3552e869ad0efeed79d550f53abb0e6b27e5b654fc4147275a73ca56fe3be08",
+      "contentHash": "a7aeb7bb76ab2b55796ee2b8259dda5fb57a7e87da10d391bdc4acd633df5841"
     },
     {
       "id": "floorkit.chiller",
@@ -631,6 +694,37 @@
       "contentHash": "183f8e3f969af58f0c2c70ac25c8effc14038043a43de2085db05ba1207edb7c"
     },
     {
+      "id": "floorkit.desk-pedestal",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "desk-pedestal",
+      "version": "1.0.0",
+      "labelName": "Desk Pedestal",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "pedestal",
+        "drawers",
+        "filing",
+        "mobile",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.43,
+        "depth": 0.6,
+        "height": 0.6
+      },
+      "path": "blocks/floorkit/desk-pedestal/1.0.0.op",
+      "bytes": 6471,
+      "sha256": "e9dcdd4d978b322d48c2c50a3164be04d98ddc33c90456669500daf7507a8605",
+      "contentHash": "2ba2bf517158fca49702d2c1816553a5607cb178e060f949f6a4aedc26cbd78d"
+    },
+    {
       "id": "floorkit.dining-table-4",
       "publisher": {
         "id": "floorkit",
@@ -776,6 +870,36 @@
       "bytes": 4154,
       "sha256": "d1543c83749e8215696fbab1a435e1892f78dc70d083f9cdfb668e307a67dbb3",
       "contentHash": "41616510e5a9e1ff16c555da41a88b20180947c1545857d51b518eeb57d6b039"
+    },
+    {
+      "id": "floorkit.filing-cabinet",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "filing-cabinet",
+      "version": "1.0.0",
+      "labelName": "Filing Cabinet",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "filing cabinet",
+        "cabinet",
+        "storage",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.47,
+        "depth": 0.62,
+        "height": 1.32
+      },
+      "path": "blocks/floorkit/filing-cabinet/1.0.0.op",
+      "bytes": 6179,
+      "sha256": "92fc39b71f057810231df149030a4627517724cad8778109c296eb3335ee7a3d",
+      "contentHash": "03a017a5c6ac213dcca5b42086e311e4d259a9389ce992f44cb5fdd6b29a6ec1"
     },
     {
       "id": "floorkit.floor-lamp",
@@ -1459,6 +1583,37 @@
       "contentHash": "8d98b187078893faa6b53ffe4718541e99eec3ba4c5380730d9d689350af1624"
     },
     {
+      "id": "floorkit.sideboard",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "sideboard",
+      "version": "1.0.0",
+      "labelName": "Sideboard",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "sideboard",
+        "cupboard",
+        "storage",
+        "dining",
+        "living"
+      ],
+      "dimensions": {
+        "width": 1.6,
+        "depth": 0.45,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/sideboard/1.0.0.op",
+      "bytes": 7036,
+      "sha256": "bd46203d6d02a3e5619409124f351674d371b6e6c2920d17e1938c087a0743db",
+      "contentHash": "a8b0929a648a5b2faed670f64c29dd643587aa9d37dc572860e0ccdf06c65ba9"
+    },
+    {
       "id": "floorkit.simple-chair",
       "publisher": {
         "id": "floorkit",
@@ -1870,6 +2025,36 @@
       "bytes": 2885,
       "sha256": "0abc4202249783eb35e72eae3ab8160e8493831efde49d67ae917733e4e9d2b9",
       "contentHash": "bffaf36609297451cbc54408acdb9766b5051552a26f8d23419255a8d805dfb7"
+    },
+    {
+      "id": "floorkit.wardrobe",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wardrobe",
+      "version": "1.0.0",
+      "labelName": "Wardrobe",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wardrobe",
+        "cupboard",
+        "storage",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 0.6,
+        "height": 2.1
+      },
+      "path": "blocks/floorkit/wardrobe/1.0.0.op",
+      "bytes": 6500,
+      "sha256": "cf590a2b4561885f5c327cba01daf3102cfb41156ff6bd18c2daf60b541e44cf",
+      "contentHash": "298d473ab4a72ea63ff6fd482eb725cee2599c1f4dfbd4f2de116fd6c38e3f1f"
     },
     {
       "id": "floorkit.wash-basin",

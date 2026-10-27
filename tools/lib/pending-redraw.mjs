@@ -10,7 +10,6 @@
  */
 export const PENDING_REDRAW = Object.freeze({
   bathtub: '12474e20c6d8fe103ea47697fdbfc1c4ef459402d9d2f88bcb72a4988bb16aae',
-  cabinet: '208c3d4abd991faf3113d92c1977a9720297cd8d97aa84d1220f81df5166160c',
   chiller: 'c922e3ad1dd70eea4a6087953c333f32e8a371db828638cd7ef499310a48bc82',
   crah: 'cc1a3ed5fea2b5dff5b6bb25298b4e51e25ee91d42ccbf74fbb6c6c9da3d9672',
   pdu: 'aac409563d3d7a5ae2c34dbed3819f1a862695c8f7161ae0dc4b0f2ab65741b4',
