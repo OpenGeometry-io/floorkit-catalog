@@ -31,11 +31,14 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "openings",
     "catalog:placement": "hosted",
+    "catalog:lod": "300",
     "catalog:tags": "door, vision panel",
+    "catalog:note": "Glass in its leaf and the leaf in its frame: overlap glassInset+glazedLeaf, overlap frameSolid+glazedLeaf.",
     "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/openings/glazed-door-assembly.op#catalog-openings-glazed-door-assembly",
     "ifc:class": "IfcDoor",
     "ifc:predefinedType": "DOOR",
     "mat:frameSolid": "frame",
+    "mat:glazedLeaf": "surface",
     "mat:glassInset": "glass"
   },
   "anchors": {
@@ -56,6 +59,9 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
     },
     "tagMount": {
@@ -88,19 +94,19 @@
       "points": [
         [
           -0.46,
-          -0.06
+          -0.07
         ],
         [
           -0.46,
-          0.06
+          0.04
         ],
         [
           0.46,
-          0.06
+          0.04
         ],
         [
           0.46,
-          -0.06
+          -0.07
         ]
       ]
     },
@@ -190,7 +196,7 @@
       ],
       "width": 0.86,
       "height": 2.05,
-      "depth": 0.042,
+      "depth": 0.06,
       "color": "#D7D0C4"
     },
     "visionPanelCutter": {
@@ -242,19 +248,19 @@
         "vertices": [
           [
             -0.43,
-            -0.021
+            -0.03
           ],
           [
             -0.43,
-            0.021
+            0.03
           ],
           [
             0.43,
-            0.021
+            0.03
           ],
           [
             0.43,
-            -0.021
+            -0.03
           ]
         ]
       },

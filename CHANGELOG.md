@@ -8,6 +8,15 @@ Notable changes to floorkit-catalog, in the style of [Keep a Changelog 1.1.0](ht
 
 ## [Unreleased]
 
+### Removed
+
+- **The seed importer**, the one-off tool that wrote the 26 seed blocks from Floorkit v0.6.1. The seeds are now redrawn by hand to the drafting standard, and a tool that regenerated them would undo that. `catalog:basedOn` names the standard, data sheet or reference a block's dimensions come from. The 0.1.0 section below records the import as it was; the seeds it describes are being redrawn in place before the first tag.
+
+### Changed
+
+- **`floorkit.glazed-door` 1.0.0 is redrawn in place** (untagged, so allowed): `catalog:lod` 300, anchor and `mat:` roles, a 0.06 m leaf so `tagMount` sits on its face, the plan frame line under the body, and its two rebate contacts listed (glass in the leaf, the leaf in the frame); nothing is renamed or removed, and the footprint and insertion point stay.
+- **Sweeps** in the geometry gates are bounded as OpenGeometry's `sweep.rs` builds them, for the one case modelled: the profile centred on its vertex average at the origin and facing +y, the path starting straight up, in one vertical plane, with no turn over 90°. The glazed-door frame now measures 2.11 m high, not 2.08. Any other sweep is refused.
+
 ## [0.1.0] - 2026-10-26
 
 The first release, tagged at the public launch ([docs/LAUNCH.md](docs/LAUNCH.md), item 4).

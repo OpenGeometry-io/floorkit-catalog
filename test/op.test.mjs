@@ -430,3 +430,36 @@ test('the anchor and port constants equal the drafting standard\'s tables', () =
   const sorted = (o) => JSON.parse(JSON.stringify(o, (k, v) => (Array.isArray(v) ? [...v].sort() : v)));
   assert.deepEqual(sorted(ports), sorted(PORTS));
 });
+
+test('a sweep is bounded with its profile turned along each segment, as the kernel builds it', () => {
+  // The glazed-door frame: a parity --mesh run against Floorkit main measured the kernel's frameSolid
+  // box as 0.98 x 2.11 x 0.14 m (x -0.49..0.49, y 0..2.11, z -0.07..0.07).
+  const door = JSON.parse(readFileSync(new URL('../blocks/floorkit/glazed-door/1.0.0.op', import.meta.url), 'utf8'));
+  door.id = 'fixture.glazed-door';
+  assert.deepEqual(check(door).issues, []);
+  door.dimensions.height = 2.08;
+  rejects(door, '/dimensions/height', 'is 2.080 m but the body spans 2.110 m in y');
+});
+
+test('a sweep outside the case the catalog can bound is refused, naming the rule', () => {
+  // Inputs from a port of the kernel's sweep (OpenGeometry sweep.rs), where the box above would be wrong.
+  const door = () => {
+    const d = JSON.parse(readFileSync(new URL('../blocks/floorkit/glazed-door/1.0.0.op', import.meta.url), 'utf8'));
+    d.id = 'fixture.glazed-door';
+    return d;
+  };
+  const tri = [[-0.02, 0, -0.03], [0.04, 0, -0.03], [-0.02, 0, 0.06]];
+  const cases = {
+    'its profile is not centred on its vertex average at the origin': (d) => { d.definitions.frameSection.points = [[0, 0, 0], [0, 0, 0.1], [0.05, 0, 0.1], [0.05, 0, 0]]; },
+    'its profile does not face +y': (d) => { d.definitions.frameSection.points = tri; },
+    'its path does not start straight up': (d) => { d.definitions.framePath.points = [[0, 2.08, 0], [0, 0, 0]]; },
+    'its path is not in one vertical plane': (d) => { d.definitions.framePath.points = [[-0.46, 0, 0], [-0.46, 2.08, 0], [0.46, 2.08, 0], [0.46, 2.08, 0.5]]; },
+    'its path turns by more than 90°': (d) => { d.definitions.framePath.points = [[-0.46, 0, 0], [-0.46, 2.08, 0], [0, 1, 0]]; },
+  };
+  for (const [rule, edit] of Object.entries(cases)) {
+    const d = door();
+    edit(d);
+    rejects(d, '/definitions/frameSolid', rule);
+  }
+  assert.deepEqual(check(door()).issues, []);
+});

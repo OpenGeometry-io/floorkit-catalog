@@ -196,9 +196,9 @@
         "height": 2.11
       },
       "path": "blocks/floorkit/glazed-door/1.0.0.op",
-      "bytes": 5024,
-      "sha256": "371095af08643162e690ccb8431a4f31b80e1ccdbfdd5978457bf7ad6b5d613e",
-      "contentHash": "c8dba47bef3f679b7d389fe737bbe6d0d5ada8bb7b59f48646438d9c753067ac"
+      "bytes": 5269,
+      "sha256": "10c317debe0546780d2ba6fe4271bf479f5b73cb7fa720689c868b4bb5413c3c",
+      "contentHash": "4685de254ef54e9dcd04c6a4b42933b53fe6c5e47db2adf2e9829f06aedbda90"
     },
     {
       "id": "floorkit.hob",

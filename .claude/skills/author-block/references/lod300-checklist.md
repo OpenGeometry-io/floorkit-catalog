@@ -1,6 +1,6 @@
 # LOD 300 checklist
 
-Tick every line against the pictures `tools/render.mjs` writes for the block (`renders/<publisher>/<slug>/<version>/`). One line, one check; the section in brackets is the rule in [docs/drafting-standard.md](../../../../docs/drafting-standard.md). A line that cannot be ticked is fixed, or explained in the pull request.
+Tick every line against the pictures `tools/render.mjs` writes for the block (`renders/<publisher>/<slug>/<version>/`). One line, one check; the section in brackets is the rule in [docs/drafting-standard.md](../../../../docs/drafting-standard.md). A line that cannot be ticked is fixed, or explained in the pull request; a line that does not apply is marked N/A with a word of reason ("N/A: no ports").
 
 ## Plan tick (`plan-1-50.svg`, `plan-1-100.svg`, `overlay.svg`)
 

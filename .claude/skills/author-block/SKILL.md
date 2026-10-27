@@ -18,7 +18,7 @@ Run everything from the repository root, with Node 22 or later, after `npm ci`.
 
 Read [docs/drafting-standard.md](../../../docs/drafting-standard.md) before drawing, and keep its section 10 row for the block's category open: it lists what the plan must show and which parts the body must have. Every question about a height, a role, a colour, an anchor name, a port id or an IFC class is answered there.
 
-**Numbers.** Take every size from the standard's key-dimension table ([§11](../../../docs/drafting-standard.md#key-dimensions)) or from a source you can name in `catalog:basedOn`. A number marked "verify" may be drawn; say in the pull request that it is unverified. Stop and ask only when neither gives the number.
+**Numbers.** Key dimensions (the overall size and the named heights) come from the standard's key-dimension table ([§11](../../../docs/drafting-standard.md#key-dimensions)) or a source you name in `catalog:basedOn`; a "verify" number may be drawn, and the pull request says it is unverified. Secondary sizes (thicknesses, insets, rails) are yours to choose within the standard's minima and the parts of §10. Stop and ask only for a key dimension with no source.
 
 ## 1. Check the request first
 
@@ -108,7 +108,7 @@ npm run check                                                # tests, every bloc
 
 Re-run `npm run index` after any change to a block or `publishers.json`, and commit `index.json`. `npm run check` must end with `N block(s) valid.` and `index.json is current: N entr(ies).`; quote both in the pull request.
 
-**Parity and render need a Floorkit build.** CI cannot run them. With a build:
+**Parity and render need a Floorkit build.** Anyone with a Floorkit build runs them; CI cannot; a maintainer runs them before merging when the author could not. With a build:
 
 ```sh
 FLOORKIT_DIR=<Floorkit build> node tools/parity.mjs --build --mesh blocks/<publisher>/<slug>/1.0.0.op    # builds it, and its mirror; checks the solids

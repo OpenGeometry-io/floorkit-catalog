@@ -13,7 +13,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
-import { geometryIssues } from './geometry.mjs';
+import { geometryIssues, sweepIssue } from './geometry.mjs';
 import { parseNote } from './note.mjs';
 import { PENDING_REDRAW } from './pending-redraw.mjs';
 import { ANCHOR_ROLES, KEPT_PORT_IDS, PORTS } from './roles.mjs';
@@ -330,6 +330,8 @@ function standardIssues(definition, text, listed) {
     ...Object.entries(definition.definitions ?? {}).map(([key, node]) => [node, `/definitions/${key}`]),
   ];
   for (const [node, path] of nodes) {
+    const sweep = node.kind === 'sweep' && sweepIssue(node, definition.definitions ?? {});
+    if (sweep) issues.push({ path, message: sweep });
     // Floorkit mirrors only the centre of a partial cylinder (drafting standard §3).
     if (node.kind === 'cylinder' && node.angle !== undefined && node.angle < 2 * Math.PI - 1e-4) {
       issues.push({ path: `${path}/angle`, message: `is ${node.angle}; a cylinder must be a full turn (${(2 * Math.PI).toFixed(4)}), since a mirrored partial cylinder does not match its plan` });

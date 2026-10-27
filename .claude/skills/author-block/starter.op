@@ -72,6 +72,7 @@
   "definitions": {
     "leg": {
       "kind": "cuboid",
+      "color": "#7a5c3e",
       "center": [
         0,
         0.21,
@@ -126,7 +127,6 @@
       {
         "id": "leg-front-left",
         "ref": "leg",
-        "color": "#7a5c3e",
         "placement": {
           "position": [
             -0.18,
@@ -148,7 +148,6 @@
       {
         "id": "leg-front-right",
         "ref": "leg",
-        "color": "#7a5c3e",
         "placement": {
           "position": [
             0.18,
@@ -170,7 +169,6 @@
       {
         "id": "leg-back-left",
         "ref": "leg",
-        "color": "#7a5c3e",
         "placement": {
           "position": [
             -0.18,
@@ -192,7 +190,6 @@
       {
         "id": "leg-back-right",
         "ref": "leg",
-        "color": "#7a5c3e",
         "placement": {
           "position": [
             0.18,
