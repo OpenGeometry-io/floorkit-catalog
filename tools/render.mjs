@@ -16,7 +16,8 @@
  * which. `renders/gallery.html` shows every block rendered, by category, with a
  * "before" column for each block found under `renders/baseline/`, which
  * `--baseline=<dir>` fills from a tree laid out as `<publisher>/<slug>/<version>/`.
- * Exits 1 when any block fails to parse, build or draw.
+ * Exits 1 when any block fails to parse, build or draw, or a 3D node of it has
+ * no kernel triangles (an unmeshed body would draw as a blank picture).
  */
 import { cpSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -85,6 +86,8 @@ for (const block of targets(args, renders)) {
     const built = floorkit.buildFromBuildingModel(placedModel('block.op'), new THREE.Group(), { assetSources: { 'block.op': block.text } });
     const element = built.elementsById.get('block');
     const parts = colourParts(bodyParts(element), definition.metadata);
+    const empty = parts.filter((part) => part.tris.length === 0).map((part) => part.name);
+    if (parts.length === 0 || empty.length > 0) throw new Error(`no kernel triangles for ${parts.length === 0 ? 'any 3D node' : empty.join(', ')}`);
     mkdirSync(block.out, { recursive: true });
     const put = (file, data) => writeFileSync(path.join(block.out, file), data);
     put('plan-1-50.svg', planSvg(element, 0.02));
