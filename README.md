@@ -2,8 +2,8 @@
 
 Free, reusable building blocks for [Floorkit](https://ploterr.com/floorkit): furniture, beds, kitchen units, sanitaryware, appliances, lighting, doors, planting, vehicles and data-centre equipment. Each block is one plain JSON `.op` file with a plan symbol, a 3D body and named anchors.
 
-- **80 blocks in 13 categories**, listed in [`index.json`](index.json). Each is drawn to LOD 300 to the [drafting standard](docs/drafting-standard.md). 11 of them also have a version 2.0.0, so the index has 91 entries.
-- **Two formats.** Every block has a version in format 1. The 2.0.0 versions use [format v2](docs/format-v2.md), the curved node kinds of Floorkit 3.0 (arcs, revolves, cones, sectors). The reference loader skips them unless asked with `maxFormat: 2`.
+- **81 blocks in 13 categories**, listed in [`index.json`](index.json). Each is drawn to LOD 300 to the [drafting standard](docs/drafting-standard.md). 80 of them are in format 1, and 11 of these also have a version 2.0.0. `shower-enclosure-quadrant` is in format v2 only. The index has 92 entries.
+- **Two formats.** The 2.0.0 versions and `shower-enclosure-quadrant` use [format v2](docs/format-v2.md), the curved node kinds of Floorkit 3.0 (arcs, revolves, cones, sectors). The reference loader skips them unless asked with `maxFormat: 2`.
 - **A released block never changes.** A fix is a new version in a new file, so a URL pinned to a tag always serves the same bytes.
 - **Stricter than Floorkit.** The catalog refuses anything Floorkit would silently repair, so a block draws exactly as written.
 - **Blocks are CC BY 4.0; the tools are Apache-2.0.** See [Licence](#licence).
@@ -21,7 +21,7 @@ One picture per category, and every block in it. Each picture is the `iso.png` t
 | <img src="docs/images/double-bed.png" width="160" alt="Double bed, beds"> | **beds** (6): `bedside-table`, `bunk-bed`, `cot`, `double-bed`, `king-bed`, `single-bed` |
 | <img src="docs/images/chest-of-drawers.png" width="160" alt="Chest of drawers, storage"> | **storage** (7): `bookshelf`, `cabinet`, `chest-of-drawers`, `desk-pedestal`, `filing-cabinet`, `sideboard`, `wardrobe` |
 | <img src="docs/images/kitchen-sink.png" width="160" alt="Kitchen sink, kitchen"> | **kitchen** (7): `base-unit-1000`, `base-unit-600`, `corner-base-unit`, `kitchen-counter`, `kitchen-sink`, `tall-unit-600`, `wall-unit-600` |
-| <img src="docs/images/bathtub.png" width="160" alt="Bathtub, sanitary"> | **sanitary** (12): `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-enclosure`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible`, `wc-wall-hung` |
+| <img src="docs/images/bathtub.png" width="160" alt="Bathtub, sanitary"> | **sanitary** (13): `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-enclosure`, `shower-enclosure-quadrant`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible`, `wc-wall-hung` |
 | <img src="docs/images/cooker.png" width="160" alt="Cooker, appliances"> | **appliances** (8): `cooker`, `dishwasher`, `extractor-hood`, `fridge-freezer`, `hob`, `television`, `tumble-dryer`, `washing-machine` |
 | <img src="docs/images/floor-lamp.png" width="160" alt="Floor lamp, lighting"> | **lighting** (6): `ceiling-luminaire-1200`, `downlight`, `floor-lamp`, `pendant-light`, `table-lamp`, `wall-light` |
 | <img src="docs/images/tree.png" width="160" alt="Tree, planting"> | **planting** (3): `planter`, `potted-plant`, `tree` |

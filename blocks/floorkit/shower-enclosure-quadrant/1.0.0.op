@@ -1,0 +1,927 @@
+{
+  "version": 1,
+  "id": "floorkit.shower-enclosure-quadrant",
+  "labelName": "Quadrant Shower Enclosure",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.9,
+    "depth": 0.9,
+    "height": 2
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "shower, shower enclosure, quadrant, bathroom",
+    "catalog:note": "Quadrant shower enclosure on a tray: rim 0.04. The back wall is on wallFace and the left side (-x) is a wall too; mirror the block for the other hand. The tray stands on a quarter cylinder sector of radius 0.90 about the corner of the walls; its floor and rim are outline sweep halves, the gully flush in a hole through the floor. Curved glass 0.010 on the rim: two fixed panels and a sliding door 0.002 inside them, not drawn in plan. A riser stands on the valve on its axis and carries the head.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, verify; EN 14527 for the tray), not read, unverified; quadrant of radius 0.90 filling the 0.90 x 0.90 footprint, generic, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified; height 2.00 practice size, unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "SHOWER",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:tray-base": "ceramic",
+    "mat:tray-floor-back": "ceramic",
+    "mat:tray-floor-left": "ceramic",
+    "mat:tray-rim-back": "ceramic",
+    "mat:tray-rim-left": "ceramic",
+    "mat:gully": "metal",
+    "mat:glass-fixed-right": "glass",
+    "mat:glass-fixed-left": "glass",
+    "mat:door": "glass",
+    "mat:valve": "metal",
+    "mat:riser": "metal",
+    "mat:head": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.025,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          0,
+          1.1,
+          -0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.03,
+          1.1,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.03,
+          1.1,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polyline",
+        "points": [
+          [
+            0.45,
+            -0.45
+          ],
+          [
+            -0.45,
+            -0.45
+          ],
+          [
+            -0.45,
+            0.45
+          ]
+        ]
+      },
+      {
+        "id": "outline-arc",
+        "kind": "arc",
+        "center": [
+          -0.45,
+          -0.45
+        ],
+        "radius": 0.9,
+        "startAngle": -1.570796,
+        "sweepAngle": 1.570796
+      },
+      {
+        "id": "rim",
+        "kind": "polyline",
+        "points": [
+          [
+            0.3885105843,
+            -0.4
+          ],
+          [
+            -0.4,
+            -0.4
+          ],
+          [
+            -0.4,
+            0.3885105843
+          ]
+        ]
+      },
+      {
+        "id": "fall-1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.4,
+            -0.4
+          ],
+          [
+            -0.0318198052,
+            -0.0318198052
+          ]
+        ]
+      },
+      {
+        "id": "fall-2",
+        "kind": "polyline",
+        "points": [
+          [
+            0.3885105843,
+            -0.4
+          ],
+          [
+            0.0313528295,
+            -0.0322800261
+          ]
+        ]
+      },
+      {
+        "id": "fall-3",
+        "kind": "polyline",
+        "points": [
+          [
+            0.1439696962,
+            0.1439696962
+          ],
+          [
+            0.0318198052,
+            0.0318198052
+          ]
+        ]
+      },
+      {
+        "id": "fall-4",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.4,
+            0.3885105843
+          ],
+          [
+            -0.0322800261,
+            0.0313528295
+          ]
+        ]
+      },
+      {
+        "id": "glass-fixed-right",
+        "kind": "arc",
+        "center": [
+          -0.45,
+          -0.45
+        ],
+        "radius": 0.87,
+        "startAngle": -0.45,
+        "sweepAngle": 0.45
+      },
+      {
+        "id": "glass-fixed-left",
+        "kind": "arc",
+        "center": [
+          -0.45,
+          -0.45
+        ],
+        "radius": 0.87,
+        "startAngle": -1.570796,
+        "sweepAngle": 0.45
+      },
+      {
+        "id": "gully-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.045,
+        "startAngle": 0,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "gully-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.045,
+        "startAngle": 3.141593,
+        "sweepAngle": 3.141593
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "tray-base",
+        "kind": "cylinder",
+        "color": "#f2f1ec",
+        "center": [
+          -0.45,
+          0.005,
+          -0.45
+        ],
+        "radius": 0.9,
+        "height": 0.01,
+        "angle": 1.570796,
+        "startAngle": -1.570796
+      },
+      {
+        "id": "tray-floor-back",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.01,
+            0
+          ],
+          [
+            0,
+            0.025,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.45,
+            -0.45
+          ],
+          "segments": [
+            {
+              "to": [
+                0.45,
+                -0.45
+              ]
+            },
+            {
+              "to": [
+                0.1863961031,
+                0.1863961031
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0.0318198052,
+                0.0318198052
+              ]
+            },
+            {
+              "to": [
+                -0.0318198052,
+                -0.0318198052
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                -0.45,
+                -0.45
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "tray-floor-left",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.01,
+            0
+          ],
+          [
+            0,
+            0.025,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.45,
+            -0.45
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.0318198052,
+                -0.0318198052
+              ]
+            },
+            {
+              "to": [
+                0.0318198052,
+                0.0318198052
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.1863961031,
+                0.1863961031
+              ]
+            },
+            {
+              "to": [
+                -0.45,
+                0.45
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.45,
+                -0.45
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "tray-rim-back",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.025,
+            0
+          ],
+          [
+            0,
+            0.04,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.45,
+            -0.45
+          ],
+          "segments": [
+            {
+              "to": [
+                0.45,
+                -0.45
+              ]
+            },
+            {
+              "to": [
+                0.1863961031,
+                0.1863961031
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0.151040764,
+                0.151040764
+              ]
+            },
+            {
+              "to": [
+                0.3985281374,
+                -0.4
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                -0.4,
+                -0.4
+              ]
+            },
+            {
+              "to": [
+                -0.45,
+                -0.45
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "tray-rim-left",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.025,
+            0
+          ],
+          [
+            0,
+            0.04,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.45,
+            -0.45
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.4,
+                -0.4
+              ]
+            },
+            {
+              "to": [
+                -0.4,
+                0.3985281374
+              ]
+            },
+            {
+              "to": [
+                0.151040764,
+                0.151040764
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.1863961031,
+                0.1863961031
+              ]
+            },
+            {
+              "to": [
+                -0.45,
+                0.45
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.45,
+                -0.45
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "gully",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.0175,
+          0
+        ],
+        "radius": 0.04,
+        "height": 0.015
+      },
+      {
+        "id": "glass-fixed-right",
+        "kind": "sweep",
+        "color": "#a8d0e6",
+        "path": [
+          [
+            0,
+            0.04,
+            0
+          ],
+          [
+            0,
+            2,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0.3378912146,
+            -0.0694051577
+          ],
+          "segments": [
+            {
+              "to": [
+                0.425,
+                -0.45
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.415,
+                -0.45
+              ]
+            },
+            {
+              "to": [
+                0.3288867435,
+                -0.073754813
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0.3378912146,
+                -0.0694051577
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "glass-fixed-left",
+        "kind": "sweep",
+        "color": "#a8d0e6",
+        "path": [
+          [
+            0,
+            0.04,
+            0
+          ],
+          [
+            0,
+            2,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.45,
+            0.425
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.0694051577,
+                0.3378912146
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                -0.073754813,
+                0.3288867435
+              ]
+            },
+            {
+              "to": [
+                -0.45,
+                0.415
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.45,
+                0.425
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "door",
+        "kind": "sweep",
+        "color": "#a8d0e6",
+        "path": [
+          [
+            0,
+            0.04,
+            0
+          ],
+          [
+            0,
+            1.98,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.1139319706,
+            0.3448756378
+          ],
+          "segments": [
+            {
+              "to": [
+                0.3448756378,
+                -0.1139319706
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.3356650279,
+                -0.117826154
+              ]
+            },
+            {
+              "to": [
+                -0.117826154,
+                0.3356650279
+              ],
+              "arc": {
+                "center": [
+                  -0.45,
+                  -0.45
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.1139319706,
+                0.3448756378
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "valve",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.1,
+          -0.425
+        ],
+        "width": 0.12,
+        "height": 0.1,
+        "depth": 0.05
+      },
+      {
+        "id": "riser",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.525,
+          -0.438
+        ],
+        "radius": 0.012,
+        "height": 0.75
+      },
+      {
+        "id": "head",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.91,
+          -0.39
+        ],
+        "radius": 0.06,
+        "height": 0.02
+      }
+    ]
+  }
+}
