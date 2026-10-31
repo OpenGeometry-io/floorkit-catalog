@@ -16,8 +16,8 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "bath, bathtub, bathroom",
-    "catalog:note": "Bath for an alcove: rim 0.55, a tub 1.52 x 0.56 inside and 0.43 deep, drawn as four rim strips over four wall slabs and a floor, with a front panel. Two pillar taps 0.10 high on the rim at the tap end make the overall height 0.65; the taps build as prisms. Drain and taps sit at the -x end: a mirrored copy keeps drainCenter, faucetMount and the ports where they are.",
-    "catalog:basedOn": "Drafting standard key dimensions (practice, verify; EN 14516 for baths), not read, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified",
+    "catalog:note": "Back-to-wall panelled bath, open on the wall side: rim 0.55, a tub 1.52 x 0.56 inside and 0.43 deep, drawn as four rim strips over four wall slabs and a floor, inside a front panel and two end panels to the floor. Two pillar taps 0.10 high on the rim at the tap end, 0.18 apart, make the overall height 0.65; they build as prisms. faucetMount is the midpoint between the taps. Drain and taps sit at the -x end: a mirrored copy keeps drainCenter, faucetMount and the ports where they are.",
+    "catalog:basedOn": "Bath 1.70 x 0.70 x 0.55: drafting standard key dimensions (practice; EN 14516 not read), unverified. Tap centres 0.18: common UK two-hole deck bath filler centres (180 mm), no source checked; EN 232 not read, unverified. Ports: BS EN 12056-2 via the drafting standard, unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "BATH",
     "ifcClass": "IfcSanitaryTerminal",
@@ -31,6 +31,8 @@
     "mat:wall-foot-end": "ceramic",
     "mat:tub-floor": "ceramic",
     "mat:front-panel": "surface",
+    "mat:end-panel-tap": "surface",
+    "mat:end-panel-foot": "surface",
     "mat:tap": "metal"
   },
   "anchors": {
@@ -133,7 +135,7 @@
         "position": [
           -0.805,
           0.52,
-          0.05
+          0.09
         ],
         "rotation": [
           90,
@@ -160,7 +162,7 @@
         "position": [
           -0.805,
           0.52,
-          -0.05
+          -0.09
         ],
         "rotation": [
           90,
@@ -292,7 +294,7 @@
         "kind": "arc",
         "center": [
           -0.805,
-          0.05
+          0.09
         ],
         "radius": 0.015,
         "startAngle": 0,
@@ -303,7 +305,7 @@
         "kind": "arc",
         "center": [
           -0.805,
-          0.05
+          0.09
         ],
         "radius": 0.015,
         "startAngle": 3.14159265,
@@ -314,7 +316,7 @@
         "kind": "arc",
         "center": [
           -0.805,
-          -0.05
+          -0.09
         ],
         "radius": 0.015,
         "startAngle": 0,
@@ -325,7 +327,7 @@
         "kind": "arc",
         "center": [
           -0.805,
-          -0.05
+          -0.09
         ],
         "radius": 0.015,
         "startAngle": 3.14159265,
@@ -466,13 +468,39 @@
         "depth": 0.02
       },
       {
+        "id": "end-panel-tap",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          -0.84,
+          0.26,
+          -0.01
+        ],
+        "width": 0.02,
+        "height": 0.52,
+        "depth": 0.68
+      },
+      {
+        "id": "end-panel-foot",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0.84,
+          0.26,
+          -0.01
+        ],
+        "width": 0.02,
+        "height": 0.52,
+        "depth": 0.68
+      },
+      {
         "id": "tap-cold",
         "ref": "tap",
         "placement": {
           "position": [
             -0.805,
             0,
-            0.05
+            0.09
           ],
           "rotation": [
             0,
@@ -493,7 +521,7 @@
           "position": [
             -0.805,
             0,
-            -0.05
+            -0.09
           ],
           "rotation": [
             0,
