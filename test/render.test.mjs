@@ -126,10 +126,17 @@ test('parity --mesh honours an overlap listed in catalog:note, and only then', {
 });
 
 test('parity --mesh prints the slivers it drops', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, () => {
+  // Kernel bd44f13 (OPE-101) emits no slivers here; older kernels emit some on the arc wall.
   const run = parity('--mesh', path.join(ROOT, 'test/fixtures/valid/v2-sweep-arc-profile.op'));
   assert.equal(run.status, 0, run.stdout);
-  assert.match(run.stdout, /^SLIVERS test\/fixtures\/valid\/v2-sweep-arc-profile\.op: \d+ triangle\(s\) collapse under the 0\.01 mm weld and were dropped \(pan \d+\)$/m);
-  assert.match(run.stdout, /^slivers dropped:\s+\d+ triangle\(s\) in 1 block\(s\)$/m);
+  const total = run.stdout.match(/^slivers dropped:\s+(\d+) triangle\(s\) in (\d+) block\(s\)$/m);
+  assert.ok(total, run.stdout);
+  const lines = run.stdout.match(/^SLIVERS .*$/gm) ?? [];
+  assert.equal(lines.length, Number(total[2]));
+  assert.equal(Number(total[1]) === 0, lines.length === 0);
+  for (const line of lines) {
+    assert.match(line, /^SLIVERS test\/fixtures\/valid\/v2-sweep-arc-profile\.op: \d+ triangle\(s\) collapse under the 0\.01 mm weld and were dropped \(pan \d+\)$/);
+  }
 });
 
 test('parity fails on every kernel-reject fixture named on its own', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, () => {

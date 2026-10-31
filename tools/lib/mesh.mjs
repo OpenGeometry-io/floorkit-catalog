@@ -36,8 +36,9 @@ function plane(t) {
 
 function shell(all) {
   // A triangle with two corners in one weld cell is a sliver of no area. Kernel 3.0 emits two per
-  // arc step on the side wall of an arc-edged outline sweep (measured, FLO-279); it is dropped here
-  // and counted, so it neither opens the shell nor hides.
+  // arc step on the side wall of an arc-edged outline sweep (measured, FLO-279; fixed in kernel bd44f13
+  // (OPE-101), 2026-10-31). Older kernels still emit it. It is dropped here and counted, so it
+  // neither opens the shell nor hides.
   const tris = all.filter((t) => new Set(t.map(key)).size === 3);
   const edges = new Map();
   const parent = new Map();
