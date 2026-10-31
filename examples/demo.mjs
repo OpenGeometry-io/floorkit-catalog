@@ -226,7 +226,22 @@ if (missing.length > 0) fail(`missing from the plan: ${missing.join(', ')}`);
 else console.log(`plan: all ${placed.length} placed blocks draw (1:50)`);
 
 // ── The four heights, from the built bodies and from the section ──
-const box = (object) => new THREE.Box3().setFromObject(object);
+// The box of the vertices that the triangles (or lines) use. Box3.setFromObject reads the whole position buffer, and a
+// kernel boolean with an outline-sweep cutter leaves the cutter's own vertices there, unused: the bath rim, a body from
+// 0.52 to 0.55 cut by a sweep from 0.51 to 0.56, reads 0.51 to 0.56 that way (FLO-330).
+const box = (object) => {
+  const out = new THREE.Box3();
+  const v = new THREE.Vector3();
+  object.updateMatrixWorld(true);
+  object.traverse((o) => {
+    const position = o.geometry?.attributes?.position;
+    if (!position) return;
+    const index = o.geometry.index;
+    const count = index ? index.count : position.count;
+    for (let k = 0; k < count; k++) out.expandByPoint(v.fromBufferAttribute(position, index ? index.getX(k) : k).applyMatrix4(o.matrixWorld));
+  });
+  return out;
+};
 // The bodies' own parts: a box of the whole element also holds its anchors, which sit on the floor.
 // Kernel 3.0 meshes only shown bodies: show them, flush, and show them again to place the new meshes.
 const meshed = (element) => (element.updateMatrixWorld(true), OpenGeometry.flush({ geometry: 'sync' }), element.updateMatrixWorld(true), element);
