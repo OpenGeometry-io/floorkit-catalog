@@ -17,16 +17,14 @@
     "catalog:lod": "300",
     "catalog:format": "2",
     "catalog:tags": "bath, bathtub, bathroom",
-    "catalog:note": "Back-to-wall panelled bath, open on the wall side: rim 0.55. The tub is 1.52 x 0.56 inside with corners of radius 0.08 and 0.43 deep: a floor slab and walls at least 0.02 thick whose inner faces are outline sweeps with arcs, the walls and the rim each drawn as two halves that meet on the centre line, inside a front panel and two end panels to the floor. Two pillar taps 0.10 high, 0.18 apart, at the -x end; faucetMount is between them. A mirrored copy keeps the anchors and ports where they are.",
+    "catalog:note": "Back-to-wall panelled bath, open on the wall side: rim 0.55. Tub 1.52 x 0.56 inside, corners of radius 0.08, 0.43 deep. Walls (box 1.56 x 0.60, y 0.10 to 0.52) and rim (1.70 x 0.70) are each one piece: a cuboid less the tub opening, an outline sweep cut through it. Floor slab 0.02 thick, the opening 0.001 smaller, in the walls. Front and end panels. Two pillar taps 0.10 high, 0.18 apart, at the -x end; faucetMount between them. A mirrored copy keeps the anchors and ports where they are.",
     "catalog:basedOn": "Bath 1.70 x 0.70 x 0.55: drafting standard key dimensions (practice; EN 14516 not read), unverified. Inner corner radius 0.08 generic, unverified. Tap centres 0.18: common UK bath filler centres, no source checked, unverified. Ports: BS EN 12056-2 via the drafting standard, unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "BATH",
     "ifcClass": "IfcSanitaryTerminal",
     "mat:tub-floor": "ceramic",
-    "mat:tub-wall-right": "ceramic",
-    "mat:tub-wall-left": "ceramic",
-    "mat:rim-right": "ceramic",
-    "mat:rim-left": "ceramic",
+    "mat:tub-walls": "ceramic",
+    "mat:rim": "ceramic",
     "mat:front-panel": "surface",
     "mat:end-panel-tap": "surface",
     "mat:end-panel-foot": "surface",
@@ -217,6 +215,254 @@
       ],
       "radius": 0.015,
       "height": 0.1
+    },
+    "wallBox": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.31,
+        0
+      ],
+      "width": 1.56,
+      "height": 0.42,
+      "depth": 0.6
+    },
+    "wallOpening": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.09,
+          0
+        ],
+        [
+          0,
+          0.53,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.68,
+          -0.28
+        ],
+        "segments": [
+          {
+            "to": [
+              0.68,
+              -0.28
+            ]
+          },
+          {
+            "to": [
+              0.76,
+              -0.2
+            ],
+            "arc": {
+              "center": [
+                0.68,
+                -0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.76,
+              0.2
+            ]
+          },
+          {
+            "to": [
+              0.68,
+              0.28
+            ],
+            "arc": {
+              "center": [
+                0.68,
+                0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.68,
+              0.28
+            ]
+          },
+          {
+            "to": [
+              -0.76,
+              0.2
+            ],
+            "arc": {
+              "center": [
+                -0.68,
+                0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.76,
+              -0.2
+            ]
+          },
+          {
+            "to": [
+              -0.68,
+              -0.28
+            ],
+            "arc": {
+              "center": [
+                -0.68,
+                -0.2
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "tubWalls": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "wallBox",
+      "operandRefs": [
+        "wallOpening"
+      ],
+      "color": "#f2f1ec"
+    },
+    "rimBox": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.535,
+        0
+      ],
+      "width": 1.7,
+      "height": 0.03,
+      "depth": 0.7
+    },
+    "rimOpening": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.51,
+          0
+        ],
+        [
+          0,
+          0.56,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.68,
+          -0.28
+        ],
+        "segments": [
+          {
+            "to": [
+              0.68,
+              -0.28
+            ]
+          },
+          {
+            "to": [
+              0.76,
+              -0.2
+            ],
+            "arc": {
+              "center": [
+                0.68,
+                -0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.76,
+              0.2
+            ]
+          },
+          {
+            "to": [
+              0.68,
+              0.28
+            ],
+            "arc": {
+              "center": [
+                0.68,
+                0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.68,
+              0.28
+            ]
+          },
+          {
+            "to": [
+              -0.76,
+              0.2
+            ],
+            "arc": {
+              "center": [
+                -0.68,
+                0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.76,
+              -0.2
+            ]
+          },
+          {
+            "to": [
+              -0.68,
+              -0.28
+            ],
+            "arc": {
+              "center": [
+                -0.68,
+                -0.2
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "rim": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "rimBox",
+      "operandRefs": [
+        "rimOpening"
+      ],
+      "color": "#f2f1ec"
     }
   },
   "profileView": {
@@ -415,112 +661,101 @@
     "elements": [
       {
         "id": "tub-floor",
-        "kind": "cuboid",
-        "color": "#f2f1ec",
-        "center": [
-          0,
-          0.11,
-          0
-        ],
-        "width": 1.56,
-        "height": 0.02,
-        "depth": 0.6
-      },
-      {
-        "id": "tub-wall-right",
         "kind": "sweep",
         "color": "#f2f1ec",
         "path": [
+          [
+            0,
+            0.1,
+            0
+          ],
           [
             0,
             0.12,
             0
-          ],
-          [
-            0,
-            0.52,
-            0
           ]
         ],
         "profile": {
           "start": [
-            0,
-            -0.3
+            -0.68,
+            -0.279
           ],
           "segments": [
             {
               "to": [
-                0.78,
-                -0.3
-              ]
-            },
-            {
-              "to": [
-                0.78,
-                0.3
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.3
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.28
-              ]
-            },
-            {
-              "to": [
                 0.68,
-                0.28
+                -0.279
               ]
             },
             {
               "to": [
-                0.76,
-                0.2
-              ],
-              "arc": {
-                "center": [
-                  0.68,
-                  0.2
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0.76,
+                0.759,
                 -0.2
-              ]
-            },
-            {
-              "to": [
-                0.68,
-                -0.28
               ],
               "arc": {
                 "center": [
                   0.68,
                   -0.2
                 ],
-                "counterClockwise": true
+                "counterClockwise": false
               }
             },
             {
               "to": [
-                0,
-                -0.28
+                0.759,
+                0.2
               ]
             },
             {
               "to": [
-                0,
-                -0.3
+                0.68,
+                0.279
+              ],
+              "arc": {
+                "center": [
+                  0.68,
+                  0.2
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.68,
+                0.279
               ]
+            },
+            {
+              "to": [
+                -0.759,
+                0.2
+              ],
+              "arc": {
+                "center": [
+                  -0.68,
+                  0.2
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.759,
+                -0.2
+              ]
+            },
+            {
+              "to": [
+                -0.68,
+                -0.279
+              ],
+              "arc": {
+                "center": [
+                  -0.68,
+                  -0.2
+                ],
+                "counterClockwise": false
+              }
             }
           ],
           "closed": true
@@ -529,310 +764,12 @@
         "capEnd": true
       },
       {
-        "id": "tub-wall-left",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.12,
-            0
-          ],
-          [
-            0,
-            0.52,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            0,
-            -0.3
-          ],
-          "segments": [
-            {
-              "to": [
-                0,
-                -0.28
-              ]
-            },
-            {
-              "to": [
-                -0.68,
-                -0.28
-              ]
-            },
-            {
-              "to": [
-                -0.76,
-                -0.2
-              ],
-              "arc": {
-                "center": [
-                  -0.68,
-                  -0.2
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                -0.76,
-                0.2
-              ]
-            },
-            {
-              "to": [
-                -0.68,
-                0.28
-              ],
-              "arc": {
-                "center": [
-                  -0.68,
-                  0.2
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0,
-                0.28
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.3
-              ]
-            },
-            {
-              "to": [
-                -0.78,
-                0.3
-              ]
-            },
-            {
-              "to": [
-                -0.78,
-                -0.3
-              ]
-            },
-            {
-              "to": [
-                0,
-                -0.3
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
+        "id": "tub-walls",
+        "ref": "tubWalls"
       },
       {
-        "id": "rim-right",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.52,
-            0
-          ],
-          [
-            0,
-            0.55,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            0,
-            -0.35
-          ],
-          "segments": [
-            {
-              "to": [
-                0.85,
-                -0.35
-              ]
-            },
-            {
-              "to": [
-                0.85,
-                0.35
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.35
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.28
-              ]
-            },
-            {
-              "to": [
-                0.68,
-                0.28
-              ]
-            },
-            {
-              "to": [
-                0.76,
-                0.2
-              ],
-              "arc": {
-                "center": [
-                  0.68,
-                  0.2
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0.76,
-                -0.2
-              ]
-            },
-            {
-              "to": [
-                0.68,
-                -0.28
-              ],
-              "arc": {
-                "center": [
-                  0.68,
-                  -0.2
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0,
-                -0.28
-              ]
-            },
-            {
-              "to": [
-                0,
-                -0.35
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
-      },
-      {
-        "id": "rim-left",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.52,
-            0
-          ],
-          [
-            0,
-            0.55,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            0,
-            -0.35
-          ],
-          "segments": [
-            {
-              "to": [
-                0,
-                -0.28
-              ]
-            },
-            {
-              "to": [
-                -0.68,
-                -0.28
-              ]
-            },
-            {
-              "to": [
-                -0.76,
-                -0.2
-              ],
-              "arc": {
-                "center": [
-                  -0.68,
-                  -0.2
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                -0.76,
-                0.2
-              ]
-            },
-            {
-              "to": [
-                -0.68,
-                0.28
-              ],
-              "arc": {
-                "center": [
-                  -0.68,
-                  0.2
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0,
-                0.28
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.35
-              ]
-            },
-            {
-              "to": [
-                -0.85,
-                0.35
-              ]
-            },
-            {
-              "to": [
-                -0.85,
-                -0.35
-              ]
-            },
-            {
-              "to": [
-                0,
-                -0.35
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
+        "id": "rim",
+        "ref": "rim"
       },
       {
         "id": "front-panel",

@@ -17,16 +17,12 @@
     "catalog:lod": "300",
     "catalog:format": "2",
     "catalog:tags": "shower, shower enclosure, quadrant, bathroom",
-    "catalog:note": "Quadrant shower enclosure on a tray: rim 0.04. The back wall is on wallFace and the left side (-x) is a wall too; mirror the block for the other hand. The tray stands on a quarter cylinder sector of radius 0.90 about the corner of the walls; its floor and rim are outline sweep halves, the gully flush in a hole through the floor. Curved glass 0.010 on the rim: two fixed panels and a sliding door 0.002 inside them, not drawn in plan. A riser stands on the valve on its axis and carries the head.",
+    "catalog:note": "Quadrant shower enclosure on a tray: rim 0.04. The back wall is on wallFace and the left side (-x) is a wall too; mirror the block for the other hand. Tray: one flat quadrant slab of radius 0.90, 0.04 high all round, sealed to the walls, the gully flush in a hole through it; its falls are drawn in plan only. Curved glass 0.010 on the slab: two fixed panels and a sliding door 0.002 inside them. A riser on the valve carries the head.",
     "catalog:basedOn": "Drafting standard key dimensions (practice, verify; EN 14527 for the tray), not read, unverified; quadrant of radius 0.90 filling the 0.90 x 0.90 footprint, generic, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified; height 2.00 practice size, unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "SHOWER",
     "ifcClass": "IfcSanitaryTerminal",
-    "mat:tray-base": "ceramic",
-    "mat:tray-floor-back": "ceramic",
-    "mat:tray-floor-left": "ceramic",
-    "mat:tray-rim-back": "ceramic",
-    "mat:tray-rim-left": "ceramic",
+    "mat:tray": "ceramic",
     "mat:gully": "metal",
     "mat:glass-fixed-right": "glass",
     "mat:glass-fixed-left": "glass",
@@ -84,7 +80,7 @@
       "placement": {
         "position": [
           0,
-          0.025,
+          0.04,
           0
         ],
         "rotation": [
@@ -208,6 +204,122 @@
       }
     }
   ],
+  "definitions": {
+    "traySlab": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0.04,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.45,
+          -0.45
+        ],
+        "segments": [
+          {
+            "to": [
+              0.45,
+              -0.45
+            ]
+          },
+          {
+            "to": [
+              -0.45,
+              0.45
+            ],
+            "arc": {
+              "center": [
+                -0.45,
+                -0.45
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.45,
+              -0.45
+            ]
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "gullyCut": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          -0.01,
+          0
+        ],
+        [
+          0,
+          0.05,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          0,
+          -0.045
+        ],
+        "segments": [
+          {
+            "to": [
+              0,
+              0.045
+            ],
+            "arc": {
+              "center": [
+                0,
+                0
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0,
+              -0.045
+            ],
+            "arc": {
+              "center": [
+                0,
+                0
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "tray": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "traySlab",
+      "operandRefs": [
+        "gullyCut"
+      ],
+      "color": "#f2f1ec"
+    }
+  },
   "profileView": {
     "elements": [
       {
@@ -240,30 +352,12 @@
         "sweepAngle": 1.570796
       },
       {
-        "id": "rim",
-        "kind": "polyline",
-        "points": [
-          [
-            0.3885105843,
-            -0.4
-          ],
-          [
-            -0.4,
-            -0.4
-          ],
-          [
-            -0.4,
-            0.3885105843
-          ]
-        ]
-      },
-      {
         "id": "fall-1",
         "kind": "polyline",
         "points": [
           [
-            -0.4,
-            -0.4
+            -0.45,
+            -0.45
           ],
           [
             -0.0318198052,
@@ -276,12 +370,12 @@
         "kind": "polyline",
         "points": [
           [
-            0.3885105843,
-            -0.4
+            0.39,
+            -0.45
           ],
           [
-            0.0313528295,
-            -0.0322800261
+            0.0294718742,
+            -0.0340060087
           ]
         ]
       },
@@ -290,8 +384,8 @@
         "kind": "polyline",
         "points": [
           [
-            0.1439696962,
-            0.1439696962
+            0.1354844148,
+            0.1354844148
           ],
           [
             0.0318198052,
@@ -304,12 +398,12 @@
         "kind": "polyline",
         "points": [
           [
-            -0.4,
-            0.3885105843
+            -0.45,
+            0.39
           ],
           [
-            -0.0322800261,
-            0.0313528295
+            -0.0340060087,
+            0.0294718742
           ]
         ]
       },
@@ -334,6 +428,17 @@
         "radius": 0.87,
         "startAngle": -1.570796,
         "sweepAngle": 0.45
+      },
+      {
+        "id": "door",
+        "kind": "arc",
+        "center": [
+          -0.45,
+          -0.45
+        ],
+        "radius": 0.858,
+        "startAngle": -1.085796,
+        "sweepAngle": 0.600796
       },
       {
         "id": "gully-a",
@@ -362,318 +467,8 @@
   "modelView": {
     "elements": [
       {
-        "id": "tray-base",
-        "kind": "cylinder",
-        "color": "#f2f1ec",
-        "center": [
-          -0.45,
-          0.005,
-          -0.45
-        ],
-        "radius": 0.9,
-        "height": 0.01,
-        "angle": 1.570796,
-        "startAngle": -1.570796
-      },
-      {
-        "id": "tray-floor-back",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.01,
-            0
-          ],
-          [
-            0,
-            0.025,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            -0.45,
-            -0.45
-          ],
-          "segments": [
-            {
-              "to": [
-                0.45,
-                -0.45
-              ]
-            },
-            {
-              "to": [
-                0.1863961031,
-                0.1863961031
-              ],
-              "arc": {
-                "center": [
-                  -0.45,
-                  -0.45
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                0.0318198052,
-                0.0318198052
-              ]
-            },
-            {
-              "to": [
-                -0.0318198052,
-                -0.0318198052
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  0
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                -0.45,
-                -0.45
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
-      },
-      {
-        "id": "tray-floor-left",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.01,
-            0
-          ],
-          [
-            0,
-            0.025,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            -0.45,
-            -0.45
-          ],
-          "segments": [
-            {
-              "to": [
-                -0.0318198052,
-                -0.0318198052
-              ]
-            },
-            {
-              "to": [
-                0.0318198052,
-                0.0318198052
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  0
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0.1863961031,
-                0.1863961031
-              ]
-            },
-            {
-              "to": [
-                -0.45,
-                0.45
-              ],
-              "arc": {
-                "center": [
-                  -0.45,
-                  -0.45
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                -0.45,
-                -0.45
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
-      },
-      {
-        "id": "tray-rim-back",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.025,
-            0
-          ],
-          [
-            0,
-            0.04,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            -0.45,
-            -0.45
-          ],
-          "segments": [
-            {
-              "to": [
-                0.45,
-                -0.45
-              ]
-            },
-            {
-              "to": [
-                0.1863961031,
-                0.1863961031
-              ],
-              "arc": {
-                "center": [
-                  -0.45,
-                  -0.45
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                0.151040764,
-                0.151040764
-              ]
-            },
-            {
-              "to": [
-                0.3985281374,
-                -0.4
-              ],
-              "arc": {
-                "center": [
-                  -0.45,
-                  -0.45
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                -0.4,
-                -0.4
-              ]
-            },
-            {
-              "to": [
-                -0.45,
-                -0.45
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
-      },
-      {
-        "id": "tray-rim-left",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.025,
-            0
-          ],
-          [
-            0,
-            0.04,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            -0.45,
-            -0.45
-          ],
-          "segments": [
-            {
-              "to": [
-                -0.4,
-                -0.4
-              ]
-            },
-            {
-              "to": [
-                -0.4,
-                0.3985281374
-              ]
-            },
-            {
-              "to": [
-                0.151040764,
-                0.151040764
-              ],
-              "arc": {
-                "center": [
-                  -0.45,
-                  -0.45
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0.1863961031,
-                0.1863961031
-              ]
-            },
-            {
-              "to": [
-                -0.45,
-                0.45
-              ],
-              "arc": {
-                "center": [
-                  -0.45,
-                  -0.45
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                -0.45,
-                -0.45
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
+        "id": "tray",
+        "ref": "tray"
       },
       {
         "id": "gully",
@@ -681,11 +476,11 @@
         "color": "#9aa3ab",
         "center": [
           0,
-          0.0175,
+          0.02,
           0
         ],
-        "radius": 0.04,
-        "height": 0.015
+        "radius": 0.044,
+        "height": 0.04
       },
       {
         "id": "glass-fixed-right",

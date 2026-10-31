@@ -17,12 +17,12 @@
     "catalog:lod": "300",
     "catalog:format": "2",
     "catalog:tags": "shower tray, shower, bathroom",
-    "catalog:note": "Shower tray: a rim upstand 0.05 wide, its outer corners rounded to radius 0.05, drawn as two outline sweeps that meet on the centreline; inside it a floor plate 0.025 thick with a round cut through it and the gully grating set in the cut, flush with the floor; plate and grating stand 0.001 clear of the rim and the cut. The floor is flat; its falls to the gully are drawn in plan only. rim 0.04.",
-    "catalog:basedOn": "Drafting standard key dimensions (0.90 x 0.90 x 0.04, practice; EN 14527), not read, unverified; corner radius 0.05, floor 0.025, gully radius 0.044: author's sizes, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified",
+    "catalog:note": "Shower tray: a rim upstand 0.055 wide, its outer corners rounded to radius 0.05 and its inner corners to radius 0.03, drawn as one outline sweep less the opening (0.79 x 0.79), an outline sweep cut through it; inside it a floor plate 0.025 thick, an outline sweep with a round cut through it, and the gully grating set in the cut, flush with the floor; plate and grating stand 0.001 clear of the rim and the cut. The floor is flat; its falls to the gully are drawn in plan only. rim 0.04.",
+    "catalog:basedOn": "Drafting standard key dimensions (0.90 x 0.90 x 0.04, practice; EN 14527), not read, unverified; corner radius 0.05, inner corner radius 0.03, rim width 0.055, floor 0.025, gully radius 0.044: author's sizes, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "SHOWER",
     "ifcClass": "IfcSanitaryTerminal",
-    "mat:rimHalf": "ceramic",
+    "mat:rim": "ceramic",
     "mat:floorPlate": "ceramic",
     "mat:gully": "metal"
   },
@@ -124,7 +124,7 @@
     }
   ],
   "definitions": {
-    "rimHalf": {
+    "rimSolid": {
       "kind": "sweep",
       "color": "#f2f1ec",
       "path": [
@@ -141,7 +141,7 @@
       ],
       "profile": {
         "start": [
-          0,
+          -0.4,
           -0.45
         ],
         "segments": [
@@ -185,33 +185,41 @@
           },
           {
             "to": [
-              0,
+              -0.4,
               0.45
             ]
           },
           {
             "to": [
-              0,
+              -0.45,
               0.4
-            ]
+            ],
+            "arc": {
+              "center": [
+                -0.4,
+                0.4
+              ],
+              "counterClockwise": false
+            }
           },
           {
             "to": [
-              0.4,
-              0.4
-            ]
-          },
-          {
-            "to": [
-              0.4,
+              -0.45,
               -0.4
             ]
           },
           {
             "to": [
-              0,
-              -0.4
-            ]
+              -0.4,
+              -0.45
+            ],
+            "arc": {
+              "center": [
+                -0.4,
+                -0.4
+              ],
+              "counterClockwise": false
+            }
           }
         ],
         "closed": true
@@ -219,28 +227,273 @@
       "capStart": true,
       "capEnd": true
     },
-    "floorBase": {
-      "kind": "cuboid",
+    "rimOpening": {
+      "kind": "sweep",
       "color": "#f2f1ec",
-      "center": [
-        0,
-        0.0125,
-        0
+      "path": [
+        [
+          0,
+          -0.01,
+          0
+        ],
+        [
+          0,
+          0.05,
+          0
+        ]
       ],
-      "width": 0.798,
-      "height": 0.025,
-      "depth": 0.798
+      "profile": {
+        "start": [
+          -0.365,
+          -0.395
+        ],
+        "segments": [
+          {
+            "to": [
+              0.365,
+              -0.395
+            ]
+          },
+          {
+            "to": [
+              0.395,
+              -0.365
+            ],
+            "arc": {
+              "center": [
+                0.365,
+                -0.365
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.395,
+              0.365
+            ]
+          },
+          {
+            "to": [
+              0.365,
+              0.395
+            ],
+            "arc": {
+              "center": [
+                0.365,
+                0.365
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.365,
+              0.395
+            ]
+          },
+          {
+            "to": [
+              -0.395,
+              0.365
+            ],
+            "arc": {
+              "center": [
+                -0.365,
+                0.365
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.395,
+              -0.365
+            ]
+          },
+          {
+            "to": [
+              -0.365,
+              -0.395
+            ],
+            "arc": {
+              "center": [
+                -0.365,
+                -0.365
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "rim": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "rimSolid",
+      "operandRefs": [
+        "rimOpening"
+      ],
+      "color": "#f2f1ec"
+    },
+    "floorBase": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0.025,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.365,
+          -0.394
+        ],
+        "segments": [
+          {
+            "to": [
+              0.365,
+              -0.394
+            ]
+          },
+          {
+            "to": [
+              0.394,
+              -0.365
+            ],
+            "arc": {
+              "center": [
+                0.365,
+                -0.365
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.394,
+              0.365
+            ]
+          },
+          {
+            "to": [
+              0.365,
+              0.394
+            ],
+            "arc": {
+              "center": [
+                0.365,
+                0.365
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.365,
+              0.394
+            ]
+          },
+          {
+            "to": [
+              -0.394,
+              0.365
+            ],
+            "arc": {
+              "center": [
+                -0.365,
+                0.365
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.394,
+              -0.365
+            ]
+          },
+          {
+            "to": [
+              -0.365,
+              -0.394
+            ],
+            "arc": {
+              "center": [
+                -0.365,
+                -0.365
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
     },
     "gullyCut": {
-      "kind": "cylinder",
+      "kind": "sweep",
       "color": "#f2f1ec",
-      "center": [
-        0,
-        0.0125,
-        0
+      "path": [
+        [
+          0,
+          -0.01,
+          0
+        ],
+        [
+          0,
+          0.035,
+          0
+        ]
       ],
-      "radius": 0.045,
-      "height": 0.045
+      "profile": {
+        "start": [
+          0,
+          -0.045
+        ],
+        "segments": [
+          {
+            "to": [
+              0,
+              0.045
+            ],
+            "arc": {
+              "center": [
+                0,
+                0
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0,
+              -0.045
+            ],
+            "arc": {
+              "center": [
+                0,
+                0
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
     },
     "floorPlate": {
       "kind": "boolean3d",
@@ -425,20 +678,164 @@
         "kind": "polygon",
         "vertices": [
           [
-            -0.4,
-            -0.4
+            -0.395,
+            -0.365
           ],
           [
-            0.4,
-            -0.4
+            -0.3945442326,
+            -0.3702094453
           ],
           [
-            0.4,
-            0.4
+            -0.3931907786,
+            -0.3752606043
           ],
           [
-            -0.4,
-            0.4
+            -0.3909807621,
+            -0.38
+          ],
+          [
+            -0.3879813333,
+            -0.3842836283
+          ],
+          [
+            -0.3842836283,
+            -0.3879813333
+          ],
+          [
+            -0.38,
+            -0.3909807621
+          ],
+          [
+            -0.3752606043,
+            -0.3931907786
+          ],
+          [
+            -0.3702094453,
+            -0.3945442326
+          ],
+          [
+            -0.365,
+            -0.395
+          ],
+          [
+            0.365,
+            -0.395
+          ],
+          [
+            0.3702094453,
+            -0.3945442326
+          ],
+          [
+            0.3752606043,
+            -0.3931907786
+          ],
+          [
+            0.38,
+            -0.3909807621
+          ],
+          [
+            0.3842836283,
+            -0.3879813333
+          ],
+          [
+            0.3879813333,
+            -0.3842836283
+          ],
+          [
+            0.3909807621,
+            -0.38
+          ],
+          [
+            0.3931907786,
+            -0.3752606043
+          ],
+          [
+            0.3945442326,
+            -0.3702094453
+          ],
+          [
+            0.395,
+            -0.365
+          ],
+          [
+            0.395,
+            0.365
+          ],
+          [
+            0.3945442326,
+            0.3702094453
+          ],
+          [
+            0.3931907786,
+            0.3752606043
+          ],
+          [
+            0.3909807621,
+            0.38
+          ],
+          [
+            0.3879813333,
+            0.3842836283
+          ],
+          [
+            0.3842836283,
+            0.3879813333
+          ],
+          [
+            0.38,
+            0.3909807621
+          ],
+          [
+            0.3752606043,
+            0.3931907786
+          ],
+          [
+            0.3702094453,
+            0.3945442326
+          ],
+          [
+            0.365,
+            0.395
+          ],
+          [
+            -0.365,
+            0.395
+          ],
+          [
+            -0.3702094453,
+            0.3945442326
+          ],
+          [
+            -0.3752606043,
+            0.3931907786
+          ],
+          [
+            -0.38,
+            0.3909807621
+          ],
+          [
+            -0.3842836283,
+            0.3879813333
+          ],
+          [
+            -0.3879813333,
+            0.3842836283
+          ],
+          [
+            -0.3909807621,
+            0.38
+          ],
+          [
+            -0.3931907786,
+            0.3752606043
+          ],
+          [
+            -0.3945442326,
+            0.3702094453
+          ],
+          [
+            -0.395,
+            0.365
           ]
         ]
       },
@@ -447,8 +844,8 @@
         "kind": "polyline",
         "points": [
           [
-            -0.4,
-            -0.4
+            -0.3862132034,
+            -0.3862132034
           ],
           [
             -0.0318,
@@ -461,8 +858,8 @@
         "kind": "polyline",
         "points": [
           [
-            0.4,
-            -0.4
+            0.3862132034,
+            -0.3862132034
           ],
           [
             0.0318,
@@ -475,8 +872,8 @@
         "kind": "polyline",
         "points": [
           [
-            0.4,
-            0.4
+            0.3862132034,
+            0.3862132034
           ],
           [
             0.0318,
@@ -489,8 +886,8 @@
         "kind": "polyline",
         "points": [
           [
-            -0.4,
-            0.4
+            -0.3862132034,
+            0.3862132034
           ],
           [
             -0.0318,
@@ -529,29 +926,8 @@
         "ref": "floorPlate"
       },
       {
-        "id": "rim-right",
-        "ref": "rimHalf"
-      },
-      {
-        "id": "rim-left",
-        "ref": "rimHalf",
-        "placement": {
-          "position": [
-            0,
-            0,
-            0
-          ],
-          "rotation": [
-            0,
-            180,
-            0
-          ],
-          "scale": [
-            1,
-            1,
-            1
-          ]
-        }
+        "id": "rim",
+        "ref": "rim"
       },
       {
         "id": "gully",

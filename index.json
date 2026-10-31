@@ -246,9 +246,9 @@
         "height": 0.65
       },
       "path": "blocks/floorkit/bathtub/2.0.0.op",
-      "bytes": 17710,
-      "sha256": "55ea0a181ad04eebf6183b5af10a6d61be84ffed7b0ab3657192aad1c68138fc",
-      "contentHash": "36ab8a63a519d7d66550eb6a8fe3231cc73a9ee99758e8a4452a8d4ab243beb9"
+      "bytes": 16379,
+      "sha256": "6be60213fe92baa5d1b42f4abbb95ff4f8d0c5c44c21f437eab4f09b08c1e135",
+      "contentHash": "818751aa7f307acd0cb5f5b65dde619c4a9960ebf149301f87d2710d0a8191a4"
     },
     {
       "id": "floorkit.bedside-table",
@@ -1787,9 +1787,9 @@
         "height": 2
       },
       "path": "blocks/floorkit/shower-enclosure-quadrant/1.0.0.op",
-      "bytes": 18422,
-      "sha256": "05abbe71f69db300415199f328caf589970481c27b4d93c55d58baeee77bca31",
-      "contentHash": "a1ff249a34961aa5377baf89b4564ed3154662683c1525795a9017bb7a8e01cf"
+      "bytes": 13921,
+      "sha256": "dc4fb47e60e8f67e093aec5aee472a3ef6a96cbc8c6aebd576bf360f2e20eabf",
+      "contentHash": "f47afd4351cb3cf5205bc2d7203491f530e22661b892b7df23908d7e918f3c9c"
     },
     {
       "id": "floorkit.shower-level-access",
@@ -1911,9 +1911,9 @@
         "height": 0.04
       },
       "path": "blocks/floorkit/shower-tray/2.0.0.op",
-      "bytes": 10228,
-      "sha256": "fffeeb295dacc220f08a0a01a525be1f4f8c676768d8008755802ec3b220f72a",
-      "contentHash": "b5549e09e5aa68e96f4fdb5660ca5868c012692b1b4fbcfddce1973374b7ce10"
+      "bytes": 17468,
+      "sha256": "eedbca6866cc89ca612cb9431a3dabb6d0e795d0f50ccc741730d8cbac08c001",
+      "contentHash": "8d4520b8e448c10db947d11271b116f6584807c0261c73be84a8df46fd6736d1"
     },
     {
       "id": "floorkit.sideboard",
