@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 /**
  * Pictures of a built block for `render.mjs`. The 3D views are NOT Floorkit's
- * OpenThree viewer: they are the kernel's own triangles (`bodyParts`), coloured
- * by each node's `mat:` role, drawn either by Floorkit's own copy of three.js
- * in headless Chromium (PNG) or, when no Chromium starts, as SVG with
- * painter's-order hidden faces. Orthographic; +z is the front of a block.
+ * OpenThree viewer: they are the kernel's own mesh (`bodyParts`, no coarser
+ * than the 2 mm drawing deflection), coloured by each node's `mat:` role, drawn either by
+ * Floorkit's own copy of three.js in headless Chromium (PNG, shaded with the
+ * kernel's per-vertex normals) or, when no Chromium starts, as SVG with
+ * painter's-order hidden faces (flat-shaded). Orthographic; +z is the front of
+ * a block.
  */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { homedir } from 'node:os';
@@ -110,9 +112,12 @@ window.draw = (parts, dir, caption) => {
   const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(3, 5, 4); scene.add(sun);
   for (const part of parts) {
     if (!part.tris.length) continue;
-    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(part.tris.flat(2), 3)); g.computeVertexNormals();
+    // The kernel's own index and per-vertex normals, so a round body shades smooth; edges from the triangles as before.
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(part.mesh.positions, 3)); g.setIndex(part.mesh.indices);
+    if (part.mesh.normals) g.setAttribute('normal', new THREE.Float32BufferAttribute(part.mesh.normals, 3)); else g.computeVertexNormals();
     scene.add(new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: part.color, side: THREE.DoubleSide })));
-    scene.add(new THREE.LineSegments(new THREE.EdgesGeometry(g, 25), new THREE.LineBasicMaterial({ color: 0x222222 })));
+    const t = new THREE.BufferGeometry(); t.setAttribute('position', new THREE.Float32BufferAttribute(part.tris.flat(2), 3));
+    scene.add(new THREE.LineSegments(new THREE.EdgesGeometry(t, 25), new THREE.LineBasicMaterial({ color: 0x222222 })));
     g.computeBoundingBox(); box.union(g.boundingBox);
   }
   const size = box.getSize(new THREE.Vector3()), centre = box.getCenter(new THREE.Vector3()), span = Math.max(size.x, size.z) + 0.4;

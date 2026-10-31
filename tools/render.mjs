@@ -10,21 +10,24 @@
  * `plan-1-50.svg` and `plan-1-100.svg` (Floorkit's plan extractor and paper
  * emitter, so the pens are Floorkit's own), `overlay.svg` (the plan symbol over
  * the top-down projection of the body), and `iso`, `iso-ne`, `front` and `side`.
- * Those four are the kernel's triangles coloured by `mat:` role, NOT Floorkit's
- * OpenThree viewer: PNG drawn by Floorkit's three.js in headless Chromium, or
- * SVG from the mesh when no Chromium starts (`lib/pictures.mjs`). The tool says
- * which. `renders/gallery.html` shows every block rendered, by category, with a
- * "before" column for each block found under `renders/baseline/`, which
- * `--baseline=<dir>` fills from a tree laid out as `<publisher>/<slug>/<version>/`.
+ * Those four are the kernel's mesh, no coarser than Floorkit's 2 mm drawing
+ * deflection, coloured by `mat:` role, NOT Floorkit's OpenThree viewer: PNG
+ * drawn by Floorkit's three.js in headless Chromium with the kernel's normals,
+ * or SVG from the mesh when no Chromium starts (`lib/pictures.mjs`). The tool says
+ * which. `renders/gallery.html` shows one card per block, by category, at its
+ * newest version rendered. Its "before" column shows the older version that
+ * the card's version replaces (a 1.0.0 beside its 2.0.0), and the card's own
+ * version found under `renders/baseline/`, which `--baseline=<dir>` fills from
+ * a tree laid out as `<publisher>/<slug>/<version>/`.
  * Exits 1 when any block fails to parse, build or draw, or a 3D node of it has
  * no kernel triangles (an unmeshed body would draw as a blank picture).
  */
 import { cpSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { bodyParts, loadFloorkit, placedModel, targets } from './lib/floorkit.mjs';
+import { PICTURE_DEFLECTION, bodyParts, loadFloorkit, placedModel, targets } from './lib/floorkit.mjs';
 import { VIEWS, colourParts, findChromium, meshSvg, openChromium, overlaySvg } from './lib/pictures.mjs';
-import { ROOT } from './lib/repo.mjs';
+import { ROOT, compareSemver } from './lib/repo.mjs';
 
 const args = process.argv.slice(2);
 const option = (name) => args.find((arg) => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
@@ -75,7 +78,7 @@ try {
 }
 const ext = chromium ? 'png' : 'svg';
 console.log(chromium
-  ? `3D views: PNG, kernel triangles drawn by Floorkit's three.js r${THREE.REVISION} in headless Chromium ${chromium.version} (${executable}); not the OpenThree viewer`
+  ? `3D views: PNG, kernel triangles (no coarser than ${PICTURE_DEFLECTION * 1000} mm) and normals drawn by Floorkit's three.js r${THREE.REVISION} in headless Chromium ${chromium.version} (${executable}); not the OpenThree viewer`
   : `3D views: SVG from the kernel triangles, painter's order (${why}); not the OpenThree viewer`);
 
 const cards = [];
@@ -85,7 +88,7 @@ for (const block of targets(args, renders)) {
     const definition = floorkit.parseOpenElementDefinition(block.text);
     const built = floorkit.buildFromBuildingModel(placedModel('block.op'), new THREE.Group(), { assetSources: { 'block.op': block.text } });
     const element = built.elementsById.get('block');
-    const parts = colourParts(bodyParts(element), definition.metadata);
+    const parts = colourParts(bodyParts(element, { maxDeflection: PICTURE_DEFLECTION }), definition.metadata);
     const empty = parts.filter((part) => part.tris.length === 0).map((part) => part.name);
     if (parts.length === 0 || empty.length > 0) throw new Error(`no kernel triangles for ${parts.length === 0 ? 'any 3D node' : empty.join(', ')}`);
     mkdirSync(block.out, { recursive: true });
@@ -108,18 +111,27 @@ await chromium?.close();
 
 const esc = (text) => String(text).replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
 const shown = (dir, files) => files.map((file) => `<figure><img src="${dir}/${file}" alt="${file}" loading="lazy"><figcaption>${file}</figcaption></figure>`).join('');
-const groups = Map.groupBy(cards, (card) => card.category);
-const sections = [...groups.keys()].sort().map((category) => `<h2>${esc(category)}</h2>\n${groups.get(category).map((card) => {
-  const rel = path.relative(renders, card.out).split(path.sep).join('/');
-  const before = existsSync(path.join(renders, 'baseline', rel)) ? `<div class="before"><h4>Before</h4>${shown(`baseline/${rel}`, ['plan-1-50.svg', 'iso.png'])}</div>` : '';
+const relOf = (card) => path.relative(renders, card.out).split(path.sep).join('/');
+// One card per block, at its newest version rendered. The "before" column shows the version it
+// replaces (the newest older one rendered, a 1.0.0 beside its 2.0.0), then the baseline pictures
+// of the shown version from `--baseline`, each under its own heading; a block with neither has none.
+const blocks = [...Map.groupBy(cards, (card) => card.block).values()].map((versions) => versions.sort((a, b) => compareSemver(b.version ?? '0.0.0', a.version ?? '0.0.0')));
+const groups = Map.groupBy(blocks, ([card]) => card.category);
+const sections = [...groups.keys()].sort().map((category) => `<h2>${esc(category)}</h2>\n${groups.get(category).map(([card, older]) => {
+  const rel = relOf(card);
+  const befores = [
+    older ? `<h5>${esc(older.version)}</h5>${shown(relOf(older), ['plan-1-50.svg', `iso.${ext}`])}` : '',
+    existsSync(path.join(renders, 'baseline', rel)) ? `<h5>baseline</h5>${shown(`baseline/${rel}`, ['plan-1-50.svg', 'iso.png'])}` : '',
+  ].join('');
+  const before = befores ? `<div class="before"><h4>Before</h4>${befores}</div>` : '';
   const now = shown(rel, ['plan-1-50.svg', `iso.${ext}`, `front.${ext}`, `side.${ext}`, 'overlay.svg']);
   return `<section class="card"><h3>${esc(card.name)} <small>${esc(card.label)}</small></h3><div class="row">${before}<div class="now"><h4>Now</h4>${now}</div></div></section>`;
 }).join('\n')}`);
 writeFileSync(path.join(renders, 'gallery.html'), `<!doctype html><html lang="en"><meta charset="utf-8"><title>Catalog renders</title>
 <style>body{font:14px system-ui,sans-serif;margin:16px;background:#fafafa}.card{background:#fff;border:1px solid #ddd;border-radius:6px;margin:12px 0;padding:8px}
-.row,.now,.before{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start}.before{background:#f3efe6;padding:4px;border-radius:4px}h4{margin:4px;writing-mode:vertical-rl}
+.row,.now,.before{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start}.before{background:#f3efe6;padding:4px;border-radius:4px}h4,h5{margin:4px;writing-mode:vertical-rl}h5{font-weight:normal;color:#666}
 figure{margin:0}img{width:220px;height:170px;object-fit:contain;background:#fff;border:1px solid #eee}figcaption{font-size:11px;color:#666}</style>
-<h1>Catalog renders</h1><p>${cards.length} block(s). 3D views are kernel triangles coloured by <code>mat:</code> role, not Floorkit's OpenThree viewer.</p>
+<h1>Catalog renders</h1><p>${blocks.length} block(s), one card each at its newest version; ${cards.length} block version(s) rendered. 3D views are kernel triangles coloured by <code>mat:</code> role, not Floorkit's OpenThree viewer.</p>
 ${sections.join('\n')}\n</html>\n`);
 console.log(`rendered ${cards.length}/${cards.length + failed} block(s) to ${path.relative(process.cwd(), renders) || '.'}; gallery ${path.join(path.relative(process.cwd(), renders), 'gallery.html')}`);
 process.exitCode = failed === 0 ? 0 : 1;

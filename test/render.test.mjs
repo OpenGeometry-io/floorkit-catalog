@@ -160,3 +160,12 @@ test('render draws the seven pictures as SVG from the kernel mesh when Chromium 
   assert.match(run.stdout, /^3D views: SVG from the kernel triangles, painter's order \(FLOORKIT_CHROMIUM=none\); not the OpenThree viewer$/m);
   assert.deepEqual(run.seen, { files: names, cards: 1 });
 });
+
+test('render draws one gallery card per block, with its older version in the "before" column', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, () => {
+  const files = ['1.0.0', '2.0.0'].map((version) => path.join(ROOT, `blocks/floorkit/wash-basin/${version}.op`));
+  const run = tool('render.mjs', files, (out) => readFileSync(path.join(out, 'gallery.html'), 'utf8'), { FLOORKIT_CHROMIUM: 'none' });
+  assert.equal(run.status, 0, run.stdout);
+  assert.equal(run.seen.match(/class="card"/g)?.length, 1);
+  assert.match(run.seen, /<h3>floorkit\.wash-basin@2\.0\.0 /);
+  assert.match(run.seen, /<div class="before"><h4>Before<\/h4><h5>1\.0\.0<\/h5><figure><img src="floorkit\/wash-basin\/1\.0\.0\/plan-1-50\.svg"/);
+});
