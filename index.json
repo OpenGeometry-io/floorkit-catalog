@@ -397,9 +397,9 @@
         "height": 0.48
       },
       "path": "blocks/floorkit/bidet/2.0.0.op",
-      "bytes": 13455,
-      "sha256": "4937ec4107dccf19bb6b5533614f255d54bb30700c9d5ef44d0c4baa9a0ab2c1",
-      "contentHash": "37c2becaa6b7c6db896ac8e74b9dcb2ab0db83452efcd0eab790260a49243bf8"
+      "bytes": 12051,
+      "sha256": "69ea034d34c214fc325ba9519cf40b111c8183d46b2fcfc1379bb319aca2e90f",
+      "contentHash": "efd0d101b91e2dd252200c0838d6200db78fc3a6395b309d46e4a6b53924fd62"
     },
     {
       "id": "floorkit.boiler",
@@ -2369,9 +2369,9 @@
         "height": 0.65
       },
       "path": "blocks/floorkit/urinal/2.0.0.op",
-      "bytes": 8065,
-      "sha256": "6e71912a5f3402da54138ec7216e6a893afb24d54e5aab105cc7e8d0c3c74e53",
-      "contentHash": "638c39c5779151ee894b3370416ec9f34b031d1c1d35c7d73ee3dfb4b6bf4c90"
+      "bytes": 9717,
+      "sha256": "7958bda0071834028696636326761a5e5666ea6b210a0a49ad52779f9cb27bdb",
+      "contentHash": "32b03a03f3f5234205ecf04fac7934dd1069699a2b0cd0bc5bd4e37135bb29a4"
     },
     {
       "id": "floorkit.wall-light",
@@ -2646,9 +2646,9 @@
         "height": 0.78
       },
       "path": "blocks/floorkit/wc/2.0.0.op",
-      "bytes": 12999,
-      "sha256": "8b5ac30acfc3da80abe81ec222458f76d6eca5d3ab2bad9461622fac412a2647",
-      "contentHash": "b0158638d13e097e0d5982410a065089a044db1e60510a4c736fb4d911d79264"
+      "bytes": 13946,
+      "sha256": "07835774ae948b1da76635b93a84ec3fa21e7a76b0a02afeed8bfd4bb18d2b49",
+      "contentHash": "839d9c35ed25d7fbad0a4c34cb4af0dd67b717fa52b8baa2bae8d9c94747ad6c"
     },
     {
       "id": "floorkit.wc-accessible",
@@ -2710,9 +2710,9 @@
         "height": 0.8
       },
       "path": "blocks/floorkit/wc-accessible/2.0.0.op",
-      "bytes": 16653,
-      "sha256": "56cee397f521da754c761e8e0f75dc705c0d13470211e320f5b346bea17d3303",
-      "contentHash": "852efc3f19ea9d9e404d36e62ec983c93f69d864ce32e0f5627189f575cee858"
+      "bytes": 12524,
+      "sha256": "d38e411abc2ff61439309374be7f3aad24a1e62ed6f789c525aa2abab28de2cc",
+      "contentHash": "c77aba33cc1a48cbeb1d098b34d848d2e77e2262499b2ade0d5395bde8486da7"
     },
     {
       "id": "floorkit.wc-wall-hung",
@@ -2772,9 +2772,9 @@
         "height": 0.63
       },
       "path": "blocks/floorkit/wc-wall-hung/2.0.0.op",
-      "bytes": 10319,
-      "sha256": "7da6b50458a70db9f50304bb976027e504e904815e1148c8074a04a8a2f220eb",
-      "contentHash": "e451d77aa1bc79e32644567ea84f05fa3f80293f0f22c4085c80794c9083f382"
+      "bytes": 11238,
+      "sha256": "27d3ecc656b30ade5fdd471c1078d7b43b7821527a958ff0d331cccc8215a796",
+      "contentHash": "ec8e0ec6d01bd417f1604a2e5a26264f9e47cc31c3efafb1f8ccc912aade4982"
     },
     {
       "id": "floorkit.wheelchair",

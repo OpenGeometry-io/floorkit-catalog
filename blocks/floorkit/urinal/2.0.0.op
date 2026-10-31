@@ -17,14 +17,13 @@
     "catalog:lod": "300",
     "catalog:format": "2",
     "catalog:tags": "urinal, wall-hung, washroom",
-    "catalog:note": "Wall-hung urinal in format v2: a back panel; a half-round bowl 0.35 deep from the wall, its wall a U of true arcs (an outline sweep) on a floor of a box and a half-round cylinder sector; and above it a hood of two cheeks and a top, stepped back to 0.175 from the wall. bottom 0.35, rim 0.60. The hood is stepped, not sloped.",
+    "catalog:note": "Wall-hung urinal in format v2: a back panel; a half-round bowl 0.35 deep from the wall, its wall a U of true arcs (an outline sweep) from the bottom to the rim, round a floor 0.05 thick (an outline sweep of the inner half-round) set 0.015 into it (overlap bowlWall+floor); and above it a hood of two cheeks and a top, stepped back to 0.175 from the wall. bottom 0.35, rim 0.60. The hood is stepped, not sloped.",
     "catalog:basedOn": "0.35 x 0.35 x 0.65, bottom 0.35 and rim 0.60 are generic practice sizes, not checked against a published source (unverified). Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "URINAL",
     "ifcClass": "IfcSanitaryTerminal",
     "mat:backPanel": "ceramic",
-    "mat:floorBack": "ceramic",
-    "mat:floorFront": "ceramic",
+    "mat:floor": "ceramic",
     "mat:bowlWall": "ceramic",
     "mat:hoodCheek": "ceramic",
     "mat:hoodTop": "ceramic"
@@ -255,31 +254,57 @@
         "depth": 0.03
       },
       {
-        "id": "floorBack",
-        "kind": "cuboid",
+        "id": "floor",
+        "kind": "sweep",
         "color": "#f2f1ec",
-        "center": [
-          0,
-          0.375,
-          -0.0725
+        "path": [
+          [
+            0,
+            0.35,
+            0
+          ],
+          [
+            0,
+            0.4,
+            0
+          ]
         ],
-        "width": 0.35,
-        "height": 0.05,
-        "depth": 0.145
-      },
-      {
-        "id": "floorFront",
-        "kind": "cylinder",
-        "color": "#f2f1ec",
-        "center": [
-          0,
-          0.375,
-          0
-        ],
-        "radius": 0.175,
-        "height": 0.05,
-        "angle": 3.14159265,
-        "startAngle": 3.14159265
+        "profile": {
+          "start": [
+            -0.16,
+            -0.145
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.16,
+                0
+              ]
+            },
+            {
+              "to": [
+                0.16,
+                0
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.16,
+                -0.145
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
       },
       {
         "id": "bowlWall",
@@ -288,7 +313,7 @@
         "path": [
           [
             0,
-            0.4,
+            0.35,
             0
           ],
           [
@@ -308,6 +333,32 @@
                 -0.175,
                 0
               ]
+            },
+            {
+              "to": [
+                -0.1515544457,
+                0.0875
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.1515544457,
+                0.0875
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": true
+              }
             },
             {
               "to": [
@@ -339,6 +390,32 @@
                 0.145,
                 0
               ]
+            },
+            {
+              "to": [
+                0.1255736835,
+                0.0725
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.1255736835,
+                0.0725
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": false
+              }
             },
             {
               "to": [

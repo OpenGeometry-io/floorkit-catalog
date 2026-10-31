@@ -17,15 +17,14 @@
     "catalog:lod": "300",
     "catalog:format": "2",
     "catalog:tags": "wc, toilet, close-coupled, bathroom",
-    "catalog:note": "Close-coupled WC against the wall, lid open. seat 0.42, rim 0.40. The pan is an oval outline sweep, hollowed by a shell 0.015 thick whose top is opened by a round bowl cut, on an oval pedestal that follows the pan. The seat is two half rings that meet on the centre line. Cistern on the rear of the pan with a push button on top; the button, radius 0.02, is drawn at true size.",
+    "catalog:note": "Close-coupled WC against the wall, lid open. seat 0.42, rim 0.40. The pan is an oval outline sweep, hollowed by a shell 0.015 thick whose top is opened by an oval bowl cut (an outline sweep through the top face), on an oval pedestal that follows the pan. The seat is one ring: an outline sweep less a round outline sweep. Cistern on the rear of the pan with a push button on top; the button, radius 0.02, is drawn at true size.",
     "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: WC 0.37 x 0.65 x 0.78, seat 0.42; EN 997 not read. Pan oval, pedestal and bowl opening are generic shapes, unverified. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "TOILETPAN",
     "ifcClass": "IfcSanitaryTerminal",
     "mat:pedestal": "ceramic",
     "mat:pan": "ceramic",
-    "mat:seatLeft": "surface",
-    "mat:seatRight": "surface",
+    "mat:seat": "surface",
     "mat:lid": "surface",
     "mat:cistern": "ceramic",
     "mat:flushButton": "metal"
@@ -156,8 +155,212 @@
         "segments": [
           {
             "to": [
+              -0.185,
+              -0.05
+            ]
+          },
+          {
+            "to": [
+              -0.1053574007,
+              0.2624440433
+            ],
+            "arc": {
+              "center": [
+                0.4676923077,
+                -0.05
+              ],
+              "counterClockwise": true
+            }
+          },
+          {
+            "to": [
+              0.1053574007,
+              0.2624440433
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.205
+              ],
+              "counterClockwise": true
+            }
+          },
+          {
+            "to": [
+              0.185,
+              -0.05
+            ],
+            "arc": {
+              "center": [
+                -0.4676923077,
+                -0.05
+              ],
+              "counterClockwise": true
+            }
+          },
+          {
+            "to": [
               0.185,
               -0.325
+            ]
+          },
+          {
+            "to": [
+              -0.185,
+              -0.325
+            ]
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "panShell": {
+      "kind": "shell",
+      "color": "#f2f1ec",
+      "sourceRef": "panSolid",
+      "thickness": 0.015
+    },
+    "bowlOpening": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.35,
+          0
+        ],
+        [
+          0,
+          0.41,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          0.12,
+          0.08
+        ],
+        "segments": [
+          {
+            "to": [
+              0.054,
+              0.21200000000000002
+            ],
+            "arc": {
+              "center": [
+                -0.045,
+                0.08
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.054,
+              0.21200000000000002
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.14
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.12,
+              0.08
+            ],
+            "arc": {
+              "center": [
+                0.045,
+                0.08
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.054,
+              -0.052000000000000005
+            ],
+            "arc": {
+              "center": [
+                0.045,
+                0.08
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.054,
+              -0.052000000000000005
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.020000000000000004
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.12,
+              0.08
+            ],
+            "arc": {
+              "center": [
+                -0.045,
+                0.08
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "pan": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "panShell",
+      "operandRefs": [
+        "bowlOpening"
+      ],
+      "color": "#f2f1ec"
+    },
+    "seatSolid": {
+      "kind": "sweep",
+      "color": "#d8d2c4",
+      "path": [
+        [
+          0,
+          0.4,
+          0
+        ],
+        [
+          0,
+          0.42,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.185,
+          -0.12
+        ],
+        "segments": [
+          {
+            "to": [
+              0.185,
+              -0.12
             ]
           },
           {
@@ -204,12 +407,6 @@
               ],
               "counterClockwise": false
             }
-          },
-          {
-            "to": [
-              -0.185,
-              -0.325
-            ]
           }
         ],
         "closed": true
@@ -217,31 +414,67 @@
       "capStart": true,
       "capEnd": true
     },
-    "panShell": {
-      "kind": "shell",
-      "color": "#f2f1ec",
-      "sourceRef": "panSolid",
-      "thickness": 0.015
-    },
-    "bowlOpening": {
-      "kind": "cylinder",
-      "color": "#f2f1ec",
-      "center": [
-        0,
-        0.38,
-        0.08
+    "seatHole": {
+      "kind": "sweep",
+      "color": "#d8d2c4",
+      "path": [
+        [
+          0,
+          0.39,
+          0
+        ],
+        [
+          0,
+          0.43,
+          0
+        ]
       ],
-      "radius": 0.12,
-      "height": 0.06
+      "profile": {
+        "start": [
+          0,
+          -0.039999999999999994
+        ],
+        "segments": [
+          {
+            "to": [
+              0,
+              0.2
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.08
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0,
+              -0.039999999999999994
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.08
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
     },
-    "pan": {
+    "seat": {
       "kind": "boolean3d",
       "operation": "subtract",
-      "baseRef": "panShell",
+      "baseRef": "seatSolid",
       "operandRefs": [
-        "bowlOpening"
+        "seatHole"
       ],
-      "color": "#f2f1ec"
+      "color": "#d8d2c4"
     }
   },
   "profileView": {
@@ -431,186 +664,8 @@
         "ref": "pan"
       },
       {
-        "id": "seatRight",
-        "kind": "sweep",
-        "color": "#d8d2c4",
-        "path": [
-          [
-            0,
-            0.4,
-            0
-          ],
-          [
-            0,
-            0.42,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            0,
-            -0.12
-          ],
-          "segments": [
-            {
-              "to": [
-                0.185,
-                -0.12
-              ]
-            },
-            {
-              "to": [
-                0.185,
-                -0.05
-              ]
-            },
-            {
-              "to": [
-                0.1053574007,
-                0.2624440433
-              ],
-              "arc": {
-                "center": [
-                  -0.4676923077,
-                  -0.05
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                0,
-                0.325
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  0.205
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                0,
-                0.2
-              ]
-            },
-            {
-              "to": [
-                0,
-                -0.04
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  0.08
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0,
-                -0.12
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
-      },
-      {
-        "id": "seatLeft",
-        "kind": "sweep",
-        "color": "#d8d2c4",
-        "path": [
-          [
-            0,
-            0.4,
-            0
-          ],
-          [
-            0,
-            0.42,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            0,
-            -0.12
-          ],
-          "segments": [
-            {
-              "to": [
-                0,
-                -0.04
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.2
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  0.08
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0,
-                0.325
-              ]
-            },
-            {
-              "to": [
-                -0.1053574007,
-                0.2624440433
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  0.205
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                -0.185,
-                -0.05
-              ],
-              "arc": {
-                "center": [
-                  0.4676923077,
-                  -0.05
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                -0.185,
-                -0.12
-              ]
-            },
-            {
-              "to": [
-                0,
-                -0.12
-              ]
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
+        "id": "seat",
+        "ref": "seat"
       },
       {
         "id": "lid",
