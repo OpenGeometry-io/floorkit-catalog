@@ -6,24 +6,7 @@
   "dimensions": {
     "width": 0.9,
     "depth": 0.9,
-    "height": 0.06
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
+    "height": 0.04
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,12 +14,19 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "sanitary",
     "catalog:placement": "free",
-    "catalog:tags": "shower, bathroom",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/sanitary/shower-tray.op#catalog-sanitary-shower-tray",
-    "catalog:note": "Square tray; the diagonals are the fall to the central gully.",
+    "catalog:lod": "300",
+    "catalog:tags": "shower tray, shower, bathroom",
+    "catalog:note": "Shower tray: a floor slab with a rim upstand 0.05 wide and 0.015 high, and a gully grating 0.010 proud of the floor inside the rim. rim 0.04.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, verify; EN 14527 for shower trays), not read, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "SHOWER",
-    "mat:tray": "ceramic"
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:tray-floor": "ceramic",
+    "mat:tray-rim-back": "ceramic",
+    "mat:tray-rim-front": "ceramic",
+    "mat:tray-rim-left": "ceramic",
+    "mat:tray-rim-right": "ceramic",
+    "mat:gully": "metal"
   },
   "anchors": {
     "base": {
@@ -56,6 +46,9 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
     },
     "wallFace": {
@@ -79,14 +72,64 @@
       "metadata": {
         "role": "wall-contact"
       }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.035,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
     }
   },
+  "ports": [
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
   "profileView": {
     "elements": [
       {
-        "id": "tray",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#eceae4",
         "vertices": [
           [
             -0.45,
@@ -107,98 +150,185 @@
         ]
       },
       {
-        "id": "fall-a",
-        "kind": "polyline",
-        "color": "#b4b0a8",
-        "points": [
-          [
-            -0.45,
-            -0.45
-          ],
-          [
-            0.45,
-            0.45
-          ]
-        ]
-      },
-      {
-        "id": "fall-b",
-        "kind": "polyline",
-        "color": "#b4b0a8",
-        "points": [
-          [
-            -0.45,
-            0.45
-          ],
-          [
-            0.45,
-            -0.45
-          ]
-        ]
-      },
-      {
-        "id": "gully",
+        "id": "rim",
         "kind": "polygon",
-        "color": "#9aa0a6",
         "vertices": [
           [
-            0.05,
-            0
+            -0.4,
+            -0.4
           ],
           [
-            0.0405,
-            0.0294
+            0.4,
+            -0.4
           ],
           [
-            0.0155,
-            0.0476
+            0.4,
+            0.4
           ],
           [
-            -0.0155,
-            0.0476
-          ],
-          [
-            -0.0405,
-            0.0294
-          ],
-          [
-            -0.05,
-            0
-          ],
-          [
-            -0.0405,
-            -0.0294
-          ],
-          [
-            -0.0155,
-            -0.0476
-          ],
-          [
-            0.0155,
-            -0.0476
-          ],
-          [
-            0.0405,
-            -0.0294
+            -0.4,
+            0.4
           ]
         ]
+      },
+      {
+        "id": "fall-1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.4,
+            -0.4
+          ],
+          [
+            -0.0318,
+            -0.0318
+          ]
+        ]
+      },
+      {
+        "id": "fall-2",
+        "kind": "polyline",
+        "points": [
+          [
+            0.4,
+            -0.4
+          ],
+          [
+            0.0318,
+            -0.0318
+          ]
+        ]
+      },
+      {
+        "id": "fall-3",
+        "kind": "polyline",
+        "points": [
+          [
+            0.4,
+            0.4
+          ],
+          [
+            0.0318,
+            0.0318
+          ]
+        ]
+      },
+      {
+        "id": "fall-4",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.4,
+            0.4
+          ],
+          [
+            -0.0318,
+            0.0318
+          ]
+        ]
+      },
+      {
+        "id": "gully-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.045,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "gully-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.045,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
       }
     ]
   },
   "modelView": {
     "elements": [
       {
-        "id": "tray",
+        "id": "tray-floor",
         "kind": "cuboid",
-        "color": "#f4f2ec",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.0125,
+          0
+        ],
+        "width": 0.9,
+        "height": 0.025,
+        "depth": 0.9
+      },
+      {
+        "id": "tray-rim-back",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.0325,
+          -0.425
+        ],
+        "width": 0.9,
+        "height": 0.015,
+        "depth": 0.05
+      },
+      {
+        "id": "tray-rim-front",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.0325,
+          0.425
+        ],
+        "width": 0.9,
+        "height": 0.015,
+        "depth": 0.05
+      },
+      {
+        "id": "tray-rim-left",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          -0.425,
+          0.0325,
+          0
+        ],
+        "width": 0.05,
+        "height": 0.015,
+        "depth": 0.8
+      },
+      {
+        "id": "tray-rim-right",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0.425,
+          0.0325,
+          0
+        ],
+        "width": 0.05,
+        "height": 0.015,
+        "depth": 0.8
+      },
+      {
+        "id": "gully",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
         "center": [
           0,
           0.03,
           0
         ],
-        "width": 0.9,
-        "height": 0.06,
-        "depth": 0.9
+        "radius": 0.045,
+        "height": 0.01
       }
     ]
   }

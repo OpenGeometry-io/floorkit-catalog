@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "id": "floorkit.round-table",
+  "labelName": "Round Table",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1.1,
+    "depth": 1.1,
+    "height": 0.75
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "tables",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "table, round, dining, pedestal",
+    "catalog:note": "Round pedestal table for four: a top on a column and a base disc. top 0.75",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "TABLE",
+    "mat:base-disc": "frame",
+    "mat:column": "frame",
+    "mat:top": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.75,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "top-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.55,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "top-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.55,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "base-disc",
+        "kind": "cylinder",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.015,
+          0
+        ],
+        "radius": 0.3,
+        "height": 0.03
+      },
+      {
+        "id": "column",
+        "kind": "cylinder",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.375,
+          0
+        ],
+        "radius": 0.05,
+        "height": 0.69
+      },
+      {
+        "id": "top",
+        "kind": "cylinder",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.735,
+          0
+        ],
+        "radius": 0.55,
+        "height": 0.03
+      }
+    ]
+  }
+}

@@ -1,0 +1,388 @@
+{
+  "version": 1,
+  "id": "floorkit.sideboard",
+  "labelName": "Sideboard",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1.6,
+    "depth": 0.45,
+    "height": 0.8
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "storage",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "sideboard, cupboard, storage, dining, living",
+    "catalog:note": "Three-door sideboard: a case of panels with two dividers and a recessed kick board, three doors with handles. The top overhangs the doors and handles. top 0.80",
+    "catalog:basedOn": "Neufert, Architects' Data, as given in the drafting standard key dimensions; Neufert itself not read, unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:side-left": "frame",
+    "mat:side-right": "frame",
+    "mat:back": "frame",
+    "mat:bottom": "frame",
+    "mat:kick": "frame",
+    "mat:top": "surface",
+    "mat:divider-left": "frame",
+    "mat:divider-right": "frame",
+    "mat:door": "frame",
+    "mat:handle": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.225
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.8,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "definitions": {
+    "door": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.43,
+        0.19
+      ],
+      "width": 0.53,
+      "height": 0.7,
+      "depth": 0.02
+    },
+    "handle": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.67,
+        0.2125
+      ],
+      "width": 0.12,
+      "height": 0.02,
+      "depth": 0.025
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.8,
+            -0.225
+          ],
+          [
+            0.8,
+            -0.225
+          ],
+          [
+            0.8,
+            0.225
+          ],
+          [
+            -0.8,
+            0.225
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "side-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.79,
+          0.39,
+          -0.0225
+        ],
+        "width": 0.02,
+        "height": 0.78,
+        "depth": 0.405
+      },
+      {
+        "id": "side-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.79,
+          0.39,
+          -0.0225
+        ],
+        "width": 0.02,
+        "height": 0.78,
+        "depth": 0.405
+      },
+      {
+        "id": "back",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.43,
+          -0.215
+        ],
+        "width": 1.56,
+        "height": 0.7,
+        "depth": 0.02
+      },
+      {
+        "id": "bottom",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.09,
+          -0.0125
+        ],
+        "width": 1.56,
+        "height": 0.02,
+        "depth": 0.385
+      },
+      {
+        "id": "kick",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.04,
+          0.14
+        ],
+        "width": 1.56,
+        "height": 0.08,
+        "depth": 0.02
+      },
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.79,
+          0
+        ],
+        "width": 1.6,
+        "height": 0.02,
+        "depth": 0.45
+      },
+      {
+        "id": "divider-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.2665,
+          0.44,
+          -0.0125
+        ],
+        "width": 0.02,
+        "height": 0.68,
+        "depth": 0.385
+      },
+      {
+        "id": "divider-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.2665,
+          0.44,
+          -0.0125
+        ],
+        "width": 0.02,
+        "height": 0.68,
+        "depth": 0.385
+      },
+      {
+        "id": "door-left",
+        "ref": "door",
+        "placement": {
+          "position": [
+            -0.533,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "door-middle",
+        "ref": "door",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "door-right",
+        "ref": "door",
+        "placement": {
+          "position": [
+            0.533,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-left",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            -0.533,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-middle",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-right",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0.533,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

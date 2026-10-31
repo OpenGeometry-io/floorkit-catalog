@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "id": "floorkit.floor-lamp",
+  "labelName": "Floor Lamp",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.4,
+    "depth": 0.4,
+    "height": 1.6
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "lighting",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "lamp, floor lamp, standard lamp, lighting",
+    "catalog:note": "Freestanding floor lamp on a round base; plugs in, so it has no wired port. Parts under radius 0.04 build as polygonal prisms at true size.",
+    "catalog:basedOn": "Generic practice size, not checked against a published source (unverified): shade 0.40 diameter, base 0.30 diameter, height 1.60",
+    "ifc:class": "IfcLightFixture",
+    "ifc:predefinedType": "POINTSOURCE",
+    "mat:base": "metal",
+    "mat:stem": "metal",
+    "mat:shade": "glass"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "shade-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.2,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "shade-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.2,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "cross-1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.141421,
+            -0.141421
+          ],
+          [
+            0.141421,
+            0.141421
+          ]
+        ]
+      },
+      {
+        "id": "cross-2",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.141421,
+            0.141421
+          ],
+          [
+            0.141421,
+            -0.141421
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "base",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.015,
+          0
+        ],
+        "radius": 0.15,
+        "height": 0.03
+      },
+      {
+        "id": "stem",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.665,
+          0
+        ],
+        "radius": 0.015,
+        "height": 1.27
+      },
+      {
+        "id": "shade",
+        "kind": "cylinder",
+        "color": "#a8d0e6",
+        "center": [
+          0,
+          1.45,
+          0
+        ],
+        "radius": 0.2,
+        "height": 0.3
+      }
+    ]
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "version": 1,
+  "id": "floorkit.coffee-table",
+  "labelName": "Coffee Table",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 1.1,
+    "depth": 0.6,
+    "height": 0.42
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "tables",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "table, coffee, living",
+    "catalog:note": "Low table for a living room: a top on four legs with aprons between them. top 0.42",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "TABLE",
+    "mat:top": "surface",
+    "mat:apron-front": "frame",
+    "mat:apron-back": "frame",
+    "mat:apron-left": "frame",
+    "mat:apron-right": "frame",
+    "mat:leg": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.42,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "definitions": {
+    "leg": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.195,
+        0
+      ],
+      "width": 0.05,
+      "height": 0.39,
+      "depth": 0.05
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "top",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.55,
+            -0.3
+          ],
+          [
+            0.55,
+            -0.3
+          ],
+          [
+            0.55,
+            0.3
+          ],
+          [
+            -0.55,
+            0.3
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.405,
+          0
+        ],
+        "width": 1.1,
+        "height": 0.03,
+        "depth": 0.6
+      },
+      {
+        "id": "leg-front-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.5,
+            0,
+            0.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-front-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.5,
+            0,
+            0.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.5,
+            0,
+            -0.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.5,
+            0,
+            -0.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "apron-front",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.36,
+          0.255
+        ],
+        "width": 0.95,
+        "height": 0.06,
+        "depth": 0.02
+      },
+      {
+        "id": "apron-back",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.36,
+          -0.255
+        ],
+        "width": 0.95,
+        "height": 0.06,
+        "depth": 0.02
+      },
+      {
+        "id": "apron-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.505,
+          0.36,
+          0
+        ],
+        "width": 0.02,
+        "height": 0.06,
+        "depth": 0.45
+      },
+      {
+        "id": "apron-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.505,
+          0.36,
+          0
+        ],
+        "width": 0.02,
+        "height": 0.06,
+        "depth": 0.45
+      }
+    ]
+  }
+}

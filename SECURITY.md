@@ -80,14 +80,14 @@ Use GitHub's private vulnerability reporting on this repository:
 | `revoked` | A revoked entry |
 | `integrity` | A length or SHA-256 that differs from the index, or a file whose own `id` or `catalog:version` differs from its entry |
 
-Two failures are not wrapped in a `CatalogError` yet:
+Two more failures get a code:
 - **A timeout or network error while a body is streaming** is `fetch-failed`: the loader enforces its deadline on every read, so a host that keeps sending slowly cannot outlive it.
 - **A file that matches its SHA-256 but is not JSON** is `malformed`, and so is an index entry whose `bytes` or `sha256` is missing or out of range (a block is at most 256 KB).
 
-**Measured:** `test/loader.test.mjs` serves the real catalog from a local HTTP server, loads and verifies all 26 blocks, then serves it lying in each of these ways: a tampered file, an oversized file sent chunked with no `content-length`, a revoked entry, an entry path that escapes the root, a file claiming to be a different block, a redirect, an unknown id, a percent-encoded `..%2F` path, an entry claiming 10^12 bytes, a non-JSON file with a matching hash, a body that stalls, and a server error. Each gets the code it should.
+**Measured:** `test/loader.test.mjs` serves the real catalog from a local HTTP server, loads and verifies every block in `index.json` (80 when this was written), then serves it lying in each of these ways: a tampered file, an oversized file sent chunked with no `content-length`, a revoked entry, an entry path that escapes the root, a file claiming to be a different block, a redirect, an unknown id, a percent-encoded `..%2F` path, an entry claiming 10^12 bytes, a non-JSON file with a matching hash, a body that stalls, and a server error. Each gets the code it should.
 
-**Not yet:**
-- a signature over the index;
-- re-validation of a block's content by the client. The loader trusts that CI validated it.
+**What the loader does not do:**
+- verify a signature over the index;
+- validate a block's content again in the client. The loader trusts that CI validated it.
 
-[RFC 0001](docs/rfcs/0001-catalog-and-loader.md) plans both: a signed pointer, and a strict validator in the Floorkit SDK.
+[RFC 0001](docs/rfcs/0001-catalog-and-loader.md) discusses both: a signed pointer, and a strict validator in the Floorkit SDK.

@@ -46,12 +46,13 @@ test('stray files, bad names and symlinks under blocks/ are reported', () => {
   put('blocks/floorkit/simple-chair/1.0.0.op', chair());
   put('blocks/floorkit/simple-chair/latest.op', chair());
   put('blocks/floorkit/README.md', '# no\n');
-  put('blocks/Floorkit/chair/1.0.0.op', chair());
+  // A bad-case publisher folder; not a case of an existing one, which collides on a case-insensitive disk.
+  put('blocks/Acme/chair/1.0.0.op', chair());
   symlinkSync('1.0.0.op', path.join(root, 'blocks/floorkit/simple-chair/1.0.1.op'));
   const { blocks, misplaced } = listBlocks(root);
   assert.deepEqual(blocks.map((block) => block.file), ['blocks/floorkit/simple-chair/1.0.0.op']);
   assert.deepEqual(misplaced.map((item) => item.file).sort(), [
-    'blocks/Floorkit/chair/1.0.0.op',
+    'blocks/Acme/chair/1.0.0.op',
     'blocks/floorkit/README.md',
     'blocks/floorkit/simple-chair/1.0.1.op',
     'blocks/floorkit/simple-chair/latest.op',
@@ -92,4 +93,12 @@ test('the index refuses an invalid block, and carries a revocation', () => {
   writeFileSync(path.join(root, 'revocations.json'), '[]');
   put('blocks/floorkit/simple-chair/1.0.0.op', { ...chair(), labelName: '' });
   assert.throws(() => buildIndex(root), /simple-chair\/1\.0\.0\.op: \/labelName/);
+});
+
+test('each index entry carries its block format: 1 without catalog:format, 2 for a format v2 block', () => {
+  put('blocks/floorkit/simple-chair/1.0.0.op', chair());
+  const sampler = JSON.parse(readFileSync(path.join(ROOT, 'test/fixtures/valid/v2-sampler.op'), 'utf8'));
+  put('blocks/floorkit/v2-sampler/1.0.0.op', { ...sampler, id: 'floorkit.v2-sampler' });
+  const formats = Object.fromEntries(buildIndex(root).entries.map((entry) => [entry.id, entry.format]));
+  assert.deepEqual(formats, { 'floorkit.simple-chair': 1, 'floorkit.v2-sampler': 2 });
 });

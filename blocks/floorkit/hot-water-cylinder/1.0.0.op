@@ -1,0 +1,332 @@
+{
+  "version": 1,
+  "id": "floorkit.hot-water-cylinder",
+  "labelName": "Hot Water Cylinder",
+  "type": "MEP_EQUIPMENT",
+  "dimensions": {
+    "width": 0.55,
+    "depth": 0.6,
+    "height": 1.5
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "hot water cylinder, cylinder, hot water, heating, storage",
+    "catalog:note": "Indirect hot water cylinder standing on the floor. Cold feed low and the coil flow and return on the front, hot draw-off on the top. The axis is offset to z -0.025 so the footprint, front stubs included, centres on the origin. The 15 mm stubs are drawn at the 0.01 minimum radius; stubs under radius 0.04 build as polygonal prisms at true size.",
+    "catalog:basedOn": "Cylinder 0.55 diameter x 1.50, generic practice size, not checked against a published source (unverified). Port sizes are UK domestic practice per the drafting standard §8 table, unverified. IfcTankTypeEnum STORAGE (IFC4.3 docs, buildingSMART IFC4.3.x-development)",
+    "ifc:class": "IfcTank",
+    "ifc:predefinedType": "STORAGE",
+    "ifcClass": "IfcTank",
+    "mat:shell": "metal",
+    "mat:dome": "metal",
+    "mat:dhwStub": "metal",
+    "mat:dcwStub": "metal",
+    "mat:returnStub": "metal",
+    "mat:flowStub": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.15,
+          0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "return",
+      "domain": "piping",
+      "systemType": "heating",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.3,
+          0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.022
+      }
+    },
+    {
+      "id": "flow",
+      "domain": "piping",
+      "systemType": "heating",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.6,
+          0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.022
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          1.5,
+          -0.025
+        ],
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "shell-a",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.025
+        ],
+        "radius": 0.275,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "shell-b",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.025
+        ],
+        "radius": 0.275,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "connections",
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            0.25
+          ],
+          [
+            0,
+            0.3
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "shell",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.7,
+          -0.025
+        ],
+        "radius": 0.275,
+        "height": 1.4
+      },
+      {
+        "id": "dome",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.43,
+          -0.025
+        ],
+        "radius": 0.15,
+        "height": 0.06
+      },
+      {
+        "id": "dhwStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.48,
+          -0.025
+        ],
+        "radius": 0.01,
+        "height": 0.04
+      },
+      {
+        "id": "dcwStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.01,
+        "height": 0.05,
+        "placement": {
+          "position": [
+            0,
+            0.15,
+            0.275
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "returnStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.011,
+        "height": 0.05,
+        "placement": {
+          "position": [
+            0,
+            0.3,
+            0.275
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "flowStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.011,
+        "height": 0.05,
+        "placement": {
+          "position": [
+            0,
+            0.6,
+            0.275
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

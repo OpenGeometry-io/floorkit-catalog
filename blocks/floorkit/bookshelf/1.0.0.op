@@ -1,0 +1,304 @@
+{
+  "version": 1,
+  "id": "floorkit.bookshelf",
+  "labelName": "Bookshelf",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.8,
+    "depth": 0.3,
+    "height": 2
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "storage",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "bookshelf, bookcase, shelving, storage, living, office",
+    "catalog:note": "Open bookshelf: two sides to the floor, top, bottom, a back set into the sides, a recessed kick board and five shelves (one definition).",
+    "catalog:basedOn": "Neufert, Architects' Data, as given in the drafting standard key dimensions; Neufert itself not read, unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "SHELF",
+    "mat:side-left": "frame",
+    "mat:side-right": "frame",
+    "mat:back": "frame",
+    "mat:top": "frame",
+    "mat:bottom": "frame",
+    "mat:kick": "frame",
+    "mat:shelf": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.15
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "definitions": {
+    "shelf": {
+      "kind": "cuboid",
+      "color": "#d8d2c4",
+      "center": [
+        0,
+        0.01,
+        0.015
+      ],
+      "width": 0.76,
+      "height": 0.02,
+      "depth": 0.27
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.4,
+            -0.15
+          ],
+          [
+            0.4,
+            -0.15
+          ],
+          [
+            0.4,
+            0.15
+          ],
+          [
+            -0.4,
+            0.15
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "side-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.39,
+          1,
+          0
+        ],
+        "width": 0.02,
+        "height": 2,
+        "depth": 0.3
+      },
+      {
+        "id": "side-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.39,
+          1,
+          0
+        ],
+        "width": 0.02,
+        "height": 2,
+        "depth": 0.3
+      },
+      {
+        "id": "back",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          1.03,
+          -0.13
+        ],
+        "width": 0.76,
+        "height": 1.9,
+        "depth": 0.02
+      },
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          1.99,
+          0
+        ],
+        "width": 0.76,
+        "height": 0.02,
+        "depth": 0.3
+      },
+      {
+        "id": "bottom",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.09,
+          0.015
+        ],
+        "width": 0.76,
+        "height": 0.02,
+        "depth": 0.27
+      },
+      {
+        "id": "kick",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.04,
+          0.12
+        ],
+        "width": 0.76,
+        "height": 0.08,
+        "depth": 0.02
+      },
+      {
+        "id": "shelf-1",
+        "ref": "shelf",
+        "placement": {
+          "position": [
+            0,
+            0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "shelf-2",
+        "ref": "shelf",
+        "placement": {
+          "position": [
+            0,
+            0.73,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "shelf-3",
+        "ref": "shelf",
+        "placement": {
+          "position": [
+            0,
+            1.05,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "shelf-4",
+        "ref": "shelf",
+        "placement": {
+          "position": [
+            0,
+            1.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "shelf-5",
+        "ref": "shelf",
+        "placement": {
+          "position": [
+            0,
+            1.69,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

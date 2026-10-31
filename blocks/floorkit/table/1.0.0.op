@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.table",
-  "labelName": "Table",
+  "labelName": "Dining Table for 6",
   "type": "FURNITURE",
   "dimensions": {
-    "width": 1.68,
-    "depth": 1.18,
-    "height": 0.84
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
+    "width": 1.8,
+    "depth": 0.9,
+    "height": 0.75
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,17 +14,18 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "tables",
     "catalog:placement": "free",
-    "catalog:tags": "dining, table",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/sketch-table.op#catalog-furnishing-sketch-table",
+    "catalog:lod": "300",
+    "catalog:tags": "table, dining, six-seat",
+    "catalog:note": "Dining table for six: a top on four legs with aprons between them. top 0.75, aprons 0.08 deep leave 0.64 clear for the knees.",
+    "catalog:basedOn": "Neufert, Architects' Data, for the dining table (0.60 m of edge per place, height 0.72 to 0.78), unverified; drafting standard key dimensions",
     "ifc:class": "IfcFurniture",
     "ifc:predefinedType": "TABLE",
-    "mat:leg-front-left": "frame",
-    "mat:leg-front-right": "frame",
-    "mat:leg-back-left": "frame",
-    "mat:leg-back-right": "frame",
-    "mat:stretcher-left": "frame",
-    "mat:stretcher-right": "frame",
-    "mat:center-support": "frame"
+    "mat:top": "surface",
+    "mat:apron-front": "frame",
+    "mat:apron-back": "frame",
+    "mat:apron-left": "frame",
+    "mat:apron-right": "frame",
+    "mat:leg": "frame"
   },
   "anchors": {
     "base": {
@@ -61,13 +45,16 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
     },
     "topCenter": {
       "placement": {
         "position": [
           0,
-          0.84,
+          0.75,
           0
         ],
         "rotation": [
@@ -82,239 +69,45 @@
         ]
       },
       "metadata": {
-        "role": "work-surface"
+        "role": "top-surface"
       }
+    }
+  },
+  "definitions": {
+    "leg": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.36,
+        0
+      ],
+      "width": 0.06,
+      "height": 0.72,
+      "depth": 0.06
     }
   },
   "profileView": {
     "elements": [
       {
-        "id": "top-surface",
+        "id": "top",
         "kind": "polygon",
-        "color": "#EEE6D9",
         "vertices": [
           [
-            -0.84,
-            -0.59
+            -0.9,
+            -0.45
           ],
           [
-            -0.84,
-            0.59
+            0.9,
+            -0.45
           ],
           [
-            0.84,
-            0.59
+            0.9,
+            0.45
           ],
           [
-            0.84,
-            -0.59
-          ]
-        ]
-      },
-      {
-        "id": "frame-front",
-        "kind": "polygon",
-        "color": "#B48A69",
-        "vertices": [
-          [
-            -0.76,
-            0.455
-          ],
-          [
-            -0.76,
-            0.515
-          ],
-          [
-            0.76,
-            0.515
-          ],
-          [
-            0.76,
-            0.455
-          ]
-        ]
-      },
-      {
-        "id": "frame-back",
-        "kind": "polygon",
-        "color": "#B48A69",
-        "vertices": [
-          [
-            -0.76,
-            -0.515
-          ],
-          [
-            -0.76,
-            -0.455
-          ],
-          [
-            0.76,
-            -0.455
-          ],
-          [
-            0.76,
-            -0.515
-          ]
-        ]
-      },
-      {
-        "id": "frame-left",
-        "kind": "polygon",
-        "color": "#B48A69",
-        "vertices": [
-          [
-            -0.76,
-            -0.51
-          ],
-          [
-            -0.76,
-            0.51
-          ],
-          [
-            -0.71,
-            0.51
-          ],
-          [
-            -0.71,
-            -0.51
-          ]
-        ]
-      },
-      {
-        "id": "frame-right",
-        "kind": "polygon",
-        "color": "#B48A69",
-        "vertices": [
-          [
-            0.71,
-            -0.51
-          ],
-          [
-            0.71,
-            0.51
-          ],
-          [
-            0.76,
-            0.51
-          ],
-          [
-            0.76,
-            -0.51
-          ]
-        ]
-      },
-      {
-        "id": "leg-front-left",
-        "kind": "polygon",
-        "color": "#6B5543",
-        "vertices": [
-          [
-            -0.84,
-            0.51
-          ],
-          [
-            -0.84,
-            0.59
-          ],
-          [
-            -0.76,
-            0.59
-          ],
-          [
-            -0.76,
-            0.51
-          ]
-        ]
-      },
-      {
-        "id": "leg-front-right",
-        "kind": "polygon",
-        "color": "#6B5543",
-        "vertices": [
-          [
-            0.76,
-            0.51
-          ],
-          [
-            0.76,
-            0.59
-          ],
-          [
-            0.84,
-            0.59
-          ],
-          [
-            0.84,
-            0.51
-          ]
-        ]
-      },
-      {
-        "id": "leg-back-left",
-        "kind": "polygon",
-        "color": "#6B5543",
-        "vertices": [
-          [
-            -0.84,
-            -0.59
-          ],
-          [
-            -0.84,
-            -0.51
-          ],
-          [
-            -0.76,
-            -0.51
-          ],
-          [
-            -0.76,
-            -0.59
-          ]
-        ]
-      },
-      {
-        "id": "leg-back-right",
-        "kind": "polygon",
-        "color": "#6B5543",
-        "vertices": [
-          [
-            0.76,
-            -0.59
-          ],
-          [
-            0.76,
-            -0.51
-          ],
-          [
-            0.84,
-            -0.51
-          ],
-          [
-            0.84,
-            -0.59
-          ]
-        ]
-      },
-      {
-        "id": "center-support",
-        "kind": "polygon",
-        "color": "#8D7661",
-        "vertices": [
-          [
-            -0.04,
-            -0.04
-          ],
-          [
-            -0.04,
-            0.04
-          ],
-          [
-            0.04,
-            0.04
-          ],
-          [
-            0.04,
-            -0.04
+            -0.9,
+            0.45
           ]
         ]
       }
@@ -323,160 +116,153 @@
   "modelView": {
     "elements": [
       {
-        "id": "top-surface",
+        "id": "top",
         "kind": "cuboid",
-        "color": "#EEE6D9",
+        "color": "#d8d2c4",
         "center": [
           0,
-          0.8,
+          0.735,
           0
         ],
-        "width": 1.68,
-        "height": 0.08,
-        "depth": 1.18
+        "width": 1.8,
+        "height": 0.03,
+        "depth": 0.9
+      },
+      {
+        "id": "leg-front-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.84,
+            0,
+            0.39
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-front-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.84,
+            0,
+            0.39
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.84,
+            0,
+            -0.39
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.84,
+            0,
+            -0.39
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
         "id": "apron-front",
         "kind": "cuboid",
-        "color": "#B48A69",
+        "color": "#7a5c3e",
         "center": [
           0,
-          0.7,
-          0.485
+          0.68,
+          0.4
         ],
-        "width": 1.52,
-        "height": 0.12,
-        "depth": 0.05
+        "width": 1.62,
+        "height": 0.08,
+        "depth": 0.02
       },
       {
         "id": "apron-back",
         "kind": "cuboid",
-        "color": "#B48A69",
+        "color": "#7a5c3e",
         "center": [
           0,
-          0.7,
-          -0.485
+          0.68,
+          -0.4
         ],
-        "width": 1.52,
-        "height": 0.12,
-        "depth": 0.05
+        "width": 1.62,
+        "height": 0.08,
+        "depth": 0.02
       },
       {
         "id": "apron-left",
         "kind": "cuboid",
-        "color": "#B48A69",
+        "color": "#7a5c3e",
         "center": [
-          -0.735,
-          0.7,
+          -0.85,
+          0.68,
           0
         ],
-        "width": 0.05,
-        "height": 0.12,
-        "depth": 1.02
+        "width": 0.02,
+        "height": 0.08,
+        "depth": 0.72
       },
       {
         "id": "apron-right",
         "kind": "cuboid",
-        "color": "#B48A69",
+        "color": "#7a5c3e",
         "center": [
-          0.735,
-          0.7,
+          0.85,
+          0.68,
           0
         ],
-        "width": 0.05,
-        "height": 0.12,
-        "depth": 1.02
-      },
-      {
-        "id": "leg-front-left",
-        "kind": "cuboid",
-        "color": "#6B5543",
-        "center": [
-          -0.8,
-          0.38,
-          0.55
-        ],
-        "width": 0.08,
-        "height": 0.76,
-        "depth": 0.08
-      },
-      {
-        "id": "leg-front-right",
-        "kind": "cuboid",
-        "color": "#6B5543",
-        "center": [
-          0.8,
-          0.38,
-          0.55
-        ],
-        "width": 0.08,
-        "height": 0.76,
-        "depth": 0.08
-      },
-      {
-        "id": "leg-back-left",
-        "kind": "cuboid",
-        "color": "#6B5543",
-        "center": [
-          -0.8,
-          0.38,
-          -0.55
-        ],
-        "width": 0.08,
-        "height": 0.76,
-        "depth": 0.08
-      },
-      {
-        "id": "leg-back-right",
-        "kind": "cuboid",
-        "color": "#6B5543",
-        "center": [
-          0.8,
-          0.38,
-          -0.55
-        ],
-        "width": 0.08,
-        "height": 0.76,
-        "depth": 0.08
-      },
-      {
-        "id": "stretcher-left",
-        "kind": "cuboid",
-        "color": "#755E4C",
-        "center": [
-          -0.8,
-          0.26,
-          0
-        ],
-        "width": 0.08,
-        "height": 0.05,
-        "depth": 1.02
-      },
-      {
-        "id": "stretcher-right",
-        "kind": "cuboid",
-        "color": "#755E4C",
-        "center": [
-          0.8,
-          0.26,
-          0
-        ],
-        "width": 0.08,
-        "height": 0.05,
-        "depth": 1.02
-      },
-      {
-        "id": "center-support",
-        "kind": "cuboid",
-        "color": "#8D7661",
-        "center": [
-          0,
-          0.63,
-          0
-        ],
-        "width": 0.08,
-        "height": 0.26,
-        "depth": 0.08
+        "width": 0.02,
+        "height": 0.08,
+        "depth": 0.72
       }
     ]
   }

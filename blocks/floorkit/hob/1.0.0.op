@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.hob",
-  "labelName": "Kitchen Hob",
+  "labelName": "Hob",
   "type": "APPLIANCE",
   "dimensions": {
     "width": 0.6,
     "depth": 0.52,
     "height": 0.05
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,10 +14,16 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "appliances",
     "catalog:placement": "free",
-    "catalog:tags": "kitchen, cooktop",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/kitchen/hob.op#catalog-kitchen-hob",
-    "catalog:note": "Four-burner hob dropped into a counter run; not scaled with the run.",
-    "mat:plate": "frame"
+    "catalog:lod": "300",
+    "catalog:tags": "hob, cooktop, electric, kitchen",
+    "catalog:note": "Four-ring electric hob set onto a worktop at 0.90: a plate 0.04 with rings 0.010 on it. The power port is 1 pole, 230 V, 32 A; Floorkit states no units for voltage and amperage, so they are unverified.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: hob 0.60 x 0.52 x 0.05; worktop 0.90 (EN 1116 via the standard, not read)",
+    "ifc:class": "IfcElectricAppliance",
+    "ifc:predefinedType": "ELECTRICCOOKER",
+    "ifcClass": "IfcElectricAppliance",
+    "mat:plate": "metal",
+    "mat:ringLarge": "metal",
+    "mat:ringSmall": "metal"
   },
   "anchors": {
     "base": {
@@ -54,6 +43,9 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
     },
     "wallFace": {
@@ -79,12 +71,66 @@
       }
     }
   },
+  "ports": [
+    {
+      "id": "power",
+      "domain": "electrical",
+      "systemType": "power",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.9,
+          -0.2
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "electrical",
+        "poles": 1,
+        "voltage": 230,
+        "amperage": 32
+      }
+    }
+  ],
+  "definitions": {
+    "ringLarge": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.945,
+        0
+      ],
+      "radius": 0.1,
+      "height": 0.01
+    },
+    "ringSmall": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.945,
+        0
+      ],
+      "radius": 0.07,
+      "height": 0.01
+    }
+  },
   "profileView": {
     "elements": [
       {
-        "id": "plate",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#2b2b2b",
         "vertices": [
           [
             -0.3,
@@ -105,224 +151,92 @@
         ]
       },
       {
-        "id": "burner-0",
-        "kind": "polygon",
-        "color": "#6e6e6e",
-        "vertices": [
-          [
-            -0.065,
-            -0.12
-          ],
-          [
-            -0.075,
-            -0.0825
-          ],
-          [
-            -0.1025,
-            -0.055
-          ],
-          [
-            -0.14,
-            -0.045
-          ],
-          [
-            -0.1775,
-            -0.055
-          ],
-          [
-            -0.205,
-            -0.0825
-          ],
-          [
-            -0.215,
-            -0.12
-          ],
-          [
-            -0.205,
-            -0.1575
-          ],
-          [
-            -0.1775,
-            -0.185
-          ],
-          [
-            -0.14,
-            -0.195
-          ],
-          [
-            -0.1025,
-            -0.185
-          ],
-          [
-            -0.075,
-            -0.1575
-          ]
-        ]
+        "id": "ringFrontLeftA",
+        "kind": "arc",
+        "center": [
+          -0.15,
+          0.12
+        ],
+        "radius": 0.1,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
       },
       {
-        "id": "burner-1",
-        "kind": "polygon",
-        "color": "#6e6e6e",
-        "vertices": [
-          [
-            0.215,
-            -0.12
-          ],
-          [
-            0.205,
-            -0.0825
-          ],
-          [
-            0.1775,
-            -0.055
-          ],
-          [
-            0.14,
-            -0.045
-          ],
-          [
-            0.1025,
-            -0.055
-          ],
-          [
-            0.075,
-            -0.0825
-          ],
-          [
-            0.065,
-            -0.12
-          ],
-          [
-            0.075,
-            -0.1575
-          ],
-          [
-            0.1025,
-            -0.185
-          ],
-          [
-            0.14,
-            -0.195
-          ],
-          [
-            0.1775,
-            -0.185
-          ],
-          [
-            0.205,
-            -0.1575
-          ]
-        ]
+        "id": "ringFrontLeftB",
+        "kind": "arc",
+        "center": [
+          -0.15,
+          0.12
+        ],
+        "radius": 0.1,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
       },
       {
-        "id": "burner-2",
-        "kind": "polygon",
-        "color": "#6e6e6e",
-        "vertices": [
-          [
-            -0.065,
-            0.12
-          ],
-          [
-            -0.075,
-            0.1575
-          ],
-          [
-            -0.1025,
-            0.185
-          ],
-          [
-            -0.14,
-            0.195
-          ],
-          [
-            -0.1775,
-            0.185
-          ],
-          [
-            -0.205,
-            0.1575
-          ],
-          [
-            -0.215,
-            0.12
-          ],
-          [
-            -0.205,
-            0.0825
-          ],
-          [
-            -0.1775,
-            0.055
-          ],
-          [
-            -0.14,
-            0.045
-          ],
-          [
-            -0.1025,
-            0.055
-          ],
-          [
-            -0.075,
-            0.0825
-          ]
-        ]
+        "id": "ringBackRightA",
+        "kind": "arc",
+        "center": [
+          0.15,
+          -0.12
+        ],
+        "radius": 0.1,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
       },
       {
-        "id": "burner-3",
-        "kind": "polygon",
-        "color": "#6e6e6e",
-        "vertices": [
-          [
-            0.215,
-            0.12
-          ],
-          [
-            0.205,
-            0.1575
-          ],
-          [
-            0.1775,
-            0.185
-          ],
-          [
-            0.14,
-            0.195
-          ],
-          [
-            0.1025,
-            0.185
-          ],
-          [
-            0.075,
-            0.1575
-          ],
-          [
-            0.065,
-            0.12
-          ],
-          [
-            0.075,
-            0.0825
-          ],
-          [
-            0.1025,
-            0.055
-          ],
-          [
-            0.14,
-            0.045
-          ],
-          [
-            0.1775,
-            0.055
-          ],
-          [
-            0.205,
-            0.0825
-          ]
-        ]
+        "id": "ringBackRightB",
+        "kind": "arc",
+        "center": [
+          0.15,
+          -0.12
+        ],
+        "radius": 0.1,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringFrontRightA",
+        "kind": "arc",
+        "center": [
+          0.15,
+          0.12
+        ],
+        "radius": 0.07,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringFrontRightB",
+        "kind": "arc",
+        "center": [
+          0.15,
+          0.12
+        ],
+        "radius": 0.07,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringBackLeftA",
+        "kind": "arc",
+        "center": [
+          -0.15,
+          -0.12
+        ],
+        "radius": 0.07,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringBackLeftB",
+        "kind": "arc",
+        "center": [
+          -0.15,
+          -0.12
+        ],
+        "radius": 0.07,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
       }
     ]
   },
@@ -331,15 +245,99 @@
       {
         "id": "plate",
         "kind": "cuboid",
-        "color": "#1d1d1d",
+        "color": "#9aa3ab",
         "center": [
           0,
-          0.925,
+          0.92,
           0
         ],
         "width": 0.6,
-        "height": 0.03,
+        "height": 0.04,
         "depth": 0.52
+      },
+      {
+        "id": "ringFrontLeft",
+        "ref": "ringLarge",
+        "placement": {
+          "position": [
+            -0.15,
+            0,
+            0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ringBackRight",
+        "ref": "ringLarge",
+        "placement": {
+          "position": [
+            0.15,
+            0,
+            -0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ringFrontRight",
+        "ref": "ringSmall",
+        "placement": {
+          "position": [
+            0.15,
+            0,
+            0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ringBackLeft",
+        "ref": "ringSmall",
+        "placement": {
+          "position": [
+            -0.15,
+            0,
+            -0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }

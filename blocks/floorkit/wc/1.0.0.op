@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.wc",
-  "labelName": "WC Pan",
+  "labelName": "WC",
   "type": "FIXTURE",
   "dimensions": {
-    "width": 0.38,
-    "depth": 0.66,
+    "width": 0.37,
+    "depth": 0.65,
     "height": 0.78
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,13 +14,22 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "sanitary",
     "catalog:placement": "free",
-    "catalog:tags": "toilet, wc, bathroom",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/sanitary/wc.op#catalog-sanitary-wc",
-    "catalog:note": "Wall-hung cistern at -Z; pan projects to +Z.",
+    "catalog:lod": "300",
+    "catalog:tags": "wc, toilet, close-coupled, bathroom",
+    "catalog:note": "Close-coupled WC against the wall, lid open. seat 0.42, rim 0.40. The pan is a ring that abuts a rear block at its tangent, on a floor disc and a foot; the seat is a ring on the rim. Cistern with a push button on top; the button, radius 0.02, builds as a polygonal prism at true size; the kernel decides its facets.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: WC 0.37 x 0.65 x 0.78, seat 0.42; EN 997 not read. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "TOILETPAN",
-    "mat:pan": "ceramic",
-    "mat:cistern": "ceramic"
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:foot": "ceramic",
+    "mat:panRear": "ceramic",
+    "mat:bowlFloor": "ceramic",
+    "mat:bowl": "ceramic",
+    "mat:seat": "surface",
+    "mat:seatBack": "surface",
+    "mat:lid": "surface",
+    "mat:cistern": "ceramic",
+    "mat:flushButton": "metal"
   },
   "anchors": {
     "base": {
@@ -57,6 +49,9 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
     },
     "wallFace": {
@@ -64,7 +59,7 @@
         "position": [
           0,
           0,
-          -0.33
+          -0.325
         ],
         "rotation": [
           0,
@@ -82,132 +77,308 @@
       }
     }
   },
+  "ports": [
+    {
+      "id": "soil",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.25,
+          -0.325
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.7,
+          -0.325
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "bowlSolid": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.3,
+        0.14
+      ],
+      "radius": 0.185,
+      "height": 0.2
+    },
+    "bowlCore": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.3,
+        0.14
+      ],
+      "radius": 0.14,
+      "height": 0.2
+    },
+    "bowl": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "bowlSolid",
+      "operandRefs": [
+        "bowlCore"
+      ],
+      "color": "#f2f1ec"
+    },
+    "seatSolid": {
+      "kind": "cylinder",
+      "color": "#d8d2c4",
+      "center": [
+        0,
+        0.41,
+        0.14
+      ],
+      "radius": 0.185,
+      "height": 0.02
+    },
+    "seatCore": {
+      "kind": "cylinder",
+      "color": "#d8d2c4",
+      "center": [
+        0,
+        0.41,
+        0.14
+      ],
+      "radius": 0.11,
+      "height": 0.02
+    },
+    "seat": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "seatSolid",
+      "operandRefs": [
+        "seatCore"
+      ],
+      "color": "#d8d2c4"
+    }
+  },
   "profileView": {
     "elements": [
       {
-        "id": "pan",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#f2f0ea",
         "vertices": [
           [
-            0.15,
-            -0.15
+            -0.185,
+            -0.325
           ],
           [
-            0.18,
-            -0.05
+            0.185,
+            -0.325
           ],
           [
-            0.19,
-            0.05
+            0.185,
+            -0.045
           ],
           [
-            0.18,
-            0.15
-          ],
-          [
-            0.14,
-            0.25
-          ],
-          [
-            0.07,
-            0.31
-          ],
-          [
-            0,
-            0.33
-          ],
-          [
-            -0.07,
-            0.31
-          ],
-          [
-            -0.14,
-            0.25
-          ],
-          [
-            -0.18,
-            0.15
-          ],
-          [
-            -0.19,
-            0.05
-          ],
-          [
-            -0.18,
-            -0.05
-          ],
-          [
-            -0.15,
-            -0.15
+            -0.185,
+            -0.045
           ]
         ]
       },
       {
-        "id": "cistern",
-        "kind": "polygon",
-        "color": "#e6e3dc",
-        "vertices": [
+        "id": "cisternFront",
+        "kind": "polyline",
+        "points": [
           [
-            -0.19,
-            -0.33
+            -0.185,
+            -0.155
           ],
           [
-            0.19,
-            -0.33
-          ],
-          [
-            0.19,
-            -0.15
-          ],
-          [
-            -0.19,
-            -0.15
+            0.185,
+            -0.155
           ]
         ]
+      },
+      {
+        "id": "panA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.14
+        ],
+        "radius": 0.185,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "panB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.14
+        ],
+        "radius": 0.185,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "seatInnerA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.14
+        ],
+        "radius": 0.11,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "seatInnerB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.14
+        ],
+        "radius": 0.11,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
       }
     ]
   },
   "modelView": {
     "elements": [
       {
-        "id": "pan",
+        "id": "foot",
         "kind": "cuboid",
-        "color": "#fbfbf7",
+        "color": "#f2f1ec",
         "center": [
           0,
-          0.2,
-          0.09
+          0.09,
+          -0.0625
         ],
-        "width": 0.36,
-        "height": 0.4,
-        "depth": 0.48
+        "width": 0.24,
+        "height": 0.18,
+        "depth": 0.525
+      },
+      {
+        "id": "panRear",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.29,
+          -0.185
+        ],
+        "width": 0.37,
+        "height": 0.22,
+        "depth": 0.28
+      },
+      {
+        "id": "bowlFloor",
+        "kind": "cylinder",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.19,
+          0.14
+        ],
+        "radius": 0.185,
+        "height": 0.02
+      },
+      {
+        "id": "bowl",
+        "ref": "bowl"
       },
       {
         "id": "seat",
+        "ref": "seat"
+      },
+      {
+        "id": "seatBack",
         "kind": "cuboid",
-        "color": "#ededea",
+        "color": "#d8d2c4",
         "center": [
           0,
-          0.415,
-          0.09
+          0.41,
+          -0.09
         ],
-        "width": 0.36,
-        "height": 0.03,
-        "depth": 0.46
+        "width": 0.37,
+        "height": 0.02,
+        "depth": 0.09
+      },
+      {
+        "id": "lid",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.585,
+          -0.145
+        ],
+        "width": 0.37,
+        "height": 0.37,
+        "depth": 0.02
       },
       {
         "id": "cistern",
         "kind": "cuboid",
-        "color": "#fbfbf7",
+        "color": "#f2f1ec",
         "center": [
           0,
-          0.58,
+          0.585,
           -0.24
         ],
-        "width": 0.38,
-        "height": 0.36,
-        "depth": 0.18
+        "width": 0.37,
+        "height": 0.37,
+        "depth": 0.17
+      },
+      {
+        "id": "flushButton",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.775,
+          -0.24
+        ],
+        "radius": 0.02,
+        "height": 0.01
       }
     ]
   }

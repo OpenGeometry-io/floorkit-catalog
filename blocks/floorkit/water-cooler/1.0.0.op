@@ -1,0 +1,249 @@
+{
+  "version": 1,
+  "id": "floorkit.water-cooler",
+  "labelName": "Water Cooler",
+  "type": "APPLIANCE",
+  "dimensions": {
+    "width": 0.35,
+    "depth": 0.35,
+    "height": 1.1
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "water cooler, drinking water, office",
+    "catalog:note": "Bottled water cooler, back to the wall at -z: a cabinet with a drip tray and two taps at the front and an inverted bottle on top. Bottle-fed, so it has no water port.",
+    "catalog:basedOn": "Water cooler 0.35 x 0.35 x 1.10, generic practice size, not checked against a published source (unverified). IfcElectricApplianceTypeEnum FREESTANDINGWATERCOOLER (IFC4.3 docs, buildingSMART IFC4.3.x-development: WATERCOOLER renamed in IFC4)",
+    "ifc:class": "IfcElectricAppliance",
+    "ifc:predefinedType": "FREESTANDINGWATERCOOLER",
+    "mat:cabinet": "metal",
+    "mat:dripTray": "metal",
+    "mat:tap": "metal",
+    "mat:neck": "glass",
+    "mat:bottle": "glass"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "definitions": {
+    "tap": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.72,
+        0.16
+      ],
+      "width": 0.03,
+      "height": 0.04,
+      "depth": 0.03
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.175,
+            -0.175
+          ],
+          [
+            0.175,
+            -0.175
+          ],
+          [
+            0.175,
+            0.145
+          ],
+          [
+            0.1,
+            0.145
+          ],
+          [
+            0.1,
+            0.175
+          ],
+          [
+            -0.1,
+            0.175
+          ],
+          [
+            -0.1,
+            0.145
+          ],
+          [
+            -0.175,
+            0.145
+          ]
+        ]
+      },
+      {
+        "id": "bottle-a",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.015
+        ],
+        "radius": 0.13,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "bottle-b",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.015
+        ],
+        "radius": 0.13,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "cabinet",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.39,
+          -0.015
+        ],
+        "width": 0.35,
+        "height": 0.78,
+        "depth": 0.32
+      },
+      {
+        "id": "dripTray",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.53,
+          0.16
+        ],
+        "width": 0.2,
+        "height": 0.02,
+        "depth": 0.03
+      },
+      {
+        "id": "tapCold",
+        "ref": "tap",
+        "placement": {
+          "position": [
+            -0.06,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "tapHot",
+        "ref": "tap",
+        "placement": {
+          "position": [
+            0.06,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "neck",
+        "kind": "cylinder",
+        "color": "#a8d0e6",
+        "center": [
+          0,
+          0.795,
+          -0.015
+        ],
+        "radius": 0.04,
+        "height": 0.03
+      },
+      {
+        "id": "bottle",
+        "kind": "cylinder",
+        "color": "#a8d0e6",
+        "center": [
+          0,
+          0.955,
+          -0.015
+        ],
+        "radius": 0.13,
+        "height": 0.29
+      }
+    ]
+  }
+}

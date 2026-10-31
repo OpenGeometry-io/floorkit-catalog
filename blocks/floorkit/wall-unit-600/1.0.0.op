@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "id": "floorkit.wall-unit-600",
+  "labelName": "Wall Unit 600",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.35,
+    "height": 0.72
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "kitchen",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "wall unit, kitchen unit, cabinet, overhead, kitchen",
+    "catalog:note": "Overhead wall unit, hung on the wall above the counter. underside 1.40, 0.72 high. The plan draws its outline only: Floorkit draws every block line with one pen, so the usual dashed line cannot be drawn.",
+    "catalog:basedOn": "EN 1116 co-ordinating sizes as given in the drafting standard key dimensions (wall unit 0.60 x 0.35 x 0.72, underside 1.40); EN 1116 itself not read, unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:carcass": "frame",
+    "mat:door": "frame",
+    "mat:handle": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.3,
+            -0.175
+          ],
+          [
+            0.3,
+            -0.175
+          ],
+          [
+            0.3,
+            0.175
+          ],
+          [
+            -0.3,
+            0.175
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "carcass",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          1.76,
+          -0.0225
+        ],
+        "width": 0.6,
+        "height": 0.72,
+        "depth": 0.305
+      },
+      {
+        "id": "door",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          1.76,
+          0.14
+        ],
+        "width": 0.596,
+        "height": 0.716,
+        "depth": 0.02
+      },
+      {
+        "id": "handle",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          1.43,
+          0.1625
+        ],
+        "width": 0.16,
+        "height": 0.02,
+        "depth": 0.025
+      }
+    ]
+  }
+}

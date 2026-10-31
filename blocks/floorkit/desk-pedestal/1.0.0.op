@@ -1,0 +1,357 @@
+{
+  "version": 1,
+  "id": "floorkit.desk-pedestal",
+  "labelName": "Desk Pedestal",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.43,
+    "depth": 0.6,
+    "height": 0.6
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "storage",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "pedestal, drawers, filing, mobile, office",
+    "catalog:note": "Mobile desk pedestal on four castors: two drawers over a file drawer, with handles standing 0.025 proud, inside the plan outline. top 0.60. Goes under a desk 0.74 high. The castors are drawn at true size and build as polygonal prisms; the kernel decides their facets.",
+    "catalog:basedOn": "Neufert, Architects' Data, as given in the drafting standard key dimensions; Neufert itself not read, unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "FILECABINET",
+    "mat:body": "frame",
+    "mat:file-drawer-front": "frame",
+    "mat:small": "frame",
+    "mat:handle": "metal",
+    "mat:castor": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.6,
+          -0.0225
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "definitions": {
+    "small": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.0625,
+        0.265
+      ],
+      "width": 0.426,
+      "height": 0.125,
+      "depth": 0.02
+    },
+    "handle": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0,
+        0.2875
+      ],
+      "width": 0.12,
+      "height": 0.02,
+      "depth": 0.025
+    },
+    "castor": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.025,
+        0
+      ],
+      "radius": 0.025,
+      "height": 0.05
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.215,
+            -0.3
+          ],
+          [
+            0.215,
+            -0.3
+          ],
+          [
+            0.215,
+            0.3
+          ],
+          [
+            -0.215,
+            0.3
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "castor-back-left",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            -0.18,
+            0,
+            -0.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "castor-back-right",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            0.18,
+            0,
+            -0.25
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "castor-front-left",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            -0.18,
+            0,
+            0.2
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "castor-front-right",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            0.18,
+            0,
+            0.2
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "body",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.325,
+          -0.0225
+        ],
+        "width": 0.43,
+        "height": 0.55,
+        "depth": 0.555
+      },
+      {
+        "id": "file-drawer-front",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.195,
+          0.265
+        ],
+        "width": 0.426,
+        "height": 0.28,
+        "depth": 0.02
+      },
+      {
+        "id": "drawer-front-middle",
+        "ref": "small",
+        "placement": {
+          "position": [
+            0,
+            0.34,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "drawer-front-top",
+        "ref": "small",
+        "placement": {
+          "position": [
+            0,
+            0.47,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-file",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0.295,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-middle",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0.43,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handle-top",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0.56,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "version": 1,
+  "id": "floorkit.radiator",
+  "labelName": "Radiator",
+  "type": "MEP_EQUIPMENT",
+  "dimensions": {
+    "width": 1,
+    "depth": 0.1,
+    "height": 0.65
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "equipment",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "radiator, heating, panel radiator",
+    "catalog:note": "Double panel radiator on two wall brackets, back to the wall at -z. panel bottom 0.15; the valves hang below it. Flow at the -x valve, return at the +x valve: these ports stay put when a project mirrors the block, so swap them by hand after a mirror.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: radiator 1.00 x 0.10 x 0.60 panel, bottom 0.15. Port sizes are UK domestic practice per the drafting standard §8 table, unverified. IfcSpaceHeaterTypeEnum RADIATOR (IFC4.3 docs, buildingSMART IFC4.3.x-development)",
+    "ifc:class": "IfcSpaceHeater",
+    "ifc:predefinedType": "RADIATOR",
+    "ifcClass": "IfcSpaceHeater",
+    "mat:rearPanel": "metal",
+    "mat:frontPanel": "metal",
+    "mat:grille": "metal",
+    "mat:bracket": "frame",
+    "mat:valve": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "flow",
+      "domain": "piping",
+      "systemType": "heating",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.45,
+          0.1,
+          0.015
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "return",
+      "domain": "piping",
+      "systemType": "heating",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0.45,
+          0.1,
+          0.015
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "bracket": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.65,
+        -0.035
+      ],
+      "width": 0.04,
+      "height": 0.1,
+      "depth": 0.03
+    },
+    "valve": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.125,
+        0.015
+      ],
+      "radius": 0.02,
+      "height": 0.05
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.5,
+            -0.02
+          ],
+          [
+            -0.37,
+            -0.02
+          ],
+          [
+            -0.37,
+            -0.05
+          ],
+          [
+            -0.33,
+            -0.05
+          ],
+          [
+            -0.33,
+            -0.02
+          ],
+          [
+            0.33,
+            -0.02
+          ],
+          [
+            0.33,
+            -0.05
+          ],
+          [
+            0.37,
+            -0.05
+          ],
+          [
+            0.37,
+            -0.02
+          ],
+          [
+            0.5,
+            -0.02
+          ],
+          [
+            0.5,
+            0.05
+          ],
+          [
+            -0.5,
+            0.05
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "rearPanel",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.445,
+          -0.01
+        ],
+        "width": 1,
+        "height": 0.59,
+        "depth": 0.02
+      },
+      {
+        "id": "frontPanel",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.445,
+          0.04
+        ],
+        "width": 1,
+        "height": 0.59,
+        "depth": 0.02
+      },
+      {
+        "id": "grille",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.745,
+          0.015
+        ],
+        "width": 1,
+        "height": 0.01,
+        "depth": 0.07
+      },
+      {
+        "id": "bracketLeft",
+        "ref": "bracket",
+        "placement": {
+          "position": [
+            -0.35,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bracketRight",
+        "ref": "bracket",
+        "placement": {
+          "position": [
+            0.35,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "valveFlow",
+        "ref": "valve",
+        "placement": {
+          "position": [
+            -0.45,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "valveReturn",
+        "ref": "valve",
+        "placement": {
+          "position": [
+            0.45,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

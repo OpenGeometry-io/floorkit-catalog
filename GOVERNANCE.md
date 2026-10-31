@@ -141,6 +141,7 @@ The format has two versioned schemas:
 | What | Schema | Identifier |
 | --- | --- | --- |
 | A block (`.op` v1) | [`schema/op/v1.schema.json`](schema/op/v1.schema.json) | `"version": 1` in every block |
+| A block (`.op` format v2, [RFC 0004](docs/rfcs/0004-format-v2.md)) | [`schema/op/v2.schema.json`](schema/op/v2.schema.json) | `"catalog:format": "2"` in root `metadata`; `"version"` stays `1` |
 | The index | [`schema/index/v1.schema.json`](schema/index/v1.schema.json) | `"schema": "floorkit.catalog/v1"` |
 
 **A change within v1** comes as an ordinary pull request with tests, and stays inside two limits:
