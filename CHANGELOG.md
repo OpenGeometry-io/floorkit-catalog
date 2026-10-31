@@ -8,6 +8,10 @@ Notable changes to floorkit-catalog, in the style of [Keep a Changelog 1.1.0](ht
 
 ## [Unreleased]
 
+### Changed
+
+- **The README opens with a banner**, `docs/images/banner-section-a.png`: the demo's section A, drawn by Floorkit from catalog blocks ([`examples/demo.mjs`](examples/demo.mjs)).
+
 ## [0.1.0] - not yet tagged
 
 The first release, tagged at the public launch ([docs/LAUNCH.md](docs/LAUNCH.md), item 4).
