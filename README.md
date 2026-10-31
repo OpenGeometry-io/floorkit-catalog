@@ -131,7 +131,7 @@ FLOORKIT_DIR=<dir with dist/index.js> node tools/render.mjs                  # p
 Add `blocks/<you>/<slug>/1.0.0.op`, run `npm run check`, sign off every commit (`git commit -s`) and open a pull request with its provenance section filled in. Only self-authored work is accepted: no geometry copied from manufacturer or BIM-portal files, and no brand names in community labels.
 
 - [docs/drafting-standard.md](docs/drafting-standard.md): how a block is drawn: the origin, true heights, the body at LOD 300, the plan symbol, roles, colours, anchors, ports and IFC class, per category.
-- [The `author-block` skill](.claude/skills/author-block/SKILL.md): the order of work, from the request to the pull request, for Claude Code or another coding agent; with a [starter block](.claude/skills/author-block/starter.op) and the [LOD 300 review checklist](.claude/skills/author-block/references/lod300-checklist.md).
+- [The `author-block` skill](.claude/skills/author-block/SKILL.md): the order of work, from the request to the pull request, for a coding agent; with a [starter block](.claude/skills/author-block/starter.op) and the [LOD 300 review checklist](.claude/skills/author-block/references/lod300-checklist.md).
 - [CONTRIBUTING.md](CONTRIBUTING.md): the full steps and what CI checks.
 - [GOVERNANCE.md](GOVERNANCE.md): publisher tiers, releases, revocation and takedowns.
 - [SECURITY.md](SECURITY.md): report a vulnerability privately.

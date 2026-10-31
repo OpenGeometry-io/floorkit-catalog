@@ -32,7 +32,7 @@ A good block is something a designer would place in a plan without checking it f
 
 ## Add a block
 
-Draw the block to the [drafting standard](docs/drafting-standard.md): it says where the origin goes, which heights are true, which parts the body needs, what the plan shows, and which roles, colours, anchors, ports and IFC class to use. Using Claude Code or another coding agent? The [`author-block` skill](.claude/skills/author-block/SKILL.md) walks through these steps in order.
+Draw the block to the [drafting standard](docs/drafting-standard.md): it says where the origin goes, which heights are true, which parts the body needs, what the plan shows, and which roles, colours, anchors, ports and IFC class to use. Using a coding agent? The [`author-block` skill](.claude/skills/author-block/SKILL.md) walks through these steps in order.
 
 ### 1. Set up
 

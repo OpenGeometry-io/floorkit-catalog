@@ -83,7 +83,7 @@ Every block has a `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (ti
 #### The drafting standard and the authoring skill
 
 - **[docs/drafting-standard.md](docs/drafting-standard.md):** how a block is drawn. The origin and grounds, true heights and the note keywords, the body at LOD 300, overlapping parts, the plan symbol, material roles and colours, the closed tables of anchor names and port ids, the IFC class, a row per category, and where each key dimension comes from.
-- **[`.claude/skills/author-block/`](.claude/skills/author-block/SKILL.md):** the order of work from the request to the pull request, for Claude Code or another coding agent, with `starter.op` and the LOD 300 review checklist (`references/lod300-checklist.md`).
+- **[`.claude/skills/author-block/`](.claude/skills/author-block/SKILL.md):** the order of work from the request to the pull request, for a coding agent, with `starter.op` and the LOD 300 review checklist (`references/lod300-checklist.md`).
 - **A sixth allowed overlap** in the drafting standard's §4 (FLO-330, owner's decision): a bowl floor set into its bowl wall, by no more than the wall's thickness. The `bidet` and `urinal` 2.0.0 use it. An AI assistant drafted the row.
 
 #### Format and schema
