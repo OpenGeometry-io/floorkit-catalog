@@ -12,6 +12,26 @@ import process from 'node:process';
 import { pathToFileURL } from 'node:url';
 import { ROOT, listBlocks } from './repo.mjs';
 
+let booting = null; // the boot, started once
+let kernel = null; // OpenGeometry, once booted
+
+/**
+ * Boot kernel 3.0 once, as Floorkit's own tests/helpers/kernel.mjs does. The
+ * package exports only `import`, so it is found by its package.json; its
+ * index.js is the SAME module instance Floorkit's dist imports, else a second
+ * kernel copy would stay unbooted. Node has no Worker: tessellate inline.
+ */
+function bootKernel(require) {
+  booting ??= (async () => {
+    const pkg = path.dirname(require.resolve('opengeometry/package.json'));
+    const { OpenGeometry } = await import(pathToFileURL(path.join(pkg, 'index.js')).href);
+    const wasmModule = await WebAssembly.compile(readFileSync(path.join(pkg, 'opengeometry_bg.wasm')));
+    await OpenGeometry.create({ wasmModule }, { tessellation: 'inline' });
+    kernel = OpenGeometry;
+  })();
+  return booting;
+}
+
 /** Import Floorkit's `dist/index.js`, and boot its kernel when `boot` is set. */
 export async function loadFloorkit({ boot = false } = {}) {
   const dir = process.env.FLOORKIT_DIR;
@@ -23,14 +43,7 @@ export async function loadFloorkit({ boot = false } = {}) {
   const require = createRequire(entry);
   const three = path.join(path.dirname(require.resolve('three')), 'three.module.js'); // the ESM build dist imports
   const THREE = await import(pathToFileURL(three).href);
-  if (boot) {
-    const kernelEntry = require.resolve('opengeometry');
-    const { OpenGeometry } = await import(pathToFileURL(kernelEntry).href);
-    globalThis.document ??= { createElement: () => ({ style: {}, setAttribute() {}, appendChild() {} }) };
-    // Booted from the .wasm BYTES, as Floorkit's own tests/helpers/kernel.mjs does.
-    const wasm = readFileSync(path.join(path.dirname(kernelEntry), 'opengeometry', 'pkg', 'opengeometry_bg.wasm'));
-    if (!OpenGeometry.instance) await OpenGeometry.create({ wasmURL: wasm });
-  }
+  if (boot) await bootKernel(require);
   return { dir: path.resolve(dir), entry, floorkit, require, THREE };
 }
 
@@ -60,9 +73,17 @@ export function placedModel(uri, scale = [1, 1, 1]) {
     assets: { block: { kind: 'external-op', uri } }, buildings: [{ id: 'building', storeys: [storey] }] };
 }
 
-/** World-space triangles of each 3D node of a built element, named as Floorkit names them. */
+/**
+ * World-space triangles of each 3D node of a built element, named as Floorkit
+ * names them. Kernel 3.0 meshes only the bodies shown since the last flush:
+ * show them (`updateMatrixWorld`), flush synchronously, then show them again so
+ * that each new mesh is placed (Floorkit's kernel-display.ts does the same).
+ */
 export function bodyParts(element) {
-  element.updateWorldMatrix(true, true);
+  if (!kernel) throw new Error('bodyParts needs the kernel: loadFloorkit({ boot: true }) first.');
+  element.updateMatrixWorld(true);
+  kernel.flush({ geometry: 'sync' });
+  element.updateMatrixWorld(true);
   return element.getPhysicalParts().map((part) => {
     const tris = [];
     let color = null;

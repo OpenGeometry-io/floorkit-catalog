@@ -48,12 +48,10 @@ const entry = path.resolve(process.env.FLOORKIT_DIR, 'dist', 'index.js');
 const F = await import(pathToFileURL(entry).href);
 const require = createRequire(entry);
 const THREE = await import(pathToFileURL(path.join(path.dirname(require.resolve('three')), 'three.module.js')).href);
-const kernelEntry = require.resolve('opengeometry');
-const { OpenGeometry } = await import(pathToFileURL(kernelEntry).href);
-globalThis.document ??= { createElement: () => ({ style: {}, setAttribute() {}, appendChild() {} }) };
-if (!OpenGeometry.instance) {
-  await OpenGeometry.create({ wasmURL: readFileSync(path.join(path.dirname(kernelEntry), 'opengeometry', 'pkg', 'opengeometry_bg.wasm')) });
-}
+const kernelDir = path.dirname(require.resolve('opengeometry/package.json')); // kernel 3.0 exports only `import`
+const { OpenGeometry } = await import(pathToFileURL(path.join(kernelDir, 'index.js')).href);
+const wasmModule = await WebAssembly.compile(readFileSync(path.join(kernelDir, 'opengeometry_bg.wasm')));
+await OpenGeometry.create({ wasmModule }, { tessellation: 'inline' });
 
 // ── The blocks: index.json says where each one is and what its bytes hash to ──
 const index = JSON.parse(readFileSync(path.join(ROOT, 'index.json'), 'utf8'));
@@ -206,7 +204,9 @@ else console.log(`plan: all ${placed.length} placed blocks draw (1:50)`);
 // ── The four heights, from the built bodies and from the section ──
 const box = (object) => new THREE.Box3().setFromObject(object);
 // The bodies' own parts: a box of the whole element also holds its anchors, which sit on the floor.
-const parts = (id, prefix = '') => live(id).getPhysicalParts().filter((p) => p.name.startsWith(prefix)).map(box);
+// Kernel 3.0 meshes only shown bodies: show them, flush, and show them again to place the new meshes.
+const meshed = (element) => (element.updateMatrixWorld(true), OpenGeometry.flush({ geometry: 'sync' }), element.updateMatrixWorld(true), element);
+const parts = (id, prefix = '') => meshed(live(id)).getPhysicalParts().filter((p) => p.name.startsWith(prefix)).map(box);
 const top = (id, prefix) => Math.max(...parts(id, prefix).map((b) => b.max.y));
 const bottom = (id) => Math.min(...parts(id).map((b) => b.min.y));
 // In the section, height is -y; a block's level edge at height h is a horizontal line of that block.
@@ -267,7 +267,7 @@ if (broken === 'roundtrip') {
   reopened.apply({ kind: 'replace-element', ...where, list: 'instances', elementId: 'l-sofa', element: { ...sofa, position: [sofa.position[0] + 0.01, 0, sofa.position[2]] } });
 }
 const boxes = (m) => Object.fromEntries([...m.session.currentBuild.elementsById].map(([id, e]) => {
-  const b = box(e);
+  const b = box(meshed(e));
   return [id, b.isEmpty() ? null : [...b.min.toArray(), ...b.max.toArray()].map((v) => Math.round(v * 1e6) / 1e6)];
 }));
 const [before, after] = [boxes(manager), boxes(reopened)];
