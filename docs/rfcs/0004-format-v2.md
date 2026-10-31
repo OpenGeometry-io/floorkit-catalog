@@ -66,7 +66,7 @@ Format 1 must not change to take them: released blocks are immutable, and a read
   - **no shell of a shell** (Floorkit accepts; the kernel refuses with `CoverageGap`, measured);
   - **a shell `thickness` under half the smallest extent of its source's box** (Floorkit: above 4e-8): the void needs room; a necessary rule, with parity as the real check;
   - **one scale factor on every body placement, in both formats** (Floorkit refuses others when built): refused before the build, in format 1 too, since the catalog must not accept a block Floorkit 3.0 refuses.
-- **A sweep stays out of booleans**, as in format 1, until a build of one is measured.
+- **A sweep stays out of booleans**, as in format 1, until a build of one is measured. Amended on 2026-10-31: an outline sweep may be a through cut ([amendment](#amendment-2026-10-31-an-outline-sweep-as-a-through-cut)).
 - **The geometry gates bound the new kinds** exactly where it is cheap (sphere, torus, sector, outline sweep, revolve) and soundly elsewhere (a turned cone, a shell's volume) ([format-v2 §7](../format-v2.md#7-the-geometry-gates-on-the-new-kinds)).
 
 ### The index
@@ -117,6 +117,62 @@ A reader would fetch and parse a file it cannot use, and the loader's newest-ver
 1. **Parity on format v2.** Measured on 2026-10-31: the four valid fixtures build, mirror and are mesh clean, and the 27 kernel rejects are refused. An asymmetric sector (`v2-pedestal.op`, from 0.3 rad) mirrors onto its mirrored box, measured by mesh boxes; `render.mjs` draws unplaced, so no mirrored picture.
 2. **Uneven node scale in format 1** is now refused in both formats (lead's call, 2026-10-31): Floorkit 3.0 refuses it on every body (read: `base-type.ts:51-63`). No block had one, so no block changed.
 3. **Triangle counts.** Measured: the shell of a 0.1 m sphere is 83,636 triangles. A maintainer's audit (2026-10-31) reports 54,288 for a 0.5 m sphere and a drawing cap of 20,000 triangles per block (unverified here), so a sphere alone may pass that cap. No schema limit is proposed; `parity.mjs --mesh` records each node's triangle count in its mesh report.
+
+## Amendment 2026-10-31: an outline sweep as a through cut
+
+| | |
+| --- | --- |
+| **Status** | Accepted by the owner (2026-10-31); built in FLO-330 part A |
+| **Changes** | [format-v2 §2](../format-v2.md#2-node-kinds) (revolve row), [§4](../format-v2.md#4-shells), [§6](../format-v2.md#6-what-the-catalog-refuses-that-floorkit-30-accepts) with [§6.1](../format-v2.md#61-an-outline-sweep-in-a-boolean) and [§6.2](../format-v2.md#62-revolve-arcs), [§7](../format-v2.md#7-the-geometry-gates-on-the-new-kinds); `tools/lib/op.mjs`, `tools/lib/outline.mjs`, `tools/lib/geometry.mjs`. No schema change. No block changes |
+
+### Decision
+
+- **An outline sweep may be in a `boolean3d` only as a through cut**: a subtract of outline sweeps or cuboids, each through the base and inside its outline, from an outline sweep, a cuboid, or a shell of either (through its top face only), with no vertex on the line of the other's straight edge. [Format-v2 §6.1](../format-v2.md#61-an-outline-sweep-in-a-boolean) has the rule. The owner approved this on 2026-10-31.
+- **No revolve in a boolean** (OPE-109).
+- **No union as the operand of a subtract** (BIM review 070, G17).
+- **A revolve arc off the axis keeps its whole circle off the axis**, the kernel's own rule (BIM review 070, G11).
+
+### The measurement (FLO-330, 2026-10-31)
+
+Floorkit `68604c67`, kernel 3.0.0 at `053b471`, on 27 scratch blocks, each a released block with only the rim (or the part named) redrawn, with the refusal turned off for the run (`FLO-330/REPORT.md` in the review evidence, not in this repository):
+
+- `FLOORKIT_DIR=… node tools/parity.mjs --build --mesh --out=<evidence>/parity <evidence>/blocks/*.op`: "accepted by Floorkit: 27/27", "built by Floorkit: 24/27", "mirrored by Floorkit: 24/27", "mesh clean: 18/27".
+- `OG_DIR=… node rim-booleans.mjs`, the kernel alone:
+  - **OPE-107.** An outline extrusion less a cylinder through both caps: "264 open edges" (A1, the basin rim; A2 with straight edges too). A cuboid less the same cylinder: "0 open edges" (A3). The rim less a circle extrusion of two half arcs: "0 open edges" (A8).
+  - **OPE-108.** A rounded square less a 0.8 square, whose side lies on the line through the outer vertex (−0.45, −0.4): "3 open edges" in the bottom cap (B1). A 0.79 square: "0 open edges" (B2).
+  - **OPE-109.** The rim less the bowl's revolve (6 chords): "FAILED: CoverageGap { families: ["generic analytic solid", "intersecting analytic solid"] }" (C1, and C3 against a cuboid). An egg extrusion less a pocket of another egg: the same failure (D1); through both caps it builds, "0 open edges" (D2).
+- Clean through cuts: the basins' rims less a circle sweep (1c), the shower tray less its exact offset (2a), the bath less a rounded opening from a sweep or a cuboid (2b, 2b3), the WC shell less an oval sweep through its top (3a, 3d), the quadrant tray less a circle sweep (4b).
+
+### BIM review 070 (2026-10-31)
+
+- **G11.** The probes P3 and P4 (a wash-basin bowl whose arcs are centred 0.08 and 0.06 m from the axis, radii 0.105 and 0.09) passed `validate.mjs` (`logs/probes-validate.log`) and failed to build: `revolved profile arc circle meets the revolve axis` (`logs/probes.log`). P3b, with arcs whose circles clear the axis, built. The rule is read from the kernel at `053b471`, `src/primitives/internal/revolved_profile.rs` (`arc_lateral`): centred within 1e-8 m of the axis, a sphere; else the centre's distance less the radius must be more than 1e-8 m.
+- **G17.** The WC pan's shell less a union of two cylinders, or of cylinders and a cuboid (refuter probes R2, R2b, R2c), passed `validate.mjs` and failed to build: `InvalidTopology("pcurve on halfedge 9 leaves face 2 UV bounds at [-0.0948683298050514, 0.1334846922834953])` (`refuter/logs/r2.json`, `r2bc.json`). The cause is not traced, so every union operand of a subtract is refused. No released block and no valid fixture used one (checked over `blocks/` and `test/fixtures/` on 2026-10-31).
+
+### Checked here (FLO-330 part A, 2026-10-31)
+
+- `node tools/validate.mjs` on the 27 FLO-330 scratch blocks: every case that failed to build or left open edges is refused (1a, 1b, 2b and 2c tray, 4a), each with its kernel issue. Every clean case passes except 2b2 ([format-v2 §6.1](../format-v2.md#61-an-outline-sweep-in-a-boolean), "Stricter than the measurement"). 3c fails on its note only.
+- `FLOORKIT_DIR=… node tools/parity.mjs --build --mesh` on the catalog: "accepted by Floorkit: 92/92", "built by Floorkit: 92/92", "mirrored by Floorkit: 92/92", "mesh clean: 92/92", "kernel-reject fixtures refused by Floorkit: 27/27". On the five valid format v2 fixtures, `v2-sweep-through-cut.op` among them: 5/5 each.
+- The new reject fixtures through the same command: `v2-revolve-operand.op` fails with `CoverageGap`, `v2-revolve-arc-circle-meets-axis.op` with `revolved profile arc circle meets the revolve axis`, `v2-union-operand.op` with the `InvalidTopology` above; `v2-sweep-minus-through-cylinder.op` leaves "264 edge(s)" open, and `v2-sweep-cut-outside-base.op` leaves two shells. `v2-sweep-pocket.op` (a circle pocket) and `v2-sweep-collinear-opening.op` built mesh clean: those two rules are stricter than the faults they guard.
+- The 2b2 tray opening moved 0.005 m in (0.79 m, corners 0.03): passes `validate.mjs`, and parity gives "built by Floorkit: 1/1", "mesh clean: 1/1".
+
+### Review A fixes (2026-10-31)
+
+A review of the first version of this rule (FLO-330 review A, probes `p01` to `p29b`) found three cases that passed `validate.mjs` and did not build clean. The rule now covers them ([format-v2 §6.1](../format-v2.md#61-an-outline-sweep-in-a-boolean), [§6.2](../format-v2.md#62-revolve-arcs)):
+
+- **A chord point of an arc on a straight edge's line** (p17a, p17b: 3 open edges, plain and mirrored). The kernel's chord points follow the display deflection, so the catalog does not reproduce them: a straight edge's line may not come within 0.001 m of any point of an arc of the other outline. This also refuses cuts like 2a and 4b, which built clean at the deflection measured.
+- **A shell's concave corner** (p26: 12 open edges). A cut of a shell is now measured against the void's own outline, whose concave corners lie more than `t` inside the source's.
+- **An arc centred 1e-8 m from the axis** (p20, p25: `InvalidTopology("pcurve does not lie on edge support")`). A centre counts as on the axis only within 1e-9 m. Measured: 1e-9 builds clean, plain and mirrored on x and on z.
+- **A shell of an outline sweep** is held to the rule whatever its operands (p14, a cuboid pocket: two shells). A full cylinder through the shell's top skin stays allowed, as in the released WC pans.
+- **Measured after the fix**, with `node tools/validate.mjs`, `tools/parity.mjs --build --mesh` and review A's `mirror-mesh.mjs` (builds plain and mirrored on x and on z): 16 of review A's probes pass `validate.mjs`, and all 16 are accepted, built and mesh clean in parity ("mesh clean: 16/16"), and clean plain and in both mirrors.
+- **The 11 redrawn blocks of the FLO-330 author branches**, checked without changing them: 9 pass. `shower-enclosure-quadrant` 1.0.0 is refused by the chord-point rule (its opening's side z = −0.4 runs into the tray's arc of radius 0.9), and `wc-accessible` 2.0.0 by the void rule (its opening comes within 0.0005 m of the void). All 11 built mesh clean in parity.
+
+### Unverified
+
+- The mirrored mesh beyond the blocks and probes listed: parity checks only that the mirrored build succeeds; review A's `mirror-mesh.mjs` checks the mirrored meshes, and was run only where this amendment says.
+- Whether a straight edge of an outline is ever cut into chords in a cap, which would add more points on a line.
+- Several cuts in one subtract; a cuboid cut of a sweep away from the measured 2c and B2 shapes; a straight-edged cut in a shell; a shell of a cuboid with a sweep cut.
+- Why the kernel's cap triangulation fails on B1 and not on 2b2 (OPE-108), and the cause of G17.
+- Kernels after 3.0.0 at `053b471`: when OPE-107, OPE-108 or OPE-109 is fixed, this rule can be loosened, with a new measurement.
 
 ## Sources
 

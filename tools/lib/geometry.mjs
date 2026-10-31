@@ -22,7 +22,8 @@
  *
  * Boxes are conservative for rotated parts. A boolean's box is its base's (a
  * union's spans all its parts); its volume is the base's, a union's the base's
- * plus its operands'. A sweep's profile, drawn facing +y as in the glazed-door
+ * plus its operands', and a format v2 through cut's the base's less each cut's
+ * outline area times the height it shares with the base. A sweep's profile, drawn facing +y as in the glazed-door
  * frame, is turned along each path segment; its corners are not mitred. A surface is a box face, so (f) is exact for
  * cuboids and lenient elsewhere.
  *
@@ -228,6 +229,27 @@ function solidBox(node, map, definitions, v2 = false) {
   if (node.kind === 'boolean3d') {
     const box = (ref) => (definitions[ref] ? solidBox(definitions[ref], own, definitions, v2) : null);
     const base = box(node.baseRef);
+    if (base && node.operation === 'subtract' && v2) {
+      // A through cut with an outline sweep, or of a shell of one (format v2 §6.1; op.mjs admits it
+      // only inside the base's outline and through it, or through a shell's top skin only): the base less each cut's
+      // outline area times the height it shares with the base (a shell's: its top skin). Taken in
+      // the boolean's own frame, where each part is only moved. Any other subtract keeps its base's
+      // volume, an over-estimate, so the ratio of gate (e) errs towards refusing.
+      const parts = [node.baseRef, ...node.operandRefs].map((ref) => definitions[ref]);
+      const outlineSweep = (n) => n?.kind === 'sweep' && n.profile && !Array.isArray(n.profile);
+      const sweepShell = parts[0]?.kind === 'shell' && outlineSweep(definitions[parts[0].sourceRef]);
+      if (parts.some(outlineSweep) || sweepShell) {
+        const local = (n) => solidBox(n, placementMap(), definitions, v2);
+        const baseBox = local(parts[0]);
+        const [low, high] = parts[0].kind === 'shell' ? [baseBox.max[1] - parts[0].thickness, baseBox.max[1]] : [baseBox.min[1], baseBox.max[1]];
+        const cut = parts.slice(1).reduce((sum, n) => {
+          const b = local(n);
+          const area = n.kind === 'cuboid' ? n.width * n.depth : n.kind === 'cylinder' ? Math.PI * n.radius ** 2 : Math.abs(areaAndCentroid(outlinePolygon(outlineEdges(n.profile, (arc) => !arc.counterClockwise))).area);
+          return sum + area * Math.max(0, Math.min(high, b.max[1]) - Math.max(low, b.min[1]));
+        }, 0);
+        return { ...base, volume: base.volume - cut * det(own) };
+      }
+    }
     if (!base || node.operation === 'subtract') return base;
     const parts = node.operandRefs.map(box).filter(Boolean);
     const pick = node.operation === 'union' ? [Math.min, Math.max] : [Math.max, Math.min];

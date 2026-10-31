@@ -1,0 +1,675 @@
+{
+  "version": 1,
+  "id": "fixture.v2-union-operand",
+  "labelName": "WC",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.37,
+    "depth": 0.65,
+    "height": 0.78
+  },
+  "metadata": {
+    "catalog:version": "2.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "wc, toilet, close-coupled, bathroom",
+    "catalog:note": "Close-coupled WC against the wall, lid open. seat 0.42, rim 0.40. The pan is an oval outline sweep, hollowed by a shell 0.015 thick whose top is opened by a round bowl cut, on an oval pedestal that follows the pan. The seat is two half rings that meet on the centre line. Cistern on the rear of the pan with a push button on top; the button, radius 0.02, is drawn at true size.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: WC 0.37 x 0.65 x 0.78, seat 0.42; EN 997 not read. Pan oval, pedestal and bowl opening are generic shapes, unverified. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "TOILETPAN",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:pedestal": "ceramic",
+    "mat:pan": "ceramic",
+    "mat:seatLeft": "surface",
+    "mat:seatRight": "surface",
+    "mat:lid": "surface",
+    "mat:cistern": "ceramic",
+    "mat:flushButton": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.325
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "soil",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.25,
+          -0.325
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.7,
+          -0.325
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "panSolid": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.18,
+          0
+        ],
+        [
+          0,
+          0.4,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.185,
+          -0.325
+        ],
+        "segments": [
+          {
+            "to": [
+              0.185,
+              -0.325
+            ]
+          },
+          {
+            "to": [
+              0.185,
+              -0.05
+            ]
+          },
+          {
+            "to": [
+              0.1053574007,
+              0.2624440433
+            ],
+            "arc": {
+              "center": [
+                -0.4676923077,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.1053574007,
+              0.2624440433
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.205
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.185,
+              -0.05
+            ],
+            "arc": {
+              "center": [
+                0.4676923077,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.185,
+              -0.325
+            ]
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "panShell": {
+      "kind": "shell",
+      "color": "#f2f1ec",
+      "sourceRef": "panSolid",
+      "thickness": 0.015
+    },
+    "bowlOpening": {
+      "kind": "boolean3d",
+      "operation": "union",
+      "baseRef": "openingFront",
+      "operandRefs": [
+        "openingBack"
+      ],
+      "color": "#f2f1ec"
+    },
+    "pan": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "panShell",
+      "operandRefs": [
+        "bowlOpening"
+      ],
+      "color": "#f2f1ec"
+    },
+    "openingFront": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.38,
+        0.05
+      ],
+      "radius": 0.12,
+      "height": 0.06
+    },
+    "openingBack": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.38,
+        0.11
+      ],
+      "radius": 0.12,
+      "height": 0.06
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.185,
+            -0.05
+          ],
+          [
+            -0.185,
+            -0.325
+          ],
+          [
+            0.185,
+            -0.325
+          ],
+          [
+            0.185,
+            -0.05
+          ]
+        ]
+      },
+      {
+        "id": "panRight",
+        "kind": "arc",
+        "center": [
+          -0.4676923077,
+          -0.05
+        ],
+        "radius": 0.652692,
+        "startAngle": -0.499174,
+        "sweepAngle": 0.499174
+      },
+      {
+        "id": "panFront",
+        "kind": "arc",
+        "center": [
+          0,
+          0.205
+        ],
+        "radius": 0.12,
+        "startAngle": -2.642419,
+        "sweepAngle": 2.143245
+      },
+      {
+        "id": "panLeft",
+        "kind": "arc",
+        "center": [
+          0.4676923077,
+          -0.05
+        ],
+        "radius": 0.652692,
+        "startAngle": 3.141593,
+        "sweepAngle": 0.499174
+      },
+      {
+        "id": "cisternFront",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.185,
+            -0.155
+          ],
+          [
+            0.185,
+            -0.155
+          ]
+        ]
+      },
+      {
+        "id": "seatInnerA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.08
+        ],
+        "radius": 0.12,
+        "startAngle": 0,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "seatInnerB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.08
+        ],
+        "radius": 0.12,
+        "startAngle": 3.141593,
+        "sweepAngle": 3.141593
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "pedestal",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.18,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.12,
+            -0.28
+          ],
+          "segments": [
+            {
+              "to": [
+                0.12,
+                -0.28
+              ]
+            },
+            {
+              "to": [
+                0.12,
+                -0.05
+              ]
+            },
+            {
+              "to": [
+                0.0679245283,
+                0.1322641509
+              ],
+              "arc": {
+                "center": [
+                  -0.225,
+                  -0.05
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.0679245283,
+                0.1322641509
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.09
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.12,
+                -0.05
+              ],
+              "arc": {
+                "center": [
+                  0.225,
+                  -0.05
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.12,
+                -0.28
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "pan",
+        "ref": "pan"
+      },
+      {
+        "id": "seatRight",
+        "kind": "sweep",
+        "color": "#d8d2c4",
+        "path": [
+          [
+            0,
+            0.4,
+            0
+          ],
+          [
+            0,
+            0.42,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0,
+            -0.12
+          ],
+          "segments": [
+            {
+              "to": [
+                0.185,
+                -0.12
+              ]
+            },
+            {
+              "to": [
+                0.185,
+                -0.05
+              ]
+            },
+            {
+              "to": [
+                0.1053574007,
+                0.2624440433
+              ],
+              "arc": {
+                "center": [
+                  -0.4676923077,
+                  -0.05
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0,
+                0.325
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.205
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0,
+                0.2
+              ]
+            },
+            {
+              "to": [
+                0,
+                -0.04
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.08
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0,
+                -0.12
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "seatLeft",
+        "kind": "sweep",
+        "color": "#d8d2c4",
+        "path": [
+          [
+            0,
+            0.4,
+            0
+          ],
+          [
+            0,
+            0.42,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0,
+            -0.12
+          ],
+          "segments": [
+            {
+              "to": [
+                0,
+                -0.04
+              ]
+            },
+            {
+              "to": [
+                0,
+                0.2
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.08
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0,
+                0.325
+              ]
+            },
+            {
+              "to": [
+                -0.1053574007,
+                0.2624440433
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.205
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.185,
+                -0.05
+              ],
+              "arc": {
+                "center": [
+                  0.4676923077,
+                  -0.05
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.185,
+                -0.12
+              ]
+            },
+            {
+              "to": [
+                0,
+                -0.12
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "lid",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.585,
+          -0.145
+        ],
+        "width": 0.37,
+        "height": 0.37,
+        "depth": 0.02
+      },
+      {
+        "id": "cistern",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.585,
+          -0.24
+        ],
+        "width": 0.37,
+        "height": 0.37,
+        "depth": 0.17
+      },
+      {
+        "id": "flushButton",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.775,
+          -0.24
+        ],
+        "radius": 0.02,
+        "height": 0.01
+      }
+    ]
+  }
+}

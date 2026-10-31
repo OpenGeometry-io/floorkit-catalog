@@ -119,6 +119,7 @@ A block may list a pair only when it is one of these:
 | Glass in its frame's rebate or a leaf in its frame's rebate | a vision panel in a door leaf |
 | A post or column through a base disc or a footrest ring | a stool column through its foot ring |
 | A soft part resting into its support by no more than 0.02 m | a cushion on a seat deck |
+| A bowl floor set into its bowl wall, by no more than the wall's thickness: the floor lies inside the outline of the bowl wall's outside, runs into the wall by no more than the wall's thickness, and its top is below the wall's top (owner's decision, 2026-10-31) | a bidet's bowl floor 0.01 into a wall at least 0.0265 thick, `overlap bowl+bowl-floor`; a urinal's floor 0.015 into a wall 0.03 thick, `overlap bowlWall+floor` |
 
 Everything else must be redrawn so the parts meet:
 

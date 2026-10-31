@@ -15,7 +15,7 @@ import { readFileSync } from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
 import { definitionBox, geometryIssues, revolveAxis, sweepIssue } from './geometry.mjs';
 import { parseNote } from './note.mjs';
-import { areaAndCentroid, outlineEdges, outlinePolygon, support } from './outline.mjs';
+import { areaAndCentroid, insetOutline, insideOutline, lineArcDistance, lineDistance, outlineDistance, outlineEdges, outlinePolygon, support } from './outline.mjs';
 import { ANCHOR_ROLES, KEPT_PORT_IDS, PORTS } from './roles.mjs';
 
 /** The block formats this catalog reads, each with its own schema. */
@@ -197,17 +197,25 @@ function semanticIssues(definition) {
         add(['definitions', ref, 'sourceRef'], 'an offset2d source must be a polyline');
       }
     }
-    if (node.kind === 'boolean3d') {
-      for (const [field, child] of refsOf(node)) {
-        if (has(child) && definitions[child].kind === 'sweep') {
-          add(['definitions', ref, ...field.split('/')], `"${child}" is a sweep; Floorkit can only cut cuboids, cylinders and other booleans`);
-        }
-      }
-    }
+    if (node.kind === 'boolean3d') booleanChildIssues(node, ['definitions', ref]);
     const result = KIND_RESULT[node.kind];
     settled.set(ref, result);
     return result;
   };
+  // A point-list sweep stays out of booleans (format 1 §4); an outline sweep is judged by
+  // `outlineSweepBooleanIssues` (format v2 §6). A union is no operand of a subtract (format v2 §6).
+  function booleanChildIssues(node, path) {
+    for (const [field, child] of refsOf(node)) {
+      if (!has(child)) continue;
+      const kid = definitions[child];
+      if (kid.kind === 'sweep' && !isOutlineSweep(kid)) {
+        add([...path, ...field.split('/')], `"${child}" is a sweep; Floorkit can only cut cuboids, cylinders and other booleans`);
+      }
+      if (node.operation === 'subtract' && field !== 'baseRef' && kid.kind === 'boolean3d' && kid.operation === 'union') {
+        add([...path, ...field.split('/')], `"${child}" is a union; kernel 3.0.0 refuses a subtract whose operand is a union (InvalidTopology "pcurve on halfedge … leaves face … UV bounds", measured for a union of cylinders, BIM review 070 G17; cause not traced). Cut with one solid of the opening's shape instead, for example an outline sweep`);
+      }
+    }
+  }
   function expect(ref, want, path, stack) {
     const got = resolve(ref, path, stack);
     if (got !== null && got !== want) add(path, `"${ref}" is ${got}, expected ${want}`);
@@ -224,7 +232,8 @@ function semanticIssues(definition) {
   definition.modelView.elements.forEach((element, index) => {
     const at = ['modelView', 'elements', index];
     if (element.ref !== undefined) expect(element.ref, 'solid3d', [...at, 'ref'], []);
-    else for (const [field, child, want] of refsOf(element)) expect(child, want, [...at, field], []);
+    else for (const [field, child, want] of refsOf(element)) expect(child, want, [...at, ...field.split('/')], []);
+    if (element.kind === 'boolean3d') booleanChildIssues(element, at);
   });
   // Resolve every definition, so an unused one still has its own refs checked.
   for (const key of Object.keys(definitions)) resolve(key, ['definitions', key], []);
@@ -379,6 +388,245 @@ function revolveAxisIssue(node) {
   return null;
 }
 
+/** OpenGeometry 3.0.0's geometric accuracy (`Accuracy::STANDARD.geometric`, `brep/accuracy.rs`). */
+const KERNEL_ACCURACY = 1e-8;
+/**
+ * How near the axis an arc's centre must be to count as on it, in metres: a tenth of the kernel's
+ * 1e-8. The kernel takes a centre within 1e-8 as on the axis, but one at exactly 1e-8 then fails to
+ * build (`InvalidTopology("pcurve does not lie on edge support")`, FLO-330 review A, p20 and p25),
+ * so the catalog keeps well inside its limit.
+ */
+const ON_AXIS = 1e-9;
+/** A small length for a message: fixed decimals for a usual size, else six significant digits. */
+const small = (v) => (Math.abs(v) >= 1e-4 || v === 0 ? Number(v.toFixed(6)) : Number(v.toPrecision(6)));
+
+/**
+ * Why an arc of a revolve's outline does not build, or null. Kernel 3.0.0 at 053b471 builds each
+ * arc as a sphere when its centre is on the axis and otherwise as a torus, which it refuses unless
+ * the centre's distance from the axis less the radius is more than 1e-8 m: "revolved profile arc
+ * circle meets the revolve axis" (`arc_lateral`, `src/primitives/internal/revolved_profile.rs`;
+ * measured on BIM review 070 probes P3 and P4). So an off-axis arc's whole circle clears the axis,
+ * not only the arc. The catalog counts a centre as on the axis only within ON_AXIS (1e-9 m). An arc
+ * centred on the axis that passes a pole crosses the axis, which `revolveAxisIssue` refuses first.
+ */
+function revolveArcIssue(node) {
+  const { point: p, g, edges, farthest } = revolveAxis(node);
+  const s = farthest > 1e-9 ? 1 : -1;
+  for (const edge of edges) {
+    if (!edge.c) continue;
+    const centre = s * (g[0] * (edge.c[0] - p[0]) + g[1] * (edge.c[1] - p[1]));
+    if (Math.abs(centre) <= ON_AXIS) continue;
+    if (centre - edge.r <= KERNEL_ACCURACY) {
+      return `has an arc about [${edge.c.join(', ')}], ${small(centre)} m from its axis, of radius ${small(edge.r)}, so the arc's circle comes ${small(centre - edge.r)} m from the axis or crosses it, and the centre is not on the axis (within ${ON_AXIS} m); kernel 3.0.0 refuses it ("revolved profile arc circle meets the revolve axis", measured, BIM review 070 G11), or fails on a centre at 1e-8 m (FLO-330 review A). Centre the arc on the axis, within ${ON_AXIS} m (a sphere), or keep its centre more than its radius plus ${KERNEL_ACCURACY} m from the axis (a torus)`;
+    }
+  }
+  return null;
+}
+
+/** An outline sweep: format v2's extrusion of a closed outline. */
+const isOutlineSweep = (node) => node?.kind === 'sweep' && node.profile !== undefined && !Array.isArray(node.profile);
+
+/** How far a through cut passes each face it cuts, in metres (FLO-330: every clean case passed by 0.005 to 0.01). */
+const THROUGH = 0.005;
+/** Clearance between outlines in a cut, and from a vertex to a straight edge's line: the contact tolerance. */
+const CUT_CLEARANCE = 0.001;
+const ROUND = 1e-9;
+const mm = (value) => Number(value.toFixed(4));
+const pt = (p) => `[${p.map(mm).join(', ')}]`;
+
+/** A node's placement as a plain move [x, y, z], or null when it turns or scales. */
+function moveOf(node) {
+  const placement = node.placement;
+  if (!placement) return [0, 0, 0];
+  if (placement.rotation.some((v) => v !== 0) || placement.scale.some((v) => v !== 1)) return null;
+  return placement.position;
+}
+
+/** The prism of an outline sweep, a cuboid or a full cylinder in its boolean's frame: plan edges (x, z) and its y range. */
+function prismOf(node, move = [0, 0, 0]) {
+  if (isOutlineSweep(node)) {
+    const [low, high] = node.path;
+    const [dx, dz] = [low[0] + move[0], low[2] + move[2]];
+    const at = (p) => [p[0] + dx, p[1] + dz];
+    const outline = {
+      start: at(node.profile.start),
+      segments: node.profile.segments.map((segment) => (segment.arc ? { to: at(segment.to), arc: { ...segment.arc, center: at(segment.arc.center) } } : { to: at(segment.to) })),
+    };
+    return { edges: outlineEdges(outline, (arc) => !arc.counterClockwise), low: low[1] + move[1], high: high[1] + move[1] };
+  }
+  const [cx, cy, cz] = [node.center[0] + move[0], node.center[1] + move[1], node.center[2] + move[2]];
+  if (node.kind === 'cylinder') {
+    // A full cylinder: its plan circle as two half arcs.
+    const r = node.radius;
+    const outline = { start: [cx, cz - r], segments: [{ to: [cx, cz + r], arc: { center: [cx, cz] } }, { to: [cx, cz - r], arc: { center: [cx, cz] } }] };
+    return { edges: outlineEdges(outline, () => true), low: cy - node.height / 2, high: cy + node.height / 2 };
+  }
+  const [w, d] = [node.width / 2, node.depth / 2];
+  const outline = { start: [cx - w, cz - d], segments: [{ to: [cx + w, cz - d] }, { to: [cx + w, cz + d] }, { to: [cx - w, cz + d] }] };
+  return { edges: outlineEdges(outline, () => true), low: cy - node.height / 2, high: cy + node.height / 2 };
+}
+
+/**
+ * The first place where outline `a` lines up with a straight edge of outline `b`, as a sentence, or
+ * null: a vertex of `a` (null entries skipped), or any point of an arc of `a`, within CUT_CLEARANCE
+ * of the full line through a straight edge of `b`. Arcs count whole, since the kernel cuts an arc
+ * in a cap into chords whose ends move with the display deflection (FLO-330 review A, probe p17).
+ */
+function linesUp(vertices, arcs, lines) {
+  for (const edge of lines) {
+    if (edge.c) continue;
+    const line = `the line through the straight edge ${pt(edge.from)} to ${pt(edge.to)}`;
+    for (const v of vertices) {
+      if (!v) continue;
+      const distance = lineDistance(v, edge);
+      if (distance <= CUT_CLEARANCE + ROUND) return `the vertex ${pt(v)} is ${mm(distance)} m from ${line}`;
+    }
+    for (const arc of arcs) {
+      if (!arc.c) continue;
+      const distance = lineArcDistance(edge, arc);
+      if (distance <= CUT_CLEARANCE + ROUND) return `the arc about ${pt(arc.c)} from ${pt(arc.from)} to ${pt(arc.to)} comes ${mm(distance)} m from ${line}`;
+    }
+  }
+  return null;
+}
+const lineUp = (a, b) => linesUp(a.map((edge) => edge.from), a, b) ?? linesUp(b.map((edge) => edge.from), b, a);
+
+/**
+ * Format v2: an outline sweep in a boolean, as measured on kernel 3.0.0 (FLO-330, 2026-10-31;
+ * docs/format-v2.md §6). Allowed only as a through cut: a subtract whose base is an outline
+ * sweep, a cuboid or a shell of either, whose every operand is an outline sweep or a cuboid that
+ * cuts through (a sweep or cuboid base: past both its faces; a shell: through its top face only),
+ * inside the base's outline, and lined up with no straight edge of it. Also: no revolve in any
+ * boolean, and no boolean or shell of a boolean that holds an outline sweep.
+ */
+function sweepBooleanIssues(definitions, nodes) {
+  const issues = [];
+  const holdsSweep = (node) => node?.kind === 'boolean3d' && refsOf(node).some(([, child]) => isOutlineSweep(definitions[child]));
+  const OPE107 = 'kernel 3.0.0 leaves open edges round the hole (OPE-107, measured)';
+  const notMeasured = 'not measured on kernel 3.0.0 (FLO-330)';
+  for (const [node, path] of nodes) {
+    if (node.kind !== 'boolean3d') continue;
+    const add = (field, message) => issues.push({ path: pointer([...path, ...field.split('/')]), message });
+    const kids = refsOf(node).map(([field, ref]) => [field, ref, definitions[ref]]);
+    let refused = false;
+    for (const [field, ref, kid] of kids) {
+      if (kid?.kind === 'revolve') {
+        add(field, field === 'baseRef'
+          ? `"${ref}" is a revolve; a revolve as a boolean's base is refused: kernel 3.0.0 left 96 open edges in one measured case and built another clean (FLO-330 review A, p29 and p29b), and as the tool it fails (CoverageGap, OPE-109, measured). Keep the revolve a solid of its own`
+          : `"${ref}" is a revolve; kernel 3.0.0 fails to cut with a revolve as the tool (CoverageGap, OPE-109, measured), so no revolve is in a boolean. Cut with an outline sweep through the solid instead`);
+        refused = true;
+      } else if (holdsSweep(kid)) {
+        add(field, `"${ref}" is a boolean that holds an outline sweep; a boolean of it is not measured on kernel 3.0.0 (FLO-330). Make every cut an operand of that one subtract`);
+        refused = true;
+      }
+    }
+    if (refused) continue;
+    // The rule holds when any part is an outline sweep, or the base is a shell of one (M3: a shell of a
+    // sweep less a cuboid pocket left two shells, FLO-330 review A p14).
+    const baseKid = kids[0][2];
+    const sweepBase = isOutlineSweep(baseKid) || (baseKid?.kind === 'shell' && isOutlineSweep(definitions[baseKid.sourceRef]));
+    if (!sweepBase && !kids.some(([, , kid]) => isOutlineSweep(kid))) continue;
+    if (node.operation !== 'subtract') {
+      add('operation', `is "${node.operation}"; a boolean that holds an outline sweep must be a subtract (a through cut), since a ${node.operation} with a sweep is not measured on kernel 3.0.0 (FLO-330). Draw the parts as separate solids that touch`);
+      continue;
+    }
+    const [, baseRef, base] = kids[0];
+    // The base: an outline sweep, a cuboid, or a shell of one; each only moved.
+    const source = base.kind === 'shell' ? definitions[base.sourceRef] : base;
+    const shell = base.kind === 'shell' ? base : null;
+    if (!['sweep', 'cuboid', 'shell'].includes(base.kind) || !(isOutlineSweep(source) || source?.kind === 'cuboid')) {
+      add('baseRef', `"${baseRef}" is ${shell ? `a shell of a ${source?.kind}` : `a ${base.kind}`}; an outline sweep may cut only an outline sweep, a cuboid, or a shell of either, the bases measured on kernel 3.0.0 (FLO-330)`);
+      continue;
+    }
+    const baseMove = moveOf(base);
+    const sourceMove = shell ? moveOf(source) : [0, 0, 0];
+    if (!baseMove || !sourceMove) {
+      add('baseRef', `"${baseRef}"${shell ? ` or its source "${base.sourceRef}"` : ''} turns or scales in its placement; in a boolean that holds an outline sweep each part may only be moved, so that the gates can compare the outlines`);
+      continue;
+    }
+    const outer = prismOf(source, baseMove.map((v, i) => v + sourceMove[i]));
+    const t = shell ? shell.thickness : 0;
+    const inset = shell ? insetOutline(outer.edges, t) : null;
+    const prisms = [];
+    for (const [field, ref, kid] of kids.slice(1)) {
+      if (kid.kind === 'cylinder' && isOutlineSweep(base)) {
+        add(field, `"${ref}" is a cylinder through the outline sweep "${baseRef}"; ${OPE107}. Cut the hole with an outline sweep of a circle (two half arcs) instead`);
+        continue;
+      }
+      // A full cylinder may cut a cuboid or a shell (the released WC pans: a shell of a sweep less a
+      // cylinder through its top skin, measured clean), never an outline sweep (above).
+      const fullCylinder = kid.kind === 'cylinder' && kid.angle === undefined;
+      if (!(isOutlineSweep(kid) || kid.kind === 'cuboid' || fullCylinder)) {
+        add(field, `"${ref}" is a ${kid.kind === 'cylinder' ? 'cylinder sector' : kid.kind}; in a boolean with an outline sweep only an outline sweep, a cuboid or a full cylinder (not through a sweep) may be an operand, since any other is ${notMeasured}`);
+        continue;
+      }
+      const move = moveOf(kid);
+      if (!move) {
+        add(field, `"${ref}" turns or scales in its placement; in a boolean that holds an outline sweep each part may only be moved, so that the gates can compare the outlines`);
+        continue;
+      }
+      const cut = prismOf(kid, move);
+      // Through: a sweep or cuboid base is passed by THROUGH at both faces; a shell's top skin only.
+      const span = `runs from y = ${mm(cut.low)} to ${mm(cut.high)} m`;
+      if (!shell) {
+        if (cut.low > outer.low - THROUGH + ROUND || cut.high < outer.high + THROUGH - ROUND) {
+          add(field, `${span}; it must cut through "${baseRef}" (y = ${mm(outer.low)} to ${mm(outer.high)} m), from at least ${THROUGH} m below to at least ${THROUGH} m above it, since kernel 3.0.0 fails on a pocket of another shape (CoverageGap, OPE-109, measured)`);
+          continue;
+        }
+      } else {
+        const [top, skin, floor] = [outer.high, outer.high - t, outer.low + t];
+        if (cut.high < top + THROUGH - ROUND || cut.low > skin - THROUGH + ROUND || cut.low < floor + THROUGH - ROUND) {
+          add(field, `${span}; it must cut the top face of the shell "${baseRef}" only, as the measured WC opening (FLO-330 case 3a): its top at least ${THROUGH} m above the shell's top (y >= ${mm(top + THROUGH)}), its bottom in the void, at least ${THROUGH} m below the underside of the top skin (y <= ${mm(skin - THROUGH)}) and at least ${THROUGH} m above the void's floor (y >= ${mm(floor + THROUGH)}). Any other cut of a shell is not measured, and a pocket of another shape fails (CoverageGap, OPE-109)`);
+          continue;
+        }
+      }
+      // Inside the base's outline, CUT_CLEARANCE clear; for a shell, inside its void's outline (the
+      // source's outline moved t inwards, with its concave corners: FLO-330 review A, p26).
+      const room = shell ? inset.edges : outer.edges;
+      if (!room) {
+        add(field, `cuts the shell "${baseRef}", whose void the gates cannot draw (its source's outline moved ${t} m inwards turns an edge round); the cut cannot be checked against the void, so it is refused. Give the source an outline whose edges stay longer than the shell is thick`);
+        continue;
+      }
+      const gap = outlineDistance(cut.edges, room);
+      if (gap < CUT_CLEARANCE - ROUND || !insideOutline(cut.edges[0].from, room)) {
+        const where = gap < CUT_CLEARANCE - ROUND ? `comes within ${mm(gap)} m of` : 'is not inside';
+        add(field, shell
+          ? `${where} the void of the shell "${baseRef}" (the outline of "${base.sourceRef}" moved ${t} m inwards); a cut of a shell lies inside its void, at least ${CUT_CLEARANCE} m clear, since a cut that reaches a wall leaves open edges (FLO-330 review A, p26)`
+          : `${where} the outline of "${baseRef}"; a cut's outline lies inside the base's outline, at least ${CUT_CLEARANCE} m clear, since a cut that reaches the side of the base is ${notMeasured}`);
+        continue;
+      }
+      // Nothing of one outline on the line of a straight edge of the other (OPE-108); for a shell,
+      // of its void's outline too.
+      const lined = lineUp(cut.edges, outer.edges) ?? (shell && lineUp(cut.edges, inset.edges));
+      if (lined) {
+        add(field, `lines up with "${shell ? base.sourceRef : baseRef}"${shell ? ' or its void' : ''}: ${lined} (within ${CUT_CLEARANCE} m); kernel 3.0.0 leaves open edges in the cap when a corner or an arc's chord point lies on such a line (OPE-108, measured). Keep every vertex and every arc of either outline at least ${CUT_CLEARANCE} m off the line of each straight edge of the other${shell ? ' and of the void' : ''}`);
+        continue;
+      }
+      prisms.push([field, ref, cut]);
+    }
+    // Several cuts: apart from each other, and not lined up (not measured; held to the same rules).
+    for (let i = 0; i < prisms.length; i += 1) {
+      for (let j = 0; j < i; j += 1) {
+        const [[field, ref, a], [, other, b]] = [prisms[i], prisms[j]];
+        const gap = outlineDistance(a.edges, b.edges);
+        const lined = lineUp(a.edges, b.edges);
+        if (gap < CUT_CLEARANCE - ROUND || insideOutline(a.edges[0].from, b.edges) || insideOutline(b.edges[0].from, a.edges)) {
+          add(field, `"${ref}" comes within ${mm(gap)} m of the cut "${other}" or holds it; the cuts of one subtract stay at least ${CUT_CLEARANCE} m apart, since overlapping cuts are ${notMeasured}`);
+        } else if (lined) {
+          add(field, `"${ref}" lines up with the cut "${other}": ${lined}; kernel 3.0.0 leaves open edges in a cap with such a line (OPE-108, measured)`);
+        }
+      }
+    }
+  }
+  // A shell of a boolean that holds an outline sweep: not measured.
+  for (const [node, path] of nodes) {
+    if (node.kind === 'shell' && holdsSweep(definitions[node.sourceRef])) {
+      issues.push({ path: pointer([...path, 'sourceRef']), message: `"${node.sourceRef}" is a boolean that holds an outline sweep; a shell of it is not measured on kernel 3.0.0 (FLO-330). Shell the sweep, then cut the shell` });
+    }
+  }
+  return issues;
+}
+
 /**
  * Every format: Floorkit 3.0 places each built body by a turn, a move and one
  * scale factor (`transformBody`), and refuses any other node placement as
@@ -465,10 +713,15 @@ function formatTwoIssues(definition) {
         const why = revolveAxisIssue(node);
         if (why) {
           add([...path, 'profile'], `${why}; a revolve's outline stays more than ${AXIS_CLEARANCE} m to one side of its axis, except along one run of line edges that lies on the axis (a solid revolve), since the kernel refuses an outline that crosses the axis, touches it at a point or meets it along more than one run`);
+        } else {
+          const arc = revolveArcIssue(node);
+          if (arc) add([...path, 'profile'], arc);
         }
       }
     }
   }
+
+  if (issues.length === 0) issues.push(...sweepBooleanIssues(definitions, nodes));
 
   // A shell: OpenGeometry 3.0.0 cannot hollow a revolve, a cylinder sector or a shell (CoverageGap,
   // measured), also when one is an operand of a boolean the shell hollows.

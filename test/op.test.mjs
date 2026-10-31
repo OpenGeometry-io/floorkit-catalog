@@ -4,6 +4,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { test } from 'node:test';
+import { definitionBox } from '../tools/lib/geometry.mjs';
 import { parseNote } from '../tools/lib/note.mjs';
 import { LIMITS, checkBlockText, formatBlock } from '../tools/lib/op.mjs';
 import { ANCHOR_ROLES, PORTS } from '../tools/lib/roles.mjs';
@@ -42,7 +43,7 @@ test('the valid fixture and every seed block pass', () => {
 test('every valid fixture passes, format v2 included', () => {
   const dir = new URL('fixtures/valid/', import.meta.url);
   const names = readdirSync(dir).filter((name) => name.endsWith('.op'));
-  assert.ok(['v2-sampler.op', 'v2-sweep-arc-profile.op', 'v2-pedestal.op', 'v2-revolve-collinear.op'].every((name) => names.includes(name)));
+  assert.ok(['v2-sampler.op', 'v2-sweep-arc-profile.op', 'v2-pedestal.op', 'v2-revolve-collinear.op', 'v2-sweep-through-cut.op'].every((name) => names.includes(name)));
   for (const name of names) assert.deepEqual(checkBlockText(readFileSync(new URL(name, dir), 'utf8')).issues, [], name);
 });
 
@@ -282,6 +283,16 @@ test('each geometry-reject fixture fails exactly its own gate, naming the node a
     'v2-outline-closing-gap.op': ['/modelView/elements/0/profile/segments/3/to', /^is 1\.0\d*e-10 m from start, so the closing line would be that short; end exactly at start, or leave a closing line of at least 0\.001 m$/],
     'v2-outline-sweep-too-low.op': ['/modelView/elements/3/path', /^rises 1e-10 m; an outline sweep is at least 0\.01 m high$/],
     'v2-shell-of-sector.op': ['/definitions/top/sourceRef', /^hollows the cylinder sector "topSolid"; OpenGeometry 3\.0\.0 cannot shell/],
+    'v2-sweep-in-union.op': ['/definitions/rim/operation', /^is "union"; a boolean that holds an outline sweep must be a subtract/],
+    'v2-sweep-pocket.op': ['/definitions/rim/operandRefs/0', /^runs from y = 0\.82 to 0\.86 m; it must cut through "rimSolid" \(y = 0\.81 to 0\.85 m\).*OPE-109/],
+    'v2-sweep-minus-through-cylinder.op': ['/definitions/rim/operandRefs/0', /^"bowlCut" is a cylinder through the outline sweep "rimSolid"; kernel 3\.0\.0 leaves open edges round the hole \(OPE-107, measured\)/],
+    'v2-sweep-collinear-opening.op': ['/definitions/rim/operandRefs/0', /^lines up with "rimSolid": the vertex \[0\.275, -0\.05\] is 0 m from the line through the straight edge \[-0\.15, -0\.05\] to \[0\.15, -0\.05\].*OPE-108/],
+    'v2-sweep-cut-outside-base.op': ['/definitions/rim/operandRefs/0', /^comes within 0 m of the outline of "rimSolid"; a cut's outline lies inside the base's outline, at least 0\.001 m clear/],
+    'v2-revolve-operand.op': ['/definitions/rim/operandRefs/0', /^"bowlCut" is a revolve; kernel 3\.0\.0 fails to cut with a revolve as the tool \(CoverageGap, OPE-109, measured\)/],
+    'v2-revolve-arc-circle-meets-axis.op': ['/modelView/elements/0/profile', /^has an arc about \[0\.04, 0\.24\], 0\.04 m from its axis, of radius 0\.160312, so the arc's circle comes -0\.120312 m from the axis or crosses it, and the centre is not on the axis \(within 1e-9 m\); kernel 3\.0\.0 refuses it/],
+    'v2-sweep-line-meets-arc.op': ['/definitions/rim/operandRefs/0', /^lines up with "rimSolid": the arc about \[0, -0\.05\] from \[0\.275, -0\.05\] to \[0, 0\.225\] comes 0 m from the line through the straight edge \[-0\.1, 0\.1\] to \[0\.1, 0\.1\].*OPE-108/],
+    'v2-shell-cut-near-concave-corner.op': ['/definitions/cut/operandRefs/0', /^comes within 0 m of the void of the shell "sh" \(the outline of "src" moved 0\.03 m inwards\)/],
+    'v2-union-operand.op': ['/definitions/pan/operandRefs/0', /^"bowlOpening" is a union; kernel 3\.0\.0 refuses a subtract whose operand is a union \(InvalidTopology/],
   };
   const family = { 'missing-mat.op': /has no mat: role/, 'arc-plan.op': /^the plan's (min|max) [xz] is/ };
   const dir = new URL('fixtures/geometry-rejects/', import.meta.url);
@@ -583,13 +594,116 @@ test('format v2 gates: outlines, the torus, the revolve axis, the outline sweep 
   const stretched = v2();
   v2Node(stretched, 'top').placement = P([0, 0, 0], [1, 1, 1.5]);
   rejects(stretched, '/modelView/elements/1/placement/scale', 'one scale factor');
-  const operand = v2();
-  operand.definitions.base = { kind: 'cuboid', center: [0, 0.5, 0], width: 0.1, height: 0.1, depth: 0.1 };
-  operand.definitions.rail = { ...v2Node(operand, 'plinth') };
-  delete operand.definitions.rail.id;
-  operand.definitions.cut = { kind: 'boolean3d', operation: 'subtract', baseRef: 'base', operandRefs: ['rail'] };
-  operand.modelView.elements.push({ ref: 'cut' });
-  rejects(operand, '/definitions/cut/operandRefs/0', 'is a sweep');
+  // A revolve arc (kernel 3.0.0, revolved_profile.rs): centred on the axis it is a sphere; off the axis its whole circle clears the axis.
+  assert.deepEqual(check(knob({ start: [0.01, 0], segments: [{ to: [0.05, 0] }, { to: [0.05, 0.04], arc: { center: [0.05, 0.02], counterClockwise: true } }, { to: [0.01, 0.04] }], closed: true })).issues, [], 'a bead whose circle clears the axis');
+  rejects(knob({ start: [0.01, 0], segments: [{ to: [0.03, 0] }, { to: [0.03, 0.04], arc: { center: [0.01, 0.02], counterClockwise: true } }, { to: [0.01, 0.04] }], closed: true }), '/modelView/elements/3/profile', 'from the axis or crosses it');
+  rejects(knob({ start: [0.01, 0], segments: [{ to: [0.03, 0] }, { to: [0.03, 0.04], arc: { center: [0.02, 0.02], counterClockwise: true } }, { to: [0.01, 0.04] }], closed: true }), '/modelView/elements/3/profile', 'from the axis or crosses it');
+  // On the axis means within 1e-9 m: a centre at 1e-8 fails to build (FLO-330 review A, p20), and its distance prints in full.
+  const h = 0.02 * Math.sin(Math.PI / 3);
+  const offset = (e) => knob({ start: [0.005, 0], segments: [{ to: [0.01 + e, 0] }, { to: [0.01 + e, 2 * h], arc: { center: [e, h], counterClockwise: true } }, { to: [0.005, 2 * h] }], closed: true });
+  assert.deepEqual(check(offset(1e-9)).issues, [], 'a ball band centred 1e-9 m off the axis');
+  rejects(offset(1e-8), '/modelView/elements/3/profile', '1e-8 m from its axis, of radius 0.02');
+  rejects(offset(1.1e-8), '/modelView/elements/3/profile', '1.1e-8 m from its axis');
+});
+
+test('format v2 booleans: an outline sweep only as a through cut, as measured (FLO-330); no revolve, no union operand', () => {
+  const cut = () => JSON.parse(fixture('valid/v2-sweep-through-cut.op'));
+  assert.deepEqual(check(cut()).issues, []);
+  // The circle cut, as a cuboid base (2b3) and as two cuts.
+  const cuboid = cut();
+  cuboid.definitions.rimSolid = { kind: 'cuboid', color: '#f2f1ec', center: [0, 0.83, 0], width: 0.55, height: 0.04, depth: 0.45 };
+  assert.deepEqual(check(cuboid).issues.filter((issue) => issue.path.startsWith('/definitions')), []);
+  const two = cut();
+  const hole = (z) => ({ ...two.definitions.bowlCut, profile: { start: [0, z - 0.03], segments: [{ to: [0, z + 0.03], arc: { center: [0, z], counterClockwise: false } }, { to: [0, z - 0.03], arc: { center: [0, z], counterClockwise: false } }], closed: true } });
+  two.definitions.bowlCut = hole(-0.1);
+  two.definitions.tapHole = hole(0.1);
+  two.definitions.rim.operandRefs.push('tapHole');
+  assert.deepEqual(check(two).issues, []);
+  const overlapping = cut();
+  overlapping.definitions.tapHole = hole(0.0);
+  overlapping.definitions.rim.operandRefs.push('tapHole');
+  rejects(overlapping, '/definitions/rim/operandRefs/1', 'the cuts of one subtract stay at least 0.001 m apart');
+  // A cut that passes a face by less than 0.005 m.
+  const shallow = cut();
+  shallow.definitions.bowlCut.path = [[0, 0.806, 0], [0, 0.86, 0]];
+  rejects(shallow, '/definitions/rim/operandRefs/0', 'from at least 0.005 m below');
+  // A turned part cannot be compared.
+  const turned = cut();
+  turned.definitions.bowlCut.placement = { position: [0, 0, 0], rotation: [0, 10, 0], scale: [1, 1, 1] };
+  rejects(turned, '/definitions/rim/operandRefs/0', 'turns or scales in its placement');
+  // Only an outline sweep, a cuboid or a shell of either as the base.
+  const cylinderBase = cut();
+  cylinderBase.definitions.rimSolid = { kind: 'cylinder', color: '#f2f1ec', center: [0, 0.83, 0], radius: 0.25, height: 0.04 };
+  rejects(cylinderBase, '/definitions/rim/baseRef', 'an outline sweep may cut only an outline sweep, a cuboid, or a shell of either');
+  // A cut through a vertex within 0.001 m of the line of a straight edge (OPE-108), the measured 2b tray.
+  const near = cut();
+  near.definitions.bowlCut.profile = { start: [-0.15, -0.0505], segments: [{ to: [0.15, -0.0505] }, { to: [-0.15, -0.0505], arc: { center: [0, -0.0505], counterClockwise: false } }], closed: true };
+  rejects(near, '/definitions/rim/operandRefs/0', 'OPE-108');
+  const clear = cut();
+  clear.definitions.bowlCut.profile = { start: [-0.15, -0.052], segments: [{ to: [0.15, -0.052] }, { to: [-0.15, -0.052], arc: { center: [0, -0.052], counterClockwise: false } }], closed: true };
+  assert.deepEqual(check(clear).issues.filter((issue) => issue.path.startsWith('/definitions')), []);
+  // No boolean of a boolean that holds a sweep, and no shell of one.
+  const nested = cut();
+  nested.definitions.outer = { kind: 'boolean3d', operation: 'subtract', baseRef: 'rim', operandRefs: ['extra'] };
+  nested.definitions.extra = { kind: 'cuboid', center: [0, 0.83, 0], width: 0.01, height: 0.1, depth: 0.01 };
+  nested.modelView.elements = nested.modelView.elements.map((element) => (element.ref === 'rim' ? { ...element, ref: 'outer' } : element));
+  rejects(nested, '/definitions/outer/baseRef', 'is a boolean that holds an outline sweep');
+  const hollow = cut();
+  hollow.definitions.hollowRim = { kind: 'shell', sourceRef: 'rim', thickness: 0.01 };
+  hollow.modelView.elements = hollow.modelView.elements.map((element) => (element.ref === 'rim' ? { ...element, ref: 'hollowRim' } : element));
+  rejects(hollow, '/definitions/hollowRim/sourceRef', 'a shell of it is not measured');
+  // A shell base: the top face only (FLO-330 case 3a).
+  const shell = v2();
+  shell.definitions.pan = { kind: 'sweep', path: [[0, 0, 0], [0, 0.1, 0]], profile: v2Node(shell, 'plinth').profile, capStart: true, capEnd: true };
+  shell.definitions.panShell = { kind: 'shell', sourceRef: 'pan', thickness: 0.01 };
+  const opening = (low, high, r = 0.05) => ({ kind: 'sweep', path: [[0, low, 0], [0, high, 0]], profile: { start: [0, -r], segments: [{ to: [0, r], arc: { center: [0, 0], counterClockwise: false } }, { to: [0, -r], arc: { center: [0, 0], counterClockwise: false } }], closed: true }, capStart: true, capEnd: true });
+  shell.definitions.opening = opening(0.08, 0.11);
+  shell.definitions.open = { kind: 'boolean3d', operation: 'subtract', baseRef: 'panShell', operandRefs: ['opening'] };
+  shell.modelView.elements[0] = { id: 'plinthBody', ref: 'open' };
+  shell.metadata['mat:plinthBody'] = shell.metadata['mat:plinth'];
+  delete shell.metadata['mat:plinth'];
+  const shellIssues = (change) => { const d = JSON.parse(JSON.stringify(shell)); change(d); return check(d).issues.filter((issue) => issue.path.startsWith('/definitions/open')); };
+  assert.deepEqual(shellIssues(() => {}), []);
+  assert.match(shellIssues((d) => { d.definitions.opening = opening(-0.01, 0.11); })[0].message, /must cut the top face of the shell "panShell" only/);
+  assert.match(shellIssues((d) => { d.definitions.opening = opening(0.088, 0.11); })[0].message, /must cut the top face of the shell "panShell" only/);
+  assert.match(shellIssues((d) => { d.definitions.opening = opening(0.08, 0.11, 0.195); })[0].message, /^comes within 0 m of the void of the shell "panShell" \(the outline of "pan" moved 0\.01 m inwards\)/);
+  // A straight edge of the cut on the line of a straight edge of the void (the plinth's sides moved 0.01 in).
+  assert.match(shellIssues((d) => { d.definitions.opening.profile = { start: [-0.05, -0.189], segments: [{ to: [0.05, -0.189] }, { to: [0.05, 0] }, { to: [-0.05, 0] }], closed: true }; })[0].message, /lines up with "pan".*OPE-108/);
+  // A straight edge whose line meets an arc of the other outline (a chord point may lie on it, review A p17).
+  const chord = cut();
+  chord.definitions.bowlCut.profile = { start: [-0.1, 0.1], segments: [{ to: [0.1, 0.1] }, { to: [-0.1, 0.1], arc: { center: [0, 0.1], counterClockwise: true } }], closed: true };
+  rejects(chord, '/definitions/rim/operandRefs/0', 'the arc about [0, -0.05]');
+  // A shell of a sweep: its rules hold for a cuboid or a cylinder cut too (review A p14: a cuboid pocket left two shells).
+  const pocket = (cutter) => { const d = JSON.parse(JSON.stringify(shell)); d.definitions.opening = cutter; return check(d).issues.filter((issue) => issue.path.startsWith('/definitions/open')); };
+  assert.match(pocket({ kind: 'cuboid', center: [0, 0.05, 0], width: 0.1, height: 0.04, depth: 0.1 })[0].message, /must cut the top face of the shell "panShell" only/);
+  // A cuboid through the top skin: its sides z = ±0.05 run, extended, into the stadium's end arcs.
+  assert.match(pocket({ kind: 'cuboid', center: [0, 0.095, 0], width: 0.1, height: 0.03, depth: 0.1 })[0].message, /lines up with "pan" or its void: the arc about \[0\.1, 0\]/);
+  assert.deepEqual(pocket({ kind: 'cylinder', center: [0, 0.095, 0], radius: 0.05, height: 0.03 }), [], 'the released WC pans: a cylinder through the top skin');
+  assert.match(pocket({ kind: 'cylinder', center: [0, 0.095, 0], radius: 0.05, height: 0.03, angle: 3 })[0].message, /is a cylinder sector/);
+  // A revolve in any boolean; a union as a subtract's operand, in format 1 too.
+  const revolve = cut();
+  revolve.definitions.bowlCut = { kind: 'revolve', profile: { start: [0, 0.8], segments: [{ to: [0.1, 0.8] }, { to: [0.1, 0.86] }, { to: [0, 0.86] }], closed: true } };
+  rejects(revolve, '/definitions/rim/operandRefs/0', 'OPE-109');
+  const union = base();
+  union.definitions = { body: box('body'), a: box('a', { width: 0.05 }), b: box('b', { depth: 0.05 }), both: { kind: 'boolean3d', operation: 'union', baseRef: 'a', operandRefs: ['b'] }, cut: { kind: 'boolean3d', operation: 'subtract', baseRef: 'body', operandRefs: ['both'] } };
+  union.modelView.elements.push({ ref: 'cut' });
+  rejects(union, '/definitions/cut/operandRefs/0', '"both" is a union; kernel 3.0.0 refuses a subtract whose operand is a union');
+});
+
+test('a through cut takes its area times the height it shares off the base\'s volume (geometry.mjs)', () => {
+  const d = JSON.parse(fixture('valid/v2-sweep-through-cut.op'));
+  const volume = (ref) => definitionBox(d.definitions[ref], d.definitions).volume;
+  // The rim, 0.04 high, less the bowl's circle of radius 0.15 through it; areas from 10° chords (within 0.6 %).
+  const expected = volume('rimSolid') - Math.PI * 0.15 ** 2 * 0.04;
+  assert.ok(Math.abs(volume('rim') - expected) < 0.006 * Math.PI * 0.15 ** 2 * 0.04, `${volume('rim')} against ${expected}`);
+  // A shell: only its top skin, 0.01 thick, is cut.
+  const s = v2();
+  s.definitions.pan = { kind: 'sweep', path: [[0, 0, 0], [0, 0.1, 0]], profile: v2Node(s, 'plinth').profile, capStart: true, capEnd: true };
+  s.definitions.panShell = { kind: 'shell', sourceRef: 'pan', thickness: 0.01 };
+  s.definitions.hole = { kind: 'cuboid', center: [0, 0.085, 0], width: 0.1, height: 0.05, depth: 0.1 };
+  s.definitions.open = { kind: 'boolean3d', operation: 'subtract', baseRef: 'panShell', operandRefs: ['hole'] };
+  const shellVolume = definitionBox(s.definitions.panShell, s.definitions).volume;
+  assert.ok(Math.abs(definitionBox(s.definitions.open, s.definitions).volume - (shellVolume - 0.1 * 0.1 * 0.01)) < 1e-12);
 });
 
 test('format v2 shells: not of a revolve or a sector, through any chain; room for the void; counted when expanded', () => {
