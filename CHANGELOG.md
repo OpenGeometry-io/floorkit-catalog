@@ -55,6 +55,9 @@ Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier 
   - the WC pans are oval outline sweeps, hollowed by a `shell` 0.015 thick whose top is opened by a round cylinder cut; the floor-standing WC stands on an oval pedestal that follows the pan, and each seat is two half rings that meet on the centre line;
   - the basin rims are D-shaped outline sweeps, drawn as two half rims, over a bowl that is a `revolve` of an outline with its 0.012 wall in chords, the waste hole the gap at its axis, filled by a metal waste;
   - overall sizes, anchor names and port ids are as in 1.0.0. Both basins' `drainCenter` anchors moved to the new bowl floors, and the cloakroom basin's `dcw` and `dhw` ports to its thicker rim's underside; the WCs' anchors and ports did not move.
+- **Redrawn on format v2 (FLO-281, part A).** `shower-tray` and `shower-level-access` have a `2.0.0.op` beside their `1.0.0.op`, which stays unchanged. Each was drafted by an AI assistant and checked with `validate.mjs`, `parity.mjs --build --mesh` and `render.mjs`:
+  - `shower-tray`: the rim is two outline sweeps with outer corners rounded to radius 0.05, meeting on the centre line; the floor plate has a round cut through it, and the gully grating sits in the cut, flush with the floor, no longer proud. `drainCenter` moves down to the floor at 0.025; the `waste` port does not move;
+  - `shower-level-access`: the floor finish is let into the floor (`recess`), its face level with the room floor, with the gully flush in a cut; the seat has rounded front corners; the valve moves down to 0.90, inside the 750 to 1000 mm of Approved Document M Volume 2, 5.18(q). `faucetMount`, `dcw` and `dhw` move down with it, and the `waste` port to the gully's underside at −0.010; overall height 2.01. Falls are drawn in plan.
 
 #### The drafting standard and the authoring skill
 
