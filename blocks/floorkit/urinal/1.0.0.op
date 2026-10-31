@@ -16,13 +16,14 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "urinal, wall-hung, washroom",
-    "catalog:note": "Wall-hung urinal, a hood open at the front: back panel, two cheeks, top, bowl floor and front lip. bottom 0.35, rim 0.60. The plan draws the bowl as a half circle inside the box outline; the body is a box hood, since a half cylinder does not mirror.",
+    "catalog:note": "Wall-hung urinal: a back panel; a bowl of two cheeks, a floor and a front lip, 0.35 deep from the wall; and above it a hood of two cheeks and a top, stepped back to 0.175 from the wall. bottom 0.35, rim 0.60. The bowl is drawn square: a rounded bowl and a sloped hood wait for format v2.",
     "catalog:basedOn": "0.35 x 0.35 x 0.65, bottom 0.35 and rim 0.60 are generic practice sizes, not checked against a published source (unverified). Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "URINAL",
     "ifcClass": "IfcSanitaryTerminal",
     "mat:backPanel": "ceramic",
     "mat:cheek": "ceramic",
+    "mat:hoodCheek": "ceramic",
     "mat:hoodTop": "ceramic",
     "mat:bowlFloor": "ceramic",
     "mat:lip": "ceramic"
@@ -157,12 +158,24 @@
       "color": "#f2f1ec",
       "center": [
         0,
-        0.675,
+        0.475,
         0.015
       ],
-      "width": 0.02,
-      "height": 0.65,
+      "width": 0.03,
+      "height": 0.25,
       "depth": 0.32
+    },
+    "hoodCheek": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.8,
+        -0.0725
+      ],
+      "width": 0.03,
+      "height": 0.4,
+      "depth": 0.145
     }
   },
   "profileView": {
@@ -190,29 +203,40 @@
         ]
       },
       {
-        "id": "backFace",
+        "id": "hoodFront",
         "kind": "polyline",
         "points": [
           [
             -0.175,
-            -0.145
+            0
           ],
           [
             0.175,
-            -0.145
+            0
           ]
         ]
       },
       {
         "id": "bowl",
-        "kind": "arc",
-        "center": [
-          0,
-          -0.145
-        ],
-        "radius": 0.145,
-        "startAngle": 3.14159265,
-        "sweepAngle": 3.14159265
+        "kind": "polyline",
+        "points": [
+          [
+            -0.145,
+            0
+          ],
+          [
+            -0.145,
+            0.145
+          ],
+          [
+            0.145,
+            0.145
+          ],
+          [
+            0.145,
+            0
+          ]
+        ]
       }
     ]
   },
@@ -236,7 +260,7 @@
         "ref": "cheek",
         "placement": {
           "position": [
-            -0.165,
+            -0.16,
             0,
             0
           ],
@@ -257,7 +281,49 @@
         "ref": "cheek",
         "placement": {
           "position": [
-            0.165,
+            0.16,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hoodCheekLeft",
+        "ref": "hoodCheek",
+        "placement": {
+          "position": [
+            -0.16,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hoodCheekRight",
+        "ref": "hoodCheek",
+        "placement": {
+          "position": [
+            0.16,
             0,
             0
           ],
@@ -280,11 +346,11 @@
         "center": [
           0,
           0.985,
-          0.015
+          -0.0725
         ],
-        "width": 0.31,
+        "width": 0.29,
         "height": 0.03,
-        "depth": 0.32
+        "depth": 0.145
       },
       {
         "id": "bowlFloor",
@@ -295,7 +361,7 @@
           0.375,
           0.015
         ],
-        "width": 0.31,
+        "width": 0.29,
         "height": 0.05,
         "depth": 0.32
       },
@@ -306,11 +372,11 @@
         "center": [
           0,
           0.5,
-          0.165
+          0.16
         ],
-        "width": 0.31,
+        "width": 0.29,
         "height": 0.2,
-        "depth": 0.02
+        "depth": 0.03
       }
     ]
   }

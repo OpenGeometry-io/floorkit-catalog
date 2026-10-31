@@ -41,6 +41,13 @@ Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier 
   - `counter-run`: it was authored to be stretched along x, which a Floorkit building model refuses (`bad-scale`).
 
   The other 57 blocks are new. The importer that wrote the seeds is not part of this release: a tool that regenerated them would undo the redraw.
+- **Six sanitary blocks redrawn inside format v1** (FLO-278), in place at `1.0.0`, before the tag. Each change was drafted by an AI assistant and checked with `validate.mjs`, `parity.mjs --build --mesh` and `render.mjs`:
+  - `bathtub`: end panels carry the rim to the floor; the taps are 0.18 apart (180 mm hole centres), with their ports;
+  - `bidet`: the rim and bowl are a D ring of two straight sweeps on a pedestal, with no open space under the rim; the bowl centre, `drainCenter` and the waste port move to z 0.095, on one axis;
+  - `shower-enclosure`: the riser stands on the valve on its axis and carries the head; the gully sits flush in a hole through the tray floor;
+  - `urinal`: the hood steps back above the rim; the plan shows the hood front and the open bowl;
+  - `wash-basin`: a rim slab 0.04 thick with rounded front corners over a bowl body, bowl 0.13 deep, on a pedestal from the wall to under the bowl; `drainCenter` moves up to the new bowl floor, and the `dcw` and `dhw` ports to the pedestal's back face;
+  - `wc-accessible`: the pan is a D of two straight sweeps, with no crevices; a D seat with a hinge bar replaces the full-width seat back, and the lid pad is gone.
 - **`catalog:basedOn`** names the standard, data sheet or reference a block's dimensions come from, and says "unverified" where a size was not checked against a published source.
 - **Ports and IFC.** 31 blocks have ports. Each of them also sets the legacy `ifcClass`, equal to `ifc:class`, because Floorkit's distribution export reads only that key ([format §11](docs/format-v1.md#11-advisory-notes)).
 - **AI assistance.** Every commit that drew or redrew blocks for this release is co-authored by an AI assistant (Claude), as its `Co-Authored-By:` trailer says, and was reviewed against the standard. Whether such content is protected by copyright is unsettled. This is not legal advice.

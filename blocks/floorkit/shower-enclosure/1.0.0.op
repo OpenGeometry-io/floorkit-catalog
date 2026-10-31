@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "shower, shower enclosure, bathroom",
-    "catalog:note": "Corner shower enclosure on a tray: rim 0.04. The back wall is on wallFace and the left side (-x) is a wall too; mirror the block for the other hand. Glass 0.010 stands on the tray rim, 0.03 in from its edge, 0.002 clear of the door frame: a fixed panel and a door at the front, a side panel at +x. The door frame is one sweep; the door swings out (swing). A valve, a riser and a head on the back wall; the riser builds as a prism.",
+    "catalog:note": "Corner shower enclosure on a tray: rim 0.04. The back wall is on wallFace and the left side (-x) is a wall too; mirror the block for the other hand. Glass 0.010 on the tray rim, 0.03 in from its edge, 0.002 clear of the door frame: a fixed panel and a door at the front, a side panel at +x. The door frame is one sweep; the door swings out (swing). The gully sits flush in a hole through the tray floor. A riser stands on the valve on its axis and carries the head; it builds as a prism.",
     "catalog:basedOn": "Drafting standard key dimensions (practice, verify; EN 14527 for the tray), not read, unverified; ports BS EN 12056-2 via the drafting standard, not read, unverified; height 2.00 practice size, unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "SHOWER",
@@ -84,7 +84,7 @@
       "placement": {
         "position": [
           0,
-          0.035,
+          0.025,
           0
         ],
         "rotation": [
@@ -209,6 +209,38 @@
     }
   ],
   "definitions": {
+    "tray-floor-slab": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.0125,
+        0
+      ],
+      "width": 0.9,
+      "height": 0.025,
+      "depth": 0.9
+    },
+    "gully-cut": {
+      "kind": "cylinder",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.0125,
+        0
+      ],
+      "radius": 0.045,
+      "height": 0.045
+    },
+    "tray-floor": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "tray-floor-slab",
+      "operandRefs": [
+        "gully-cut"
+      ],
+      "color": "#f2f1ec"
+    },
     "doorFramePath": {
       "kind": "polyline3d",
       "points": [
@@ -420,16 +452,7 @@
     "elements": [
       {
         "id": "tray-floor",
-        "kind": "cuboid",
-        "color": "#f2f1ec",
-        "center": [
-          0,
-          0.0125,
-          0
-        ],
-        "width": 0.9,
-        "height": 0.025,
-        "depth": 0.9
+        "ref": "tray-floor"
       },
       {
         "id": "tray-rim-back",
@@ -489,11 +512,11 @@
         "color": "#9aa3ab",
         "center": [
           0,
-          0.03,
+          0.0125,
           0
         ],
-        "radius": 0.045,
-        "height": 0.01
+        "radius": 0.044,
+        "height": 0.025
       },
       {
         "id": "door-frame",
@@ -556,21 +579,21 @@
         "kind": "cylinder",
         "color": "#9aa3ab",
         "center": [
-          0.2,
-          1.4,
+          0,
+          1.525,
           -0.438
         ],
         "radius": 0.012,
-        "height": 1
+        "height": 0.75
       },
       {
         "id": "head",
         "kind": "cylinder",
         "color": "#9aa3ab",
         "center": [
-          0.2,
+          0,
           1.91,
-          -0.38
+          -0.39
         ],
         "radius": 0.06,
         "height": 0.02
