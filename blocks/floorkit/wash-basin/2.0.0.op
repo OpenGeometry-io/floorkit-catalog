@@ -17,13 +17,12 @@
     "catalog:lod": "300",
     "catalog:format": "2",
     "catalog:tags": "basin, wash basin, pedestal, bathroom",
-    "catalog:note": "Pedestal wash basin against the wall. rim 0.85. A D-shaped rim slab 0.04 thick, two outline sweeps of true arcs with a round bowl of radius 0.15 through them; under it a revolved bowl whose outline has its wall, curved in 6 chords per arc, and a flat floor 0.13 below the rim with a metal waste in its centre hole, on a tapered round pedestal. The waste port is at the foot of the pedestal: the trap is inside it, not drawn. Parts under radius 0.04 build as polygonal prisms at true size.",
+    "catalog:note": "Pedestal wash basin against the wall. rim 0.85. A D-shaped rim slab 0.04 thick, one outline sweep of true arcs less a round bowl opening of radius 0.15; under it a revolved bowl whose outline has its wall, curved in true arcs (tori), and a flat floor 0.13 below the rim with a metal waste in its centre hole, on a tapered round pedestal. The waste port is at the foot of the pedestal: the trap is inside it, not drawn. Parts under radius 0.04 build as polygonal prisms at true size.",
     "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: wash basin 0.55 x 0.45, rim 0.85; EN 14688 not read. Bowl depth 0.13, the D and the pedestal taper are the author's, unverified. Port sizes from the drafting standard (BS EN 12056-2), unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "WASHHANDBASIN",
     "ifcClass": "IfcSanitaryTerminal",
-    "mat:rimLeft": "ceramic",
-    "mat:rimRight": "ceramic",
+    "mat:rim": "ceramic",
     "mat:bowl": "ceramic",
     "mat:pedestal": "ceramic",
     "mat:waste": "metal",
@@ -297,148 +296,8 @@
   "modelView": {
     "elements": [
       {
-        "id": "rimLeft",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.81,
-            0
-          ],
-          [
-            0,
-            0.85,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            0,
-            0.225
-          ],
-          "segments": [
-            {
-              "to": [
-                -0.275,
-                -0.05
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  -0.05
-                ],
-                "counterClockwise": false
-              }
-            },
-            {
-              "to": [
-                -0.275,
-                -0.225
-              ]
-            },
-            {
-              "to": [
-                0,
-                -0.225
-              ]
-            },
-            {
-              "to": [
-                0,
-                -0.10999999999999999
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.19
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  0.04
-                ],
-                "counterClockwise": true
-              }
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
-      },
-      {
-        "id": "rimRight",
-        "kind": "sweep",
-        "color": "#f2f1ec",
-        "path": [
-          [
-            0,
-            0.81,
-            0
-          ],
-          [
-            0,
-            0.85,
-            0
-          ]
-        ],
-        "profile": {
-          "start": [
-            0,
-            0.19
-          ],
-          "segments": [
-            {
-              "to": [
-                0,
-                -0.10999999999999999
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  0.04
-                ],
-                "counterClockwise": true
-              }
-            },
-            {
-              "to": [
-                0,
-                -0.225
-              ]
-            },
-            {
-              "to": [
-                0.275,
-                -0.225
-              ]
-            },
-            {
-              "to": [
-                0.275,
-                -0.05
-              ]
-            },
-            {
-              "to": [
-                0,
-                0.225
-              ],
-              "arc": {
-                "center": [
-                  0,
-                  -0.05
-                ],
-                "counterClockwise": false
-              }
-            }
-          ],
-          "closed": true
-        },
-        "capStart": true,
-        "capEnd": true
+        "id": "rim",
+        "ref": "rim"
       },
       {
         "id": "bowl",
@@ -469,45 +328,22 @@
           "segments": [
             {
               "to": [
-                0.08,
+                0.095,
                 0.695
               ]
             },
             {
               "to": [
-                0.107176,
-                0.698578
-              ]
-            },
-            {
-              "to": [
-                0.1325,
-                0.709067
-              ]
-            },
-            {
-              "to": [
-                0.154246,
-                0.725754
-              ]
-            },
-            {
-              "to": [
-                0.170933,
-                0.7475
-              ]
-            },
-            {
-              "to": [
-                0.181422,
-                0.772824
-              ]
-            },
-            {
-              "to": [
                 0.185,
-                0.8
-              ]
+                0.785
+              ],
+              "arc": {
+                "center": [
+                  0.095,
+                  0.785
+                ],
+                "counterClockwise": true
+              }
             },
             {
               "to": [
@@ -523,39 +359,22 @@
             },
             {
               "to": [
-                0.146933,
-                0.786706
+                0.15,
+                0.79
               ]
             },
             {
               "to": [
-                0.137942,
-                0.765
-              ]
-            },
-            {
-              "to": [
-                0.12364,
-                0.74636
-              ]
-            },
-            {
-              "to": [
-                0.105,
-                0.732058
-              ]
-            },
-            {
-              "to": [
-                0.083294,
-                0.723067
-              ]
-            },
-            {
-              "to": [
-                0.06,
+                0.08,
                 0.72
-              ]
+              ],
+              "arc": {
+                "center": [
+                  0.08,
+                  0.79
+                ],
+                "counterClockwise": false
+              }
             },
             {
               "to": [
@@ -634,5 +453,134 @@
         }
       }
     ]
+  },
+  "definitions": {
+    "rimSolid": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.81,
+          0
+        ],
+        [
+          0,
+          0.85,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.275,
+          -0.225
+        ],
+        "segments": [
+          {
+            "to": [
+              0.275,
+              -0.225
+            ]
+          },
+          {
+            "to": [
+              0.275,
+              -0.05
+            ]
+          },
+          {
+            "to": [
+              0,
+              0.225
+            ],
+            "arc": {
+              "center": [
+                0,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.275,
+              -0.05
+            ],
+            "arc": {
+              "center": [
+                0,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "bowlCut": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.8,
+          0
+        ],
+        [
+          0,
+          0.86,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          0,
+          -0.10999999999999999
+        ],
+        "segments": [
+          {
+            "to": [
+              0,
+              0.19
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.04
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0,
+              -0.10999999999999999
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.04
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "rim": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "rimSolid",
+      "operandRefs": [
+        "bowlCut"
+      ],
+      "color": "#f2f1ec"
+    }
   }
 }

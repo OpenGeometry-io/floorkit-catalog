@@ -186,9 +186,9 @@
         "height": 0.39
       },
       "path": "blocks/floorkit/basin-accessible/2.0.0.op",
-      "bytes": 13701,
-      "sha256": "ce5bb33e3d34b04936c5d7a1f62d5de597c1e5b4f9f33c86e5ac72f777b61523",
-      "contentHash": "852f98667d176ceaca0af6b2dde27c7ed19675a27532fd0ca229bc0693c62798"
+      "bytes": 12157,
+      "sha256": "5c72466faa0a1b389561e491cf8d3bf5b9cab1866cd718fe6c337186dec7e3c6",
+      "contentHash": "fc8c7701575c13f496f7ddcd013f6e904410138d2614af9d5456b745214f438c"
     },
     {
       "id": "floorkit.bathtub",
@@ -710,9 +710,9 @@
         "height": 0.47
       },
       "path": "blocks/floorkit/cloakroom-basin/2.0.0.op",
-      "bytes": 13184,
-      "sha256": "6207f75b4d260feedf4379f20e181ea6af1f3755010861ff0d2714bd303b43fa",
-      "contentHash": "a78f496f1d24ad1ea7ecbda332d112893d2dbde8b01982755b0e03b9a98b0498"
+      "bytes": 11651,
+      "sha256": "0ddba1e2b4abf603e8dac3f41245cf33b1b27146c9080bf9d7c9f299ac8fc3d4",
+      "contentHash": "b29c65e1ff1392347573d761d2cb7cb7691e531b1a9fef8ba904f85e5767cfda"
     },
     {
       "id": "floorkit.coffee-table",
@@ -2524,9 +2524,9 @@
         "height": 0.97
       },
       "path": "blocks/floorkit/wash-basin/2.0.0.op",
-      "bytes": 12341,
-      "sha256": "290c0b219d7fd3ed61c7de23979c7955944ebac9f4897998b73e1dab8c945179",
-      "contentHash": "f7c15bac9152073d3037f8a497794415d2e2461a32325867939140eb78f536d7"
+      "bytes": 11166,
+      "sha256": "8dab24c126e5e3ce2d273c255ed638169734aa1eb2c5c15d8c0a26bdfc6bd87a",
+      "contentHash": "45596ff22dca4f0b26580ee9d0cf97308fba21115df498ab19c7fdc7009cd11d"
     },
     {
       "id": "floorkit.washing-machine",
