@@ -19,6 +19,9 @@
  *   never stops sending cannot exhaust memory;
  * - bytes whose SHA-256 differs from the index: a swapped file;
  * - a revoked entry: withdrawn for a reason the index states;
+ * - an entry in a block format above `maxFormat` (default 1): an old reader
+ *   never gets a format v2 block. Picking the newest version skips such an
+ *   entry; asking for it by version is refused (docs/rfcs/0004-format-v2.md);
  * - a file whose own id or version disagrees with its entry.
  *
  * What it does NOT do yet (docs/rfcs/0001-catalog-and-loader.md): verify a
@@ -105,8 +108,12 @@ async function sha256Hex(bytes) {
  * @param {typeof fetch} [options.fetch]   injectable, for tests and custom transports
  * @param {number} [options.maxIndexBytes] default 4 MB
  * @param {number} [options.timeoutMs]     per request, default 10 s
+ * @param {number} [options.maxFormat]     the highest block format the caller reads, default 1
  */
-export async function openCatalog({ baseUrl, fetch = globalThis.fetch, maxIndexBytes = 4 * 1024 * 1024, timeoutMs = 10_000 }) {
+export async function openCatalog({ baseUrl, fetch = globalThis.fetch, maxIndexBytes = 4 * 1024 * 1024, timeoutMs = 10_000, maxFormat = 1 }) {
+  if (!Number.isSafeInteger(maxFormat) || maxFormat < 1) throw new RangeError(`maxFormat must be a whole number from 1, got ${maxFormat}`);
+  // An entry without a format predates the field and is format 1.
+  const readable = (entry) => (entry.format ?? 1) <= maxFormat;
   const base = new URL(baseUrl);
   if (!base.pathname.endsWith('/')) base.pathname += '/';
 
@@ -170,19 +177,28 @@ export async function openCatalog({ baseUrl, fetch = globalThis.fetch, maxIndexB
     if (matches.length === 0) {
       throw new CatalogError('not-found', `${id}${version ? `@${version}` : ''} is not in this catalog`);
     }
-    if (version !== undefined) return matches[0];
-    const live = matches.filter((entry) => !entry.revoked).sort((a, b) => compareSemver(b.version, a.version));
-    return live[0] ?? matches[0];
+    if (version !== undefined) {
+      if (!readable(matches[0])) {
+        throw new CatalogError('unsupported-format', `${id}@${version} is block format ${matches[0].format}; this reader reads format ${maxFormat} or lower`);
+      }
+      return matches[0];
+    }
+    const usable = matches.filter(readable);
+    if (usable.length === 0) {
+      throw new CatalogError('unsupported-format', `${id} has no version in block format ${maxFormat} or lower; open the catalog with a higher maxFormat to read it`);
+    }
+    const live = usable.filter((entry) => !entry.revoked).sort((a, b) => compareSemver(b.version, a.version));
+    return live[0] ?? usable[0];
   };
 
   return {
     baseUrl: base.href,
     index,
-    /** Every entry, revoked ones left out unless asked for. */
+    /** Every entry this reader can read, revoked ones left out unless asked for. */
     list({ includeRevoked = false } = {}) {
-      return index.entries.filter((entry) => includeRevoked || !entry.revoked);
+      return index.entries.filter((entry) => (includeRevoked || !entry.revoked) && readable(entry));
     },
-    /** The newest live version, or exactly `version`. */
+    /** The newest live version in a readable format, or exactly `version` (refused when its format is above `maxFormat`). */
     find,
     /**
      * Fetch and verify one block. Returns `{ entry, text, definition }`;
@@ -215,6 +231,11 @@ export async function openCatalog({ baseUrl, fetch = globalThis.fetch, maxIndexB
       }
       if (definition?.id !== entry.id || definition?.metadata?.['catalog:version'] !== entry.version) {
         throw new CatalogError('integrity', `${label} says it is ${definition.id}@${definition.metadata?.['catalog:version']}, not ${entry.id}@${entry.version}`);
+      }
+      // The file's own format marker must agree with its entry: "2" is format 2, absent is format 1.
+      const format = definition.metadata?.['catalog:format'] === '2' ? 2 : definition.metadata?.['catalog:format'] === undefined || definition.metadata['catalog:format'] === '1' ? 1 : null;
+      if (format !== (entry.format ?? 1)) {
+        throw new CatalogError('integrity', `${label} says catalog:format ${JSON.stringify(definition.metadata?.['catalog:format'])}; the index says format ${entry.format ?? 1}`);
       }
       return { entry, text, definition };
     },

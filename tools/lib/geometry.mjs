@@ -25,7 +25,17 @@
  * plus its operands'. A sweep's profile, drawn facing +y as in the glazed-door
  * frame, is turned along each path segment; its corners are not mitred. A surface is a box face, so (f) is exact for
  * cuboids and lenient elsewhere.
+ *
+ * Format v2 kinds: the boxes of a sphere, a torus, a cylinder sector, an outline
+ * sweep and a revolve are exact before any turn (an arc's extremes are taken
+ * exactly, `outline.mjs`); a cone is bounded as a cylinder of its larger radius,
+ * exact upright; a shell takes its source's box. Volumes are exact except a
+ * revolve's and an outline's area (arcs cut into 10° chords, within 0.6 %) and a
+ * shell of anything but a cuboid, sphere or full cylinder, which counts its
+ * source's whole volume.
  */
+import { areaAndCentroid, outlineEdges, outlinePolygon, support } from './outline.mjs';
+
 const DIMENSION_TOLERANCE = 0.005;
 const CONTACT_TOLERANCE = 0.001;
 const MIN_SOLIDS = 3;
@@ -61,13 +71,71 @@ const boxOf = (points) => ({
   min: [0, 1, 2].map((i) => Math.min(...points.map((p) => p[i]))),
   max: [0, 1, 2].map((i) => Math.max(...points.map((p) => p[i]))),
 });
+const cornersOf = (min, max) => {
+  const corners = [];
+  for (const x of [min[0], max[0]]) for (const y of [min[1], max[1]]) for (const z of [min[2], max[2]]) corners.push([x, y, z]);
+  return corners;
+};
+
+/** A cylinder sector: its centre line, both ends of the arc and every axis the arc crosses, the point at angle a at (cx + r cos a, cz − r sin a). */
+function sectorBox(node, own) {
+  const start = node.startAngle ?? 0;
+  const [a0, a1] = [start, start + node.angle];
+  const angles = [a0, a1];
+  for (let k = Math.ceil(a0 / (Math.PI / 2)); k * (Math.PI / 2) < a1; k += 1) angles.push((k * Math.PI) / 2);
+  const plan = [[0, 0], ...angles.map((a) => [node.radius * Math.cos(a), -node.radius * Math.sin(a)])];
+  const [cx, cy, cz] = node.center;
+  const corners = plan.flatMap(([x, z]) => [-1, 1].map((s) => apply(own, [cx + x, cy + (s * node.height) / 2, cz + z])));
+  return { ...boxOf(corners), volume: (node.radius ** 2 * node.angle * node.height * det(own)) / 2 };
+}
+
+/**
+ * A revolve's outline against its axis: `rho(q)` is the signed distance of an outline point from
+ * the axis, and `nearest`/`farthest` its least and greatest value over the whole outline, arcs
+ * included. The outline clears the axis when both have one sign.
+ */
+export function revolveAxis(node) {
+  const point = node.axis?.point ?? [0, 0];
+  const [dx, dy] = node.axis?.direction ?? [0, 1];
+  const length = Math.hypot(dx, dy);
+  const d = [dx / length, dy / length];
+  const g = [-d[1], d[0]];
+  const edges = outlineEdges(node.profile, (arc) => arc.counterClockwise);
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1];
+  const max = (h, k) => support(edges, h) + k;
+  const min = (h, k) => -support(edges, [-h[0], -h[1]]) + k;
+  return { point, d, g, edges, dot, max, min, nearest: min(g, -dot(g, point)), farthest: max(g, -dot(g, point)) };
+}
+
+/** A revolve's exact box and its volume by Pappus's theorem, before its placement. */
+function revolveBox(node) {
+  const { point: p, d, g, edges, dot, max, min, nearest } = revolveAxis(node);
+  const s = nearest >= -1e-9 ? 1 : -1; // the side the outline is on; an edge may lie on the axis
+  // Each outline point turns on a circle about the axis: centre p + t·d with t = d·(q − p), radius s·rho(q).
+  // Along x that circle reaches centre_x ± |d_y|·radius, along y centre_y ± |d_x|·radius, along z ± radius.
+  // Each bound is affine in q, h·q + k, so its extreme over the outline is a support value.
+  const bound = (axis, sign) => {
+    const k = Math.abs(d[1 - axis]) * s * sign;
+    const h = [d[axis] * d[0] + k * g[0], d[axis] * d[1] + k * g[1]];
+    return [h, p[axis] - d[axis] * dot(d, p) - k * dot(g, p)];
+  };
+  const box = {
+    min: [min(...bound(0, -1)), min(...bound(1, -1)), -max([s * g[0], s * g[1]], -s * dot(g, p))],
+    max: [max(...bound(0, 1)), max(...bound(1, 1)), max([s * g[0], s * g[1]], -s * dot(g, p))],
+  };
+  const { area, centroid } = areaAndCentroid(outlinePolygon(edges));
+  return { ...box, volume: 2 * Math.PI * Math.abs(area) * Math.abs(dot(g, centroid) - dot(g, p)) };
+}
+
+/** The box of a definition in definition space, for the format v2 gates of `op.mjs`. */
+export const definitionBox = (node, definitions) => solidBox(node, placementMap(), definitions, true);
 
 /** The block-space box of one solid node under `map`, or null for a node that is not a solid. */
-function solidBox(node, map, definitions) {
+function solidBox(node, map, definitions, v2 = false) {
   const own = compose(map, placementMap(node.placement));
   if (node.ref !== undefined) {
     // In modelView a ref's placement applies on top of the definition's own.
-    return definitions[node.ref] ? solidBox(definitions[node.ref], own, definitions) : null;
+    return definitions[node.ref] ? solidBox(definitions[node.ref], own, definitions, v2) : null;
   }
   if (node.kind === 'cuboid') {
     const [w, h, d] = [node.width / 2, node.height / 2, node.depth / 2];
@@ -77,13 +145,63 @@ function solidBox(node, map, definitions) {
     }
     return { ...boxOf(corners), volume: node.width * node.height * node.depth * det(own) };
   }
-  if (node.kind === 'cylinder') {
-    // Exact for a full cylinder: the axis is the mapped y direction.
+  if (node.kind === 'cylinder' && node.angle !== undefined && v2) {
+    // A format v2 sector. A format 1 partial cylinder is bounded as a full one below: the
+    // drafting standard refuses it on its own (§3), and its box must not add a second issue.
+    return sectorBox(node, own);
+  }
+  if (node.kind === 'cylinder' || node.kind === 'cone') {
+    // Exact for a full cylinder and an upright cone: the axis is the mapped y direction. A cone is
+    // bounded as a cylinder of its larger radius: exact upright, sound when turned.
+    const radius = node.kind === 'cone' ? Math.max(node.radiusBottom, node.radiusTop) : node.radius;
     const c = apply(own, node.center);
     const axis = [0, 1, 2].map((i) => own.m[i][1]);
-    const radial = (i) => Math.hypot(own.m[i][0], own.m[i][2]) * node.radius;
+    const radial = (i) => Math.hypot(own.m[i][0], own.m[i][2]) * radius;
     const half = [0, 1, 2].map((i) => Math.abs(axis[i]) * (node.height / 2) + radial(i));
-    return { min: c.map((v, i) => v - half[i]), max: c.map((v, i) => v + half[i]), volume: Math.PI * node.radius ** 2 * node.height * det(own) };
+    const volume = node.kind === 'cone'
+      ? (Math.PI * node.height * (node.radiusBottom ** 2 + node.radiusBottom * node.radiusTop + node.radiusTop ** 2)) / 3
+      : Math.PI * node.radius ** 2 * node.height;
+    return { min: c.map((v, i) => v - half[i]), max: c.map((v, i) => v + half[i]), volume: volume * det(own) };
+  }
+  if (node.kind === 'sphere' || node.kind === 'torus') {
+    // Exact under a turn and one scale factor, the only placements format v2 allows: a sphere
+    // reaches r·|row| along each block axis, a flat torus R·|row in x–z| + r·|row|.
+    const c = apply(own, node.center);
+    const row = (i) => Math.hypot(...own.m[i]);
+    const half = node.kind === 'sphere'
+      ? [0, 1, 2].map((i) => row(i) * node.radius)
+      : [0, 1, 2].map((i) => Math.hypot(own.m[i][0], own.m[i][2]) * node.majorRadius + row(i) * node.minorRadius);
+    const volume = node.kind === 'sphere' ? (4 / 3) * Math.PI * node.radius ** 3 : 2 * Math.PI ** 2 * node.majorRadius * node.minorRadius ** 2;
+    return { min: c.map((v, i) => v - half[i]), max: c.map((v, i) => v + half[i]), volume: volume * det(own) };
+  }
+  if (node.kind === 'revolve') {
+    const { min, max, volume } = revolveBox(node);
+    return { ...boxOf(cornersOf(min, max).map((p) => apply(own, p))), volume: volume * det(own) };
+  }
+  if (node.kind === 'sweep' && node.profile && !Array.isArray(node.profile)) {
+    // An outline sweep: the plan outline extruded straight up from the path's lower end, bounded exactly.
+    const edges = outlineEdges(node.profile, (arc) => !arc.counterClockwise);
+    const [low, high] = node.path[0][1] <= node.path[1][1] ? node.path : [node.path[1], node.path[0]];
+    const min = [low[0] - support(edges, [-1, 0]), low[1], low[2] - support(edges, [0, -1])];
+    const max = [low[0] + support(edges, [1, 0]), high[1], low[2] + support(edges, [0, 1])];
+    const { area } = areaAndCentroid(outlinePolygon(edges));
+    return { ...boxOf(cornersOf(min, max).map((p) => apply(own, p))), volume: Math.abs(area) * (high[1] - low[1]) * det(own) };
+  }
+  if (node.kind === 'shell') {
+    // The source's box. The volume takes off the void exactly for a cuboid, a sphere or a full
+    // cylinder source without a placement of its own; for any other source it is the source's
+    // whole volume, an over-estimate, so the volume ratio of gate (e) errs towards refusing.
+    const source = definitions[node.sourceRef];
+    const box = source ? solidBox(source, own, definitions, v2) : null;
+    if (!box) return null;
+    const t = node.thickness;
+    const inner = (v) => Math.max(0, v);
+    const hollow = source.placement ? 0
+      : source.kind === 'cuboid' ? inner(source.width - 2 * t) * inner(source.height - 2 * t) * inner(source.depth - 2 * t)
+        : source.kind === 'sphere' ? (4 / 3) * Math.PI * inner(source.radius - t) ** 3
+          : source.kind === 'cylinder' && source.angle === undefined ? Math.PI * inner(source.radius - t) ** 2 * inner(source.height - 2 * t)
+            : 0;
+    return { ...box, volume: box.volume - hollow * det(own) };
   }
   if (node.kind === 'sweep') {
     const { path, profile } = sweepCurves(node, definitions);
@@ -108,7 +226,7 @@ function solidBox(node, map, definitions) {
     return { ...boxOf(turned.length ? turned : path.map((p) => apply(own, p))), volume: area * length * det(own) };
   }
   if (node.kind === 'boolean3d') {
-    const box = (ref) => (definitions[ref] ? solidBox(definitions[ref], own, definitions) : null);
+    const box = (ref) => (definitions[ref] ? solidBox(definitions[ref], own, definitions, v2) : null);
     const base = box(node.baseRef);
     if (!base || node.operation === 'subtract') return base;
     const parts = node.operandRefs.map(box).filter(Boolean);
@@ -191,8 +309,9 @@ const mm = (v) => v.toFixed(3);
 export function geometryIssues(definition, note) {
   const issues = [];
   const definitions = definition.definitions ?? {};
+  const v2 = definition.metadata['catalog:format'] === '2';
   const solids = definition.modelView.elements
-    .map((node, index) => ({ name: node.id ?? node.ref, path: `/modelView/elements/${index}`, box: solidBox(node, placementMap(), definitions) }))
+    .map((node, index) => ({ name: node.id ?? node.ref, path: `/modelView/elements/${index}`, box: solidBox(node, placementMap(), definitions, v2) }))
     .filter((solid) => solid.box);
   if (solids.length === 0) return issues;
   const extreme = (axis, end) => solids.reduce((best, s) => ((end === 'min' ? s.box.min[axis] < best.box.min[axis] : s.box.max[axis] > best.box.max[axis]) ? s : best));

@@ -31,7 +31,7 @@ import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { loadFloorkit, bodyParts, placedModel, targets } from './lib/floorkit.mjs';
-import { meshReport } from './lib/mesh.mjs';
+import { meshReport, shellNodes } from './lib/mesh.mjs';
 import { parseNote } from './lib/note.mjs';
 import { ROOT } from './lib/repo.mjs';
 
@@ -115,15 +115,23 @@ if (build) {
   let built = 0;
   let mirrored = 0;
   let clean = 0;
+  let slivers = 0;
+  let sliverBlocks = 0;
   for (const block of blocks) {
     try {
       const element = new floorkit.OpenElement(block.text);
       if (mesh) {
         // docs/drafting-standard.md §4 says which pairs a block may list; the list itself is the block's note.
         const { overlaps } = parseNote(JSON.parse(block.text).metadata?.['catalog:note']);
-        const report = meshReport(bodyParts(element), overlaps);
+        const report = meshReport(bodyParts(element), overlaps, shellNodes(JSON.parse(block.text)));
         mkdirSync(block.out, { recursive: true });
         writeFileSync(path.join(block.out, 'mesh-report.json'), `${JSON.stringify({ block: block.name, ...report }, null, 2)}\n`);
+        const dropped = report.nodes.reduce((sum, node) => sum + node.collapsed, 0);
+        if (dropped > 0) {
+          slivers += dropped;
+          sliverBlocks += 1;
+          console.log(`SLIVERS ${block.name}: ${dropped} triangle(s) collapse under the 0.01 mm weld and were dropped (${report.nodes.filter((node) => node.collapsed).map((node) => `${node.name} ${node.collapsed}`).join(', ')})`);
+        }
         if (report.defects.length === 0) clean += 1;
         else failures += 1;
         for (const defect of report.defects) console.log(`MESH ${block.name}: ${defect}`);
@@ -151,6 +159,7 @@ if (build) {
   console.log(`built by Floorkit:      ${built}/${blocks.length}`);
   console.log(`mirrored by Floorkit:   ${mirrored}/${blocks.length}`);
   if (mesh) console.log(`mesh clean:             ${clean}/${blocks.length} (reports in ${path.relative(process.cwd(), renders) || '.'})`);
+  if (mesh) console.log(`slivers dropped:        ${slivers} triangle(s) in ${sliverBlocks} block(s)`);
 }
 
 console.log(failures === 0 ? '\nparity holds.' : `\n${failures} parity failure(s).`);

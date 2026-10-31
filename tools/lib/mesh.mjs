@@ -15,6 +15,11 @@
  *   node (a cuboid, a cylinder) and under-reports inside a concave one (a
  *   boolean's notch); a penetration of 1 mm or less by an edge is not seen; a
  *   node wholly inside a concave node's notch region can be missed.
+ * - a triangle that collapses under the weld (two corners within 0.01 mm) is
+ *   dropped before these checks, and counted in the node's `collapsed`;
+ * - a `shell` node (format v2) is two shells, its outside and its void, and
+ *   is allowed exactly two (`shellNodes`). Its depth test reads the void's
+ *   faces too, so it under-reports inside a hollow node.
  */
 const WELD = 1e5;
 const TOLERANCE = 0.001;
@@ -29,7 +34,11 @@ function plane(t) {
   return length < 1e-12 ? null : [n.map((v) => v / length), t[0]];
 }
 
-function shell(tris) {
+function shell(all) {
+  // A triangle with two corners in one weld cell is a sliver of no area. Kernel 3.0 emits two per
+  // arc step on the side wall of an arc-edged outline sweep (measured, FLO-279); it is dropped here
+  // and counted, so it neither opens the shell nor hides.
+  const tris = all.filter((t) => new Set(t.map(key)).size === 3);
   const edges = new Map();
   const parent = new Map();
   const find = (k) => (parent.get(k) === k ? k : (parent.set(k, find(parent.get(k))), parent.get(k)));
@@ -58,7 +67,17 @@ function shell(tris) {
     else if (count !== 1) windingEdges += 1;
   }
   const shells = new Set([...parent.keys()].map(find)).size;
-  return { triangles: tris.length, openEdges, windingEdges, volume, area, shells };
+  // Each shell's own signed volume and box, largest |volume| first: a hollow node's void must wind inward.
+  const parts = new Map();
+  for (const t of tris) {
+    const root = find(key(t[0]));
+    const part = parts.get(root) ?? { volume: 0, min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] };
+    part.volume += dot(t[0], cross(t[1], t[2])) / 6;
+    for (const p of t) for (let i = 0; i < 3; i += 1) [part.min[i], part.max[i]] = [Math.min(part.min[i], p[i]), Math.max(part.max[i], p[i])];
+    parts.set(root, part);
+  }
+  const components = [...parts.values()].sort((a, b) => Math.abs(b.volume) - Math.abs(a.volume));
+  return { triangles: all.length, collapsed: all.length - tris.length, openEdges, windingEdges, volume, area, shells, components };
 }
 
 function box(tris) {
@@ -105,8 +124,16 @@ function crosses(a, b) {
   return false;
 }
 
+/** The names of a block's model nodes that are a ref to a `shell` definition: each is built as two shells. */
+export function shellNodes(definition) {
+  const definitions = definition?.definitions ?? {};
+  return new Set((definition?.modelView?.elements ?? [])
+    .filter((node) => node.ref !== undefined && definitions[node.ref]?.kind === 'shell')
+    .map((node) => node.id ?? node.ref));
+}
+
 /** The mesh report of one block: per node, per overlapping pair, and every defect in words. */
-export function meshReport(parts, allowedOverlaps = new Set()) {
+export function meshReport(parts, allowedOverlaps = new Set(), hollow = new Set()) {
   const nodes = parts.map((part) => ({ name: part.name, ...shell(part.tris) }));
   const defects = [];
   for (const node of nodes) {
@@ -114,7 +141,14 @@ export function meshReport(parts, allowedOverlaps = new Set()) {
     if (node.windingEdges > 0) defects.push(`${node.name}: inconsistent winding, ${node.windingEdges} edge(s)`);
     if (!(node.volume > 0)) defects.push(`${node.name}: signed volume ${node.volume.toExponential(3)} m³, faces not outward`);
     if (!(node.area > 0)) defects.push(`${node.name}: zero area`);
-    if (node.shells > 1) defects.push(`${node.name}: ${node.shells} shells, expected one`);
+    const shells = hollow.has(node.name) ? 2 : 1;
+    if (node.shells > 0 && node.shells !== shells) defects.push(shells === 1 ? `${node.name}: ${node.shells} shells, expected one` : `${node.name}: ${node.shells} shell(s), expected two (a shell node: its outside and its void)`);
+    if (shells === 2 && node.shells === 2) {
+      // The outside winds outward (volume > 0); the void winds inward (volume < 0) and lies inside it.
+      const [outer, inner] = node.components;
+      const inside = [0, 1, 2].every((i) => inner.min[i] >= outer.min[i] - 1e-6 && inner.max[i] <= outer.max[i] + 1e-6);
+      if (!(outer.volume > 0 && inner.volume < 0 && inside)) defects.push(`${node.name}: its second shell is not an inward void inside the first (volumes ${outer.volume.toExponential(3)} and ${inner.volume.toExponential(3)} m³)`);
+    }
   }
   const boxes = parts.map((part) => box(part.tris));
   const overlaps = [];
@@ -133,5 +167,6 @@ export function meshReport(parts, allowedOverlaps = new Set()) {
       if (!allowed) defects.push(`${pair}: ${how}, not listed in catalog:note`);
     }
   }
-  return { nodes, overlaps, defects };
+  // Each shell's volume and box serve the void check only; the report keeps one line per node.
+  return { nodes: nodes.map(({ components, ...node }) => node), overlaps, defects };
 }

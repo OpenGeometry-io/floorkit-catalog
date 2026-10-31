@@ -94,3 +94,11 @@ test('the index refuses an invalid block, and carries a revocation', () => {
   put('blocks/floorkit/simple-chair/1.0.0.op', { ...chair(), labelName: '' });
   assert.throws(() => buildIndex(root), /simple-chair\/1\.0\.0\.op: \/labelName/);
 });
+
+test('each index entry carries its block format: 1 without catalog:format, 2 for a format v2 block', () => {
+  put('blocks/floorkit/simple-chair/1.0.0.op', chair());
+  const sampler = JSON.parse(readFileSync(path.join(ROOT, 'test/fixtures/valid/v2-sampler.op'), 'utf8'));
+  put('blocks/floorkit/v2-sampler/1.0.0.op', { ...sampler, id: 'floorkit.v2-sampler' });
+  const formats = Object.fromEntries(buildIndex(root).entries.map((entry) => [entry.id, entry.format]));
+  assert.deepEqual(formats, { 'floorkit.simple-chair': 1, 'floorkit.v2-sampler': 2 });
+});

@@ -39,6 +39,13 @@ test('the valid fixture and every seed block pass', () => {
   assert.equal(count, index.entries.length, 'blocks/ and index.json list different numbers of blocks');
 });
 
+test('every valid fixture passes, format v2 included', () => {
+  const dir = new URL('fixtures/valid/', import.meta.url);
+  const names = readdirSync(dir).filter((name) => name.endsWith('.op'));
+  assert.ok(['v2-sampler.op', 'v2-sweep-arc-profile.op', 'v2-pedestal.op', 'v2-revolve-collinear.op'].every((name) => names.includes(name)));
+  for (const name of names) assert.deepEqual(checkBlockText(readFileSync(new URL(name, dir), 'utf8')).issues, [], name);
+});
+
 test('the author-block skill\'s starter template passes', () => {
   const starter = readFileSync(new URL('../.claude/skills/author-block/starter.op', import.meta.url), 'utf8');
   assert.deepEqual(checkBlockText(starter).issues, []);
@@ -47,7 +54,7 @@ test('the author-block skill\'s starter template passes', () => {
 test('every Floorkit kernel-reject fixture is rejected by the catalog too', () => {
   const dir = new URL('fixtures/kernel-rejects/', import.meta.url);
   const names = readdirSync(dir).filter((name) => name.endsWith('.json'));
-  assert.ok(names.length >= 15, 'the kernel-reject set shrank');
+  assert.ok(names.length >= 27, 'the kernel-reject set shrank');
   for (const name of names) {
     const result = checkBlockText(formatBlock(JSON.parse(readFileSync(new URL(name, dir), 'utf8'))));
     assert.equal(result.ok, false, `${name} passed the catalog but Floorkit rejects it`);
@@ -268,6 +275,13 @@ test('each geometry-reject fixture fails exactly its own gate, naming the node a
     'too-few-solids.op': ['/modelView', /^has 2 solid\(s\); LOD 300 needs at least 3$/],
     'too-full.op': ['/modelView', /^the solids fill 1\.000 of their bounding box/],
     'union-volume.op': ['/modelView', /^the solids fill 1\.0\d\d of their bounding box/],
+    'uneven-scale.op': ['/modelView/elements/0/placement/scale', /^is \[1,1,1\.5\]; a body's placement must be a turn, a move and one scale factor, else Floorkit 3\.0 refuses it as bad-scale$/],
+    'v2-revolve-touches-axis-at-point.op': ['/modelView/elements/3/profile', /^touches its axis at a point, \[0, 0\]; a revolve's outline stays more than 0\.001 m to one side of its axis, except along one run of line edges that lies on the axis/],
+    'v2-revolve-two-axis-runs.op': ['/definitions/ballSolid/profile', /^lies on its axis along 2 separate runs of edges; at most one run of edges may lie on the axis/],
+    'v2-shell-of-shell.op': ['/definitions/ball2/sourceRef', /^hollows the shell "ball"; OpenGeometry 3\.0\.0 cannot shell a revolve, a cylinder sector or another shell/],
+    'v2-outline-closing-gap.op': ['/modelView/elements/0/profile/segments/3/to', /^is 1\.0\d*e-10 m from start, so the closing line would be that short; end exactly at start, or leave a closing line of at least 0\.001 m$/],
+    'v2-outline-sweep-too-low.op': ['/modelView/elements/3/path', /^rises 1e-10 m; an outline sweep is at least 0\.01 m high$/],
+    'v2-shell-of-sector.op': ['/definitions/top/sourceRef', /^hollows the cylinder sector "topSolid"; OpenGeometry 3\.0\.0 cannot shell/],
   };
   const family = { 'missing-mat.op': /has no mat: role/, 'arc-plan.op': /^the plan's (min|max) [xz] is/ };
   const dir = new URL('fixtures/geometry-rejects/', import.meta.url);
@@ -464,4 +478,172 @@ test('gate (e) binds only a block drawn to LOD 300 (owner decision 2026-10-27); 
   const wrong = box('200');
   wrong.dimensions.height = 0.6;
   rejects(wrong, '/dimensions/height', 'is 0.600 m but the body spans 0.500 m');
+});
+
+// ── Format v2 (docs/format-v2.md) ──
+const v2 = () => JSON.parse(fixture('valid/v2-sampler.op'));
+const v2Node = (d, id) => d.modelView.elements.find((node) => node.id === id);
+const P = (position, scale = [1, 1, 1]) => ({ position, rotation: [0, 0, 0], scale });
+
+test('the format marker: absent or "1" is format 1, "2" is format v2, the root version stays 1', () => {
+  const one = base();
+  one.metadata['catalog:format'] = '1';
+  assert.deepEqual(check(one).issues, []);
+  const three = base();
+  three.metadata['catalog:format'] = '3';
+  rejects(three, '/metadata/catalog:format', 'must be equal to constant ("1")');
+  const sphere = base();
+  sphere.modelView.elements.push({ id: 'ball', kind: 'sphere', center: [0, 0.5, 0], radius: 0.1 });
+  rejects(sphere, '/modelView/elements/6/kind', 'must be equal to one of the allowed values');
+  const version = v2();
+  version.version = 2;
+  rejects(version, '/version', 'must be equal to constant');
+  const unmarked = v2();
+  delete unmarked.metadata['catalog:format'];
+  rejects(unmarked, '/modelView/elements/0/profile', 'must be array');
+});
+
+test('format v2 refuses what Floorkit 3.0 would repair, default or drop', () => {
+  const key = v2();
+  key.definitions.ballSolid.segments = 32;
+  rejects(key, '/definitions/ballSolid', 'additional properties "segments"');
+  const full = v2();
+  v2Node(full, 'top').angle = 2 * Math.PI;
+  rejects(full, '/modelView/elements/1/angle', 'must be <= 6.2831');
+  const start = v2();
+  delete v2Node(start, 'top').angle;
+  rejects(start, '/modelView/elements/1', 'must have property angle when property startAngle is present');
+  const caps = v2();
+  delete v2Node(caps, 'plinth').capStart;
+  rejects(caps, '/modelView/elements/0', "must have required property 'capStart'");
+  const flat = v2();
+  flat.modelView.elements.push({ id: 'cap', kind: 'cone', center: [0, 0.35, 0], radiusBottom: 0, radiusTop: 0, height: 0.1 });
+  rejects(flat, '/modelView/elements/3', 'must NOT be valid');
+  const shell = v2();
+  shell.modelView.elements[2] = { id: 'ball', kind: 'shell', sourceRef: 'ballSolid', thickness: 0.01 };
+  delete shell.definitions.ball;
+  rejects(shell, '/modelView/elements/2/kind', 'must be equal to one of the allowed values');
+});
+
+test('format v2 gates: outlines, the torus, the revolve axis, the outline sweep path; one scale factor in both formats', () => {
+  const offCentre = v2();
+  v2Node(offCentre, 'plinth').profile.segments[1].arc.center = [0.1, 0.01];
+  rejects(offCentre, '/modelView/elements/0/profile/segments/1/arc/center', 'an arc\'s centre must be as far from both');
+  const repeat = v2();
+  v2Node(repeat, 'plinth').profile.segments.splice(1, 0, { to: [0.1, -0.2] });
+  rejects(repeat, '/modelView/elements/0/profile/segments/1/to', 'repeats the point before it');
+  const crossing = v2();
+  for (const segment of v2Node(crossing, 'plinth').profile.segments) if (segment.arc) segment.arc.counterClockwise = true;
+  rejects(crossing, '/modelView/elements/0/profile', 'crosses itself');
+  const shortSegment = v2();
+  v2Node(shortSegment, 'plinth').profile.segments.splice(1, 0, { to: [0.1005, -0.2] });
+  v2Node(shortSegment, 'plinth').profile.segments[2].arc.center = [0.1, 0];
+  rejects(shortSegment, '/modelView/elements/0/profile/segments/1/to', 'a segment is at least 0.001 m long');
+  const shortClose = v2();
+  v2Node(shortClose, 'plinth').profile.segments.at(-1).to = [-0.1, -0.1995];
+  v2Node(shortClose, 'plinth').profile.segments.at(-1).arc.center = [-0.1, 0.00025];
+  rejects(shortClose, '/modelView/elements/0/profile/segments/3/to', 'the closing line would be that short');
+  const low = v2();
+  v2Node(low, 'plinth').path = [[0, 0, 0], [0, 0.005, 0]];
+  rejects(low, '/modelView/elements/0/path', 'an outline sweep is at least 0.01 m high');
+  const down = v2();
+  v2Node(down, 'plinth').path = [[0, 0.1, 0], [0, 0, 0]];
+  rejects(down, '/modelView/elements/0/path', 'must be one segment straight up');
+  const slant = v2();
+  v2Node(slant, 'plinth').path = [[0, 0, 0], [0.01, 0.1, 0]];
+  rejects(slant, '/modelView/elements/0/path', 'must be one segment straight up');
+  const torus = v2();
+  torus.modelView.elements.push({ id: 'ring', kind: 'torus', center: [0, 0.21, 0], majorRadius: 0.05, minorRadius: 0.0495 });
+  torus.metadata['mat:ring'] = 'metal';
+  rejects(torus, '/modelView/elements/3/minorRadius', 'must be below majorRadius - 0.001');
+  const crosses = v2();
+  crosses.modelView.elements.push({ id: 'knob', kind: 'revolve', profile: { start: [-0.01, 0.2], segments: [{ to: [0.03, 0.2] }, { to: [0.03, 0.24] }], closed: true } });
+  crosses.metadata['mat:knob'] = 'metal';
+  rejects(crosses, '/modelView/elements/3/profile', 'crosses its axis');
+  // Measured on kernel 3.0.0: an edge ON the axis builds (a solid revolve); a point touch or a crossing does not.
+  const knob = (profile) => {
+    const d = v2();
+    d.modelView.elements.push({ id: 'knob', kind: 'revolve', placement: P([0, 0.2, -0.1]), profile });
+    d.metadata['mat:knob'] = 'metal';
+    return d;
+  };
+  assert.deepEqual(check(knob({ start: [0, 0], segments: [{ to: [0.03, 0] }, { to: [0.03, 0.04] }, { to: [0, 0.04] }], closed: true })).issues, []);
+  assert.deepEqual(check(knob({ start: [0, 0], segments: [{ to: [0, 0.04], arc: { center: [0, 0.02], counterClockwise: true } }], closed: true })).issues, [], 'a half-disc on the axis: a ball');
+  rejects(knob({ start: [0, 0], segments: [{ to: [0.03, 0.02] }, { to: [0.03, 0.04] }], closed: true }), '/modelView/elements/3/profile', 'touches its axis at a point, [0, 0]');
+  rejects(knob({ start: [0, 0], segments: [{ to: [0.03, 0] }, { to: [0.03, 0.04] }, { to: [0.0005, 0.04] }, { to: [0, 0.03] }], closed: true }), '/modelView/elements/3/profile', 'comes within 0.0005 m of its axis');
+  rejects(knob({ start: [0.0005, 0], segments: [{ to: [0.03, 0] }, { to: [0.03, 0.04] }, { to: [0.0005, 0.04] }], closed: true }), '/modelView/elements/3/profile', 'comes within 0.0005 m of its axis');
+  rejects(knob({ start: [0.02, 0], segments: [{ to: [0.02, 0.04], arc: { center: [0.02, 0.02], counterClockwise: false } }, { to: [0.02, 0], arc: { center: [0.02, 0.02], counterClockwise: false } }], closed: true }), '/modelView/elements/3/profile', 'touches its axis at a point');
+  const zero = v2();
+  zero.modelView.elements.push({ id: 'knob', kind: 'revolve', axis: { point: [0, 0], direction: [0, 0] }, profile: { start: [0.01, 0.2], segments: [{ to: [0.03, 0.2] }, { to: [0.03, 0.24] }], closed: true } });
+  zero.metadata['mat:knob'] = 'metal';
+  rejects(zero, '/modelView/elements/3/axis/direction', 'must not be zero');
+  const stretchedOne = base();
+  stretchedOne.modelView.elements[1].placement = P([0, 0, 0], [2, 1, 1]);
+  rejects(stretchedOne, '/modelView/elements/1/placement/scale', 'one scale factor');
+  const stretched = v2();
+  v2Node(stretched, 'top').placement = P([0, 0, 0], [1, 1, 1.5]);
+  rejects(stretched, '/modelView/elements/1/placement/scale', 'one scale factor');
+  const operand = v2();
+  operand.definitions.base = { kind: 'cuboid', center: [0, 0.5, 0], width: 0.1, height: 0.1, depth: 0.1 };
+  operand.definitions.rail = { ...v2Node(operand, 'plinth') };
+  delete operand.definitions.rail.id;
+  operand.definitions.cut = { kind: 'boolean3d', operation: 'subtract', baseRef: 'base', operandRefs: ['rail'] };
+  operand.modelView.elements.push({ ref: 'cut' });
+  rejects(operand, '/definitions/cut/operandRefs/0', 'is a sweep');
+});
+
+test('format v2 shells: not of a revolve or a sector, through any chain; room for the void; counted when expanded', () => {
+  const revolve = v2();
+  revolve.definitions.knobSolid = { kind: 'revolve', profile: { start: [0.01, 0.2], segments: [{ to: [0.03, 0.2] }, { to: [0.03, 0.24] }], closed: true } };
+  revolve.definitions.inner = { kind: 'shell', sourceRef: 'knobSolid', thickness: 0.01 };
+  revolve.definitions.ball.sourceRef = 'outer';
+  revolve.definitions.outer = { kind: 'boolean3d', operation: 'union', baseRef: 'ballSolid', operandRefs: ['inner'] };
+  rejects(revolve, '/definitions/ball/sourceRef', 'the revolve "knobSolid"');
+  rejects(revolve, '/definitions/ball/sourceRef', 'hollows the shell "inner"');
+  rejects(revolve, '/definitions/inner/sourceRef', 'hollows the revolve "knobSolid"');
+  const thick = v2();
+  thick.definitions.ball.thickness = 0.1;
+  rejects(thick, '/definitions/ball/thickness', 'must be under half the smallest extent of its source\'s box (0.200 m)');
+  const bomb = v2();
+  bomb.definitions.l0 = box('l0');
+  for (let level = 1; level <= 22; level += 1) {
+    bomb.definitions[`l${level}`] = { kind: 'boolean3d', operation: 'union', baseRef: `l${level - 1}`, operandRefs: [`l${level - 1}`] };
+  }
+  bomb.definitions.hollow = { kind: 'shell', sourceRef: 'l22', thickness: 0.01 };
+  bomb.modelView.elements.push({ ref: 'hollow' });
+  rejects(bomb, '/', `builds more than ${LIMITS.maxExpandedNodes} nodes`);
+});
+
+test('format v2 boxes are exact: sphere, cone, torus, sector, revolve and outline sweep', () => {
+  // One solid per block, LOD 200; each must pass at its exact box and fail 0.01 m off it.
+  const single = (node, dimensions, plan) => {
+    const d = v2();
+    d.id = 'fixture.v2-single';
+    d.metadata = { ...d.metadata, 'catalog:lod': '200', 'catalog:note': 'One solid.', 'mat:solid': 'surface' };
+    for (const k of ['mat:plinth', 'mat:top', 'mat:ball']) delete d.metadata[k];
+    delete d.definitions;
+    d.dimensions = dimensions;
+    d.profileView.elements = [{ id: 'outline', kind: 'polygon', vertices: plan }];
+    d.modelView.elements = [{ id: 'solid', ...node }];
+    assert.deepEqual(check(d).issues, [], JSON.stringify(node));
+    d.dimensions = { ...dimensions, height: dimensions.height + 0.01 };
+    rejects(d, '/dimensions/height', 'but the body spans');
+  };
+  const square = (x0, x1, z0, z1) => [[x0, z0], [x1, z0], [x1, z1], [x0, z1]];
+  single({ kind: 'sphere', center: [0, 0.2, 0], radius: 0.2 }, { width: 0.4, depth: 0.4, height: 0.4 }, square(-0.2, 0.2, -0.2, 0.2));
+  single({ kind: 'cone', center: [0, 0.15, 0], radiusBottom: 0.2, radiusTop: 0, height: 0.3 }, { width: 0.4, depth: 0.4, height: 0.3 }, square(-0.2, 0.2, -0.2, 0.2));
+  single({ kind: 'torus', center: [0, 0.05, 0], majorRadius: 0.2, minorRadius: 0.05 }, { width: 0.5, depth: 0.5, height: 0.1 }, square(-0.25, 0.25, -0.25, 0.25));
+  // A quarter sector from 0 turns +x towards −z: x 0..r, z −r..0.
+  single({ kind: 'cylinder', center: [0, 0.05, 0], radius: 0.3, height: 0.1, angle: Math.PI / 2 }, { width: 0.3, depth: 0.3, height: 0.1 }, square(0, 0.3, -0.3, 0));
+  // A ring of square section 0.1 to 0.2 from the y axis, 0 to 0.1 high, plus a half-round bead on its outside.
+  const ring = { start: [0.1, 0], segments: [{ to: [0.2, 0] }, { to: [0.2, 0.1], arc: { center: [0.2, 0.05], counterClockwise: true } }, { to: [0.1, 0.1] }], closed: true };
+  single({ kind: 'revolve', profile: ring }, { width: 0.5, depth: 0.5, height: 0.1 }, square(-0.25, 0.25, -0.25, 0.25));
+  const stadium = v2Node(v2(), 'plinth').profile;
+  single({ kind: 'sweep', path: [[0, 0, 0], [0, 0.1, 0]], profile: stadium, capStart: true, capEnd: true }, { width: 0.6, depth: 0.4, height: 0.1 }, square(-0.3, 0.3, -0.2, 0.2));
+  // A solid revolve: its outline lies along the y axis by an edge.
+  const solid = { start: [0, 0], segments: [{ to: [0.1, 0] }, { to: [0.1, 0.2] }, { to: [0, 0.2] }], closed: true };
+  single({ kind: 'revolve', profile: solid }, { width: 0.2, depth: 0.2, height: 0.2 }, square(-0.1, 0.1, -0.1, 0.1));
+  // A square ring 0.1 to 0.2 from a horizontal axis along x at y 0.2: it stands on its rim.
+  const lying = { start: [0, 0.1], segments: [{ to: [0.1, 0.1] }, { to: [0.1, 0] }, { to: [0, 0] }], closed: true };
+  single({ kind: 'revolve', profile: lying, axis: { point: [0, 0.2], direction: [1, 0] } }, { width: 0.1, depth: 0.4, height: 0.4 }, square(0, 0.1, -0.2, 0.2));
 });

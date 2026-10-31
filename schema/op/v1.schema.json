@@ -447,6 +447,10 @@
             "300"
           ]
         },
+        "catalog:format": {
+          "description": "The block format. Absent means format 1; a format 1 block may also say \"1\". A format 2 block says \"2\" and is held to schema/op/v2.schema.json.",
+          "const": "1"
+        },
         "catalog:tags": {
           "description": "Comma-and-space separated, lowercase.",
           "type": "string",

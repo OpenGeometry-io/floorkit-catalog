@@ -22,7 +22,7 @@ Run these on an up-to-date `main`. N is the number of entries in `index.json`: `
 | Tests, blocks and index | `npm ci && npm run check` | `N block(s) valid.` and `index.json is current: N entr(ies).`, with no failing test. On branch `catalog-1.0` on 2026-10-27 these read `80 block(s) valid.` and `index.json is current: 80 entr(ies).` |
 | Licensing metadata | `reuse lint` | `Congratulations! Your project is compliant with version 3.3 of the REUSE Specification :-)` |
 | Immutability gate, before any tag | `node tools/immutable.mjs` | `immutability: NOT ENFORCED — no v* tag yet, so no block has been released.` |
-| Floorkit parity (maintainers with a Floorkit build) | `FLOORKIT_DIR=<dir with dist/index.js> node tools/parity.mjs --build --mesh` | Accepted, unrepaired, built, mirrored and mesh clean, N/N each; kernel-reject fixtures refused 15/15; `parity holds.` |
+| Floorkit parity (maintainers with a Floorkit build) | `FLOORKIT_DIR=<dir with dist/index.js> node tools/parity.mjs --build --mesh` | Accepted, unrepaired, built, mirrored and mesh clean, N/N each; kernel-reject fixtures refused 27/27 (the 12 `v2-*.json` need Floorkit 3.0); `parity holds.` |
 | What going public publishes | `git log --stat`, plus the issues, pull requests and Actions logs | Nothing that should stay private. The whole history becomes visible |
 
 ## Checklist

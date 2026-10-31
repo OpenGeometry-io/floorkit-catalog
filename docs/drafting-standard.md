@@ -1,6 +1,6 @@
 # Drafting standard for catalog blocks
 
-This page says how a block must be drawn so that it reads like the work of a senior BIM author: where its origin sits, what its plan symbol shows, which parts its body has, which heights are true, and how it names its anchors and ports. [`format-v1.md`](format-v1.md) says what a block may contain; this page says what a good block does contain. Where the two disagree, the format and the tools win, and the difference is a bug in this page.
+This page says how a block must be drawn so that it reads like the work of a senior BIM author: where its origin sits, what its plan symbol shows, which parts its body has, which heights are true, and how it names its anchors and ports. [`format-v1.md`](format-v1.md) and [`format-v2.md`](format-v2.md) say what a block may contain; this page says what a good block does contain. Where the two disagree, the format and the tools win, and the difference is a bug in this page.
 
 "Must" is a rule a reviewer refuses a block for. "Should" is a rule a reviewer may waive with a reason in the pull request. Rules that a tool checks name the tool.
 
@@ -87,10 +87,19 @@ The body must read as the object from the isometric view, with the parts the cat
   - plate with hole plus liner: the rim as a plate with a through-hole, and the bowl below it as separate thin walls and a floor that touch the plate's underside.
   Booleans take only `cuboid`, `cylinder` or another `boolean3d` as operands ([format §4](format-v1.md#4-definitions-and-references)). Every block with a boolean is built by a maintainer with `parity.mjs --build --mesh` before it merges.
 - **Cutter sizes.** A coaxial cutter (a cylinder minus a narrower coaxial cylinder) must be exactly as tall as its base and level with it: a taller one builds open shells. Every ring in the catalog is drawn so: the pan and seat rings of `floorkit.wc` (0.20 and 0.02 high, cutter and base alike) and the bowl liners of the basins. A through-hole cutter in a plate goes 0.01 m past each face of the plate: `floorkit.wash-basin` cuts its 0.02 rim plate with a cylinder 0.04 high on the same centre.
-- **Sweeps** only in the case the gates bound as OpenGeometry's `sweep.rs` builds it, as in `floorkit.glazed-door`: the profile centred on its vertex average at the origin (within 0.001 m) and facing +y, the path starting straight up, in one vertical plane, with no turn over 90°. `validate.mjs` refuses any other sweep.
+- **Sweeps** of a list of points only in the case the gates bound as OpenGeometry's `sweep.rs` builds it, as in `floorkit.glazed-door`: the profile centred on its vertex average at the origin (within 0.001 m) and facing +y, the path starting straight up, in one vertical plane, with no turn over 90°. `validate.mjs` refuses any other sweep.
 - **Cylinders** stand on their axis along y. A cylinder that lies down is turned 90° by its `placement.rotation`: about x (`[90, 0, 0]`, axis along z: a porthole, as in `floorkit.washing-machine`) or about z (`[0, 0, 90]`, axis along x: a wheel, as in `floorkit.parked-car`). Both are measured to build and to mirror with `parity.mjs --build --mesh`.
 - **A lying cylinder needs an even side count.** The kernel builds a cylinder as a prism whose number of sides grows with the radius (measured on Floorkit main `b0a084c7`: radius 0.30 gives 20 sides, 0.31 to 0.33 give 21, 0.34 to 0.36 give 22). Turned about x or z, a prism with an odd count does not land on the reflection of its unmirrored build when a project mirrors the block, so a mirrored wheel can leave the floor. Pick a radius that gives an even count, as the car's wheels (0.30) and the bicycle's (0.35) do, and check it with `parity.mjs --build --mesh`.
-- **No partial cylinders.** A cylinder with `angle` below a full turn must not be used: when a project mirrors the block (`scale [-1, 1, 1]`), Floorkit moves its centre but does not flip its arc, so the body lands up to its full width off the mirrored plan (measured: 400 mm for a quarter cylinder of radius 0.4). A half cylinder may be drawn as a full cylinder minus a cuboid, but that arrangement is unverified: a maintainer must build it, mirror included, with `parity.mjs --build --mesh` before it merges.
+- **No partial cylinders in format 1.** A format 1 cylinder with `angle` below a full turn must not be used: when a project mirrors the block (`scale [-1, 1, 1]`), Floorkit moves its centre but does not flip its arc, so the body lands up to its full width off the mirrored plan (measured: 400 mm for a quarter cylinder of radius 0.4). A half cylinder may be drawn as a full cylinder minus a cuboid, but that arrangement is unverified: a maintainer must build it, mirror included, with `parity.mjs --build --mesh` before it merges.
+- **Format v2 (the Floorkit 3.0 kinds, [format-v2.md](format-v2.md)).** A block that says `"catalog:format": "2"` keeps every rule above, except the one against partial cylinders, and adds these:
+  - **Round parts are drawn as what they are.** A bowl, a knob or a pan is a `revolve` or an outline sweep, a ball a `sphere`, a tapered leg a `cone`, a ring a `torus`; not a stack of cylinders.
+  - **A sector is a `cylinder` with `angle` and `startAngle`.** A half-round top is a sector of `angle` π. Floorkit 3.0 reflects a sector's arc when a project mirrors the block (measured on `test/fixtures/valid/v2-pedestal.op`): a maintainer still builds it mirrored with `parity.mjs --build --mesh` before it merges.
+  - **An outline sweep is an extrusion:** one vertical path segment from its lower end up, both caps `true`, and the outline's `[0, 0]` at the path's lower end. Its arcs read counter-clockwise seen from above, as every `.op` angle. Check the sense against the plan: `validate.mjs` reports an arc that bulges the wrong way as a body that does not fill its `dimensions` or its plan.
+  - **A revolve's outline stays on one side of its axis.** It may lie on the axis along one run of straight edges, which makes a solid revolve (a knob, a pedestal); it must not cross the axis or touch it at a single point, and every other vertex and edge stays more than 0.001 m from it.
+  - **Hollows may be a `shell`** of a cuboid, a full cylinder, a sphere, a cone, a torus, a sweep or a boolean of these (never of another shell), with `thickness` at least 0.01. Never a shell of a revolve or a sector, also through a boolean: the kernel cannot build it, and `validate.mjs` refuses it.
+  - **A body's placement scale is one number on all three axes**, or Floorkit 3.0 refuses the body. This holds in format 1 too, and `validate.mjs` refuses it in both.
+  - **Spheres are heavy.** The shell of a sphere of radius 0.1 m is 83,636 triangles (measured), and a drawing caps a block at 20,000 (unverified here). Use a sphere only where the object needs one, and read the triangle counts in the mesh report.
+  - Every block with a format v2 kind is built by a maintainer with `parity.mjs --build --mesh` before it merges, as a block with a boolean is.
 - **Thin round parts render polygonal.** The kernel builds a small cylinder as a prism (measured with `parity.mjs --build --mesh` against Floorkit main `b0a084c7`, height 0.42): radius 0.011 gives 4 sides (12 triangles, volume 2·r²·h), 0.02 gives 6, 0.04 gives 8, 0.1 gives 12. A tubular leg at radius 0.011 therefore renders square; from radius 0.04 its section is an octagon or finer. A round part under radius about 0.04 is accepted as a prism: draw it at its true size, not larger to look round, and say so in one line of the note, as `floorkit.wash-basin` does: `Parts under radius 0.04 build as polygonal prisms at true size.`
 - **Rotations.** Measured to build and to mirror correctly: a cylinder turned 90° about x or about z, with an even side count; a cuboid turned about y; a ref turned about y by any angle (72° measured). A positive angle about y turns +x towards −z. A cuboid turned about z, a tilt of a cuboid about x (splayed legs) and a turn about two axes are unverified: draw parts upright, or have a maintainer build them.
 - **Mirroring.** Every block may be mirrored by a project. Floorkit mirrors the body and the plan, but not anchors or ports: an anchor or port off `x = 0` stays where it was. Put anchors on `x = 0` where the object allows; where it cannot (a tap at one end of a bath), say so in the note.
@@ -299,7 +308,7 @@ The rules a plan symbol and a drawing are reviewed against, in short. "Standard"
 
 ## 13. What the format cannot draw
 
-Version 1 of the format cannot express these. Draw the closest honest thing and say so in the note; do not invent a workaround the tools do not check.
+Format 1 cannot express these; where format v2 can, the line says so. Draw the closest honest thing and say so in the note; do not invent a workaround the tools do not check.
 
 - **No dashed, hidden or weighted lines**, no fills or masks: overhead items are drawn as outlines (section 5).
 - **No text** in a symbol: no "F", "WM", "DW" marks.
@@ -307,7 +316,8 @@ Version 1 of the format cannot express these. Draw the closest honest thing and 
 - **No mounting height in plan**: heights are baked into the body and stated in the note.
 - **Items that sit on other items** stand at `y = 0` with `base` role `surface-contact` (a table lamp); a microwave on a worktop is not a block.
 - **Fittings smaller than about 0.15 m** (toilet roll holders, grab rails, switches, monitors) are not blocks. A downlight is the exception: it is a block, as a ceiling luminaire, although it is smaller (`floorkit.downlight` is 0.09 × 0.09 × 0.03).
-- **No sphere, revolve, cone or fillet**: approximate with cylinders and cuboids.
+- **No sphere, revolve, cone or fillet in format 1**: approximate with cylinders and cuboids. Format v2 has `sphere`, `cone`, `torus`, `revolve`, `shell`, the cylinder sector and the outline sweep with arc edges (section 3). Neither format has a fillet: round an edge with an outline arc in plan, or not at all.
+- **No partial cylinder in format 1** (section 3); format v2 draws a sector.
 - **Boolean pockets** beyond the measured arrangements are unverified (section 3).
 - **One colour per node**: glass is a pale solid.
 - **No scale or parameters**: one block per module or bed size; non-uniform scaling of a placed block is refused by Floorkit.
@@ -324,3 +334,5 @@ Version 1 of the format cannot express these. Draw the closest honest thing and 
 | MAJOR | An anchor, port or id is removed or renamed, or the footprint or insertion point moves |
 | MINOR | Anchors, ports or types are added; or a drawing-only change (a plan line, a body part, a `mat:` or anchor role) that moves no anchor, port or insertion point |
 | PATCH | The label, a colour or other metadata |
+
+**A move to format v2 is MAJOR on its own**, even when the drawing does not change: a reader of format 1 cannot load the new file ([RFC 0004](rfcs/0004-format-v2.md#versioning)). The format 1 file stays.

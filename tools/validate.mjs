@@ -9,12 +9,14 @@
  *
  * A file inside blocks/ is also held to its path, including a misplaced file
  * or a symbolic link. A file elsewhere (a draft, a fixture) is judged on its
- * content alone. Exit code 1 if anything is wrong.
+ * content alone. A block is held to the schema of its format: format 1, or
+ * format v2 when its metadata says "catalog:format": "2". Exit code 1 if
+ * anything is wrong.
  */
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { checkBlockText } from './lib/op.mjs';
+import { FORMATS, checkBlockText } from './lib/op.mjs';
 import { ROOT, checkListedBlock, listBlocks, readJson, readPublishers } from './lib/repo.mjs';
 
 function report(file, issues) {
@@ -36,10 +38,13 @@ function checkCatalogFiles() {
     problems.push(error.message);
   }
   const categories = readJson(ROOT, 'categories.json');
-  const schema = readJson(ROOT, 'schema/op/v1.schema.json');
-  const schemaCategories = schema.$defs.rootMetadata.properties['catalog:category'].enum;
-  if (JSON.stringify(categories) !== JSON.stringify(schemaCategories)) {
-    problems.push('categories.json and the schema\'s catalog:category enum disagree');
+  // Every block format has its own schema; each one's categories must equal categories.json.
+  for (const format of FORMATS) {
+    const schema = readJson(ROOT, `schema/op/v${format}.schema.json`);
+    const schemaCategories = schema.$defs.rootMetadata.properties['catalog:category'].enum;
+    if (JSON.stringify(categories) !== JSON.stringify(schemaCategories)) {
+      problems.push(`categories.json and the catalog:category enum of schema/op/v${format}.schema.json disagree`);
+    }
   }
   const revocations = readJson(ROOT, 'revocations.json');
   if (!Array.isArray(revocations)) problems.push('revocations.json must be an array');

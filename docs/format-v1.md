@@ -11,6 +11,8 @@ The rules are enforced in two places:
 
 `node tools/validate.mjs` runs both. If this page and the code disagree, the code is what runs; please report the difference.
 
+A block whose root metadata says `"catalog:format": "2"` is format v2: format 1 plus the Floorkit 3.0 node kinds, described in [`format-v2.md`](format-v2.md). Every other block is format 1, described here.
+
 ## Where the Floorkit facts come from
 
 - **Read.** Floorkit's `.op` parser is `src/packages/openplans-core/src/elements/generic-element.ts` in the OpenPlans repository. This page calls it "Floorkit `generic-element.ts`" and cites line numbers from OpenPlans `origin/main` at `b0a084c7`, whose package `@opengeometry/floorkit` declares version 1.2.0 and depends on the `opengeometry` kernel `^2.0.18` (2.0.18 installed). That repository is private, so this page names files rather than linking to them.
@@ -66,7 +68,8 @@ Catalog bounds on every placement:
 
 - every coordinate (`position`, `anchor`) is within ±1000 m;
 - each rotation component is within ±360°;
-- each scale component is in (0, 100].
+- each scale component is in (0, 100];
+- on a body (a `modelView` element or a solid definition), the three scale components are equal: Floorkit 3.0 places a body by a turn, a move and one scale factor and refuses any other as `bad-scale` (`shapes/base-type.ts:51-63` at OpenPlans-3.0 `7bc2d595`; read). `op.mjs` checks it; see [format-v2 §5](format-v2.md#5-placements).
 
 `position`, `rotation` and `scale` are all required whenever a placement is given; `anchor` is optional.
 
@@ -266,6 +269,7 @@ Root `metadata` is a **closed vocabulary**: any key not listed below is rejected
 | `catalog:placement` | yes for `DOOR` and `WINDOW`; otherwise optional | `hosted` or `free`. It must be `hosted` for a `DOOR` or `WINDOW`, and `free` (if present) for every other type. | Whether the block sits in a wall. This is metadata only ([§11](#11-advisory-notes)). |
 | `catalog:defaultSill` | no; `WINDOW` only | A decimal number of metres as a string, e.g. `"0.9"` | The suggested sill height above the floor. |
 | `catalog:lod` | yes | `100`, `200` or `300`; a `floorkit` block must be `300` ([§9](#9-limits-and-why)) | The level of detail the block is drawn to. Nothing in Floorkit reads it. |
+| `catalog:format` | no | Exactly `1` when present | The block format. Absent means format 1. A block that says `2` is format v2 and is held to [`format-v2.md`](format-v2.md) and its own schema; any other value is refused. |
 | `catalog:tags` | no | Lowercase tags joined by `", "`, e.g. `"chair, dining"`. Each tag is 1–32 characters of `a-z`, `0-9`, space and `-`, and starts with a letter or digit. At most 12 tags, none repeated. | Search terms. |
 | `catalog:author` | no | text, ≤ 200 | Who drew it, if different from the attribution. |
 | `catalog:note` | no | text, ≤ 500, with the keywords below | An authoring note. The tools read the keywords in it. |

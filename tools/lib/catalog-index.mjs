@@ -9,7 +9,7 @@
  */
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { canonicalJson, sha256Hex } from './op.mjs';
+import { canonicalJson, formatOf, sha256Hex } from './op.mjs';
 import { checkListedBlock, listBlocks, readJson, readPublishers } from './repo.mjs';
 
 export const INDEX_SCHEMA = 'floorkit.catalog/v1';
@@ -42,6 +42,7 @@ export function buildIndex(root) {
       publisher: { id: publisher.id, name: publisher.name, tier: publisher.tier },
       slug: block.slug,
       version: block.version,
+      format: formatOf(definition),
       labelName: definition.labelName,
       type: definition.type,
       category: metadata['catalog:category'],
