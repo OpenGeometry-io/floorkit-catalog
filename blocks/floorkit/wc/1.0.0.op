@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "wc, toilet, close-coupled, bathroom",
-    "catalog:note": "Close-coupled WC against the wall, lid open. seat 0.42, rim 0.40. The pan is a ring that abuts a rear block at its tangent, on a floor disc and a foot; the seat is a ring on the rim. Cistern with a push button on top; the button, radius 0.02, builds as a hexagonal prism at true size.",
+    "catalog:note": "Close-coupled WC against the wall, lid open. seat 0.42, rim 0.40. The pan is a ring that abuts a rear block at its tangent, on a floor disc and a foot; the seat is a ring on the rim. Cistern with a push button on top; the button, radius 0.02, builds as a polygonal prism at true size; the kernel decides its facets.",
     "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: WC 0.37 x 0.65 x 0.78, seat 0.42; EN 997 not read. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "TOILETPAN",

@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "chair, stacking, dining",
-    "catalog:note": "Stacking chair: tubular frame, shell seat and back. seat 0.45. The tubes of radius 0.011 build as 4-sided prisms, so they render square. The nesting splay is not drawn.",
+    "catalog:note": "Stacking chair: tubular frame, shell seat and back. seat 0.45. The tubes of radius 0.011 are drawn at true size and build as polygonal prisms; the kernel decides their facets. The nesting splay is not drawn.",
     "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified; seat height 0.45 unverified",
     "ifc:class": "IfcFurniture",
     "ifc:predefinedType": "CHAIR",

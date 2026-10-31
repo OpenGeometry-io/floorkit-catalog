@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "pedestal, drawers, filing, mobile, office",
-    "catalog:note": "Mobile desk pedestal on four castors: two drawers over a file drawer, with handles standing 0.025 proud, inside the plan outline. top 0.60. Goes under a desk 0.74 high. The castors are drawn at true size and render as hexagonal prisms.",
+    "catalog:note": "Mobile desk pedestal on four castors: two drawers over a file drawer, with handles standing 0.025 proud, inside the plan outline. top 0.60. Goes under a desk 0.74 high. The castors are drawn at true size and build as polygonal prisms; the kernel decides their facets.",
     "catalog:basedOn": "Neufert, Architects' Data, as given in the drafting standard key dimensions; Neufert itself not read, unverified",
     "ifc:class": "IfcFurniture",
     "ifc:predefinedType": "FILECABINET",
