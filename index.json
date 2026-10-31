@@ -1734,6 +1734,38 @@
       "contentHash": "0cd67734274016dc6c3b9d6f55e0762381effb344f068ec34e5f76ffb5de6569"
     },
     {
+      "id": "floorkit.shower-level-access",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-level-access",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Level-Access Shower",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower",
+        "level access",
+        "accessible",
+        "wet room",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 1.2,
+        "height": 2.01
+      },
+      "path": "blocks/floorkit/shower-level-access/2.0.0.op",
+      "bytes": 11860,
+      "sha256": "370831efde0764b300ff6b7c01abc3a4c2ecf918bf2fc63aa44e28021fd358b4",
+      "contentHash": "47e6e390445fa6fc51e39cb1ca0316513fa0d92aba068a1bfdb4417f69f04e12"
+    },
+    {
       "id": "floorkit.shower-tray",
       "publisher": {
         "id": "floorkit",
@@ -1762,6 +1794,36 @@
       "bytes": 6128,
       "sha256": "812f47b20739c3b79f92a5b6463403aa354a194a74b7f17f99a20ace9f788442",
       "contentHash": "d7b9575e8a8f3508685f7a1f73c8792d507bf5eee879b8585d85e11285cf4ff5"
+    },
+    {
+      "id": "floorkit.shower-tray",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-tray",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Shower Tray",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower tray",
+        "shower",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.9,
+        "depth": 0.9,
+        "height": 0.04
+      },
+      "path": "blocks/floorkit/shower-tray/2.0.0.op",
+      "bytes": 10228,
+      "sha256": "fffeeb295dacc220f08a0a01a525be1f4f8c676768d8008755802ec3b220f72a",
+      "contentHash": "b5549e09e5aa68e96f4fdb5660ca5868c012692b1b4fbcfddce1973374b7ce10"
     },
     {
       "id": "floorkit.sideboard",
