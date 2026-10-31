@@ -1,0 +1,661 @@
+{
+  "version": 1,
+  "id": "floorkit.bidet",
+  "labelName": "Bidet",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.37,
+    "depth": 0.56,
+    "height": 0.48
+  },
+  "metadata": {
+    "catalog:version": "2.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "bidet, bathroom",
+    "catalog:note": "Floor-standing back-to-wall bidet in format v2. rim 0.40. The rim and bowl are an oval pan 0.37 wide with a round bowl of radius 0.13, drawn as two outline sweeps with true arcs that run to the wall; under them a bowl floor of the full oval, on a pedestal of the same oval set 0.03 in. The waste port is on the floor under the pedestal; the trap is inside it, not drawn. A pillar mixer 0.08 high on the rear deck makes the overall height 0.48; it builds as a prism.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, verify; EN 14528 for bidets), not read, unverified: bidet 0.37 x 0.56 x 0.40. The oval, bowl and pedestal sizes are the author's. Ports BS EN 12056-2 via the drafting standard, not read, unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "BIDET",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:bowl-left": "ceramic",
+    "mat:bowl-right": "ceramic",
+    "mat:bowl-floor": "ceramic",
+    "mat:pedestal": "ceramic",
+    "mat:tap": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          0,
+          0.4,
+          -0.18
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.25,
+          0.095
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.03,
+          0.3,
+          -0.28
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.03,
+          0.3,
+          -0.28
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0,
+          0.095
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.032
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline-1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.185,
+            -0.28
+          ],
+          [
+            -0.185,
+            -0.019374
+          ]
+        ]
+      },
+      {
+        "id": "outline-2",
+        "kind": "arc",
+        "center": [
+          0.215,
+          -0.019374
+        ],
+        "radius": 0.4,
+        "startAngle": -3.141593,
+        "sweepAngle": 0.695307
+      },
+      {
+        "id": "outline-3",
+        "kind": "arc",
+        "center": [
+          0,
+          0.16
+        ],
+        "radius": 0.12,
+        "startAngle": -2.446286,
+        "sweepAngle": 1.750979
+      },
+      {
+        "id": "outline-4",
+        "kind": "arc",
+        "center": [
+          -0.215,
+          -0.019374
+        ],
+        "radius": 0.4,
+        "startAngle": -0.695307,
+        "sweepAngle": 0.695307
+      },
+      {
+        "id": "outline-5",
+        "kind": "polyline",
+        "points": [
+          [
+            0.185,
+            -0.019374
+          ],
+          [
+            0.185,
+            -0.28
+          ],
+          [
+            -0.185,
+            -0.28
+          ]
+        ]
+      },
+      {
+        "id": "bowl-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0.095
+        ],
+        "radius": 0.13,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "bowl-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0.095
+        ],
+        "radius": 0.13,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tap-a",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.18
+        ],
+        "radius": 0.02,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tap-b",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.18
+        ],
+        "radius": 0.02,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "bowl-left",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.25,
+            0
+          ],
+          [
+            0,
+            0.4,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0,
+            0.28
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.09214285714285714,
+                0.23687453334850903
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.16000000000000003
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.185,
+                -0.019373911146520956
+              ],
+              "arc": {
+                "center": [
+                  0.21500000000000002,
+                  -0.019373911146520956
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.185,
+                -0.28
+              ]
+            },
+            {
+              "to": [
+                0,
+                -0.28
+              ]
+            },
+            {
+              "to": [
+                0,
+                -0.035
+              ]
+            },
+            {
+              "to": [
+                0,
+                0.225
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.095
+                ],
+                "counterClockwise": true
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "bowl-right",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.25,
+            0
+          ],
+          [
+            0,
+            0.4,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0,
+            0.225
+          ],
+          "segments": [
+            {
+              "to": [
+                0,
+                -0.035
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.095
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0,
+                -0.28
+              ]
+            },
+            {
+              "to": [
+                0.185,
+                -0.28
+              ]
+            },
+            {
+              "to": [
+                0.185,
+                -0.019373911146520956
+              ]
+            },
+            {
+              "to": [
+                0.09214285714285714,
+                0.23687453334850903
+              ],
+              "arc": {
+                "center": [
+                  -0.21500000000000002,
+                  -0.019373911146520956
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0,
+                0.28
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.16000000000000003
+                ],
+                "counterClockwise": false
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "bowl-floor",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.23,
+            0
+          ],
+          [
+            0,
+            0.25,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.185,
+            -0.28
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.185,
+                -0.019373911146520956
+              ]
+            },
+            {
+              "to": [
+                -0.09214285714285714,
+                0.23687453334850903
+              ],
+              "arc": {
+                "center": [
+                  0.21500000000000002,
+                  -0.019373911146520956
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.09214285714285714,
+                0.23687453334850903
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.16000000000000003
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.185,
+                -0.019373911146520956
+              ],
+              "arc": {
+                "center": [
+                  -0.21500000000000002,
+                  -0.019373911146520956
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.185,
+                -0.28
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "pedestal",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.23,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.155,
+            -0.28
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.155,
+                -0.01937391114652101
+              ]
+            },
+            {
+              "to": [
+                -0.06910714285714284,
+                0.21765590001138174
+              ],
+              "arc": {
+                "center": [
+                  0.215,
+                  -0.01937391114652101
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.06910714285714284,
+                0.21765590001138174
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.16
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.155,
+                -0.01937391114652101
+              ],
+              "arc": {
+                "center": [
+                  -0.215,
+                  -0.01937391114652101
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.155,
+                -0.28
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "tap",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.44,
+          -0.18
+        ],
+        "radius": 0.02,
+        "height": 0.08
+      }
+    ]
+  }
+}
