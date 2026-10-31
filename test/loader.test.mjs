@@ -70,6 +70,22 @@ variants.notjson = { index: realIndex, files: {} };
   };
 }
 
+// A format v2 version beside the chair's format 1 one, and a block that exists only in format v2.
+{
+  const { createHash } = await import('node:crypto');
+  const sampler = JSON.parse(readFileSync(path.join(ROOT, 'test/fixtures/valid/v2-sampler.op'), 'utf8'));
+  const files = {};
+  const entries = [];
+  for (const [id, slug, version] of [['floorkit.simple-chair', 'simple-chair', '2.0.0'], ['floorkit.v2-only', 'v2-only', '1.0.0']]) {
+    const file = `blocks/floorkit/${slug}/${version}.op`;
+    const bytes = Buffer.from(`${JSON.stringify({ ...sampler, id, metadata: { ...sampler.metadata, 'catalog:version': version } }, null, 2)}\n`);
+    files[file] = bytes;
+    const like = realIndex.entries.find((entry) => entry.id === 'floorkit.simple-chair');
+    entries.push({ ...like, id, slug, version, format: 2, path: file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') });
+  }
+  variants.mixed = { index: { ...realIndex, entries: [...realIndex.entries, ...entries] }, files };
+}
+
 let server;
 let origin;
 
@@ -189,6 +205,35 @@ test('review regressions: encoded paths, unbounded entries, non-JSON, stalls, se
 
 test('refuses a redirect', async () => {
   await refusal(openCatalog({ baseUrl: `${origin}/redirect/` }), 'redirected');
+});
+
+test('an old reader never gets a format v2 block; a reader of format 2 gets the newest', async () => {
+  assert.ok(realIndex.entries.every((entry) => entry.format === 1), 'every block in the catalog today is format 1');
+  const old = await openCatalog({ baseUrl: `${origin}/mixed/` });
+  assert.equal(old.list().length, liveCount);
+  assert.equal((await old.load('floorkit.simple-chair')).entry.version, '1.0.0');
+  await refusal(old.load('floorkit.simple-chair', { version: '2.0.0' }), 'unsupported-format');
+  await refusal(old.load('floorkit.v2-only'), 'unsupported-format');
+  const reader = await openCatalog({ baseUrl: `${origin}/mixed/`, maxFormat: 2 });
+  assert.equal(reader.list().length, liveCount + 2);
+  const { entry, definition } = await reader.load('floorkit.simple-chair');
+  assert.equal(entry.version, '2.0.0');
+  assert.equal(definition.metadata['catalog:format'], '2');
+  assert.equal((await reader.load('floorkit.v2-only')).definition.id, 'floorkit.v2-only');
+  await assert.rejects(openCatalog({ baseUrl: `${origin}/mixed/`, maxFormat: 0 }), RangeError);
+  assert.throws(() => old.find('floorkit.simple-chair', '2.0.0'), (error) => error.code === 'unsupported-format');
+  assert.equal(reader.find('floorkit.simple-chair', '2.0.0').format, 2);
+});
+
+test('a file whose catalog:format disagrees with its index entry is refused', async () => {
+  // The v2 file served under an entry that claims format 1.
+  const index = { ...variants.mixed.index, entries: variants.mixed.index.entries.map((entry) => (entry.id === 'floorkit.v2-only' ? { ...entry, format: 1 } : entry)) };
+  variants.liar = { index, files: variants.mixed.files };
+  await refusal((await openCatalog({ baseUrl: `${origin}/liar/` })).load('floorkit.v2-only'), 'integrity');
+  // And a format 1 file under an entry that claims format 2.
+  const chair = realIndex.entries.find((entry) => entry.id === 'floorkit.simple-chair');
+  variants.liar2 = { index: { ...realIndex, entries: realIndex.entries.map((entry) => (entry === chair ? { ...entry, format: 2 } : entry)) }, files: {} };
+  await refusal((await openCatalog({ baseUrl: `${origin}/liar2/`, maxFormat: 2 })).load('floorkit.simple-chair'), 'integrity');
 });
 
 test('an unknown id is not found', async () => {

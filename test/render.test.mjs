@@ -9,7 +9,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import { test } from 'node:test';
-import { meshReport } from '../tools/lib/mesh.mjs';
+import { meshReport, shellNodes } from '../tools/lib/mesh.mjs';
 import { parseNote } from '../tools/lib/note.mjs';
 import { ROOT } from '../tools/lib/repo.mjs';
 
@@ -29,12 +29,42 @@ test('a closed outward box is clean, and each mesh defect names its node', () =>
   assert.match(meshReport([{ name: 'twin', tris: twin }]).defects.join('\n'), /twin: 2 shells, expected one/);
 });
 
+test('a shell node (format v2) is two shells, its outside and its void, and nothing else is', () => {
+  const inner = cuboid([0.1, 0.1, 0.1], [0.9, 0.9, 0.9]).map(([a, b, d]) => [a, d, b]);
+  const hollow = [{ name: 'ball', tris: [...cuboid([0, 0, 0], [1, 1, 1]), ...inner] }];
+  const definition = { definitions: { ballSolid: { kind: 'cuboid' }, ball: { kind: 'shell', sourceRef: 'ballSolid' } }, modelView: { elements: [{ ref: 'ball' }, { id: 'box', kind: 'cuboid' }] } };
+  assert.deepEqual([...shellNodes(definition)], ['ball']);
+  assert.deepEqual(meshReport(hollow, new Set(), shellNodes(definition)).defects, []);
+  assert.deepEqual(meshReport(hollow).defects, ['ball: 2 shells, expected one']);
+  const solid = [{ name: 'ball', tris: cuboid([0, 0, 0], [1, 1, 1]) }];
+  assert.deepEqual(meshReport(solid, new Set(), new Set(['ball'])).defects, ['ball: 1 shell(s), expected two (a shell node: its outside and its void)']);
+});
+
+test('a shell node\'s second shell must be an inward void inside the first', () => {
+  const outward = cuboid([0.1, 0.1, 0.1], [0.9, 0.9, 0.9]);
+  const hollow = new Set(['ball']);
+  const report = (inner) => meshReport([{ name: 'ball', tris: [...cuboid([0, 0, 0], [1, 1, 1]), ...inner] }], new Set(), hollow).defects;
+  assert.deepEqual(report(outward.map(([a, b, d]) => [a, d, b])), []);
+  assert.match(report(outward).join('\n'), /^ball: its second shell is not an inward void inside the first/m);
+  const beside = cuboid([2, 0, 0], [2.5, 0.5, 0.5]).map(([a, b, d]) => [a, d, b]);
+  assert.match(report(beside).join('\n'), /^ball: its second shell is not an inward void inside the first/m);
+});
+
 test('interpenetration beyond 1 mm is reported unless the note lists the pair', () => {
   const parts = [{ name: 'carcass', tris: cuboid([0, 0, 0], [1, 1, 1]) }, { name: 'kick', tris: cuboid([0.2, 0, 0.2], [0.8, 0.1, 0.8]) }];
   assert.deepEqual(meshReport(parts).defects, ['carcass+kick: interpenetrate by 100 mm, not listed in catalog:note']);
   assert.deepEqual(meshReport(parts, parseNote('Kick inside: overlap kick+carcass.').overlaps).defects, []);
   const touching = [parts[0], { name: 'top', tris: cuboid([0, 1, 0], [1, 1.04, 1]) }];
   assert.deepEqual(meshReport(touching).overlaps, []);
+});
+
+test('a sliver that collapses under the weld is dropped and counted, not reported as an open shell', () => {
+  const box = cuboid([0, 0, 0], [1, 1, 1]);
+  const sliver = [[1, 0, 0], [1, 0, 0.000001], [1, 1, 0]];
+  const [node] = meshReport([{ name: 'box', tris: [...box, sliver, sliver.slice().reverse()] }]).nodes;
+  assert.equal(node.collapsed, 2);
+  assert.equal(node.openEdges, 0);
+  assert.equal(node.triangles, box.length + 2);
 });
 
 test('a degenerate triangle in one node does not hide an overlap with it', () => {
@@ -93,6 +123,13 @@ test('parity --mesh honours an overlap listed in catalog:note, and only then', {
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('parity --mesh prints the slivers it drops', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, () => {
+  const run = parity('--mesh', path.join(ROOT, 'test/fixtures/valid/v2-sweep-arc-profile.op'));
+  assert.equal(run.status, 0, run.stdout);
+  assert.match(run.stdout, /^SLIVERS test\/fixtures\/valid\/v2-sweep-arc-profile\.op: \d+ triangle\(s\) collapse under the 0\.01 mm weld and were dropped \(pan \d+\)$/m);
+  assert.match(run.stdout, /^slivers dropped:\s+\d+ triangle\(s\) in 1 block\(s\)$/m);
 });
 
 test('parity fails on every kernel-reject fixture named on its own', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, () => {

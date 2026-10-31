@@ -22,18 +22,19 @@ Blocks are CC BY 4.0. Everything else is Apache-2.0 ([LICENSE.md](LICENSE.md)).
 | `publishers.json` | `[{ id, name, tier, url }]`; tiers `official`, `verified`, `community` | Contributors add themselves at `community`; maintainers change tiers |
 | `categories.json` | The 13 categories; must equal the schema's `catalog:category` enum | Maintainers, through an RFC |
 | `revocations.json` | `[{ publisher, slug, version, at, reason }]` | Maintainers |
-| `schema/op/v1.schema.json`, `schema/index/v1.schema.json` | JSON Schema 2020-12, strict and closed | Maintainers |
+| `schema/op/v1.schema.json`, `schema/op/v2.schema.json`, `schema/index/v1.schema.json` | JSON Schema 2020-12, strict and closed: a block in format 1, a block in format v2 (`"catalog:format": "2"`, the Floorkit 3.0 node kinds), the index | Maintainers |
 | `tools/` | CLIs (`validate`, `format`, `build-index`, `immutable`, `dco`, `parity`, `render`) and `loader.mjs` | |
-| `tools/lib/op.mjs` | One block: schema, then references, limits and canonical bytes | |
+| `tools/lib/op.mjs` | One block: the schema of its format, then references, limits, canonical bytes and the format v2 gates | |
+| `tools/lib/geometry.mjs`, `tools/lib/outline.mjs` | The geometry gates: each solid's box, format v2 outlines included | |
 | `tools/lib/repo.mjs` | Paths, publishers, ordering | |
 | `tools/lib/floorkit.mjs`, `tools/lib/mesh.mjs` | Loading a Floorkit build from `FLOORKIT_DIR`; the mesh check of `parity.mjs --build --mesh` | |
 | `tools/lib/pictures.mjs` | The pictures of `render.mjs`: plan overlay, 3D views in Chromium or as SVG | |
 | `tools/lib/note.mjs` | The keywords a `catalog:note` carries for the tools (`overlap <nodeA>+<nodeB>`) | |
 | `tools/lib/catalog-index.mjs` | Building the index | |
 | `test/*.test.mjs` | `node:test` suites: `op`, `repo`, `loader`, `gates`, `render` (its Floorkit cases skip without `FLOORKIT_DIR`) | |
-| `test/fixtures/` | A valid block, fixtures Floorkit itself rejects (`kernel-rejects/`), and bodies for the mesh check (`mesh-rejects/`: one it rejects, one it accepts only because `catalog:note` lists the overlap) | |
+| `test/fixtures/` | Valid blocks (format 1, and format v2 as `v2-*.op`), fixtures Floorkit itself rejects (`kernel-rejects/`, format v2 ones as `v2-*.json`), and bodies for the mesh check (`mesh-rejects/`: one it rejects, one it accepts only because `catalog:note` lists the overlap) | |
 | `.claude/skills/author-block/` | The authoring skill, its `starter.op` and the LOD 300 review checklist | Maintainers |
-| `docs/` | The format, the drafting standard, the RFCs (`docs/rfcs/`), the launch checklist | |
+| `docs/` | The formats (`format-v1.md`, `format-v2.md`), the drafting standard, the RFCs (`docs/rfcs/`), the launch checklist | |
 | `.github/` | The `validate` workflow (jobs `catalog` and `reuse`), the pull request template, issue forms, `CODEOWNERS` | Maintainers |
 | `LICENSES/`, `REUSE.toml` | Licence texts, and the licence of every path | |
 
@@ -82,7 +83,8 @@ Need a Floorkit build (`parity.mjs` and `render.mjs`). Anyone with a Floorkit bu
 
 - **Blocks are byte-exact.** A block must equal `JSON.stringify(definition, null, 2) + "\n"`: 2-space JSON, LF, one final newline, no BOM, keys in authored order. Write blocks with `node tools/format.mjs`, never with an editor's own formatter. `.gitattributes` marks blocks and `index.json` as `-text` so that git never rewrites them.
 - **Path is identity.** `id` is `<publisher>.<slug>`, `metadata["catalog:version"]` equals the file name, and the publisher must be in `publishers.json`.
-- **Root metadata is a closed vocabulary.** Adding a key means changing the schema, `docs/format-v1.md` and `test/op.test.mjs` together. Every value is a string.
+- **Root metadata is a closed vocabulary.** Adding a key means changing both block schemas, `docs/format-v1.md`, `docs/format-v2.md` and `test/op.test.mjs` together. Every value is a string.
+- **Formats.** A block without `catalog:format` is format 1; `"catalog:format": "2"` makes it format v2. The root `version` is `1` in both. Moving a block to format v2 is a MAJOR version ([RFC 0004](docs/rfcs/0004-format-v2.md)).
 - **Units.** Lengths in metres, geometry angles in radians, placement rotations in degrees. A plan point `[x, z]` is model `(x, 0, z)`.
 - **The index schema is closed.** A new index field, a 14th category or a new tier breaks existing readers, so it needs an RFC in `docs/rfcs/`. A new major version of a format gets a new schema path beside the old one (`schema/op/v2.schema.json`); v1 is never removed.
 - **Tiers and revocations are maintainer decisions.** Do not change a publisher's tier or `revocations.json` unless a maintainer asked for it.
@@ -91,10 +93,11 @@ Need a Floorkit build (`parity.mjs` and `render.mjs`). Anyone with a Floorkit bu
 
 | Change | Files |
 | --- | --- |
-| A structural rule for blocks | `schema/op/v1.schema.json`, `test/op.test.mjs`, `docs/format-v1.md` |
+| A structural rule for blocks | `schema/op/v1.schema.json`, `test/op.test.mjs`, `docs/format-v1.md`; for format v2, `schema/op/v2.schema.json` and `docs/format-v2.md` (a rule for both formats changes both schemas) |
+| A format v2 kind, or a gate on one | `schema/op/v2.schema.json`, `tools/lib/op.mjs` (`formatTwoIssues`), `tools/lib/geometry.mjs` and `tools/lib/outline.mjs` (boxes), `test/op.test.mjs`, `docs/format-v2.md`, `test/fixtures/kernel-rejects/v2-*.json` |
 | A rule a schema cannot express (references, limits, canonical bytes) | `tools/lib/op.mjs`, `test/op.test.mjs` |
 | Path, publisher or ordering rules | `tools/lib/repo.mjs`, `test/repo.test.mjs` |
-| Index contents | `tools/lib/catalog-index.mjs`, `schema/index/v1.schema.json` (closed: RFC first), `test/repo.test.mjs` |
+| Index contents | `tools/lib/catalog-index.mjs`, `schema/index/v1.schema.json` (closed: RFC first; `format` came in by [RFC 0004](docs/rfcs/0004-format-v2.md)), `test/repo.test.mjs` |
 | The loader | `tools/loader.mjs`, `test/loader.test.mjs` |
 | The git gates | `tools/immutable.mjs`, `tools/dco.mjs`, `test/gates.test.mjs` |
 

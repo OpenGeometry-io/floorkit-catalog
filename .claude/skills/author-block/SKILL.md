@@ -10,6 +10,7 @@ A block is one `.op` JSON file under `blocks/`. This skill is the order of work;
 - [docs/drafting-standard.md](../../../docs/drafting-standard.md): how a block must look: origin, heights, the body at LOD 300, the plan symbol, roles, colours, anchors, ports, IFC, per category.
 - [CONTRIBUTING.md](../../../CONTRIBUTING.md): the steps, provenance, licence and sign-off.
 - [docs/format-v1.md](../../../docs/format-v1.md): every field, unit and limit.
+- [docs/format-v2.md](../../../docs/format-v2.md): format v2, the Floorkit 3.0 node kinds (step 7a).
 - [AGENTS.md](../../../AGENTS.md): the non-negotiables for agents.
 
 Run everything from the repository root, with Node 22 or later, after `npm ci`.
@@ -96,6 +97,17 @@ Root `metadata` is a closed vocabulary and every value is a string ([format §7]
 ## 7. Limits
 
 256 KB per file, 400 nodes, 1,000 nodes once refs are expanded, 1,024 points per list, 64 ports ([format §9](../../../docs/format-v1.md#9-limits-and-why)). The largest block in the catalog, `floorkit.cot`, is 22,690 bytes with 63 nodes; stay near that.
+
+## 7a. Format v2, only when a part needs it
+
+`starter.op` is format 1, and so is every block today. Use format v2 only for a part format 1 cannot draw honestly: a sphere, a cone, a torus, a revolved bowl or knob, a hollow `shell`, a cylinder sector, or an outline with arc edges extruded straight up ([format-v2 §2](../../../docs/format-v2.md#2-node-kinds)).
+
+- Add `"catalog:format": "2"` to the root `metadata`. Keep `"version": 1`.
+- Use Floorkit's field names exactly: `center`, `radiusBottom`, `radiusTop`, `majorRadius`, `minorRadius`, `profile` as `{ start, segments, closed: true }`, `arc: { center, counterClockwise }`, `sourceRef`, `thickness`. Every sweep sets `capStart` and `capEnd` to `true`.
+- Check each arc's sense: in a sweep `counterClockwise` reads seen from above (+x towards −z), in a revolve seen from the front ([format-v2 §3](../../../docs/format-v2.md#3-outlines)). A wrong sense shows as a `dimensions` or plan error from `validate.mjs`.
+- Follow the format v2 rules of [drafting standard §3](../../../docs/drafting-standard.md#3-the-body-at-lod-300): no shell of a revolve or a sector, a revolve on one side of its axis (an edge may lie on it; no crossing, no single-point touch), one scale factor per body.
+- A block moved from format 1 to format v2 is a new MAJOR version (step 9). Say in the pull request that a maintainer must build it with `parity.mjs --build --mesh`, mirrored included.
+- Examples: [`test/fixtures/valid/v2-sampler.op`](../../../test/fixtures/valid/v2-sampler.op) and [`test/fixtures/valid/v2-sweep-arc-profile.op`](../../../test/fixtures/valid/v2-sweep-arc-profile.op).
 
 ## 8. Format, validate, index, check
 

@@ -7,6 +7,7 @@
 | **Maintainer** | [@aka-blackboots](https://github.com/aka-blackboots) |
 | **Date** | 2026-10-05 |
 | **Builds on** | [RFC 0001](0001-catalog-and-loader.md) and [docs/format-v1.md](../format-v1.md) |
+| **Note** | The name "format v2" now belongs to the Floorkit 3.0 node kinds ([RFC 0004](0004-format-v2.md)); the parametric-family format sketched here moves to a later format number |
 
 How to read this document:
 - **Nothing here is built.** Field names are sketches, not a schema, and nothing in this RFC changes what `tools/validate.mjs` accepts today.

@@ -10,7 +10,7 @@ Thank you for helping. This repository takes two kinds of contribution: **blocks
 | Check what you may contribute | [Provenance rules](#provenance-rules) and [Licence and sign-off](#licence-and-sign-off) |
 | Change tools, schema or docs | [Changing tools, schema or docs](#changing-tools-schema-or-docs) |
 
-The format itself is documented in [docs/format-v1.md](docs/format-v1.md). Tiers, releases, revocation and takedowns are in [GOVERNANCE.md](GOVERNANCE.md). Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md).
+The format itself is documented in [docs/format-v1.md](docs/format-v1.md), and format v2 (the Floorkit 3.0 node kinds: sphere, cone, torus, revolve, shell, cylinder sector, outline sweep) in [docs/format-v2.md](docs/format-v2.md). Tiers, releases, revocation and takedowns are in [GOVERNANCE.md](GOVERNANCE.md). Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 **You need Node 22 or later** for the tools (`"engines": { "node": ">=22" }` in `package.json`).
 
@@ -252,9 +252,9 @@ Locally, `npm ci && npm run check` covers the first four steps, and `reuse lint`
 
   | Command | Fails when |
   | --- | --- |
-  | `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs [file.op ...]` | Floorkit rejects a block or changes one of its values, or accepts a fixture in `test/fixtures/kernel-rejects/` (whole catalog only) |
+  | `FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs [file.op ...]` | Floorkit rejects a block or changes one of its values, or accepts a fixture in `test/fixtures/kernel-rejects/` (whole catalog only; the `v2-*.json` fixtures need Floorkit 3.0) |
   | `... node tools/parity.mjs --build [file.op ...]` | The kernel cannot build a block, or cannot build it placed in a project mirrored (`scale [-1, 1, 1]`) |
-  | `... node tools/parity.mjs --build --mesh [file.op ...]` | A built 3D node is not a closed, consistently wound, outward, single shell with area, or two nodes interpenetrate by more than 1 mm and `catalog:note` does not list the pair as `overlap <nodeA>+<nodeB>`. Writes `renders/<publisher>/<slug>/<version>/mesh-report.json` (`renders/` is not committed) |
+  | `... node tools/parity.mjs --build --mesh [file.op ...]` | A built 3D node is not a closed, consistently wound, outward, single shell with area (a ref to a format v2 `shell` is two shells, its outside and its void), or two nodes interpenetrate by more than 1 mm and `catalog:note` does not list the pair as `overlap <nodeA>+<nodeB>`. Writes `renders/<publisher>/<slug>/<version>/mesh-report.json` (`renders/` is not committed) |
   | `... node tools/render.mjs [--baseline=<dir>] [file.op ...]` | A block does not parse, build or draw. Writes `renders/<publisher>/<slug>/<version>/` with `plan-1-50.svg` and `plan-1-100.svg` (Floorkit's plan extractor and paper emitter), `overlay.svg` (the plan symbol over the top-down projection of the body) and `iso`, `iso-ne`, `front` and `side`, plus `renders/gallery.html`. Those four 3D views are **not** Floorkit's OpenThree viewer: they are the kernel's triangles, coloured by each node's `mat:` role, drawn by Floorkit's own three.js in headless Chromium (PNG), or as SVG from the mesh with painter's-order hidden faces when no Chromium starts. The tool prints which. Chromium is `FLOORKIT_CHROMIUM` (`none` turns it off), else the newest Playwright headless shell in the user's cache. `--baseline=<dir>` copies a `<publisher>/<slug>/<version>/` tree of earlier pictures to `renders/baseline/`, which the gallery shows as a "before" column |
 
   With files named, only those files are checked and the exit code covers only them. Pull requests attach the PNGs; `renders/` is never committed. `npm test` runs the Floorkit cases of `test/render.test.mjs` only when `FLOORKIT_DIR` is set; without it they skip.

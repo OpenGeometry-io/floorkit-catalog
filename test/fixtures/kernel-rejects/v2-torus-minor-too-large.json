@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "id": "fixture.v2-torus-minor-too-large",
+  "labelName": "Format V2 Sampler",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.4,
+    "height": 0.3
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "other",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:note": "Format v2 test fixture: a stadium plinth (an outline sweep with two arcs), a half-round top (a cylinder sector) and a hollow ball (a shell of a sphere). top 0.20",
+    "ifc:class": "IfcFurniture",
+    "mat:plinth": "surface",
+    "mat:top": "surface",
+    "mat:ball": "ceramic",
+    "mat:ring": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "definitions": {
+    "ballSolid": {
+      "kind": "sphere",
+      "center": [
+        0,
+        0.2,
+        0.1
+      ],
+      "radius": 0.1
+    },
+    "ball": {
+      "kind": "shell",
+      "sourceRef": "ballSolid",
+      "thickness": 0.01
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "plinth-back",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.1,
+            -0.2
+          ],
+          [
+            0.1,
+            -0.2
+          ]
+        ]
+      },
+      {
+        "id": "plinth-right",
+        "kind": "arc",
+        "center": [
+          0.1,
+          0
+        ],
+        "radius": 0.2,
+        "startAngle": 1.5707963,
+        "sweepAngle": -3.1415927
+      },
+      {
+        "id": "plinth-front",
+        "kind": "polyline",
+        "points": [
+          [
+            0.1,
+            0.2
+          ],
+          [
+            -0.1,
+            0.2
+          ]
+        ]
+      },
+      {
+        "id": "plinth-left",
+        "kind": "arc",
+        "center": [
+          -0.1,
+          0
+        ],
+        "radius": 0.2,
+        "startAngle": -1.5707963,
+        "sweepAngle": -3.1415927
+      },
+      {
+        "id": "top-edge",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.2,
+            0
+          ],
+          [
+            0.2,
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "plinth",
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.1,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.1,
+            -0.2
+          ],
+          "segments": [
+            {
+              "to": [
+                0.1,
+                -0.2
+              ]
+            },
+            {
+              "to": [
+                0.1,
+                0.2
+              ],
+              "arc": {
+                "center": [
+                  0.1,
+                  0
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.1,
+                0.2
+              ]
+            },
+            {
+              "to": [
+                -0.1,
+                -0.2
+              ],
+              "arc": {
+                "center": [
+                  -0.1,
+                  0
+                ],
+                "counterClockwise": false
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "top",
+        "kind": "cylinder",
+        "center": [
+          0,
+          0.15,
+          0
+        ],
+        "radius": 0.2,
+        "height": 0.1,
+        "angle": 3.1415927,
+        "startAngle": 0
+      },
+      {
+        "ref": "ball"
+      },
+      {
+        "id": "ring",
+        "kind": "torus",
+        "center": [
+          0,
+          0.15,
+          0
+        ],
+        "majorRadius": 0.1,
+        "minorRadius": 0.1
+      }
+    ]
+  }
+}

@@ -25,6 +25,7 @@
         "publisher",
         "slug",
         "version",
+        "format",
         "labelName",
         "type",
         "category",
@@ -53,6 +54,11 @@
         "version": {
           "type": "string",
           "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "format": {
+          "description": "The block's format, from its metadata catalog:format (absent is 1). A reader of format 1 only skips an entry above 1 (docs/rfcs/0004-format-v2.md).",
+          "type": "integer",
+          "enum": [1, 2]
         },
         "labelName": { "type": "string", "minLength": 1 },
         "type": { "type": "string", "minLength": 1 },

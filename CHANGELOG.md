@@ -62,6 +62,9 @@ Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier 
 - **The geometry gates** (`tools/lib/geometry.mjs`, `tools/lib/note.mjs`, `tools/lib/roles.mjs`) hold every block to the drafting standard from its JSON alone, so CI runs them ([format §9](docs/format-v1.md#9-limits-and-why)): dimensions equal to the body's extent; nothing below the floor unless the note says `recess`; the plan under the body; every solid connected to a ground; at LOD 300, at least 3 solids filling under 95 % of their bounding box; anchors and ports on the body; note heights on exposed faces; a `mat:` role for every model node; full cylinders only; `catalog:lod` `300` for a `floorkit` block; anchor names and roles, and port ids, from the standard's tables; and `ifc:class` on every block.
 - **`schema/index/v1.schema.json`**: the generated index, `"schema": "floorkit.catalog/v1"`.
 - **[docs/format-v1.md](docs/format-v1.md)**: the format reference, with the Floorkit facts at OpenPlans `main` `b0a084c7` (package 1.2.0).
+- **Format v2** ([docs/format-v2.md](docs/format-v2.md), [RFC 0004](docs/rfcs/0004-format-v2.md)): the Floorkit 3.0 node kinds `sphere`, `cone`, `torus`, `revolve`, `shell` (in `definitions`), the cylinder sector (`angle`, `startAngle`) and the outline sweep, with Floorkit's field names and limits. A block opts in with root metadata `"catalog:format": "2"`; without it a block is format 1, and in format 1 the key may only be `"1"`. The root `version` stays `1`. No block uses format v2 yet.
+- **`schema/op/v2.schema.json`** beside v1, as strict and closed. `tools/lib/op.mjs` picks the schema per block and adds the format v2 gates: outlines (arc centres, repeated points, area, crossing), the torus radii, a revolve outline clear of its axis by 0.001 m, an outline sweep straight up, one scale factor per body, and no shell of a revolve or a cylinder sector, also through a boolean or another shell. `tools/lib/geometry.mjs` and `tools/lib/outline.mjs` bound the new kinds for the geometry gates. The format 1 refusal of partial cylinders and of sweeps in booleans stays.
+- **Each index entry has `format`** (1 or 2), required by `schema/index/v1.schema.json`, which keeps the name `floorkit.catalog/v1` ([RFC 0004](docs/rfcs/0004-format-v2.md#the-index)). All 80 entries are format 1.
 
 #### Catalog files
 
@@ -110,6 +113,7 @@ Node 22 or later. The only dependency is `ajv` ^8.
   - a file whose `id` or version disagrees with its entry.
 - **Errors** are `CatalogError` with `.code` one of `fetch-failed`, `redirected`, `too-large`, `malformed`, `outside-root`, `not-found`, `revoked` or `integrity`.
 - **It does not verify a signature over the index** ([RFC 0001](docs/rfcs/0001-catalog-and-loader.md)).
+- **`maxFormat`** (default 1) is the highest block format the caller reads. The newest-version pick and `list()` skip entries above it; asking for one by version, or for a block with no readable version, is refused with the code `unsupported-format`. `load()` refuses a file whose `catalog:format` disagrees with its entry (`integrity`).
 
 #### Demo
 
@@ -120,6 +124,37 @@ Node 22 or later. The only dependency is `ajv` ^8.
 - **Five `node:test` suites** in `test/`: `op`, `repo`, `loader` (against a local HTTP server), `gates` (the two git gates, in a throwaway repository) and `render` (the mesh check, and `parity.mjs` and `render.mjs` against a Floorkit build).
 - **Fixtures:** one valid block, `test/fixtures/valid/chair.op`; 15 definitions under `test/fixtures/kernel-rejects/` that Floorkit's own parser rejects; 19 blocks under `test/fixtures/geometry-rejects/`, each failing its own check; and 2 bodies under `test/fixtures/mesh-rejects/` for the mesh check.
 - **Measured:** `npm test` reports 55 tests, 49 passing and 6 skipped. The skipped tests need `FLOORKIT_DIR`.
+- **Format v2 fixtures:** 4 valid blocks under `test/fixtures/valid/`: `v2-sampler.op` (an outline sweep, a cylinder sector and a shell of a sphere), `v2-sweep-arc-profile.op` (the Plan047 probe, its arc sense corrected to `counterClockwise: true`), `v2-pedestal.op` (a solid revolve on its axis and a sector from 0.3 rad, not symmetric about x) and `v2-revolve-collinear.op` (a revolve on its axis along two adjacent collinear edges). 12 `kernel-rejects/v2-*.json`, for 27 in all. 6 `geometry-rejects/v2-*.op` and `geometry-rejects/uneven-scale.op`, for 26 in all.
+- **Measured after the format v2 change:** `npm test` reports 68 tests, 61 passing and 7 skipped without `FLOORKIT_DIR`; with it, 68 tests, 68 passing.
+- **Measured against Floorkit 3.0** (OpenPlans-3.0 `7bc2d595`, kernel 3.0.0), `parity.mjs --build --mesh` on the catalog:
+
+  ```text
+  accepted by Floorkit:   80/80
+  unrepaired by Floorkit: 80/80
+  kernel-reject fixtures refused by Floorkit: 27/27
+  built by Floorkit:      80/80
+  mirrored by Floorkit:   80/80
+  mesh clean:             80/80
+  slivers dropped:        0 triangle(s) in 0 block(s)
+  parity holds.
+  ```
+
+  and on the 4 valid format v2 fixtures:
+
+  ```text
+  accepted by Floorkit:   4/4
+  unrepaired by Floorkit: 4/4
+  built by Floorkit:      4/4
+  mirrored by Floorkit:   4/4
+  mesh clean:             4/4
+  slivers dropped:        240 triangle(s) in 3 block(s)
+  parity holds.
+  ```
+
+  Each shell node is two shells, the second an inward void. The 6 format v2 geometry-reject fixtures each fail in Floorkit or the kernel: 1 refused by the parser (`bad-sweep`), 5 that fail to build. `render.mjs` drew the valid fixtures. The mesh check drops and counts triangles that collapse under its 0.01 mm weld; the kernel emits them on the side wall of an arc-edged outline sweep. `parity.mjs` prints them as `SLIVERS` lines and a `slivers dropped` total.
+- **One scale factor per body, in format 1 too**: `op.mjs` refuses an uneven node `placement.scale`, which Floorkit 3.0 refuses as `bad-scale`; `test/fixtures/geometry-rejects/uneven-scale.op`. No block had one.
+- **Outline and shell limits from the review:** every outline segment, the implicit closing line included, is at least 0.001 m; an outline sweep is at least 0.01 m high; at most one run of revolve edges lies on the axis; no shell of a shell. Each rule is set where the kernel was measured to refuse: a 1e-10 m closing line, a 1e-10 m sweep, two axis runs, a shell of a shell.
+- **A revolve may lie on its axis along one run of straight edges** (a solid revolve), as kernel 3.0.0 builds it (measured); crossing the axis or touching it at a point is refused, as the kernel refuses it. `test/fixtures/valid/v2-pedestal.op` has a solid revolve and an asymmetric sector, measured to mirror onto its reflected box. The shell of a revolve is measured to fail in the kernel (`CoverageGap`).
 
 #### Documentation
 
@@ -127,6 +162,8 @@ Node 22 or later. The only dependency is `ajv` ^8.
 - [RFC 0001](docs/rfcs/0001-catalog-and-loader.md): the catalog and the loader.
 - [RFC 0002](docs/rfcs/0002-parametric-families.md): parametric families.
 - [RFC 0003](docs/rfcs/0003-plan-line-roles.md): plan line roles.
+- [RFC 0004](docs/rfcs/0004-format-v2.md): format v2, the Floorkit 3.0 node kinds. The parametric-family format of RFC 0002 moves to a later format number.
+- Format v2 in the drafting standard (§3, §13, §14), `AGENTS.md`, `CONTRIBUTING.md` and the `author-block` skill (step 7a); `starter.op` stays format 1.
 - [docs/LAUNCH.md](docs/LAUNCH.md): the checklist for going public.
 
 #### Licensing and repository
