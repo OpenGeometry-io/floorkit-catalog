@@ -776,9 +776,9 @@
         "height": 0.9
       },
       "path": "blocks/floorkit/cot/1.0.0.op",
-      "bytes": 22690,
-      "sha256": "4b50b3bd40a39a34ca5a5d574bca6cfb8a6a84280ac425bf2f9386e1815242c0",
-      "contentHash": "e78f87e4376ba14590b52119336c3e8161ea953186da538ed755a3f935ff6f43"
+      "bytes": 22729,
+      "sha256": "fe01acb176caf4c9320440928de9bbfa42bcf4629521efb1a866b9ec14343425",
+      "contentHash": "b81b2e24e610fba21575520dd4489ee45d9d4ba1a1d53a821f8ab2cbe5d79e75"
     },
     {
       "id": "floorkit.crah",
@@ -838,9 +838,9 @@
         "height": 0.6
       },
       "path": "blocks/floorkit/desk-pedestal/1.0.0.op",
-      "bytes": 6471,
-      "sha256": "e9dcdd4d978b322d48c2c50a3164be04d98ddc33c90456669500daf7507a8605",
-      "contentHash": "2ba2bf517158fca49702d2c1816553a5607cb178e060f949f6a4aedc26cbd78d"
+      "bytes": 6503,
+      "sha256": "211df8f40b5d5c9fb3143580b4b4aacbaa5ca02a92df7515f7e89c2d95b11f64",
+      "contentHash": "bcdb6d7f70474d98a470e65c0dd0bcf7f1239a94100b66d285e7e74e22ab464a"
     },
     {
       "id": "floorkit.dining-table-4",
@@ -1636,9 +1636,9 @@
         "height": 2
       },
       "path": "blocks/floorkit/rear-door-heat-exchanger/1.0.0.op",
-      "bytes": 6930,
-      "sha256": "51f8f361a4eac8becb21f4e49971b037f8fa97b5a1e48403390f69027d8f45c9",
-      "contentHash": "b6a8e66f1149fe7839d1c488b69c78170f8895cc1f8b723cf85bacc41974de9d"
+      "bytes": 6978,
+      "sha256": "a3b83a005b5f4ca070ffce579d075d3d08817292fe1c3751dc1760768da78d8f",
+      "contentHash": "2ad77bcd1db850c380242337b5705cf19edaceca2fe77477b7366cb7d1b2e924"
     },
     {
       "id": "floorkit.round-table",
@@ -1973,9 +1973,9 @@
         "height": 0.82
       },
       "path": "blocks/floorkit/stacking-chair/1.0.0.op",
-      "bytes": 5828,
-      "sha256": "95cfd720899a1ea7e9d25565831e340e0bde689128fa64b61295fc7c99325bdd",
-      "contentHash": "021d65840810c61ca45e8d780d8345ddc421b14bf54b4d973f6c49b9d010ad5e"
+      "bytes": 5867,
+      "sha256": "49e83c2fd0c1f3637b0fcdf00115c3d4003815cd122bf65f9f1231f96de51dd9",
+      "contentHash": "0da48b3f2ba57ee4c5c3e0b4a446372d9a36ef562383980329ab236e204974e4"
     },
     {
       "id": "floorkit.table",
@@ -2464,9 +2464,9 @@
         "height": 0.78
       },
       "path": "blocks/floorkit/wc/1.0.0.op",
-      "bytes": 7401,
-      "sha256": "c315e11a1db419c592491dfa57a15508cd85e1eea988dca0e9d1f586ca4faf96",
-      "contentHash": "b12a635cc32aa4eaa6ea5b77c8648868f2cc1af4be810f5f36ca900fd42b8aab"
+      "bytes": 7432,
+      "sha256": "038b36344e4f812ba4683905049c1554068476f7016c4dc740c58b6984fc1e68",
+      "contentHash": "89dff44cfb452219734c26719d430fcad46db9bebfc8f8be657ad23f334a62b8"
     },
     {
       "id": "floorkit.wc",

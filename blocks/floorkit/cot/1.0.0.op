@@ -16,7 +16,7 @@
     "catalog:placement": "free",
     "catalog:lod": "300",
     "catalog:tags": "cot, bed, baby, nursery, bedroom",
-    "catalog:note": "Cot, mattress 0.60 x 1.20 inside four posts, rails top and bottom, and bars on all four sides. top 0.26 is the mattress, 0.64 below the rail tops. No pillow, as for an infant. The bars of radius 0.01 build as 4-sided prisms, so they render square.",
+    "catalog:note": "Cot, mattress 0.60 x 1.20 inside four posts, rails top and bottom, and bars on all four sides. top 0.26 is the mattress, 0.64 below the rail tops. No pillow, as for an infant. The bars of radius 0.01 are drawn at true size and build as polygonal prisms; the kernel decides their facets.",
     "catalog:basedOn": "EN 716-1 (cots, internal size 0.60 x 1.20), unverified; drafting standard key dimensions",
     "ifc:class": "IfcFurniture",
     "ifc:predefinedType": "BED",
