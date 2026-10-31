@@ -131,7 +131,7 @@ FLOORKIT_DIR=<Floorkit build> node tools/render.mjs blocks/<publisher>/<slug>/1.
 
 ## 8a. Review your own pictures
 
-Open `renders/<publisher>/<slug>/1.0.0/` (or `renders/gallery.html`) and tick every line of [references/lod300-checklist.md](references/lod300-checklist.md) against `plan-1-50.svg`, `plan-1-100.svg`, `iso`, `front`, `side` and `overlay.svg`. Fix and re-render until every line is ticked. The 3D pictures are the kernel's triangles coloured by `mat:` role, not Floorkit's OpenThree viewer.
+Open `renders/<publisher>/<slug>/1.0.0/` (or `renders/gallery.html`) and tick every line of [references/lod300-checklist.md](references/lod300-checklist.md) against `plan-1-50.svg`, `plan-1-100.svg`, `elevation-1-50.svg`, `iso`, `front`, `side` and `overlay.svg`. Fix and re-render until every line is ticked. The 3D pictures are the kernel's triangles coloured by `mat:` role, not Floorkit's OpenThree viewer.
 
 ## 9. A new version of an existing block
 
@@ -159,6 +159,6 @@ If the change fits no row, say so in the pull request.
   - **Provenance:** tick where the geometry and dimensions came from; link any data sheet.
   - **AI assistance:** if you, an agent, wrote or changed any part, tick the box and say which parts (geometry, metadata, text) and how they were checked.
   - **Verification:** the `npm run check` output, the `parity.mjs --build --mesh` result or the statement that it was not run, and the ticked checklist.
-  - **Pictures:** attach `plan-1-50`, `iso`, `front`, `side` and `overlay` from `renders/` to the pull request. Never commit `renders/`.
+  - **Pictures:** attach `plan-1-50`, `elevation-1-50`, `iso`, `front`, `side` and `overlay` from `renders/` to the pull request. Never commit `renders/`.
   - **Checklist:** tick only what is true. If the commits are not signed off yet, say so.
 - One block, or one family of closely related blocks, per pull request.

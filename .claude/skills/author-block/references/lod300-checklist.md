@@ -13,7 +13,7 @@ Tick every line against the pictures `tools/render.mjs` writes for the block (`r
 - [ ] An overhead item says "overhead" in its label or note (§5).
 - [ ] The origin cross in `overlay.svg` is at the centre of the footprint, and the back of the block is at the top of the plan (−z) (§1).
 
-## 3D tick (`iso`, `front`, `side`)
+## 3D tick (`iso`, `front`, `side`, `elevation-1-50.svg`)
 
 - [ ] From the isometric view the body reads as the object, not as a box.
 - [ ] Every part the category's row lists is present as its own solid (§10).

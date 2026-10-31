@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
-// The maintainer tools that need a Floorkit build: `render.mjs` and the mesh
-// check of `parity.mjs --mesh`. The pure checks always run; the runs against
-// Floorkit skip unless FLOORKIT_DIR names a build, because CI has none.
+// The maintainer tools that need a Floorkit build: `render.mjs`, its section
+// and elevation (`lib/views.mjs`), and the mesh check of `parity.mjs --mesh`.
+// The pure checks always run; the runs against Floorkit skip unless
+// FLOORKIT_DIR names a build, because CI has none.
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
@@ -157,8 +158,8 @@ test('render fails on every kernel-reject fixture', { skip: !floorkit && 'FLOORK
   assert.match(run.stdout, new RegExp(`^rendered 0/${files.length} block`, 'm'));
 });
 
-test('render draws the seven pictures as SVG from the kernel mesh when Chromium is off', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, () => {
-  const names = ['plan-1-50.svg', 'plan-1-100.svg', 'overlay.svg', 'iso.svg', 'iso-ne.svg', 'front.svg', 'side.svg'];
+test('render draws the nine pictures, the 3D views as SVG from the kernel mesh when Chromium is off', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, () => {
+  const names = ['plan-1-50.svg', 'plan-1-100.svg', 'section-1-50.svg', 'elevation-1-50.svg', 'overlay.svg', 'iso.svg', 'iso-ne.svg', 'front.svg', 'side.svg'];
   const run = tool('render.mjs', [path.join(ROOT, 'test/fixtures/valid/chair.op')], (out) => ({
     files: names.filter((name) => existsSync(path.join(out, 'files', 'chair', name))),
     cards: readFileSync(path.join(out, 'gallery.html'), 'utf8').match(/class="card"/g)?.length,
@@ -175,4 +176,28 @@ test('render draws one gallery card per block, with its older version in the "be
   assert.equal(run.seen.match(/class="card"/g)?.length, 1);
   assert.match(run.seen, /<h3>floorkit\.wash-basin@2\.0\.0 /);
   assert.match(run.seen, /<div class="before"><h4>Before<\/h4><h5>1\.0\.0<\/h5><figure><img src="floorkit\/wash-basin\/1\.0\.0\/plan-1-50\.svg"/);
+  // The card shows the elevation, of both versions, and not the section (it equals the elevation until FLO-272).
+  for (const version of ['1.0.0', '2.0.0']) assert.match(run.seen, new RegExp(`<img src="floorkit/wash-basin/${version.replaceAll('.', '\\.')}/elevation-1-50\\.svg"`));
+  assert.match(run.seen.slice(run.seen.indexOf('<div class="now">')), /<img src="floorkit\/wash-basin\/2\.0\.0\/elevation-1-50\.svg"/);
+  assert.doesNotMatch(run.seen, /section-1-50\.svg/);
+});
+
+test('the section and the elevation are each an error when Floorkit draws nothing of the block', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, async () => {
+  const { PICTURE_DEFLECTION, bodyParts, loadFloorkit, placedModel } = await import('../tools/lib/floorkit.mjs');
+  const { partsBox, sectionAndElevation } = await import('../tools/lib/views.mjs');
+  const { floorkit: F, THREE } = await loadFloorkit({ boot: true });
+  const text = readFileSync(path.join(ROOT, 'test/fixtures/valid/chair.op'), 'utf8');
+  const built = F.buildFromBuildingModel(placedModel('block.op'), new THREE.Group(), { assetSources: { 'block.op': text } });
+  const box = partsBox(bodyParts(built.elementsById.get('block'), { maxDeflection: PICTURE_DEFLECTION }));
+  F.disposeBuildResult(built);
+  const drawn = sectionAndElevation(F, text, box);
+  assert.match(drawn.section.svg, /^<svg /);
+  assert.match(drawn.elevation.svg, /^<svg /);
+  // Both views aimed 10 m to the side of the block: neither sees it, and Floorkit refuses each with `empty-view`.
+  const away = sectionAndElevation(F, text, { min: [box.min[0] + 10, box.min[1], box.min[2] + 10], max: [box.max[0] + 10, box.max[1], box.max[2] + 10] });
+  assert.deepEqual(Object.keys(away).sort(), ['elevation', 'section']);
+  for (const view of Object.values(away)) {
+    assert.equal(view.svg, undefined);
+    assert.match(view.error, /^empty-view: |draws nothing of the block/);
+  }
 });

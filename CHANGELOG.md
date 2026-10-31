@@ -127,7 +127,7 @@ Node 22 or later. The only dependency is `ajv` ^8.
 | `node tools/immutable.mjs` | Fails if any file under `blocks/` in any `v*` tag was modified or deleted at HEAD, if anything under `blocks/` is a symbolic link, or if the clone is shallow. Prints `NOT ENFORCED` before the first tag |
 | `node tools/dco.mjs <base> <head>` | Every non-merge commit needs a `Signed-off-by:` naming its author email |
 | `FLOORKIT_DIR=<dir> node tools/parity.mjs [--build] [--mesh] [file.op ...]` | Holds blocks to a Floorkit build: accepted and unrepaired; with `--build`, built by the kernel and built mirrored; with `--mesh`, every built node a closed, outward single shell, and no interpenetration that `catalog:note` does not list |
-| `FLOORKIT_DIR=<dir> node tools/render.mjs [--baseline=<dir>] [file.op ...]` | Draws each block to `renders/`: two plans through Floorkit's paper emitter, an overlay of the plan on the body, and four 3D views of the kernel's triangles coloured by `mat:` role, plus `renders/gallery.html` |
+| `FLOORKIT_DIR=<dir> node tools/render.mjs [--baseline=<dir>] [file.op ...]` | Draws each block to `renders/`: two plans, a section and a front elevation through Floorkit's paper emitter, an overlay of the plan on the body, and four 3D views of the kernel's triangles coloured by `mat:` role, plus `renders/gallery.html` |
 
 `parity.mjs` and `render.mjs` need a Floorkit build, so CI does not run them; a maintainer does. Measured against Floorkit built from OpenPlans `main` `b0a084c7` (package 1.2.0), with `parity.mjs --build --mesh` on the 80 blocks:
 - accepted 80/80;
@@ -139,6 +139,8 @@ Node 22 or later. The only dependency is `ajv` ^8.
 `render.mjs` drew 80/80 blocks against the same build. After that run the `catalog:basedOn` text of `glazed-door`, `chiller`, `crah`, `pdu`, `rear-door-heat-exchanger` and `ups` was rewritten (metadata only), and those six blocks were checked again against the same build: accepted 6/6, unrepaired 6/6, built 6/6, mirrored 6/6, mesh clean 6/6, `parity holds.`; `render.mjs` drew 6/6.
 
 `render.mjs` since FLO-330 (BIM review 070): the 3D pictures keep the kernel's normals, so round bodies shade smooth, and a body the kernel meshes coarser than 2 mm is meshed again at 2 mm for the pictures only; the mesh that `parity.mjs` checks is unchanged. The gallery has one card per block at its newest version, with the older version's picture in the "before" column. An AI assistant drafted the change.
+
+`render.mjs` since FLO-338: each block also has `section-1-50.svg` and `elevation-1-50.svg`, Floorkit's own section through the block's plan centre and front elevation of the block alone, at 1:50; the gallery card and its "before" column show the elevation. The run fails when Floorkit draws nothing of a block in either view. The section is drawn and checked but not shown on the card: Floorkit draws a block in a section as seen lines, not cut (FLO-308), so it equals the elevation until FLO-272. An AI assistant drafted the change.
 
 #### Reference loader
 

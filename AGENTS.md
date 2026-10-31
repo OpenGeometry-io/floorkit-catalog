@@ -29,6 +29,7 @@ Blocks are CC BY 4.0. Everything else is Apache-2.0 ([LICENSE.md](LICENSE.md)).
 | `tools/lib/repo.mjs` | Paths, publishers, ordering | |
 | `tools/lib/floorkit.mjs`, `tools/lib/mesh.mjs` | Loading a Floorkit build from `FLOORKIT_DIR`; the mesh check of `parity.mjs --build --mesh` | |
 | `tools/lib/pictures.mjs` | The pictures of `render.mjs`: plan overlay, 3D views in Chromium or as SVG | |
+| `tools/lib/views.mjs` | The Floorkit section and elevation of `render.mjs`; the card shows the elevation only | |
 | `tools/lib/note.mjs` | The keywords a `catalog:note` carries for the tools (`overlap <nodeA>+<nodeB>`) | |
 | `tools/lib/catalog-index.mjs` | Building the index | |
 | `test/*.test.mjs` | `node:test` suites: `op`, `repo`, `loader`, `gates`, `render` (its Floorkit cases skip without `FLOORKIT_DIR`) | |
@@ -56,7 +57,7 @@ node tools/dco.mjs <base> <head>         # every non-merge commit signed off by 
 
 Need a Floorkit build (`parity.mjs` and `render.mjs`). Anyone with a Floorkit build runs them; CI cannot; a maintainer runs them before merging when the author could not.
 - `FLOORKIT_DIR=<dir with dist/index.js> node tools/parity.mjs [--build] [--mesh] [file.op ...]` needs a Floorkit build. `--build` also builds each block mirrored and prints `mirrored by Floorkit: N/N`; `--mesh` checks the built bodies and writes `renders/<publisher>/<slug>/<version>/mesh-report.json` (`renders/` is gitignored).
-- `FLOORKIT_DIR=<dir with dist/index.js> node tools/render.mjs [--baseline=<dir>] [file.op ...]` renders each block to `renders/<publisher>/<slug>/<version>/` (two plans, an overlay, four 3D views) and `renders/gallery.html`. The 3D views are the kernel's triangles coloured by `mat:` role, drawn by Floorkit's three.js in headless Chromium or as SVG; they are not Floorkit's OpenThree viewer. Say which path it printed.
+- `FLOORKIT_DIR=<dir with dist/index.js> node tools/render.mjs [--baseline=<dir>] [file.op ...]` renders each block to `renders/<publisher>/<slug>/<version>/` (two plans, a Floorkit section and elevation, an overlay, four 3D views) and `renders/gallery.html`. The section is drawn and checked but not shown on the card: Floorkit draws a block in a section as seen lines, not cut (FLO-308), so it equals the elevation until FLO-272. The 3D views are the kernel's triangles coloured by `mat:` role, drawn by Floorkit's three.js in headless Chromium or as SVG; they are not Floorkit's OpenThree viewer. Say which path it printed.
 
 ## Non-negotiables
 

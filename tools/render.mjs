@@ -9,7 +9,12 @@
  * Per block, in `renders/<publisher>/<slug>/<version>/` (or under `--out`):
  * `plan-1-50.svg` and `plan-1-100.svg` (Floorkit's plan extractor and paper
  * emitter, so the pens are Floorkit's own), `overlay.svg` (the plan symbol over
- * the top-down projection of the body), and `iso`, `iso-ne`, `front` and `side`.
+ * the top-down projection of the body), `section-1-50.svg` and
+ * `elevation-1-50.svg` (Floorkit's own section and front elevation of the block
+ * alone, through its paper emitter, `lib/views.mjs`), and `iso`, `iso-ne`, `front` and `side`.
+ * The section is drawn and checked but not shown on the card: Floorkit draws a
+ * block in a section as seen lines, not cut (FLO-308), so it equals the
+ * elevation until FLO-272.
  * Those four are the kernel's mesh, no coarser than Floorkit's 2 mm drawing
  * deflection, coloured by `mat:` role, NOT Floorkit's OpenThree viewer: PNG
  * drawn by Floorkit's three.js in headless Chromium with the kernel's normals,
@@ -19,14 +24,16 @@
  * the card's version replaces (a 1.0.0 beside its 2.0.0), and the card's own
  * version found under `renders/baseline/`, which `--baseline=<dir>` fills from
  * a tree laid out as `<publisher>/<slug>/<version>/`.
- * Exits 1 when any block fails to parse, build or draw, or a 3D node of it has
- * no kernel triangles (an unmeshed body would draw as a blank picture).
+ * Exits 1 when any block fails to parse, build or draw, a 3D node of it has
+ * no kernel triangles (an unmeshed body would draw as a blank picture), or
+ * Floorkit draws nothing of it in the section or the elevation.
  */
 import { cpSync, existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { PICTURE_DEFLECTION, bodyParts, loadFloorkit, placedModel, targets } from './lib/floorkit.mjs';
 import { VIEWS, colourParts, findChromium, meshSvg, openChromium, overlaySvg } from './lib/pictures.mjs';
+import { partsBox, sectionAndElevation } from './lib/views.mjs';
 import { ROOT, compareSemver } from './lib/repo.mjs';
 
 const args = process.argv.slice(2);
@@ -91,10 +98,15 @@ for (const block of targets(args, renders)) {
     const parts = colourParts(bodyParts(element, { maxDeflection: PICTURE_DEFLECTION }), definition.metadata);
     const empty = parts.filter((part) => part.tris.length === 0).map((part) => part.name);
     if (parts.length === 0 || empty.length > 0) throw new Error(`no kernel triangles for ${parts.length === 0 ? 'any 3D node' : empty.join(', ')}`);
+    const drawn = sectionAndElevation(floorkit, block.text, partsBox(parts));
+    const blank = Object.entries(drawn).filter(([, view]) => view.error).map(([name, view]) => `${name}: ${view.error}`);
+    if (blank.length > 0) throw new Error(blank.join('; '));
     mkdirSync(block.out, { recursive: true });
     const put = (file, data) => writeFileSync(path.join(block.out, file), data);
     put('plan-1-50.svg', planSvg(element, 0.02));
     put('plan-1-100.svg', planSvg(element, 0.01));
+    put('section-1-50.svg', drawn.section.svg);
+    put('elevation-1-50.svg', drawn.elevation.svg);
     put('overlay.svg', overlaySvg(element.toDrawing('top'), parts, `${block.name}: plan symbol (red) over the top-down projection of the body (grey), 1:50`));
     for (const view of Object.keys(VIEWS)) {
       const caption = `${block.name} · ${view} · kernel triangles coloured by mat: role, orthographic`;
@@ -112,6 +124,9 @@ await chromium?.close();
 const esc = (text) => String(text).replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
 const shown = (dir, files) => files.map((file) => `<figure><img src="${dir}/${file}" alt="${file}" loading="lazy"><figcaption>${file}</figcaption></figure>`).join('');
 const relOf = (card) => path.relative(renders, card.out).split(path.sep).join('/');
+// The elevation of a "before" version, when its folder has one (older renders and baselines may not). The section is
+// not shown: it equals the elevation until FLO-272 (see the header).
+const drawings = (dir) => ['elevation-1-50.svg'].filter((file) => existsSync(path.join(dir, file)));
 // One card per block, at its newest version rendered. The "before" column shows the version it
 // replaces (the newest older one rendered, a 1.0.0 beside its 2.0.0), then the baseline pictures
 // of the shown version from `--baseline`, each under its own heading; a block with neither has none.
@@ -120,11 +135,11 @@ const groups = Map.groupBy(blocks, ([card]) => card.category);
 const sections = [...groups.keys()].sort().map((category) => `<h2>${esc(category)}</h2>\n${groups.get(category).map(([card, older]) => {
   const rel = relOf(card);
   const befores = [
-    older ? `<h5>${esc(older.version)}</h5>${shown(relOf(older), ['plan-1-50.svg', `iso.${ext}`])}` : '',
-    existsSync(path.join(renders, 'baseline', rel)) ? `<h5>baseline</h5>${shown(`baseline/${rel}`, ['plan-1-50.svg', 'iso.png'])}` : '',
+    older ? `<h5>${esc(older.version)}</h5>${shown(relOf(older), ['plan-1-50.svg', `iso.${ext}`, ...drawings(older.out)])}` : '',
+    existsSync(path.join(renders, 'baseline', rel)) ? `<h5>baseline</h5>${shown(`baseline/${rel}`, ['plan-1-50.svg', 'iso.png', ...drawings(path.join(renders, 'baseline', rel))])}` : '',
   ].join('');
   const before = befores ? `<div class="before"><h4>Before</h4>${befores}</div>` : '';
-  const now = shown(rel, ['plan-1-50.svg', `iso.${ext}`, `front.${ext}`, `side.${ext}`, 'overlay.svg']);
+  const now = shown(rel, ['plan-1-50.svg', 'elevation-1-50.svg', `iso.${ext}`, `front.${ext}`, `side.${ext}`, 'overlay.svg']);
   return `<section class="card"><h3>${esc(card.name)} <small>${esc(card.label)}</small></h3><div class="row">${before}<div class="now"><h4>Now</h4>${now}</div></div></section>`;
 }).join('\n')}`);
 writeFileSync(path.join(renders, 'gallery.html'), `<!doctype html><html lang="en"><meta charset="utf-8"><title>Catalog renders</title>

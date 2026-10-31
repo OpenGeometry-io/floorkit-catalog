@@ -111,7 +111,7 @@ With a Floorkit build you can also hold every block to Floorkit itself, and draw
 
 ```sh
 FLOORKIT_DIR=<dir with dist/index.js> node tools/parity.mjs --build --mesh   # accepted, unrepaired, built, mirrored, clean solids
-FLOORKIT_DIR=<dir with dist/index.js> node tools/render.mjs                  # plans and 3D views of each block, under renders/
+FLOORKIT_DIR=<dir with dist/index.js> node tools/render.mjs                  # plans, elevation and 3D views of each block, under renders/
 ```
 
 | Path | What |
