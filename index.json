@@ -221,6 +221,36 @@
       "contentHash": "d50980cb791c60a45935d40a630902ed12e1640957b95b1e2605f52c9c57ac10"
     },
     {
+      "id": "floorkit.bathtub",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bathtub",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Bath",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bath",
+        "bathtub",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 1.7,
+        "depth": 0.7,
+        "height": 0.65
+      },
+      "path": "blocks/floorkit/bathtub/2.0.0.op",
+      "bytes": 17710,
+      "sha256": "55ea0a181ad04eebf6183b5af10a6d61be84ffed7b0ab3657192aad1c68138fc",
+      "contentHash": "36ab8a63a519d7d66550eb6a8fe3231cc73a9ee99758e8a4452a8d4ab243beb9"
+    },
+    {
       "id": "floorkit.bedside-table",
       "publisher": {
         "id": "floorkit",

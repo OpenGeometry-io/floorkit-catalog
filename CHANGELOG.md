@@ -63,6 +63,7 @@ Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier 
   - the urinal's bowl is half-round: its wall a U-shaped outline sweep, its floor a box and a half-round cylinder sector; the hood above stays stepped;
   - the wash basin's rim is a D-shaped outline sweep in two halves over a `revolve` bowl whose outline has its wall in chords, with a metal waste in its centre hole, on a tapered `cone` pedestal;
   - overall sizes, anchor names and port ids are as in 1.0.0. The accessible WC's `flushSide` moved to z 0.05, where the oval's side is straight; the wash basin's `drainCenter` moved to the new bowl floor, its `dcw` and `dhw` ports to the rim's back face, and its `waste` port to the foot of the pedestal.
+- **Redrawn on format v2 (FLO-281, part B).** `bathtub` has a `2.0.0.op` beside its `1.0.0.op`, which stays unchanged. An AI assistant drafted it, and it was checked with `validate.mjs`, `parity.mjs --build --mesh` and `render.mjs`. The tub keeps 1.52 x 0.56 inside, now with corners of radius 0.08. It is drawn as a floor slab and two wall halves whose inner faces are outline sweeps with arcs, under a rim of two halves, and the plan's inner line follows the rounded corners. A metal waste sits on the tub floor under `drainCenter`. No anchor or port moves.
 
 #### The drafting standard and the authoring skill
 
