@@ -13,6 +13,8 @@ import { CatalogError, openCatalog } from '../tools/loader.mjs';
 const ROOT = path.resolve(import.meta.dirname, '..');
 const realIndex = JSON.parse(readFileSync(path.join(ROOT, 'index.json'), 'utf8'));
 const liveCount = realIndex.entries.filter((entry) => !entry.revoked).length;
+// What a default reader (maxFormat 1) lists: the live format 1 entries only.
+const liveFormatOne = realIndex.entries.filter((entry) => !entry.revoked && entry.format === 1).length;
 const chairPath = 'blocks/floorkit/simple-chair/1.0.0.op';
 const chairBytes = readFileSync(path.join(ROOT, chairPath));
 const chairLabel = JSON.stringify(JSON.parse(chairBytes.toString('utf8')).labelName);
@@ -149,15 +151,21 @@ async function refusal(promise, code) {
 }
 
 test('loads and verifies every block in the real catalog', async () => {
-  const catalog = await openCatalog({ baseUrl: `${origin}/good/` });
+  const catalog = await openCatalog({ baseUrl: `${origin}/good/`, maxFormat: 2 });
   assert.equal(catalog.list().length, liveCount);
   for (const entry of catalog.list()) {
-    const { text, definition } = await catalog.load(entry.id);
+    const { text, definition } = await catalog.load(entry.id, { version: entry.version });
     assert.equal(definition.id, entry.id);
     assert.equal(Buffer.byteLength(text), entry.bytes);
   }
   const { text } = await catalog.load('floorkit.simple-chair', { version: '1.0.0' });
   assert.equal(text, chairBytes.toString('utf8'));
+});
+
+test('a default reader lists only the format 1 entries of the real catalog', async () => {
+  const catalog = await openCatalog({ baseUrl: `${origin}/good/` });
+  assert.equal(catalog.list().length, liveFormatOne);
+  assert.ok(catalog.list().every((entry) => entry.format === 1));
 });
 
 test('refuses a file that does not match its SHA-256', async () => {
@@ -171,7 +179,7 @@ test('refuses more bytes than the index promised, while streaming', async () => 
 });
 
 test('refuses a revoked entry, and hides it from list()', async () => {
-  const catalog = await openCatalog({ baseUrl: `${origin}/revoked/` });
+  const catalog = await openCatalog({ baseUrl: `${origin}/revoked/`, maxFormat: 2 });
   await refusal(catalog.load('floorkit.simple-chair'), 'revoked');
   assert.equal(catalog.list().length, liveCount - 1);
   assert.equal(catalog.list({ includeRevoked: true }).length, realIndex.entries.length);
@@ -208,9 +216,8 @@ test('refuses a redirect', async () => {
 });
 
 test('an old reader never gets a format v2 block; a reader of format 2 gets the newest', async () => {
-  assert.ok(realIndex.entries.every((entry) => entry.format === 1), 'every block in the catalog today is format 1');
   const old = await openCatalog({ baseUrl: `${origin}/mixed/` });
-  assert.equal(old.list().length, liveCount);
+  assert.equal(old.list().length, liveFormatOne);
   assert.equal((await old.load('floorkit.simple-chair')).entry.version, '1.0.0');
   await refusal(old.load('floorkit.simple-chair', { version: '2.0.0' }), 'unsupported-format');
   await refusal(old.load('floorkit.v2-only'), 'unsupported-format');
@@ -245,9 +252,9 @@ test('an unknown id is not found', async () => {
 // have until @opengeometry/floorkit is on npm. A skip is reported, not passed.
 test('a loaded block parses in Floorkit', { skip: process.env.FLOORKIT_DIR ? false : 'FLOORKIT_DIR is not set' }, async () => {
   const floorkit = await import(pathToFileURL(path.resolve(process.env.FLOORKIT_DIR, 'dist', 'index.js')).href);
-  const catalog = await openCatalog({ baseUrl: `${origin}/good/` });
+  const catalog = await openCatalog({ baseUrl: `${origin}/good/`, maxFormat: 2 });
   for (const entry of catalog.list()) {
-    const { text } = await catalog.load(entry.id);
+    const { text } = await catalog.load(entry.id, { version: entry.version });
     const parsed = floorkit.parseOpenElementDefinition(text);
     assert.equal(parsed.id, entry.id);
   }

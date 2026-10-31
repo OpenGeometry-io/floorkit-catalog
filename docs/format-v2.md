@@ -88,6 +88,7 @@ A `shell` hollows the solid that `sourceRef` names, leaving one closed void `thi
 - **A source that is not a solid** (an uncapped sweep is a sheet) is refused by Floorkit when built (`bad-shell`, GE `:2552-2553`). In format v2 every sweep is capped, so this cannot arise.
 - **Room for the void.** `thickness` must be under half the smallest extent of the source's box. This is a necessary rule only: a pointed cone, for example, can still be too thin for its thickness. A maintainer's `parity.mjs --build --mesh` run is the real check.
 - **A shell of a sphere** builds as two shells (*measured*: `v2-sampler.op`'s `ball`, 2 shells, volume 0.00113 m³, the exact 4/3·π·(0.1³ − 0.09³)).
+- **A shell of an outline sweep minus a cylinder** that opens the void through the top face builds as one shell (*measured* on Floorkit `7bc2d595`, mirrored included, mesh clean: the pans of `floorkit.wc` and `floorkit.wc-wall-hung` 2.0.0, 1,054 and 1,034 triangles). This is how a format v2 WC pan is hollowed. The shell is the boolean's base; a sweep as a base or operand stays refused ([§6](#6-what-the-catalog-refuses-that-floorkit-30-accepts)).
 - **Measured by Floorkit, not by this catalog.** Floorkit's page says that on OpenGeometry 3.0.0 a shell builds for a cuboid, a full cylinder, a sphere, a pointed cone, a frustum, a torus, an outline sweep, a capped point-list sweep, and a cuboid minus a cylinder. This catalog has not run those builds.
 
 ## 5. Placements
