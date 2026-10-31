@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "id": "floorkit.ceiling-luminaire-1200",
+  "labelName": "Linear Ceiling Luminaire 1200",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 1.2,
+    "depth": 0.3,
+    "height": 0.08
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "lighting",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "light, luminaire, linear, ceiling, lighting",
+    "catalog:note": "Surface-mounted linear luminaire on the ceiling, overhead: the plan is its outline and diagonal cross. A metal housing on the ceiling over an opal diffuser with metal end caps. ceiling 2.40, bottom 2.32. The power port is 1 pole, 230 V (unverified); its amperage is left out on purpose.",
+    "catalog:basedOn": "Generic practice size, not checked against a published source (unverified): 1.20 x 0.30 x 0.08; ceiling 2.40 from the drafting standard key dimensions; DIRECTIONSOURCE per IFC4 IfcLightFixtureTypeEnum (verify)",
+    "ifc:class": "IfcLightFixture",
+    "ifc:predefinedType": "DIRECTIONSOURCE",
+    "ifcClass": "IfcLightFixture",
+    "mat:housing": "metal",
+    "mat:diffuser": "glass",
+    "mat:endCap": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "ceilingContact": {
+      "placement": {
+        "position": [
+          0,
+          2.4,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "ceiling-contact"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "power",
+      "domain": "electrical",
+      "systemType": "power",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          2.4,
+          0
+        ],
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "electrical",
+        "poles": 1,
+        "voltage": 230
+      }
+    }
+  ],
+  "definitions": {
+    "endCap": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        2.345,
+        0
+      ],
+      "width": 0.02,
+      "height": 0.05,
+      "depth": 0.3
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.6,
+            -0.15
+          ],
+          [
+            0.6,
+            -0.15
+          ],
+          [
+            0.6,
+            0.15
+          ],
+          [
+            -0.6,
+            0.15
+          ]
+        ]
+      },
+      {
+        "id": "cross-1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.6,
+            -0.15
+          ],
+          [
+            0.6,
+            0.15
+          ]
+        ]
+      },
+      {
+        "id": "cross-2",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.6,
+            0.15
+          ],
+          [
+            0.6,
+            -0.15
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "housing",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          2.385,
+          0
+        ],
+        "width": 1.2,
+        "height": 0.03,
+        "depth": 0.22
+      },
+      {
+        "id": "diffuser",
+        "kind": "cuboid",
+        "color": "#a8d0e6",
+        "center": [
+          0,
+          2.345,
+          0
+        ],
+        "width": 1.16,
+        "height": 0.05,
+        "depth": 0.3
+      },
+      {
+        "id": "endCapLeft",
+        "ref": "endCap",
+        "placement": {
+          "position": [
+            -0.59,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "endCapRight",
+        "ref": "endCap",
+        "placement": {
+          "position": [
+            0.59,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

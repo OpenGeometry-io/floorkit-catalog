@@ -1,0 +1,464 @@
+{
+  "version": 1,
+  "id": "floorkit.cooker",
+  "labelName": "Cooker",
+  "type": "APPLIANCE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.6,
+    "height": 0.9
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "appliances",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "cooker, oven, electric, kitchen",
+    "catalog:note": "Freestanding electric cooker on the 600 module: oven door with a window, control strip above it, storage drawer below, hob plate 0.89 with four rings, top 0.90. The power port is 1 pole, 230 V, 32 A; Floorkit states no units for voltage and amperage, so they are unverified.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: cooker 0.60 x 0.60 x 0.90",
+    "ifc:class": "IfcElectricAppliance",
+    "ifc:predefinedType": "ELECTRICCOOKER",
+    "ifcClass": "IfcElectricAppliance",
+    "mat:casing": "metal",
+    "mat:hobPlate": "metal",
+    "mat:ringLarge": "metal",
+    "mat:ringSmall": "metal",
+    "mat:ovenDoor": "surface",
+    "mat:ovenWindow": "glass",
+    "mat:handle": "metal",
+    "mat:controlStrip": "surface",
+    "mat:drawer": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.89,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "power",
+      "domain": "electrical",
+      "systemType": "power",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.3,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "electrical",
+        "poles": 1,
+        "voltage": 230,
+        "amperage": 32
+      }
+    }
+  ],
+  "definitions": {
+    "ringLarge": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.895,
+        0
+      ],
+      "radius": 0.1,
+      "height": 0.01
+    },
+    "ringSmall": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.895,
+        0
+      ],
+      "radius": 0.07,
+      "height": 0.01
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.3,
+            -0.3
+          ],
+          [
+            0.3,
+            -0.3
+          ],
+          [
+            0.3,
+            0.3
+          ],
+          [
+            -0.3,
+            0.3
+          ]
+        ]
+      },
+      {
+        "id": "doorLine",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.3,
+            0.27
+          ],
+          [
+            0.3,
+            0.27
+          ]
+        ]
+      },
+      {
+        "id": "ringFrontLeftA",
+        "kind": "arc",
+        "center": [
+          -0.15,
+          0.12
+        ],
+        "radius": 0.1,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringFrontLeftB",
+        "kind": "arc",
+        "center": [
+          -0.15,
+          0.12
+        ],
+        "radius": 0.1,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringBackRightA",
+        "kind": "arc",
+        "center": [
+          0.15,
+          -0.12
+        ],
+        "radius": 0.1,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringBackRightB",
+        "kind": "arc",
+        "center": [
+          0.15,
+          -0.12
+        ],
+        "radius": 0.1,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringFrontRightA",
+        "kind": "arc",
+        "center": [
+          0.15,
+          0.12
+        ],
+        "radius": 0.07,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringFrontRightB",
+        "kind": "arc",
+        "center": [
+          0.15,
+          0.12
+        ],
+        "radius": 0.07,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringBackLeftA",
+        "kind": "arc",
+        "center": [
+          -0.15,
+          -0.12
+        ],
+        "radius": 0.07,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "ringBackLeftB",
+        "kind": "arc",
+        "center": [
+          -0.15,
+          -0.12
+        ],
+        "radius": 0.07,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "casing",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.425,
+          -0.025
+        ],
+        "width": 0.6,
+        "height": 0.85,
+        "depth": 0.55
+      },
+      {
+        "id": "hobPlate",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.87,
+          0
+        ],
+        "width": 0.6,
+        "height": 0.04,
+        "depth": 0.6
+      },
+      {
+        "id": "ringFrontLeft",
+        "ref": "ringLarge",
+        "placement": {
+          "position": [
+            -0.15,
+            0,
+            0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ringBackRight",
+        "ref": "ringLarge",
+        "placement": {
+          "position": [
+            0.15,
+            0,
+            -0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ringFrontRight",
+        "ref": "ringSmall",
+        "placement": {
+          "position": [
+            0.15,
+            0,
+            0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "ringBackLeft",
+        "ref": "ringSmall",
+        "placement": {
+          "position": [
+            -0.15,
+            0,
+            -0.12
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "controlStrip",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.7985,
+          0.26
+        ],
+        "width": 0.596,
+        "height": 0.097,
+        "depth": 0.02
+      },
+      {
+        "id": "ovenDoor",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.4385,
+          0.26
+        ],
+        "width": 0.596,
+        "height": 0.617,
+        "depth": 0.02
+      },
+      {
+        "id": "ovenWindow",
+        "kind": "cuboid",
+        "color": "#a8d0e6",
+        "center": [
+          0,
+          0.45,
+          0.275
+        ],
+        "width": 0.4,
+        "height": 0.3,
+        "depth": 0.01
+      },
+      {
+        "id": "handle",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.67,
+          0.2825
+        ],
+        "width": 0.44,
+        "height": 0.02,
+        "depth": 0.025
+      },
+      {
+        "id": "drawer",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.0735,
+          0.26
+        ],
+        "width": 0.596,
+        "height": 0.107,
+        "depth": 0.02
+      }
+    ]
+  }
+}

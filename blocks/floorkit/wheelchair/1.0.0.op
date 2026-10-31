@@ -1,0 +1,716 @@
+{
+  "version": 1,
+  "id": "floorkit.wheelchair",
+  "labelName": "Wheelchair",
+  "type": "LANDSCAPE",
+  "dimensions": {
+    "width": 0.7,
+    "depth": 1.2,
+    "height": 1.1
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "other",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "wheelchair, accessibility, clearance",
+    "catalog:note": "Manual wheelchair for testing transfer and manoeuvring space by eye, front to +z. seat 0.50. Wheels and castors are solid discs; the frame is drawn with upright and level members, since tilted parts are unverified. The plan is the two wheels and the frame with its footplates, and the seat-back line. The plan leaves out the axle between the frame and the wheels.",
+    "catalog:basedOn": "Wheelchair 0.70 x 1.20 x 1.10, seat 0.50: generic practice size, not checked against BS 8300-2 or ISO 7176-5 (unverified)",
+    "mat:wheel": "metal",
+    "mat:castor": "metal",
+    "mat:axle": "frame",
+    "mat:backPost": "frame",
+    "mat:seatRail": "frame",
+    "mat:frontPost": "frame",
+    "mat:hanger": "frame",
+    "mat:arm": "frame",
+    "mat:pushHandle": "frame",
+    "mat:footplateLeft": "metal",
+    "mat:footplateRight": "metal",
+    "mat:seat": "soft",
+    "mat:back": "soft",
+    "ifc:class": "IfcBuildingElementProxy",
+    "ifc:predefinedType": "USERDEFINED"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.5,
+          -0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "definitions": {
+    "wheel": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.3,
+      "height": 0.03
+    },
+    "castor": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.1,
+      "height": 0.03
+    },
+    "backPost": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.7075,
+        -0.3
+      ],
+      "width": 0.03,
+      "height": 0.785,
+      "depth": 0.03
+    },
+    "seatRail": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.465,
+        -0.05
+      ],
+      "width": 0.03,
+      "height": 0.03,
+      "depth": 0.47
+    },
+    "frontPost": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.34,
+        0.2
+      ],
+      "width": 0.03,
+      "height": 0.28,
+      "depth": 0.03
+    },
+    "hanger": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.34,
+        0.23
+      ],
+      "width": 0.03,
+      "height": 0.22,
+      "depth": 0.03
+    },
+    "arm": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.215,
+        0.3175
+      ],
+      "width": 0.03,
+      "height": 0.03,
+      "depth": 0.205
+    },
+    "pushHandle": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        1.085,
+        -0.3675
+      ],
+      "width": 0.03,
+      "height": 0.03,
+      "depth": 0.105
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "wheel-left",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.35,
+            -0.6
+          ],
+          [
+            -0.32,
+            -0.6
+          ],
+          [
+            -0.32,
+            0
+          ],
+          [
+            -0.35,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "wheel-right",
+        "kind": "polygon",
+        "vertices": [
+          [
+            0.32,
+            -0.6
+          ],
+          [
+            0.35,
+            -0.6
+          ],
+          [
+            0.35,
+            0
+          ],
+          [
+            0.32,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "frame",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.235,
+            -0.42
+          ],
+          [
+            -0.205,
+            -0.42
+          ],
+          [
+            -0.205,
+            -0.315
+          ],
+          [
+            0.205,
+            -0.315
+          ],
+          [
+            0.205,
+            -0.42
+          ],
+          [
+            0.235,
+            -0.42
+          ],
+          [
+            0.235,
+            0.6
+          ],
+          [
+            0.06,
+            0.6
+          ],
+          [
+            0.06,
+            0.42
+          ],
+          [
+            0.205,
+            0.42
+          ],
+          [
+            0.205,
+            0.185
+          ],
+          [
+            -0.205,
+            0.185
+          ],
+          [
+            -0.205,
+            0.42
+          ],
+          [
+            -0.06,
+            0.42
+          ],
+          [
+            -0.06,
+            0.6
+          ],
+          [
+            -0.235,
+            0.6
+          ]
+        ]
+      },
+      {
+        "id": "seat-back",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.205,
+            -0.285
+          ],
+          [
+            0.205,
+            -0.285
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "wheelLeft",
+        "ref": "wheel",
+        "placement": {
+          "position": [
+            -0.335,
+            0.3,
+            -0.3
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "wheelRight",
+        "ref": "wheel",
+        "placement": {
+          "position": [
+            0.335,
+            0.3,
+            -0.3
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "axle",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.3,
+          -0.3
+        ],
+        "width": 0.64,
+        "height": 0.03,
+        "depth": 0.03
+      },
+      {
+        "id": "castorLeft",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            -0.22,
+            0.1,
+            0.2
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "backPostLeft",
+        "ref": "backPost",
+        "placement": {
+          "position": [
+            -0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "seatRailLeft",
+        "ref": "seatRail",
+        "placement": {
+          "position": [
+            -0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "frontPostLeft",
+        "ref": "frontPost",
+        "placement": {
+          "position": [
+            -0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hangerLeft",
+        "ref": "hanger",
+        "placement": {
+          "position": [
+            -0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "armLeft",
+        "ref": "arm",
+        "placement": {
+          "position": [
+            -0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "pushHandleLeft",
+        "ref": "pushHandle",
+        "placement": {
+          "position": [
+            -0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "castorRight",
+        "ref": "castor",
+        "placement": {
+          "position": [
+            0.22,
+            0.1,
+            0.2
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "backPostRight",
+        "ref": "backPost",
+        "placement": {
+          "position": [
+            0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "seatRailRight",
+        "ref": "seatRail",
+        "placement": {
+          "position": [
+            0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "frontPostRight",
+        "ref": "frontPost",
+        "placement": {
+          "position": [
+            0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hangerRight",
+        "ref": "hanger",
+        "placement": {
+          "position": [
+            0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "armRight",
+        "ref": "arm",
+        "placement": {
+          "position": [
+            0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "pushHandleRight",
+        "ref": "pushHandle",
+        "placement": {
+          "position": [
+            0.22,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "footplateLeft",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          -0.1475,
+          0.215,
+          0.51
+        ],
+        "width": 0.175,
+        "height": 0.03,
+        "depth": 0.18
+      },
+      {
+        "id": "footplateRight",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0.1475,
+          0.215,
+          0.51
+        ],
+        "width": 0.175,
+        "height": 0.03,
+        "depth": 0.18
+      },
+      {
+        "id": "seat",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.475,
+          -0.05
+        ],
+        "width": 0.41,
+        "height": 0.05,
+        "depth": 0.47
+      },
+      {
+        "id": "back",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.7,
+          -0.3
+        ],
+        "width": 0.41,
+        "height": 0.5,
+        "depth": 0.03
+      }
+    ]
+  }
+}

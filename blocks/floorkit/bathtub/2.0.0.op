@@ -1,0 +1,869 @@
+{
+  "version": 1,
+  "id": "floorkit.bathtub",
+  "labelName": "Bath",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 1.7,
+    "depth": 0.7,
+    "height": 0.65
+  },
+  "metadata": {
+    "catalog:version": "2.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "bath, bathtub, bathroom",
+    "catalog:note": "Back-to-wall panelled bath, open on the wall side: rim 0.55. Tub 1.52 x 0.56 inside, corners of radius 0.08, 0.43 deep. Walls (box 1.56 x 0.60, y 0.10 to 0.52) and rim (1.70 x 0.70) are each one piece: a cuboid less the tub opening, an outline sweep cut through it. Floor slab 0.02 thick, the opening 0.001 smaller, in the walls. Front and end panels. Two pillar taps 0.10 high, 0.18 apart, at the -x end; faucetMount between them. A mirrored copy keeps the anchors and ports where they are.",
+    "catalog:basedOn": "Bath 1.70 x 0.70 x 0.55: drafting standard key dimensions (practice; EN 14516 not read), unverified. Inner corner radius 0.08 generic, unverified. Tap centres 0.18: common UK bath filler centres, no source checked, unverified. Ports: BS EN 12056-2 via the drafting standard, unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "BATH",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:tub-floor": "ceramic",
+    "mat:tub-walls": "ceramic",
+    "mat:rim": "ceramic",
+    "mat:front-panel": "surface",
+    "mat:end-panel-tap": "surface",
+    "mat:end-panel-foot": "surface",
+    "mat:waste": "metal",
+    "mat:tap": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.35
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          -0.7,
+          0.12,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          -0.805,
+          0.55,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.805,
+          0.52,
+          0.09
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.805,
+          0.52,
+          -0.09
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          -0.7,
+          0.1,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
+  "definitions": {
+    "tap": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.6,
+        0
+      ],
+      "radius": 0.015,
+      "height": 0.1
+    },
+    "wallBox": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.31,
+        0
+      ],
+      "width": 1.56,
+      "height": 0.42,
+      "depth": 0.6
+    },
+    "wallOpening": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.09,
+          0
+        ],
+        [
+          0,
+          0.53,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.68,
+          -0.28
+        ],
+        "segments": [
+          {
+            "to": [
+              0.68,
+              -0.28
+            ]
+          },
+          {
+            "to": [
+              0.76,
+              -0.2
+            ],
+            "arc": {
+              "center": [
+                0.68,
+                -0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.76,
+              0.2
+            ]
+          },
+          {
+            "to": [
+              0.68,
+              0.28
+            ],
+            "arc": {
+              "center": [
+                0.68,
+                0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.68,
+              0.28
+            ]
+          },
+          {
+            "to": [
+              -0.76,
+              0.2
+            ],
+            "arc": {
+              "center": [
+                -0.68,
+                0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.76,
+              -0.2
+            ]
+          },
+          {
+            "to": [
+              -0.68,
+              -0.28
+            ],
+            "arc": {
+              "center": [
+                -0.68,
+                -0.2
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "tubWalls": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "wallBox",
+      "operandRefs": [
+        "wallOpening"
+      ],
+      "color": "#f2f1ec"
+    },
+    "rimBox": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.535,
+        0
+      ],
+      "width": 1.7,
+      "height": 0.03,
+      "depth": 0.7
+    },
+    "rimOpening": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.51,
+          0
+        ],
+        [
+          0,
+          0.56,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.68,
+          -0.28
+        ],
+        "segments": [
+          {
+            "to": [
+              0.68,
+              -0.28
+            ]
+          },
+          {
+            "to": [
+              0.76,
+              -0.2
+            ],
+            "arc": {
+              "center": [
+                0.68,
+                -0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.76,
+              0.2
+            ]
+          },
+          {
+            "to": [
+              0.68,
+              0.28
+            ],
+            "arc": {
+              "center": [
+                0.68,
+                0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.68,
+              0.28
+            ]
+          },
+          {
+            "to": [
+              -0.76,
+              0.2
+            ],
+            "arc": {
+              "center": [
+                -0.68,
+                0.2
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.76,
+              -0.2
+            ]
+          },
+          {
+            "to": [
+              -0.68,
+              -0.28
+            ],
+            "arc": {
+              "center": [
+                -0.68,
+                -0.2
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "rim": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "rimBox",
+      "operandRefs": [
+        "rimOpening"
+      ],
+      "color": "#f2f1ec"
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.85,
+            -0.35
+          ],
+          [
+            0.85,
+            -0.35
+          ],
+          [
+            0.85,
+            0.35
+          ],
+          [
+            -0.85,
+            0.35
+          ]
+        ]
+      },
+      {
+        "id": "tub-front",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.68,
+            0.28
+          ],
+          [
+            0.68,
+            0.28
+          ]
+        ]
+      },
+      {
+        "id": "tub-corner-fr",
+        "kind": "arc",
+        "center": [
+          0.68,
+          0.2
+        ],
+        "radius": 0.08,
+        "startAngle": -1.570796,
+        "sweepAngle": 1.570796
+      },
+      {
+        "id": "tub-foot",
+        "kind": "polyline",
+        "points": [
+          [
+            0.76,
+            0.2
+          ],
+          [
+            0.76,
+            -0.2
+          ]
+        ]
+      },
+      {
+        "id": "tub-corner-br",
+        "kind": "arc",
+        "center": [
+          0.68,
+          -0.2
+        ],
+        "radius": 0.08,
+        "startAngle": 0,
+        "sweepAngle": 1.570796
+      },
+      {
+        "id": "tub-back",
+        "kind": "polyline",
+        "points": [
+          [
+            0.68,
+            -0.28
+          ],
+          [
+            -0.68,
+            -0.28
+          ]
+        ]
+      },
+      {
+        "id": "tub-corner-bl",
+        "kind": "arc",
+        "center": [
+          -0.68,
+          -0.2
+        ],
+        "radius": 0.08,
+        "startAngle": 1.570796,
+        "sweepAngle": 1.570796
+      },
+      {
+        "id": "tub-head",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.76,
+            -0.2
+          ],
+          [
+            -0.76,
+            0.2
+          ]
+        ]
+      },
+      {
+        "id": "tub-corner-fl",
+        "kind": "arc",
+        "center": [
+          -0.68,
+          0.2
+        ],
+        "radius": 0.08,
+        "startAngle": 3.141593,
+        "sweepAngle": 1.570796
+      },
+      {
+        "id": "drain-a",
+        "kind": "arc",
+        "center": [
+          -0.7,
+          0
+        ],
+        "radius": 0.03,
+        "startAngle": 0,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "drain-b",
+        "kind": "arc",
+        "center": [
+          -0.7,
+          0
+        ],
+        "radius": 0.03,
+        "startAngle": 3.141593,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "tap-cold-a",
+        "kind": "arc",
+        "center": [
+          -0.805,
+          0.09
+        ],
+        "radius": 0.015,
+        "startAngle": 0,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "tap-cold-b",
+        "kind": "arc",
+        "center": [
+          -0.805,
+          0.09
+        ],
+        "radius": 0.015,
+        "startAngle": 3.141593,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "tap-hot-a",
+        "kind": "arc",
+        "center": [
+          -0.805,
+          -0.09
+        ],
+        "radius": 0.015,
+        "startAngle": 0,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "tap-hot-b",
+        "kind": "arc",
+        "center": [
+          -0.805,
+          -0.09
+        ],
+        "radius": 0.015,
+        "startAngle": 3.141593,
+        "sweepAngle": 3.141593
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "tub-floor",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.1,
+            0
+          ],
+          [
+            0,
+            0.12,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.68,
+            -0.279
+          ],
+          "segments": [
+            {
+              "to": [
+                0.68,
+                -0.279
+              ]
+            },
+            {
+              "to": [
+                0.759,
+                -0.2
+              ],
+              "arc": {
+                "center": [
+                  0.68,
+                  -0.2
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0.759,
+                0.2
+              ]
+            },
+            {
+              "to": [
+                0.68,
+                0.279
+              ],
+              "arc": {
+                "center": [
+                  0.68,
+                  0.2
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.68,
+                0.279
+              ]
+            },
+            {
+              "to": [
+                -0.759,
+                0.2
+              ],
+              "arc": {
+                "center": [
+                  -0.68,
+                  0.2
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.759,
+                -0.2
+              ]
+            },
+            {
+              "to": [
+                -0.68,
+                -0.279
+              ],
+              "arc": {
+                "center": [
+                  -0.68,
+                  -0.2
+                ],
+                "counterClockwise": false
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "tub-walls",
+        "ref": "tubWalls"
+      },
+      {
+        "id": "rim",
+        "ref": "rim"
+      },
+      {
+        "id": "front-panel",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.26,
+          0.34
+        ],
+        "width": 1.7,
+        "height": 0.52,
+        "depth": 0.02
+      },
+      {
+        "id": "end-panel-tap",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          -0.84,
+          0.26,
+          -0.01
+        ],
+        "width": 0.02,
+        "height": 0.52,
+        "depth": 0.68
+      },
+      {
+        "id": "end-panel-foot",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0.84,
+          0.26,
+          -0.01
+        ],
+        "width": 0.02,
+        "height": 0.52,
+        "depth": 0.68
+      },
+      {
+        "id": "waste",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          -0.7,
+          0.125,
+          0
+        ],
+        "radius": 0.03,
+        "height": 0.01
+      },
+      {
+        "id": "tap-cold",
+        "ref": "tap",
+        "placement": {
+          "position": [
+            -0.805,
+            0,
+            0.09
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "tap-hot",
+        "ref": "tap",
+        "placement": {
+          "position": [
+            -0.805,
+            0,
+            -0.09
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

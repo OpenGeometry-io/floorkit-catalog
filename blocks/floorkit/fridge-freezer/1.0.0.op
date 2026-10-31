@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "id": "floorkit.fridge-freezer",
+  "labelName": "Fridge Freezer",
+  "type": "APPLIANCE",
+  "dimensions": {
+    "width": 0.6,
+    "depth": 0.65,
+    "height": 1.85
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "appliances",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "fridge freezer, fridge, freezer, kitchen",
+    "catalog:note": "Freestanding fridge freezer: fridge door above, freezer door below, both hinged on the -x side with handles at +x, on a recessed plinth. The plan draws the door line and the 90 degree door swing, so it carries the swing marker.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: fridge-freezer 0.60 x 0.65 x 1.85",
+    "ifc:class": "IfcElectricAppliance",
+    "ifc:predefinedType": "FRIDGE_FREEZER",
+    "mat:plinth": "metal",
+    "mat:casing": "metal",
+    "mat:freezerDoor": "surface",
+    "mat:fridgeDoor": "surface",
+    "mat:freezerHandle": "metal",
+    "mat:fridgeHandle": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.325
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.3,
+            -0.325
+          ],
+          [
+            0.3,
+            -0.325
+          ],
+          [
+            0.3,
+            0.325
+          ],
+          [
+            -0.3,
+            0.325
+          ]
+        ]
+      },
+      {
+        "id": "doorLine",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.3,
+            0.275
+          ],
+          [
+            0.3,
+            0.275
+          ]
+        ]
+      },
+      {
+        "id": "doorSwing",
+        "kind": "arc",
+        "center": [
+          -0.3,
+          0.295
+        ],
+        "radius": 0.6,
+        "startAngle": 0,
+        "sweepAngle": -1.57079633
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "plinth",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.05,
+          -0.075
+        ],
+        "width": 0.6,
+        "height": 0.1,
+        "depth": 0.5
+      },
+      {
+        "id": "casing",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.975,
+          -0.025
+        ],
+        "width": 0.6,
+        "height": 1.75,
+        "depth": 0.6
+      },
+      {
+        "id": "freezerDoor",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.4,
+          0.285
+        ],
+        "width": 0.596,
+        "height": 0.594,
+        "depth": 0.02
+      },
+      {
+        "id": "fridgeDoor",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          1.275,
+          0.285
+        ],
+        "width": 0.596,
+        "height": 1.144,
+        "depth": 0.02
+      },
+      {
+        "id": "freezerHandle",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0.26,
+          0.55,
+          0.31
+        ],
+        "width": 0.02,
+        "height": 0.2,
+        "depth": 0.03
+      },
+      {
+        "id": "fridgeHandle",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0.26,
+          1,
+          0.31
+        ],
+        "width": 0.02,
+        "height": 0.4,
+        "depth": 0.03
+      }
+    ]
+  }
+}

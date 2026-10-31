@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "id": "probe.sweep-arc-profile",
+  "labelName": "Probe sweep-arc-profile (format v2)",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.4,
+    "depth": 0.5,
+    "height": 0.4
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Plan047 probe",
+    "catalog:category": "other",
+    "catalog:lod": "100",
+    "catalog:format": "2",
+    "catalog:note": "Plan047 probe in format v2: a D-shaped pan, a 0.4 x 0.3 rectangle closed at the front (+z) by one half-circle arc of radius 0.2, extruded straight up 0.4. The arc turns counter-clockwise seen from above, so it bulges to z 0.25; the Plan047 copy had false, which bites into the D.",
+    "ifc:class": "IfcSanitaryTerminal",
+    "mat:pan": "ceramic"
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "back",
+        "kind": "polyline",
+        "points": [
+          [
+            0.2,
+            -0.25
+          ],
+          [
+            -0.2,
+            -0.25
+          ],
+          [
+            -0.2,
+            0.05
+          ]
+        ]
+      },
+      {
+        "id": "frontA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.05
+        ],
+        "radius": 0.2,
+        "startAngle": 3.14159265,
+        "sweepAngle": 1.5707963
+      },
+      {
+        "id": "frontB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.05
+        ],
+        "radius": 0.2,
+        "startAngle": 4.71238898,
+        "sweepAngle": 1.5707963
+      },
+      {
+        "id": "side",
+        "kind": "polyline",
+        "points": [
+          [
+            0.2,
+            0.05
+          ],
+          [
+            0.2,
+            -0.25
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "pan",
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.4,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0.2,
+            -0.25
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.2,
+                -0.25
+              ]
+            },
+            {
+              "to": [
+                -0.2,
+                0.05
+              ]
+            },
+            {
+              "to": [
+                0.2,
+                0.05
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.05
+                ],
+                "counterClockwise": true
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      }
+    ]
+  }
+}

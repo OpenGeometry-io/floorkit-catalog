@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "id": "floorkit.wheelchair-space",
+  "labelName": "Wheelchair Space",
+  "type": "LANDSCAPE",
+  "dimensions": {
+    "width": 0.9,
+    "depth": 1.4,
+    "height": 0.02
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "other",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "wheelchair space, wheelchair, clearance, accessibility, seating",
+    "catalog:note": "Space for an occupied wheelchair parked, 0.90 wide by 1.40 deep, front to +z. Floor marking; drawn solid, dashed in practice. The body is a 0.01 floor slab with 0.01 marking bars for the centre cross, so the note says slab. The ADA clear floor space of 0.76 x 1.22 fits inside it.",
+    "catalog:basedOn": "Approved Document M vol 2, 2015 with 2020 and 2024 amendments 4.12(g): 900mm wide by 1400mm deep, read; BS 8300-2 not read. ADA 2010 Standards (access-board.gov) 305.3: 30 x 48 in (760 x 1220 mm), read",
+    "mat:slab": "surface",
+    "mat:barX": "surface",
+    "mat:barBack": "surface",
+    "mat:barFront": "surface",
+    "ifc:class": "IfcBuildingElementProxy",
+    "ifc:predefinedType": "USERDEFINED"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.45,
+            -0.7
+          ],
+          [
+            0.45,
+            -0.7
+          ],
+          [
+            0.45,
+            0.7
+          ],
+          [
+            -0.45,
+            0.7
+          ]
+        ]
+      },
+      {
+        "id": "cross-x",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.05,
+            0
+          ],
+          [
+            0.05,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "cross-z",
+        "kind": "polyline",
+        "points": [
+          [
+            0,
+            -0.05
+          ],
+          [
+            0,
+            0.05
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "slab",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.005,
+          0
+        ],
+        "width": 0.9,
+        "height": 0.01,
+        "depth": 1.4
+      },
+      {
+        "id": "barX",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.015,
+          0
+        ],
+        "width": 0.1,
+        "height": 0.01,
+        "depth": 0.02
+      },
+      {
+        "id": "barBack",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.015,
+          -0.03
+        ],
+        "width": 0.02,
+        "height": 0.01,
+        "depth": 0.04
+      },
+      {
+        "id": "barFront",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.015,
+          0.03
+        ],
+        "width": 0.02,
+        "height": 0.01,
+        "depth": 0.04
+      }
+    ]
+  }
+}

@@ -8,36 +8,49 @@
     "depth": 1.5,
     "height": 2.2
   },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
-  },
   "metadata": {
     "catalog:version": "1.0.0",
     "catalog:license": "CC-BY-4.0",
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "equipment",
     "catalog:placement": "free",
+    "catalog:lod": "300",
     "catalog:tags": "data centre, cooling",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/datacenter/chiller.op#catalog-datacenter-chiller",
-    "catalog:note": "IfcChiller is a real IFC4 entity — this mapping is a straight rename.",
+    "catalog:basedOn": "The chiller in the Floorkit SDK's example catalog, redrawn to the drafting standard; 3.00 x 1.50 x 2.20 is that example's size, not checked against a published source (unverified)",
+    "catalog:note": "Air-cooled chiller on a skid: four condenser fans on top, control panel and the two chilled-water stubs on the front (+z). Ports, dimensions and ids are the seed's, unchanged.",
     "ifc:class": "IfcChiller",
+    "ifc:predefinedType": "AIRCOOLED",
     "ifcClass": "IfcChiller",
-    "mat:chiller-fan-a": "metal",
-    "mat:chiller-fan-b": "metal"
+    "mat:skid": "frame",
+    "mat:casing": "metal",
+    "mat:controlPanel": "surface",
+    "mat:fan": "metal",
+    "mat:chwSupplyStub": "metal",
+    "mat:chwReturnStub": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
   },
   "ports": [
     {
@@ -95,12 +108,24 @@
       }
     }
   ],
+  "definitions": {
+    "fan": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        2.15,
+        -0.05
+      ],
+      "radius": 0.3,
+      "height": 0.1
+    }
+  },
   "profileView": {
     "elements": [
       {
-        "id": "chiller-outline",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#c3d2dc",
         "vertices": [
           [
             -1.5,
@@ -112,54 +137,334 @@
           ],
           [
             1.5,
+            0.65
+          ],
+          [
+            1.05,
+            0.65
+          ],
+          [
+            1.05,
             0.75
           ],
           [
-            -1.5,
+            0.95,
             0.75
+          ],
+          [
+            0.95,
+            0.65
+          ],
+          [
+            0.4,
+            0.65
+          ],
+          [
+            0.4,
+            0.68
+          ],
+          [
+            -0.4,
+            0.68
+          ],
+          [
+            -0.4,
+            0.65
+          ],
+          [
+            -0.95,
+            0.65
+          ],
+          [
+            -0.95,
+            0.75
+          ],
+          [
+            -1.05,
+            0.75
+          ],
+          [
+            -1.05,
+            0.65
+          ],
+          [
+            -1.5,
+            0.65
           ]
         ]
+      },
+      {
+        "id": "fan-1-a",
+        "kind": "arc",
+        "center": [
+          -1.05,
+          -0.05
+        ],
+        "radius": 0.3,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "fan-1-b",
+        "kind": "arc",
+        "center": [
+          -1.05,
+          -0.05
+        ],
+        "radius": 0.3,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "fan-2-a",
+        "kind": "arc",
+        "center": [
+          -0.35,
+          -0.05
+        ],
+        "radius": 0.3,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "fan-2-b",
+        "kind": "arc",
+        "center": [
+          -0.35,
+          -0.05
+        ],
+        "radius": 0.3,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "fan-3-a",
+        "kind": "arc",
+        "center": [
+          0.35,
+          -0.05
+        ],
+        "radius": 0.3,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "fan-3-b",
+        "kind": "arc",
+        "center": [
+          0.35,
+          -0.05
+        ],
+        "radius": 0.3,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "fan-4-a",
+        "kind": "arc",
+        "center": [
+          1.05,
+          -0.05
+        ],
+        "radius": 0.3,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "fan-4-b",
+        "kind": "arc",
+        "center": [
+          1.05,
+          -0.05
+        ],
+        "radius": 0.3,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
       }
     ]
   },
   "modelView": {
     "elements": [
       {
-        "id": "chiller-body",
+        "id": "skid",
         "kind": "cuboid",
-        "color": "#dbe6ee",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.05,
+          -0.05
+        ],
+        "width": 3,
+        "height": 0.1,
+        "depth": 1.4
+      },
+      {
+        "id": "casing",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
         "center": [
           0,
           1.1,
-          0
+          -0.05
         ],
         "width": 3,
-        "height": 2.2,
-        "depth": 1.5
+        "height": 2,
+        "depth": 1.4
       },
       {
-        "id": "chiller-fan-a",
-        "kind": "cylinder",
-        "color": "#8fa3b3",
+        "id": "controlPanel",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
         "center": [
-          -0.7,
-          2.25,
-          0
+          0,
+          1.3,
+          0.665
         ],
-        "radius": 0.45,
-        "height": 0.12
+        "width": 0.8,
+        "height": 1,
+        "depth": 0.03
       },
       {
-        "id": "chiller-fan-b",
+        "id": "fan1",
+        "ref": "fan",
+        "placement": {
+          "position": [
+            -1.05,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "fan2",
+        "ref": "fan",
+        "placement": {
+          "position": [
+            -0.35,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "fan3",
+        "ref": "fan",
+        "placement": {
+          "position": [
+            0.35,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "fan4",
+        "ref": "fan",
+        "placement": {
+          "position": [
+            1.05,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "chwSupplyStub",
         "kind": "cylinder",
-        "color": "#8fa3b3",
+        "color": "#9aa3ab",
         "center": [
-          0.7,
-          2.25,
+          0,
+          0,
           0
         ],
-        "radius": 0.45,
-        "height": 0.12
+        "radius": 0.048,
+        "height": 0.1,
+        "placement": {
+          "position": [
+            -1,
+            0.6,
+            0.7
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "chwReturnStub",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.048,
+        "height": 0.1,
+        "placement": {
+          "position": [
+            1,
+            0.6,
+            0.7
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }

@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "id": "fixture.open-sweep",
+  "labelName": "Open Sweep",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.4,
+    "depth": 0.4,
+    "height": 0.5
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "other"
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "footprint",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.2,
+            -0.2
+          ],
+          [
+            0.2,
+            -0.2
+          ],
+          [
+            0.2,
+            0.2
+          ],
+          [
+            -0.2,
+            0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "tube",
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.5,
+            0
+          ]
+        ],
+        "profile": [
+          [
+            -0.2,
+            0,
+            -0.2
+          ],
+          [
+            0.2,
+            0,
+            -0.2
+          ],
+          [
+            0.2,
+            0,
+            0.2
+          ],
+          [
+            -0.2,
+            0,
+            0.2
+          ]
+        ],
+        "capStart": false,
+        "capEnd": false
+      }
+    ]
+  }
+}

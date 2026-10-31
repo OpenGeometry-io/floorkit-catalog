@@ -1,0 +1,322 @@
+{
+  "version": 1,
+  "id": "floorkit.stacking-chair",
+  "labelName": "Stacking Chair",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.53,
+    "depth": 0.55,
+    "height": 0.82
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "chair, stacking, dining",
+    "catalog:note": "Stacking chair: tubular frame, shell seat and back. seat 0.45. The tubes of radius 0.011 are drawn at true size and build as polygonal prisms; the kernel decides their facets. The nesting splay is not drawn.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified; seat height 0.45 unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "CHAIR",
+    "mat:rail-left": "frame",
+    "mat:rail-right": "frame",
+    "mat:seat": "surface",
+    "mat:back": "surface",
+    "mat:leg": "frame",
+    "mat:post": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.45,
+          0.0375
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "definitions": {
+    "leg": {
+      "kind": "cylinder",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.205,
+        0
+      ],
+      "radius": 0.011,
+      "height": 0.41
+    },
+    "post": {
+      "kind": "cylinder",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.625,
+        0
+      ],
+      "radius": 0.011,
+      "height": 0.39
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.265,
+            -0.275
+          ],
+          [
+            0.265,
+            -0.275
+          ],
+          [
+            0.265,
+            0.275
+          ],
+          [
+            -0.265,
+            0.275
+          ]
+        ]
+      },
+      {
+        "id": "back-line",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.265,
+            -0.2
+          ],
+          [
+            0.265,
+            -0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "leg-front-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.254,
+            0,
+            0.264
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-front-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.254,
+            0,
+            0.264
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-left",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            -0.254,
+            0,
+            -0.264
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "leg-back-right",
+        "ref": "leg",
+        "placement": {
+          "position": [
+            0.254,
+            0,
+            -0.264
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "rail-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.254,
+          0.42,
+          0
+        ],
+        "width": 0.022,
+        "height": 0.02,
+        "depth": 0.55
+      },
+      {
+        "id": "rail-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.254,
+          0.42,
+          0
+        ],
+        "width": 0.022,
+        "height": 0.02,
+        "depth": 0.55
+      },
+      {
+        "id": "post-left",
+        "ref": "post",
+        "placement": {
+          "position": [
+            -0.254,
+            0,
+            -0.264
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "post-right",
+        "ref": "post",
+        "placement": {
+          "position": [
+            0.254,
+            0,
+            -0.264
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "seat",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.44,
+          0.0375
+        ],
+        "width": 0.53,
+        "height": 0.02,
+        "depth": 0.475
+      },
+      {
+        "id": "back",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.71,
+          -0.2675
+        ],
+        "width": 0.486,
+        "height": 0.22,
+        "depth": 0.015
+      }
+    ]
+  }
+}

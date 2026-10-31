@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "id": "fixture.v2-pedestal",
+  "labelName": "Format V2 Pedestal",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.341,
+    "depth": 0.35,
+    "height": 0.44
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "other",
+    "catalog:lod": "200",
+    "catalog:format": "2",
+    "catalog:note": "Format v2 test fixture: a solid revolved pedestal whose outline lies along its axis, under a quarter-round shelf, a cylinder sector from 0.3 rad that is not symmetric about x, so a mirror moves it. top 0.44",
+    "ifc:class": "IfcFurniture",
+    "mat:pedestal": "surface",
+    "mat:shelf": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "foot-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.15,
+        "startAngle": 0,
+        "sweepAngle": 3.1415927
+      },
+      {
+        "id": "foot-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.15,
+        "startAngle": 3.1415927,
+        "sweepAngle": 3.1415927
+      },
+      {
+        "id": "shelf-edge",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.059104,
+            -0.191067
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0.191067,
+            -0.059104
+          ]
+        ]
+      },
+      {
+        "id": "shelf-arc",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.2,
+        "startAngle": 0.3,
+        "sweepAngle": 1.5707963267948966
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "pedestal",
+        "kind": "revolve",
+        "profile": {
+          "start": [
+            0,
+            0
+          ],
+          "segments": [
+            {
+              "to": [
+                0.15,
+                0
+              ]
+            },
+            {
+              "to": [
+                0.15,
+                0.04
+              ]
+            },
+            {
+              "to": [
+                0.05,
+                0.08
+              ]
+            },
+            {
+              "to": [
+                0.05,
+                0.4
+              ]
+            },
+            {
+              "to": [
+                0,
+                0.4
+              ]
+            }
+          ],
+          "closed": true
+        }
+      },
+      {
+        "id": "shelf",
+        "kind": "cylinder",
+        "center": [
+          0,
+          0.42,
+          0
+        ],
+        "radius": 0.2,
+        "height": 0.04,
+        "angle": 1.5707963267948966,
+        "startAngle": 0.3
+      }
+    ]
+  }
+}

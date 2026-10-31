@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.office-desk",
-  "labelName": "Office Desk",
+  "labelName": "Desk",
   "type": "FURNITURE",
   "dimensions": {
     "width": 1.6,
-    "depth": 1.5,
-    "height": 1.2
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
+    "depth": 0.8,
+    "height": 0.74
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,18 +14,16 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "tables",
     "catalog:placement": "free",
-    "catalog:tags": "desk, workstation, office",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/office-desk.op#catalog-furnishing-office-desk",
+    "catalog:lod": "300",
+    "catalog:tags": "desk, office, workstation",
+    "catalog:note": "Fixed-height office desk: a top on two panel legs, a modesty panel and a cable tray at the back. top 0.74. The top is 0.025 thick, so the knee space is 0.715 high, at least 0.70 clear, meant to meet the BS 8300 and ADA knee clearance (unverified). No monitor or chair: place them as their own blocks.",
+    "catalog:basedOn": "EN 527-1 (office work desk, fixed height 0.74), unverified; drafting standard key dimensions",
     "ifc:class": "IfcFurniture",
     "ifc:predefinedType": "DESK",
-    "mat:leg-left": "frame",
-    "mat:leg-right": "frame",
-    "mat:monitor-stand": "frame",
-    "mat:monitor-screen": "frame",
-    "mat:chair-seat": "soft",
-    "mat:chair-back": "soft",
-    "mat:chair-post": "metal",
-    "mat:chair-base": "metal"
+    "mat:top": "surface",
+    "mat:modesty-panel": "surface",
+    "mat:cable-tray": "metal",
+    "mat:legPanel": "frame"
   },
   "anchors": {
     "base": {
@@ -62,77 +43,91 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.74,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "definitions": {
+    "legPanel": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.3575,
+        0
+      ],
+      "width": 0.03,
+      "height": 0.715,
+      "depth": 0.74
     }
   },
   "profileView": {
     "elements": [
       {
-        "id": "desktop",
+        "id": "top",
         "kind": "polygon",
-        "color": "#cdbf9f",
         "vertices": [
           [
             -0.8,
-            -0.6
+            -0.4
           ],
           [
             0.8,
-            -0.6
+            -0.4
           ],
           [
             0.8,
-            0.2
+            0.4
           ],
           [
             -0.8,
-            0.2
-          ]
-        ]
-      },
-      {
-        "id": "monitor",
-        "kind": "polygon",
-        "color": "#2b2b2b",
-        "vertices": [
-          [
-            -0.3,
-            -0.55
-          ],
-          [
-            0.3,
-            -0.55
-          ],
-          [
-            0.3,
-            -0.45
-          ],
-          [
-            -0.3,
-            -0.45
-          ]
-        ]
-      },
-      {
-        "id": "chair",
-        "kind": "polygon",
-        "color": "#4a4a4a",
-        "vertices": [
-          [
-            -0.27,
-            0.3
-          ],
-          [
-            0.27,
-            0.3
-          ],
-          [
-            0.27,
-            0.7
-          ],
-          [
-            -0.27,
-            0.7
+            0.4
           ]
         ]
       }
@@ -141,119 +136,85 @@
   "modelView": {
     "elements": [
       {
-        "id": "desktop",
+        "id": "top",
         "kind": "cuboid",
-        "color": "#d8c9a8",
+        "color": "#d8d2c4",
         "center": [
           0,
-          0.73,
-          -0.2
+          0.7275,
+          0
         ],
         "width": 1.6,
-        "height": 0.04,
+        "height": 0.025,
         "depth": 0.8
       },
       {
         "id": "leg-left",
-        "kind": "cuboid",
-        "color": "#9c9488",
-        "center": [
-          -0.76,
-          0.36,
-          -0.2
-        ],
-        "width": 0.04,
-        "height": 0.72,
-        "depth": 0.74
+        "ref": "legPanel",
+        "placement": {
+          "position": [
+            -0.765,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
         "id": "leg-right",
-        "kind": "cuboid",
-        "color": "#9c9488",
-        "center": [
-          0.76,
-          0.36,
-          -0.2
-        ],
-        "width": 0.04,
-        "height": 0.72,
-        "depth": 0.74
+        "ref": "legPanel",
+        "placement": {
+          "position": [
+            0.765,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
-        "id": "monitor-stand",
+        "id": "modesty-panel",
         "kind": "cuboid",
-        "color": "#333333",
+        "color": "#d8d2c4",
         "center": [
           0,
-          0.82,
-          -0.45
+          0.5325,
+          -0.32
         ],
-        "width": 0.18,
-        "height": 0.14,
-        "depth": 0.1
+        "width": 1.5,
+        "height": 0.365,
+        "depth": 0.02
       },
       {
-        "id": "monitor-screen",
+        "id": "cable-tray",
         "kind": "cuboid",
-        "color": "#1a1a1a",
+        "color": "#9aa3ab",
         "center": [
           0,
-          1,
-          -0.5
+          0.6675,
+          -0.35
         ],
-        "width": 0.62,
-        "height": 0.36,
+        "width": 1.2,
+        "height": 0.095,
         "depth": 0.04
-      },
-      {
-        "id": "chair-seat",
-        "kind": "cuboid",
-        "color": "#3f3f3f",
-        "center": [
-          0,
-          0.46,
-          0.45
-        ],
-        "width": 0.5,
-        "height": 0.06,
-        "depth": 0.5
-      },
-      {
-        "id": "chair-back",
-        "kind": "cuboid",
-        "color": "#3f3f3f",
-        "center": [
-          0,
-          0.76,
-          0.68
-        ],
-        "width": 0.5,
-        "height": 0.52,
-        "depth": 0.06
-      },
-      {
-        "id": "chair-post",
-        "kind": "cylinder",
-        "color": "#666666",
-        "center": [
-          0,
-          0.23,
-          0.45
-        ],
-        "radius": 0.04,
-        "height": 0.46
-      },
-      {
-        "id": "chair-base",
-        "kind": "cylinder",
-        "color": "#555555",
-        "center": [
-          0,
-          0.04,
-          0.45
-        ],
-        "radius": 0.28,
-        "height": 0.06
       }
     ]
   }

@@ -2,6 +2,195 @@
   "schema": "floorkit.catalog/v1",
   "entries": [
     {
+      "id": "floorkit.armchair",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "armchair",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Armchair",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "armchair",
+        "chair",
+        "living"
+      ],
+      "dimensions": {
+        "width": 0.8,
+        "depth": 0.85,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/armchair/1.0.0.op",
+      "bytes": 5243,
+      "sha256": "76fbb51da5b0ef26c5e1881d64c2e645ce299c5ca7e7e82c0005c1594fdfb4c4",
+      "contentHash": "8ea8656e3feb1fb0e6fc696b75066e212eaeab2a3c654d7468ea7be499d0fd02"
+    },
+    {
+      "id": "floorkit.bar-stool",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bar-stool",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Bar Stool",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "stool",
+        "bar",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.38,
+        "depth": 0.38,
+        "height": 0.75
+      },
+      "path": "blocks/floorkit/bar-stool/1.0.0.op",
+      "bytes": 3193,
+      "sha256": "4e33b6fecf627e27c9ca294d41eeb6dbea0bfef3a5bfed0bafb9b12eef817fd2",
+      "contentHash": "3bb33435a5d019ca28a154e2fbc86bfd6934050aec3e260cc589fa548b841b70"
+    },
+    {
+      "id": "floorkit.base-unit-1000",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "base-unit-1000",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Base Unit 1000",
+      "type": "FURNITURE",
+      "category": "kitchen",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "base unit",
+        "kitchen unit",
+        "cabinet",
+        "double",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 0.6,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/base-unit-1000/1.0.0.op",
+      "bytes": 5204,
+      "sha256": "e9033c94b5a50ce21190e51419c00e096a4938e8a99a2b8772a83dbff5677086",
+      "contentHash": "c2f57064d15de7b03bcd80ca2e5cd2a949e9b7bb8bff131cd522c593e4377b14"
+    },
+    {
+      "id": "floorkit.base-unit-600",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "base-unit-600",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Base Unit 600",
+      "type": "FURNITURE",
+      "category": "kitchen",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "base unit",
+        "kitchen unit",
+        "cabinet",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/base-unit-600/1.0.0.op",
+      "bytes": 3848,
+      "sha256": "e9f00bf3fabeb46f0910ae1ec48d5cbf25c9caa79e51aff8c0e53e580afb593c",
+      "contentHash": "9350763a5a19fc2a9718df007602ea07442503bec5f578cdcf4014296d3f8166"
+    },
+    {
+      "id": "floorkit.basin-accessible",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "basin-accessible",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Accessible Basin",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "basin",
+        "wash basin",
+        "accessible",
+        "wheelchair",
+        "wall-hung",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.55,
+        "height": 0.39
+      },
+      "path": "blocks/floorkit/basin-accessible/1.0.0.op",
+      "bytes": 8844,
+      "sha256": "a8bc359af4ae47faa0eb383c915524716a23fe2259edbc674d182d22aff6ac8b",
+      "contentHash": "0651ad2499fe422388d2bae9a3e0e6cfdc23cc9ce64f0655aaee47b6b71a59a2"
+    },
+    {
+      "id": "floorkit.basin-accessible",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "basin-accessible",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Accessible Basin",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "basin",
+        "wash basin",
+        "accessible",
+        "wheelchair",
+        "wall-hung",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.55,
+        "height": 0.39
+      },
+      "path": "blocks/floorkit/basin-accessible/2.0.0.op",
+      "bytes": 12157,
+      "sha256": "5c72466faa0a1b389561e491cf8d3bf5b9cab1866cd718fe6c337186dec7e3c6",
+      "contentHash": "fc8c7701575c13f496f7ddcd013f6e904410138d2614af9d5456b745214f438c"
+    },
+    {
       "id": "floorkit.bathtub",
       "publisher": {
         "id": "floorkit",
@@ -10,24 +199,304 @@
       },
       "slug": "bathtub",
       "version": "1.0.0",
-      "labelName": "Bathtub",
+      "format": 1,
+      "labelName": "Bath",
       "type": "FIXTURE",
       "category": "sanitary",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "bath",
+        "bathtub",
         "bathroom"
       ],
       "dimensions": {
-        "width": 1.65,
+        "width": 1.7,
         "depth": 0.7,
-        "height": 0.55
+        "height": 0.65
       },
       "path": "blocks/floorkit/bathtub/1.0.0.op",
-      "bytes": 5506,
-      "sha256": "12474e20c6d8fe103ea47697fdbfc1c4ef459402d9d2f88bcb72a4988bb16aae",
-      "contentHash": "155e1bf000a14ae3d2a8f35360f2045d219abef66d91592dda103b64af53520c"
+      "bytes": 10422,
+      "sha256": "57a0178e6d08bf589964c9d67e5eb4bf24cdbc44c4108cb1e4c7dd3cecc04153",
+      "contentHash": "d50980cb791c60a45935d40a630902ed12e1640957b95b1e2605f52c9c57ac10"
+    },
+    {
+      "id": "floorkit.bathtub",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bathtub",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Bath",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bath",
+        "bathtub",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 1.7,
+        "depth": 0.7,
+        "height": 0.65
+      },
+      "path": "blocks/floorkit/bathtub/2.0.0.op",
+      "bytes": 16379,
+      "sha256": "6be60213fe92baa5d1b42f4abbb95ff4f8d0c5c44c21f437eab4f09b08c1e135",
+      "contentHash": "818751aa7f307acd0cb5f5b65dde619c4a9960ebf149301f87d2710d0a8191a4"
+    },
+    {
+      "id": "floorkit.bedside-table",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bedside-table",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Bedside Table",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bedside table",
+        "nightstand",
+        "cabinet",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 0.45,
+        "depth": 0.4,
+        "height": 0.55
+      },
+      "path": "blocks/floorkit/bedside-table/1.0.0.op",
+      "bytes": 4946,
+      "sha256": "7a43ecfc7444acf4c1860c4dd21eb35f50c41bd6ebf0320eac0bd81571745fd4",
+      "contentHash": "b55f180a48b9037010fc378c88ed468ae870b817aa6dfcff98244abe0f0a3d0e"
+    },
+    {
+      "id": "floorkit.bench",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bench",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Bench",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bench",
+        "seat",
+        "hall",
+        "dining"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 0.4,
+        "height": 0.45
+      },
+      "path": "blocks/floorkit/bench/1.0.0.op",
+      "bytes": 3005,
+      "sha256": "c5ad5ec6dbe894e97327592481e0a9026057318dd20f43caeb621a946423a76c",
+      "contentHash": "93bc4a547447d3ba9a2387851b22924981a271c3f7c8d189e47ef1e7a2606095"
+    },
+    {
+      "id": "floorkit.bicycle",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bicycle",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Bicycle",
+      "type": "LANDSCAPE",
+      "category": "vehicles",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bicycle",
+        "cycle",
+        "cycle parking",
+        "vehicle"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 1.8,
+        "height": 1.05
+      },
+      "path": "blocks/floorkit/bicycle/1.0.0.op",
+      "bytes": 7458,
+      "sha256": "bf617045b5cf29904882249e7f2319270b981e302a66b90d701e80506eea4c7b",
+      "contentHash": "d222a609402fe3549b0695cdaad2e33828d3d176d74ba1321459387be1e58541"
+    },
+    {
+      "id": "floorkit.bidet",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bidet",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Bidet",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bidet",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.37,
+        "depth": 0.56,
+        "height": 0.48
+      },
+      "path": "blocks/floorkit/bidet/1.0.0.op",
+      "bytes": 17427,
+      "sha256": "7ff4c6de4e3e9ddea6b7ea6a25298ef23e7240bd517488bebc156779457f0344",
+      "contentHash": "52f90b7fa73613b19423db35e9a718620cea5d419f4b8a6be983098c4bfa6be1"
+    },
+    {
+      "id": "floorkit.bidet",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bidet",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Bidet",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bidet",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.37,
+        "depth": 0.56,
+        "height": 0.48
+      },
+      "path": "blocks/floorkit/bidet/2.0.0.op",
+      "bytes": 12051,
+      "sha256": "69ea034d34c214fc325ba9519cf40b111c8183d46b2fcfc1379bb319aca2e90f",
+      "contentHash": "efd0d101b91e2dd252200c0838d6200db78fc3a6395b309d46e4a6b53924fd62"
+    },
+    {
+      "id": "floorkit.boiler",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "boiler",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Wall-Hung Combination Boiler",
+      "type": "MEP_EQUIPMENT",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "boiler",
+        "combi boiler",
+        "heating",
+        "hot water",
+        "gas"
+      ],
+      "dimensions": {
+        "width": 0.45,
+        "depth": 0.35,
+        "height": 1.25
+      },
+      "path": "blocks/floorkit/boiler/1.0.0.op",
+      "bytes": 7506,
+      "sha256": "24527d486918321bb0d8d643b63d8ea712a72bb1167431730ce4b4c39ed9dd3f",
+      "contentHash": "5971f27dd895ea7324036ad69bd4da3197c8cdac31e17297d7515c427965088c"
+    },
+    {
+      "id": "floorkit.bookshelf",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bookshelf",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Bookshelf",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bookshelf",
+        "bookcase",
+        "shelving",
+        "storage",
+        "living",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.8,
+        "depth": 0.3,
+        "height": 2
+      },
+      "path": "blocks/floorkit/bookshelf/1.0.0.op",
+      "bytes": 5483,
+      "sha256": "b68c4dfc2189a46d115c3782a0ebc355c6240b0d546924354285c1a31850d096",
+      "contentHash": "bb5168073bd772e4c36db4249bb1edf6f07806cb0431a624a905b1ad99df8047"
+    },
+    {
+      "id": "floorkit.bunk-bed",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bunk-bed",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Bunk Bed",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bed",
+        "bunk",
+        "single",
+        "bedroom",
+        "children"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 2.1,
+        "height": 1.6
+      },
+      "path": "blocks/floorkit/bunk-bed/1.0.0.op",
+      "bytes": 9505,
+      "sha256": "1d45050ae6f0f34381cd90e74e712f714a24d4bdb357d7eccf2b45c2fa87a589",
+      "contentHash": "1572d0a7816e5ff7562159856120cfa367d7580407c0148dcc8f350935bbe10e"
     },
     {
       "id": "floorkit.cabinet",
@@ -38,24 +507,26 @@
       },
       "slug": "cabinet",
       "version": "1.0.0",
-      "labelName": "Cabinet",
+      "format": 1,
+      "labelName": "Cupboard",
       "type": "FURNITURE",
       "category": "storage",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "cupboard",
-        "sideboard"
+        "cabinet",
+        "storage"
       ],
       "dimensions": {
-        "width": 1.18,
-        "depth": 0.42,
-        "height": 1.28
+        "width": 1,
+        "depth": 0.45,
+        "height": 1.3
       },
       "path": "blocks/floorkit/cabinet/1.0.0.op",
-      "bytes": 8025,
-      "sha256": "208c3d4abd991faf3113d92c1977a9720297cd8d97aa84d1220f81df5166160c",
-      "contentHash": "02ddbf128299e57c3e79836fb772ed1036050789a52197e169910e092e03ee2c"
+      "bytes": 6038,
+      "sha256": "8658915b221a7f9add950d789e3a5cc5d089a9a631a9d87c55d82ee07959eb6f",
+      "contentHash": "97a021f820b08c4dba5fed17bff5547d0d5fb1efd2758b05956dd201bf2f09c2"
     },
     {
       "id": "floorkit.cafe-counter",
@@ -66,25 +537,91 @@
       },
       "slug": "cafe-counter",
       "version": "1.0.0",
-      "labelName": "Café Counter",
+      "format": 1,
+      "labelName": "Serving Counter",
       "type": "FURNITURE",
       "category": "tables",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "counter",
+        "serving",
         "cafe",
+        "bar",
         "hospitality"
       ],
       "dimensions": {
-        "width": 2.7,
-        "depth": 1.6,
-        "height": 1
+        "width": 2.4,
+        "depth": 0.7,
+        "height": 1.1
       },
       "path": "blocks/floorkit/cafe-counter/1.0.0.op",
-      "bytes": 3476,
-      "sha256": "03e3729b4be40040a9b57dd9d22693e84a1c657cf485fb50ea297a97d172c2ec",
-      "contentHash": "f5fa20d12b86f47799128771cae42613880c6c260b539b947921aec6bc07551e"
+      "bytes": 4352,
+      "sha256": "dbeb9a5927f72ab54aad43dbcc5ebcec075f12399a1a7d89b545b312a085b033",
+      "contentHash": "5b33bb80d4177e81731e964ef3c14a5ca147dd264b4fc7d8eab50d2c336c5349"
+    },
+    {
+      "id": "floorkit.ceiling-luminaire-1200",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "ceiling-luminaire-1200",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Linear Ceiling Luminaire 1200",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "light",
+        "luminaire",
+        "linear",
+        "ceiling",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 0.3,
+        "height": 0.08
+      },
+      "path": "blocks/floorkit/ceiling-luminaire-1200/1.0.0.op",
+      "bytes": 4667,
+      "sha256": "23da35a3381cd674d28427cb5eb92a30dfdb64627cc98c2aa2d29b039763cc30",
+      "contentHash": "bb20a548fc3d252c1f776a064311c71f42c05291df875c68ff420dcbe22ed4c5"
+    },
+    {
+      "id": "floorkit.chest-of-drawers",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "chest-of-drawers",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Chest of Drawers",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "chest of drawers",
+        "drawers",
+        "storage",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 0.8,
+        "depth": 0.45,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/chest-of-drawers/1.0.0.op",
+      "bytes": 6352,
+      "sha256": "d3552e869ad0efeed79d550f53abb0e6b27e5b654fc4147275a73ca56fe3be08",
+      "contentHash": "a7aeb7bb76ab2b55796ee2b8259dda5fb57a7e87da10d391bdc4acd633df5841"
     },
     {
       "id": "floorkit.chiller",
@@ -95,6 +632,7 @@
       },
       "slug": "chiller",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "Chiller",
       "type": "MEP_EQUIPMENT",
       "category": "equipment",
@@ -110,38 +648,196 @@
         "height": 2.2
       },
       "path": "blocks/floorkit/chiller/1.0.0.op",
-      "bytes": 3050,
-      "sha256": "c922e3ad1dd70eea4a6087953c333f32e8a371db828638cd7ef499310a48bc82",
-      "contentHash": "797d2564eb6f39faae1dcff270c6b3fbf990e53fcee4c0f1e11df0f32b1064f2"
+      "bytes": 8529,
+      "sha256": "98c9a07310eda4467ef6b0f5a121aa5fa9391f2cf4fb4feb2718f7b2c928dfef",
+      "contentHash": "d2111fd064e9d3d3ee3b12641772c1247c5341b624a2c9295cb34e398b5d12a2"
     },
     {
-      "id": "floorkit.counter-run",
+      "id": "floorkit.cloakroom-basin",
       "publisher": {
         "id": "floorkit",
         "name": "Floorkit",
         "tier": "official"
       },
-      "slug": "counter-run",
+      "slug": "cloakroom-basin",
       "version": "1.0.0",
-      "labelName": "Kitchen Counter Run",
+      "format": 1,
+      "labelName": "Cloakroom Basin",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "basin",
+        "cloakroom basin",
+        "wall-hung",
+        "cloakroom"
+      ],
+      "dimensions": {
+        "width": 0.45,
+        "depth": 0.35,
+        "height": 0.47
+      },
+      "path": "blocks/floorkit/cloakroom-basin/1.0.0.op",
+      "bytes": 8228,
+      "sha256": "a30913e9cd16788876aeea51c17ba401929d60986886567172656ac573d60b67",
+      "contentHash": "1c316da8014f01a5a6ee71c4512a8ca7451270f02d110a73f1e770080de904f3"
+    },
+    {
+      "id": "floorkit.cloakroom-basin",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "cloakroom-basin",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Cloakroom Basin",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "basin",
+        "cloakroom basin",
+        "wall-hung",
+        "cloakroom"
+      ],
+      "dimensions": {
+        "width": 0.45,
+        "depth": 0.35,
+        "height": 0.47
+      },
+      "path": "blocks/floorkit/cloakroom-basin/2.0.0.op",
+      "bytes": 11651,
+      "sha256": "0ddba1e2b4abf603e8dac3f41245cf33b1b27146c9080bf9d7c9f299ac8fc3d4",
+      "contentHash": "b29c65e1ff1392347573d761d2cb7cb7691e531b1a9fef8ba904f85e5767cfda"
+    },
+    {
+      "id": "floorkit.coffee-table",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "coffee-table",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Coffee Table",
+      "type": "FURNITURE",
+      "category": "tables",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "table",
+        "coffee",
+        "living"
+      ],
+      "dimensions": {
+        "width": 1.1,
+        "depth": 0.6,
+        "height": 0.42
+      },
+      "path": "blocks/floorkit/coffee-table/1.0.0.op",
+      "bytes": 4835,
+      "sha256": "7f49ebbcfc46431f2804af34582e8069d16b7b77dd6301d72cf6ca0fb4eff9c6",
+      "contentHash": "e8e1323e34cf7caee386a5c6f55c625242af2f8a7dd6a36f97e59816a68629b6"
+    },
+    {
+      "id": "floorkit.cooker",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "cooker",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Cooker",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "cooker",
+        "oven",
+        "electric",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/cooker/1.0.0.op",
+      "bytes": 8711,
+      "sha256": "0de65350d1d4b3112125f6a537ab2474bfc00c49a62eba52fe62115adc3dac0b",
+      "contentHash": "fbff010f77f09110c1658ba45419e3b8a70881acf7bc618b63c2f8afee55b0a1"
+    },
+    {
+      "id": "floorkit.corner-base-unit",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "corner-base-unit",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Corner Base Unit",
       "type": "FURNITURE",
       "category": "kitchen",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "counter",
-        "worktop",
-        "base units"
+        "corner unit",
+        "base unit",
+        "kitchen unit",
+        "cabinet",
+        "kitchen"
       ],
       "dimensions": {
-        "width": 1,
-        "depth": 0.6,
-        "height": 0.92
+        "width": 0.9,
+        "depth": 0.9,
+        "height": 0.9
       },
-      "path": "blocks/floorkit/counter-run/1.0.0.op",
-      "bytes": 2938,
-      "sha256": "e4b9c95ebcdd2a74335441e3bf376a2bb80fa153d0032da0a8f1c69fc3e85232",
-      "contentHash": "359b6e4f341f06c3d8791529e77411da731e4648f4773cf48d2e58344dce15e8"
+      "path": "blocks/floorkit/corner-base-unit/1.0.0.op",
+      "bytes": 6519,
+      "sha256": "7241b385e9e0b3cb4aaef80476a605b1376c053e7f59babf087604ae36ef90fb",
+      "contentHash": "d4760246517300ef65fb596021a8098f740774de9f0a4b1a07c886569dcb2fb7"
+    },
+    {
+      "id": "floorkit.cot",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "cot",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Cot",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "cot",
+        "bed",
+        "baby",
+        "nursery",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 0.66,
+        "depth": 1.26,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/cot/1.0.0.op",
+      "bytes": 22729,
+      "sha256": "fe01acb176caf4c9320440928de9bbfa42bcf4629521efb1a866b9ec14343425",
+      "contentHash": "b81b2e24e610fba21575520dd4489ee45d9d4ba1a1d53a821f8ab2cbe5d79e75"
     },
     {
       "id": "floorkit.crah",
@@ -152,6 +848,7 @@
       },
       "slug": "crah",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "CRAH Unit",
       "type": "MEP_EQUIPMENT",
       "category": "equipment",
@@ -168,9 +865,286 @@
         "height": 2
       },
       "path": "blocks/floorkit/crah/1.0.0.op",
-      "bytes": 4140,
-      "sha256": "cc1a3ed5fea2b5dff5b6bb25298b4e51e25ee91d42ccbf74fbb6c6c9da3d9672",
-      "contentHash": "183f8e3f969af58f0c2c70ac25c8effc14038043a43de2085db05ba1207edb7c"
+      "bytes": 9110,
+      "sha256": "46867c0ef852a13ee340847e809ae04a1696c15d63f843905e3edf8d6dbfe82f",
+      "contentHash": "f567833a3276d1bbb8e19c4c03a0b4bd1e242782de6264fd0da1524357851ea5"
+    },
+    {
+      "id": "floorkit.desk-pedestal",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "desk-pedestal",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Desk Pedestal",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "pedestal",
+        "drawers",
+        "filing",
+        "mobile",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.43,
+        "depth": 0.6,
+        "height": 0.6
+      },
+      "path": "blocks/floorkit/desk-pedestal/1.0.0.op",
+      "bytes": 6503,
+      "sha256": "211df8f40b5d5c9fb3143580b4b4aacbaa5ca02a92df7515f7e89c2d95b11f64",
+      "contentHash": "bcdb6d7f70474d98a470e65c0dd0bcf7f1239a94100b66d285e7e74e22ab464a"
+    },
+    {
+      "id": "floorkit.dining-table-4",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "dining-table-4",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Dining Table for 4",
+      "type": "FURNITURE",
+      "category": "tables",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "table",
+        "dining",
+        "four-seat"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 0.8,
+        "height": 0.75
+      },
+      "path": "blocks/floorkit/dining-table-4/1.0.0.op",
+      "bytes": 4944,
+      "sha256": "5d573dac32bad5c5e9ea44fd712f30a738f4b3674c5d98053356aac18399e1b1",
+      "contentHash": "33a6aba1b2ee0420510c6d1207140186d03cd5ff8a81e7caa8442d3bb7455652"
+    },
+    {
+      "id": "floorkit.dishwasher",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "dishwasher",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Dishwasher",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "dishwasher",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.85
+      },
+      "path": "blocks/floorkit/dishwasher/1.0.0.op",
+      "bytes": 4840,
+      "sha256": "e9ab853485b56548bba9562963fe954d007f010a56e977a4a8ae88abb001faf9",
+      "contentHash": "5956f1f8fcfd1a984115519ff19dc52a6bd4b32abcfed1d755c1018b80ada44a"
+    },
+    {
+      "id": "floorkit.double-bed",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "double-bed",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Double Bed",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bed",
+        "double",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 1.5,
+        "depth": 2.1,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/double-bed/1.0.0.op",
+      "bytes": 6833,
+      "sha256": "578aa3cead4999ec9872f4eca0f2491fb8ffe15a5f92a4003b5045f6f7d95df5",
+      "contentHash": "fcc0fc2a7d30c4a58f6571a751a02468cc39b3716a4225c47ec82af10c7346f2"
+    },
+    {
+      "id": "floorkit.downlight",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "downlight",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Downlight",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "light",
+        "downlight",
+        "ceiling",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.09,
+        "depth": 0.09,
+        "height": 0.03
+      },
+      "path": "blocks/floorkit/downlight/1.0.0.op",
+      "bytes": 3874,
+      "sha256": "c7a7d8cf0364e4d6dd5c3008a7f0c0c7a05b43e359c63227411d3c34c2d8c5e8",
+      "contentHash": "800d4f68d9460412437fd40e9e3ea8329b9be964a4c8b9c53e7d0ddaf5644890"
+    },
+    {
+      "id": "floorkit.extractor-hood",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "extractor-hood",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Extractor Hood",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "extractor hood",
+        "cooker hood",
+        "chimney",
+        "overhead",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.5,
+        "height": 0.85
+      },
+      "path": "blocks/floorkit/extractor-hood/1.0.0.op",
+      "bytes": 4154,
+      "sha256": "d1543c83749e8215696fbab1a435e1892f78dc70d083f9cdfb668e307a67dbb3",
+      "contentHash": "41616510e5a9e1ff16c555da41a88b20180947c1545857d51b518eeb57d6b039"
+    },
+    {
+      "id": "floorkit.filing-cabinet",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "filing-cabinet",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Filing Cabinet",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "filing cabinet",
+        "cabinet",
+        "storage",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.47,
+        "depth": 0.62,
+        "height": 1.32
+      },
+      "path": "blocks/floorkit/filing-cabinet/1.0.0.op",
+      "bytes": 6179,
+      "sha256": "92fc39b71f057810231df149030a4627517724cad8778109c296eb3335ee7a3d",
+      "contentHash": "03a017a5c6ac213dcca5b42086e311e4d259a9389ce992f44cb5fdd6b29a6ec1"
+    },
+    {
+      "id": "floorkit.floor-lamp",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "floor-lamp",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Floor Lamp",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "lamp",
+        "floor lamp",
+        "standard lamp",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.4,
+        "depth": 0.4,
+        "height": 1.6
+      },
+      "path": "blocks/floorkit/floor-lamp/1.0.0.op",
+      "bytes": 2904,
+      "sha256": "24ad2b1f04eff6414aa222ef65e76e627151c70f2316029cb0614ada325bee78",
+      "contentHash": "8477135b51d57ee80795dd2367efc6bb2b3833d13b8644d6f25ba92d4d8ee7ac"
+    },
+    {
+      "id": "floorkit.fridge-freezer",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "fridge-freezer",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Fridge Freezer",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "fridge freezer",
+        "fridge",
+        "freezer",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.65,
+        "height": 1.85
+      },
+      "path": "blocks/floorkit/fridge-freezer/1.0.0.op",
+      "bytes": 4151,
+      "sha256": "c6aaeb2709fe5db0f67606c27526a558dbf28bc8d22256c99044f49fe48b5f6b",
+      "contentHash": "62b17c497b66c39f4a3ed758738ad92121ffb9748b2fb3ac6f52d71ffef56320"
     },
     {
       "id": "floorkit.glazed-door",
@@ -181,6 +1155,7 @@
       },
       "slug": "glazed-door",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "Glazed Door Assembly",
       "type": "DOOR",
       "category": "openings",
@@ -196,9 +1171,9 @@
         "height": 2.11
       },
       "path": "blocks/floorkit/glazed-door/1.0.0.op",
-      "bytes": 5024,
-      "sha256": "371095af08643162e690ccb8431a4f31b80e1ccdbfdd5978457bf7ad6b5d613e",
-      "contentHash": "c8dba47bef3f679b7d389fe737bbe6d0d5ada8bb7b59f48646438d9c753067ac"
+      "bytes": 5329,
+      "sha256": "6e6af8656e3375b665cc52d748e3d2590b4c95d178e2f9ba2a0b82f73855f198",
+      "contentHash": "d7351c73443e8303c989f5d1a7bfe10ec18fdc528e06fdc44ff81194cf36f098"
     },
     {
       "id": "floorkit.hob",
@@ -209,14 +1184,17 @@
       },
       "slug": "hob",
       "version": "1.0.0",
-      "labelName": "Kitchen Hob",
+      "format": 1,
+      "labelName": "Hob",
       "type": "APPLIANCE",
       "category": "appliances",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "kitchen",
-        "cooktop"
+        "hob",
+        "cooktop",
+        "electric",
+        "kitchen"
       ],
       "dimensions": {
         "width": 0.6,
@@ -224,9 +1202,72 @@
         "height": 0.05
       },
       "path": "blocks/floorkit/hob/1.0.0.op",
-      "bytes": 5686,
-      "sha256": "d40e26c0d431ea6715fc84caa85aae10ee3e2960e70decf6a5155c7f041fcc61",
-      "contentHash": "a85191b3bcb823fcf3b995e6933ed9bfe86228e08473ea837e64a676c4513453"
+      "bytes": 6494,
+      "sha256": "2f88412d7206ac26d70106dca179d53864ea01e8564b1e31391eca0ac1b1a8e2",
+      "contentHash": "8e11539915b0600c6118bc6243f957442739795398986182187be967fe7dd2f9"
+    },
+    {
+      "id": "floorkit.hot-water-cylinder",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "hot-water-cylinder",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Hot Water Cylinder",
+      "type": "MEP_EQUIPMENT",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "hot water cylinder",
+        "cylinder",
+        "hot water",
+        "heating",
+        "storage"
+      ],
+      "dimensions": {
+        "width": 0.55,
+        "depth": 0.6,
+        "height": 1.5
+      },
+      "path": "blocks/floorkit/hot-water-cylinder/1.0.0.op",
+      "bytes": 6471,
+      "sha256": "e560404c516e7e90995587fff721f8ae07ec15b6a2c315b482acb95b67ce3ca7",
+      "contentHash": "1e9bff010f44bb5926cd2fe4dca5eaa5bad28f491a39d9e777e4bdcda6d6f756"
+    },
+    {
+      "id": "floorkit.king-bed",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "king-bed",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "King-Size Bed",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bed",
+        "king-size",
+        "double",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 1.7,
+        "depth": 2.1,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/king-bed/1.0.0.op",
+      "bytes": 6898,
+      "sha256": "d2e541b044e3cf9a7509389544930d7eb9cdd39d997e4bbfa0e77587a6d54cbb",
+      "contentHash": "5e1490f6b5cc0551632b06367463932f3ab6081c65f66b3c79eaab7aaed3871a"
     },
     {
       "id": "floorkit.kitchen-counter",
@@ -237,24 +1278,28 @@
       },
       "slug": "kitchen-counter",
       "version": "1.0.0",
-      "labelName": "Kitchen Counter",
+      "format": 1,
+      "labelName": "Kitchen Island",
       "type": "FURNITURE",
       "category": "kitchen",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "counter",
-        "worktop"
+        "island",
+        "kitchen island",
+        "worktop",
+        "breakfast bar",
+        "kitchen"
       ],
       "dimensions": {
-        "width": 2.4,
-        "depth": 0.65,
-        "height": 1.45
+        "width": 1.8,
+        "depth": 0.9,
+        "height": 0.9
       },
       "path": "blocks/floorkit/kitchen-counter/1.0.0.op",
-      "bytes": 3524,
-      "sha256": "0a996aef9b7515c92dcf725731c4ae09e1c7da59a0a1a52b893da97721dd07a2",
-      "contentHash": "d094ede755bbb3011eba20f1f5d98deb62c6263c9553636cbdc34c142c2e782a"
+      "bytes": 6288,
+      "sha256": "0b7129f4bc760879cda4bd3709de6b542b8551f3ea142073fe7dd6ed54eb943c",
+      "contentHash": "601c282b39b858a958dc00d9f9cf5d2389b9947614ef2987fb4a434b98c7df46"
     },
     {
       "id": "floorkit.kitchen-sink",
@@ -265,23 +1310,58 @@
       },
       "slug": "kitchen-sink",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "Kitchen Sink",
       "type": "FIXTURE",
       "category": "kitchen",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "sink"
+        "sink",
+        "inset sink",
+        "drainer",
+        "kitchen"
       ],
       "dimensions": {
-        "width": 0.6,
+        "width": 0.86,
         "depth": 0.5,
-        "height": 0.2
+        "height": 0.44
       },
       "path": "blocks/floorkit/kitchen-sink/1.0.0.op",
-      "bytes": 3836,
-      "sha256": "249d8afba0592a834d9886c649235ccad429b920be18a29e8d14a8d8e4d1102c",
-      "contentHash": "de82e26734e506f71483ef34db4ceb686c2278dd6bc76f89be47aee250bc4e18"
+      "bytes": 9393,
+      "sha256": "02d92af66cdd583ebf5e54d84039b84a2c2a956735328868a86ae25b57e07514",
+      "contentHash": "95abf4f52f2f640cf6dbd927dea2b0326d8df69d4a09c6421a3eda4582130561"
+    },
+    {
+      "id": "floorkit.meeting-table",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "meeting-table",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Meeting Table",
+      "type": "FURNITURE",
+      "category": "tables",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "table",
+        "meeting",
+        "conference",
+        "office"
+      ],
+      "dimensions": {
+        "width": 2,
+        "depth": 1,
+        "height": 0.74
+      },
+      "path": "blocks/floorkit/meeting-table/1.0.0.op",
+      "bytes": 3301,
+      "sha256": "6dec6f1f055b9ffe98f381c07e8f2d3fee7df4a208b9c5016622626e90357230",
+      "contentHash": "afa5afeac5cb3f626696812f434defd6eec96223990c0fc91d1d7d7c718d04b9"
     },
     {
       "id": "floorkit.minimal-sofa",
@@ -292,7 +1372,8 @@
       },
       "slug": "minimal-sofa",
       "version": "1.0.0",
-      "labelName": "Minimal Sofa",
+      "format": 1,
+      "labelName": "Three-Seat Sofa",
       "type": "FURNITURE",
       "category": "seating",
       "license": "CC-BY-4.0",
@@ -300,17 +1381,49 @@
       "tags": [
         "sofa",
         "couch",
+        "three-seat",
         "living"
       ],
       "dimensions": {
-        "width": 2.32,
-        "depth": 0.98,
-        "height": 0.78
+        "width": 2.2,
+        "depth": 0.9,
+        "height": 0.8
       },
       "path": "blocks/floorkit/minimal-sofa/1.0.0.op",
-      "bytes": 5667,
-      "sha256": "f3114b05c6c96fcd12aa800a130771e7bda7cd5fbfcb7632e184e8d5cc79df40",
-      "contentHash": "56ac92489cb795d7189bd2262d81df2b554a0ee4d810fc662e109099f4224ed0"
+      "bytes": 8001,
+      "sha256": "ca16422b0e0be6f63a14b67ecf18532cbe1b550e8678fa2d4d20ce3a89bccbd5",
+      "contentHash": "69c437e74ba9a0d883258a13517b591aab9d6013644189f7e8cef64f4fcb619e"
+    },
+    {
+      "id": "floorkit.office-chair",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "office-chair",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Office Chair",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "chair",
+        "office",
+        "swivel",
+        "task"
+      ],
+      "dimensions": {
+        "width": 0.65,
+        "depth": 0.65,
+        "height": 1
+      },
+      "path": "blocks/floorkit/office-chair/1.0.0.op",
+      "bytes": 11158,
+      "sha256": "0e0f8c50362b218d857b3561a8cb206934906d5ca5dd75db86d7f36a0158f68d",
+      "contentHash": "bf62a9f34a951297ae07e2d792d575255c4d7cfbe53e4121ee0e3a88131d55bf"
     },
     {
       "id": "floorkit.office-desk",
@@ -321,25 +1434,26 @@
       },
       "slug": "office-desk",
       "version": "1.0.0",
-      "labelName": "Office Desk",
+      "format": 1,
+      "labelName": "Desk",
       "type": "FURNITURE",
       "category": "tables",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "desk",
-        "workstation",
-        "office"
+        "office",
+        "workstation"
       ],
       "dimensions": {
         "width": 1.6,
-        "depth": 1.5,
-        "height": 1.2
+        "depth": 0.8,
+        "height": 0.74
       },
       "path": "blocks/floorkit/office-desk/1.0.0.op",
-      "bytes": 4679,
-      "sha256": "a9e0e0e242fbcf9b7e5702f5ab0bc5d5c2fada3116addb7f38cffee6a384f7c3",
-      "contentHash": "d41fb4eecbb14412c1e848b55e6240e7674ddae7f8e7d0242f5f3b8b458e072a"
+      "bytes": 4147,
+      "sha256": "c6e57bfe85f17d363eaa3d971f676f41e39834a148e1f7d952afe1dcab128a00",
+      "contentHash": "f450393716aa40ee162f0468a0c2c11beff55298bdf489027a5d2667d49d04b8"
     },
     {
       "id": "floorkit.parked-car",
@@ -350,6 +1464,7 @@
       },
       "slug": "parked-car",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "Parked Car",
       "type": "LANDSCAPE",
       "category": "vehicles",
@@ -357,17 +1472,18 @@
       "attribution": "Vishwajeet Mane",
       "tags": [
         "car",
-        "parking"
+        "parking",
+        "vehicle"
       ],
       "dimensions": {
-        "width": 1.9,
-        "depth": 4.4,
-        "height": 1.5
+        "width": 1.8,
+        "depth": 4.5,
+        "height": 1.45
       },
       "path": "blocks/floorkit/parked-car/1.0.0.op",
-      "bytes": 4159,
-      "sha256": "4408c2f884abec21dd30421c2e58dbe7158793735fc541e52ba86059a63ebfe6",
-      "contentHash": "ca3fac82fe85a96e9567bf85aa95fd03a87cd9ab1460b1d5e27b28fcbc1589c8"
+      "bytes": 6409,
+      "sha256": "2acd0488af9de8c71dc973efb43f308c30269de53dc9efeb6914d84d3f7b29d6",
+      "contentHash": "8a5722a5c6ddb1c225c9aa5f331096d23828fd3a785d71acda4ca083623f7081"
     },
     {
       "id": "floorkit.pdu",
@@ -378,6 +1494,7 @@
       },
       "slug": "pdu",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "PDU",
       "type": "MEP_EQUIPMENT",
       "category": "equipment",
@@ -393,9 +1510,71 @@
         "height": 1.9
       },
       "path": "blocks/floorkit/pdu/1.0.0.op",
-      "bytes": 3083,
-      "sha256": "aac409563d3d7a5ae2c34dbed3819f1a862695c8f7161ae0dc4b0f2ab65741b4",
-      "contentHash": "a036bd3e375c9aa2d36fad394ac897ecc68a0f1868b2921766bef58318ba2dd4"
+      "bytes": 6653,
+      "sha256": "86c4efdbf66eb70b78bd500e8af6388795ec46c892cba93ddbde03d1ee4be496",
+      "contentHash": "8f0b6ab48420357ac62e3947b72ed5c293444b3a609616c3c3c5a7dbc9b783ad"
+    },
+    {
+      "id": "floorkit.pendant-light",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "pendant-light",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Pendant Light",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "light",
+        "pendant",
+        "ceiling",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.4,
+        "depth": 0.4,
+        "height": 0.4
+      },
+      "path": "blocks/floorkit/pendant-light/1.0.0.op",
+      "bytes": 4121,
+      "sha256": "747aa68f5c861575fb60cf15b25c680d59deb2fdf881bda6817d744c96ff4ebe",
+      "contentHash": "15a8c6d8d25a36b2b0ee284c6883fe2cd86f4c19c8fa28ee210d39e8324a886e"
+    },
+    {
+      "id": "floorkit.photocopier",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "photocopier",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Photocopier",
+      "type": "APPLIANCE",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "photocopier",
+        "copier",
+        "printer",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.7,
+        "height": 1.1
+      },
+      "path": "blocks/floorkit/photocopier/1.0.0.op",
+      "bytes": 4565,
+      "sha256": "12b9b1f7c2d5ac5a2bddf1b076a8ac725f2c56e73377371df715309591554202",
+      "contentHash": "b8dd1a0097a89aaa577baf173f3ad238e62cef17316370b9955fae417da1176c"
     },
     {
       "id": "floorkit.planter",
@@ -406,14 +1585,17 @@
       },
       "slug": "planter",
       "version": "1.0.0",
-      "labelName": "Planter Box",
-      "type": "LANDSCAPE",
+      "format": 1,
+      "labelName": "Planter",
+      "type": "FURNITURE",
       "category": "planting",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "planter",
-        "shrub"
+        "trough",
+        "shrub",
+        "planting"
       ],
       "dimensions": {
         "width": 1.4,
@@ -421,9 +1603,71 @@
         "height": 0.9
       },
       "path": "blocks/floorkit/planter/1.0.0.op",
-      "bytes": 3153,
-      "sha256": "486968838091c77210c1a42fc64b7de30b3c0844020e22d06f66679c648334c9",
-      "contentHash": "50684d8d1132040d8625300b5cdbf607b6402e7560045d5bd4ca5e48ac4a500e"
+      "bytes": 8191,
+      "sha256": "3cf7e41a0ff5986bc14bf4a7de930262e0aa3e54d4692f59f8b6d69b618aa09b",
+      "contentHash": "f87c8a7a9cdb3a0c8bfd365c47de25dc66ca547d2aeefdecab55af729f59561c"
+    },
+    {
+      "id": "floorkit.potted-plant",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "potted-plant",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Potted Plant",
+      "type": "FURNITURE",
+      "category": "planting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "plant",
+        "pot",
+        "potted plant",
+        "indoor",
+        "planting"
+      ],
+      "dimensions": {
+        "width": 0.4,
+        "depth": 0.4,
+        "height": 1.2
+      },
+      "path": "blocks/floorkit/potted-plant/1.0.0.op",
+      "bytes": 3803,
+      "sha256": "161e695733247d0fe35e6af9b9fae76238e35320896de3676b0f0c0872b2b10f",
+      "contentHash": "c917c8778808c571b9998a060fa008fc57eb8c98a6c461386c24fc3b50d23d74"
+    },
+    {
+      "id": "floorkit.radiator",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "radiator",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Radiator",
+      "type": "MEP_EQUIPMENT",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "radiator",
+        "heating",
+        "panel radiator"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 0.1,
+        "height": 0.65
+      },
+      "path": "blocks/floorkit/radiator/1.0.0.op",
+      "bytes": 6338,
+      "sha256": "fe29a1e80762ec0d898088939525910ce92e1dc7c4fab6018dcf10c20f3e96df",
+      "contentHash": "b24c52aad157f1140a6df74e7e97ba48e186e94ccd64d664abe4e7a888c2d8d1"
     },
     {
       "id": "floorkit.rear-door-heat-exchanger",
@@ -434,7 +1678,8 @@
       },
       "slug": "rear-door-heat-exchanger",
       "version": "1.0.0",
-      "labelName": "Rear-Door HX",
+      "format": 1,
+      "labelName": "Rear-Door Heat Exchanger",
       "type": "MEP_EQUIPMENT",
       "category": "equipment",
       "license": "CC-BY-4.0",
@@ -450,37 +1695,165 @@
         "height": 2
       },
       "path": "blocks/floorkit/rear-door-heat-exchanger/1.0.0.op",
-      "bytes": 2671,
-      "sha256": "4f4e460f297e30977f335e11334bc3d411c3f6999a34294c30a43b513be58a69",
-      "contentHash": "b5959bf5bd9503618ce367a54dd4d69cc2b8a2fa61bfcf440109297630ded004"
+      "bytes": 6978,
+      "sha256": "a3b83a005b5f4ca070ffce579d075d3d08817292fe1c3751dc1760768da78d8f",
+      "contentHash": "2ad77bcd1db850c380242337b5705cf19edaceca2fe77477b7366cb7d1b2e924"
     },
     {
-      "id": "floorkit.rectangular-bathtub",
+      "id": "floorkit.round-table",
       "publisher": {
         "id": "floorkit",
         "name": "Floorkit",
         "tier": "official"
       },
-      "slug": "rectangular-bathtub",
+      "slug": "round-table",
       "version": "1.0.0",
-      "labelName": "Rectangular Bathtub",
+      "format": 1,
+      "labelName": "Round Table",
+      "type": "FURNITURE",
+      "category": "tables",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "table",
+        "round",
+        "dining",
+        "pedestal"
+      ],
+      "dimensions": {
+        "width": 1.1,
+        "depth": 1.1,
+        "height": 0.75
+      },
+      "path": "blocks/floorkit/round-table/1.0.0.op",
+      "bytes": 2639,
+      "sha256": "8dde296121ecf2178c75555e000ef51344d5deaec0efaacbc7a61eb3a34427d2",
+      "contentHash": "754d81ea2e79edabd613b9e569de9c80a6732b917bbf03d6117fe83259425e26"
+    },
+    {
+      "id": "floorkit.shower-enclosure",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-enclosure",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Shower Enclosure",
       "type": "FIXTURE",
       "category": "sanitary",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "bath",
+        "shower",
+        "shower enclosure",
         "bathroom"
       ],
       "dimensions": {
-        "width": 1.7,
-        "depth": 0.75,
-        "height": 0.6
+        "width": 0.9,
+        "depth": 0.9,
+        "height": 2
       },
-      "path": "blocks/floorkit/rectangular-bathtub/1.0.0.op",
-      "bytes": 8149,
-      "sha256": "6bd72cb0e46cb6e0f6833155fab36c0d3f73f66fd7f7f1e0be1349268ab10270",
-      "contentHash": "e607238ec08fab55c9ce17f89b01639661d3c65cd55a51beb74dcd3a6f6db597"
+      "path": "blocks/floorkit/shower-enclosure/1.0.0.op",
+      "bytes": 11215,
+      "sha256": "24e0d88bf5af76b34a5c3161118a18a2d1cd43ee94b0baf7c57dc7645423775b",
+      "contentHash": "6d43d7486c8bf717e22f8af08c816c67620139abb732347e1bcd7b8099741a03"
+    },
+    {
+      "id": "floorkit.shower-enclosure-quadrant",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-enclosure-quadrant",
+      "version": "1.0.0",
+      "format": 2,
+      "labelName": "Quadrant Shower Enclosure",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower",
+        "shower enclosure",
+        "quadrant",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.9,
+        "depth": 0.9,
+        "height": 2
+      },
+      "path": "blocks/floorkit/shower-enclosure-quadrant/1.0.0.op",
+      "bytes": 13921,
+      "sha256": "dc4fb47e60e8f67e093aec5aee472a3ef6a96cbc8c6aebd576bf360f2e20eabf",
+      "contentHash": "f47afd4351cb3cf5205bc2d7203491f530e22661b892b7df23908d7e918f3c9c"
+    },
+    {
+      "id": "floorkit.shower-level-access",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-level-access",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Level-Access Shower",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower",
+        "level access",
+        "accessible",
+        "wet room",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 1.2,
+        "height": 2
+      },
+      "path": "blocks/floorkit/shower-level-access/1.0.0.op",
+      "bytes": 8384,
+      "sha256": "e23c888033d32827a8023f2955ebbaea279a4f1dea31ce2cbe2d3e5e2eaaa982",
+      "contentHash": "0cd67734274016dc6c3b9d6f55e0762381effb344f068ec34e5f76ffb5de6569"
+    },
+    {
+      "id": "floorkit.shower-level-access",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-level-access",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Level-Access Shower",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower",
+        "level access",
+        "accessible",
+        "wet room",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 1.2,
+        "depth": 1.2,
+        "height": 2.01
+      },
+      "path": "blocks/floorkit/shower-level-access/2.0.0.op",
+      "bytes": 11860,
+      "sha256": "370831efde0764b300ff6b7c01abc3a4c2ecf918bf2fc63aa44e28021fd358b4",
+      "contentHash": "47e6e390445fa6fc51e39cb1ca0316513fa0d92aba068a1bfdb4417f69f04e12"
     },
     {
       "id": "floorkit.shower-tray",
@@ -491,24 +1864,88 @@
       },
       "slug": "shower-tray",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "Shower Tray",
       "type": "FIXTURE",
       "category": "sanitary",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
+        "shower tray",
         "shower",
         "bathroom"
       ],
       "dimensions": {
         "width": 0.9,
         "depth": 0.9,
-        "height": 0.06
+        "height": 0.04
       },
       "path": "blocks/floorkit/shower-tray/1.0.0.op",
-      "bytes": 3478,
-      "sha256": "d908bde1230cf1a4c2400fa1b37263befb4f8b88101bb7ea1b2f00043a2e0513",
-      "contentHash": "8d98b187078893faa6b53ffe4718541e99eec3ba4c5380730d9d689350af1624"
+      "bytes": 6128,
+      "sha256": "812f47b20739c3b79f92a5b6463403aa354a194a74b7f17f99a20ace9f788442",
+      "contentHash": "d7b9575e8a8f3508685f7a1f73c8792d507bf5eee879b8585d85e11285cf4ff5"
+    },
+    {
+      "id": "floorkit.shower-tray",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-tray",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Shower Tray",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower tray",
+        "shower",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.9,
+        "depth": 0.9,
+        "height": 0.04
+      },
+      "path": "blocks/floorkit/shower-tray/2.0.0.op",
+      "bytes": 17468,
+      "sha256": "eedbca6866cc89ca612cb9431a3dabb6d0e795d0f50ccc741730d8cbac08c001",
+      "contentHash": "8d4520b8e448c10db947d11271b116f6584807c0261c73be84a8df46fd6736d1"
+    },
+    {
+      "id": "floorkit.sideboard",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "sideboard",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Sideboard",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "sideboard",
+        "cupboard",
+        "storage",
+        "dining",
+        "living"
+      ],
+      "dimensions": {
+        "width": 1.6,
+        "depth": 0.45,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/sideboard/1.0.0.op",
+      "bytes": 7036,
+      "sha256": "bd46203d6d02a3e5619409124f351674d371b6e6c2920d17e1938c087a0743db",
+      "contentHash": "a8b0929a648a5b2faed670f64c29dd643587aa9d37dc572860e0ccdf06c65ba9"
     },
     {
       "id": "floorkit.simple-chair",
@@ -519,7 +1956,8 @@
       },
       "slug": "simple-chair",
       "version": "1.0.0",
-      "labelName": "Simple Chair",
+      "format": 1,
+      "labelName": "Dining Chair",
       "type": "FURNITURE",
       "category": "seating",
       "license": "CC-BY-4.0",
@@ -529,14 +1967,105 @@
         "dining"
       ],
       "dimensions": {
-        "width": 0.64,
-        "depth": 0.64,
-        "height": 0.96
+        "width": 0.45,
+        "depth": 0.52,
+        "height": 0.85
       },
       "path": "blocks/floorkit/simple-chair/1.0.0.op",
-      "bytes": 5386,
-      "sha256": "c05bdce899138afb3662726bf17106d3466490d8e3352dcc7bb2361ffe53c879",
-      "contentHash": "bc5377754883cdf00fd25a87d86b465e30f4440c49017be9795319c8bc4927a1"
+      "bytes": 5175,
+      "sha256": "5051461d675c43bd6683a5efd59acba9b257a71724f6e46c98498ecfd6264b17",
+      "contentHash": "211eb62b995bb76e876f8a644ae10d9eeb31f6f0637bba3b9cc83c41997910b1"
+    },
+    {
+      "id": "floorkit.single-bed",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "single-bed",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Single Bed",
+      "type": "FURNITURE",
+      "category": "beds",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bed",
+        "single",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 2.1,
+        "height": 0.9
+      },
+      "path": "blocks/floorkit/single-bed/1.0.0.op",
+      "bytes": 6180,
+      "sha256": "63ceca9c16d68eb08bd40387c28268d23bdd02fe738df47e73b1581a339cd084",
+      "contentHash": "676b9d8f8d043e0e49525e0412ae9bbec932256e99ba2cd2e453386cb85665c9"
+    },
+    {
+      "id": "floorkit.sofa-2-seat",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "sofa-2-seat",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Two-Seat Sofa",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "sofa",
+        "couch",
+        "two-seat",
+        "living"
+      ],
+      "dimensions": {
+        "width": 1.6,
+        "depth": 0.9,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/sofa-2-seat/1.0.0.op",
+      "bytes": 6844,
+      "sha256": "289e0c0486c9b83819009bd2be5522103da50c4c60f0b10a0a886e3ebb91136d",
+      "contentHash": "e33af17636ec13dacff0ab3d26bec6f7418d2fb4781cbbbe7ba9a9f4a4d4cc00"
+    },
+    {
+      "id": "floorkit.stacking-chair",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "stacking-chair",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Stacking Chair",
+      "type": "FURNITURE",
+      "category": "seating",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "chair",
+        "stacking",
+        "dining"
+      ],
+      "dimensions": {
+        "width": 0.53,
+        "depth": 0.55,
+        "height": 0.82
+      },
+      "path": "blocks/floorkit/stacking-chair/1.0.0.op",
+      "bytes": 5867,
+      "sha256": "49e83c2fd0c1f3637b0fcdf00115c3d4003815cd122bf65f9f1231f96de51dd9",
+      "contentHash": "0da48b3f2ba57ee4c5c3e0b4a446372d9a36ef562383980329ab236e204974e4"
     },
     {
       "id": "floorkit.table",
@@ -547,24 +2076,121 @@
       },
       "slug": "table",
       "version": "1.0.0",
-      "labelName": "Table",
+      "format": 1,
+      "labelName": "Dining Table for 6",
       "type": "FURNITURE",
       "category": "tables",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
+        "table",
         "dining",
-        "table"
+        "six-seat"
       ],
       "dimensions": {
-        "width": 1.68,
-        "depth": 1.18,
-        "height": 0.84
+        "width": 1.8,
+        "depth": 0.9,
+        "height": 0.75
       },
       "path": "blocks/floorkit/table/1.0.0.op",
-      "bytes": 8474,
-      "sha256": "7a6105fd8bdbf544ea3dd3fc68bed7a7f6cda1cdb7936adf37c6ec452148df10",
-      "contentHash": "291d123701648ae57e6fde7a35ff4a6c646cc247812da1c7db93ee0f123150a1"
+      "bytes": 4935,
+      "sha256": "4981dd9a16dd3076acd950038bf07bff23bc4b1f558a5770cd0d55ebacce4c04",
+      "contentHash": "ef31cb45829a06634c53f5e647c3dec708b00c851efbf37f0f6f2bff31619a04"
+    },
+    {
+      "id": "floorkit.table-lamp",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "table-lamp",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Table Lamp",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "lamp",
+        "table lamp",
+        "bedside",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.3,
+        "depth": 0.3,
+        "height": 0.5
+      },
+      "path": "blocks/floorkit/table-lamp/1.0.0.op",
+      "bytes": 2909,
+      "sha256": "c891076fd187c905bd37e8b3387593ecdce845266f15a418a56a6e3f7b7afc7c",
+      "contentHash": "7dd4f20f6985a280d4ff0671b85954dd02c5f4eff37688f54005209067c4e56c"
+    },
+    {
+      "id": "floorkit.tall-unit-600",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "tall-unit-600",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Tall Unit 600",
+      "type": "FURNITURE",
+      "category": "kitchen",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "tall unit",
+        "larder",
+        "kitchen unit",
+        "cabinet",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 2.1
+      },
+      "path": "blocks/floorkit/tall-unit-600/1.0.0.op",
+      "bytes": 4905,
+      "sha256": "17a9e248380493fee5ed246584fa86cf1f308e0e93328114c4ad41edb2929aa3",
+      "contentHash": "8df9177019c940ffafcf79c59d839c3f29c20c8eb6092049715c1ee4cd3d8ddd"
+    },
+    {
+      "id": "floorkit.television",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "television",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Television",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "television",
+        "tv",
+        "screen",
+        "wall-hung",
+        "living room"
+      ],
+      "dimensions": {
+        "width": 1.23,
+        "depth": 0.06,
+        "height": 0.71
+      },
+      "path": "blocks/floorkit/television/1.0.0.op",
+      "bytes": 2882,
+      "sha256": "5ba2017ba26c5c56c2541b10bd1d51cacfc2b552b71a589a6970110900476f17",
+      "contentHash": "07109b0d36a8e0404338c4ef0dba1220ee162283087ee7dc609b1843a6d49539"
     },
     {
       "id": "floorkit.tree",
@@ -575,14 +2201,16 @@
       },
       "slug": "tree",
       "version": "1.0.0",
-      "labelName": "Landscape Tree",
+      "format": 1,
+      "labelName": "Tree",
       "type": "LANDSCAPE",
       "category": "planting",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "tree",
-        "landscape"
+        "landscape",
+        "planting"
       ],
       "dimensions": {
         "width": 2.8,
@@ -590,9 +2218,71 @@
         "height": 4
       },
       "path": "blocks/floorkit/tree/1.0.0.op",
-      "bytes": 3451,
-      "sha256": "2a983280ccde8fd6769d603688e52d5395926bd13e6927cdd1a6a2e26fdf1434",
-      "contentHash": "5416f96c97357142c2c4e3a0b33eaca88e0500b99cce95dd9049b622e71e4289"
+      "bytes": 3534,
+      "sha256": "0ce337e612fb68d27505f08a9fdf272410dfcb0e75990d8c102020225583f8ca",
+      "contentHash": "76a9eed40c920e8ba227d1250bbc836460ebfd56f7bed01500a1ea5b86cfc81a"
+    },
+    {
+      "id": "floorkit.tumble-dryer",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "tumble-dryer",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Tumble Dryer",
+      "type": "APPLIANCE",
+      "category": "appliances",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "tumble dryer",
+        "dryer",
+        "laundry",
+        "utility"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.85
+      },
+      "path": "blocks/floorkit/tumble-dryer/1.0.0.op",
+      "bytes": 5888,
+      "sha256": "c18e8b497fe2bf4cfc01ea077ec82c165d5ab14a7d935d0f032b5ac6aa791bb2",
+      "contentHash": "88397487daf08846ecd67c88c8bb57fd0ba74d5f9a203e943b276576ba885efd"
+    },
+    {
+      "id": "floorkit.turning-circle-1500",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "turning-circle-1500",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Wheelchair Turning Circle 1500",
+      "type": "LANDSCAPE",
+      "category": "other",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "turning circle",
+        "wheelchair",
+        "clearance",
+        "accessibility"
+      ],
+      "dimensions": {
+        "width": 1.5,
+        "depth": 1.5,
+        "height": 0.02
+      },
+      "path": "blocks/floorkit/turning-circle-1500/1.0.0.op",
+      "bytes": 3320,
+      "sha256": "32edd5aaa6874cfd629591d4648376bba8a42c658e5456582975174eed233bc2",
+      "contentHash": "c2c666aa3fe27544f27eb6697e9587a1fac23483933128ecad676260a3a8f1ae"
     },
     {
       "id": "floorkit.ups",
@@ -603,6 +2293,7 @@
       },
       "slug": "ups",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "UPS",
       "type": "MEP_EQUIPMENT",
       "category": "equipment",
@@ -618,9 +2309,162 @@
         "height": 1.9
       },
       "path": "blocks/floorkit/ups/1.0.0.op",
-      "bytes": 2901,
-      "sha256": "5d9cede96ba9abac4af431d1ccb29b0e19b375410b25506abbbeb453ee839bd6",
-      "contentHash": "304e7db43e09d1837cfd5f8e2c8d905e0b5a68c058e0bdee10c01a5afb822a66"
+      "bytes": 7830,
+      "sha256": "595b67fb8c17eb45dac624ca0040c2e1c29e2d27b21b309d316abe96aea1e6c2",
+      "contentHash": "dee924a8cad8b96f6fcab9b9c456fb2a6f0633163e63c0dc5c2225c331dc8e8b"
+    },
+    {
+      "id": "floorkit.urinal",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "urinal",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Urinal",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "urinal",
+        "wall-hung",
+        "washroom"
+      ],
+      "dimensions": {
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.65
+      },
+      "path": "blocks/floorkit/urinal/1.0.0.op",
+      "bytes": 7003,
+      "sha256": "bfed0565d20ecda478d5b5b2004ae8db667df13cd055f8601b77f13e9fad6dff",
+      "contentHash": "d3d0260649b7a8e061b3d799a083433e4461800f2f3aa9816ef315ad1e990530"
+    },
+    {
+      "id": "floorkit.urinal",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "urinal",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Urinal",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "urinal",
+        "wall-hung",
+        "washroom"
+      ],
+      "dimensions": {
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.65
+      },
+      "path": "blocks/floorkit/urinal/2.0.0.op",
+      "bytes": 9717,
+      "sha256": "7958bda0071834028696636326761a5e5666ea6b210a0a49ad52779f9cb27bdb",
+      "contentHash": "32b03a03f3f5234205ecf04fac7934dd1069699a2b0cd0bc5bd4e37135bb29a4"
+    },
+    {
+      "id": "floorkit.wall-light",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wall-light",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Wall Light",
+      "type": "FIXTURE",
+      "category": "lighting",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "light",
+        "wall light",
+        "lighting"
+      ],
+      "dimensions": {
+        "width": 0.2,
+        "depth": 0.1,
+        "height": 0.25
+      },
+      "path": "blocks/floorkit/wall-light/1.0.0.op",
+      "bytes": 4400,
+      "sha256": "7e790c8669f15eee24861f3b6d834603c6a38b44ee990535ac470483f2cdad38",
+      "contentHash": "a6a1bcae3218469faaa3150e6b72014126296ae0c297f5645f4f4ed6e7e49db3"
+    },
+    {
+      "id": "floorkit.wall-unit-600",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wall-unit-600",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Wall Unit 600",
+      "type": "FURNITURE",
+      "category": "kitchen",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wall unit",
+        "kitchen unit",
+        "cabinet",
+        "overhead",
+        "kitchen"
+      ],
+      "dimensions": {
+        "width": 0.6,
+        "depth": 0.35,
+        "height": 0.72
+      },
+      "path": "blocks/floorkit/wall-unit-600/1.0.0.op",
+      "bytes": 2885,
+      "sha256": "0abc4202249783eb35e72eae3ab8160e8493831efde49d67ae917733e4e9d2b9",
+      "contentHash": "bffaf36609297451cbc54408acdb9766b5051552a26f8d23419255a8d805dfb7"
+    },
+    {
+      "id": "floorkit.wardrobe",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wardrobe",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Wardrobe",
+      "type": "FURNITURE",
+      "category": "storage",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wardrobe",
+        "cupboard",
+        "storage",
+        "bedroom"
+      ],
+      "dimensions": {
+        "width": 1,
+        "depth": 0.6,
+        "height": 2.1
+      },
+      "path": "blocks/floorkit/wardrobe/1.0.0.op",
+      "bytes": 6500,
+      "sha256": "cf590a2b4561885f5c327cba01daf3102cfb41156ff6bd18c2daf60b541e44cf",
+      "contentHash": "298d473ab4a72ea63ff6fd482eb725cee2599c1f4dfbd4f2de116fd6c38e3f1f"
     },
     {
       "id": "floorkit.wash-basin",
@@ -631,6 +2475,7 @@
       },
       "slug": "wash-basin",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "Wash Basin",
       "type": "FIXTURE",
       "category": "sanitary",
@@ -638,18 +2483,50 @@
       "attribution": "Vishwajeet Mane",
       "tags": [
         "basin",
-        "sink",
+        "wash basin",
+        "pedestal",
         "bathroom"
       ],
       "dimensions": {
-        "width": 0.45,
-        "depth": 0.55,
-        "height": 0.85
+        "width": 0.55,
+        "depth": 0.45,
+        "height": 0.97
       },
       "path": "blocks/floorkit/wash-basin/1.0.0.op",
-      "bytes": 5389,
-      "sha256": "7e6a86b061addfbbe16d44fb5f279811f7b9614159a0cdd551b9a215dbe917fa",
-      "contentHash": "0c593bdaae68e2b30d994954e555bc287e1ef1c994d3b343fadea775e7e8d107"
+      "bytes": 27016,
+      "sha256": "e65efa418a6e212a347aad183ae1376475ccbad123cd3ee7130f9eeb37272b0f",
+      "contentHash": "91bfbd24c7b6995d25407a1374d413b2bceebcfd731fe1610ff4c60f5213005b"
+    },
+    {
+      "id": "floorkit.wash-basin",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wash-basin",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Wash Basin",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "basin",
+        "wash basin",
+        "pedestal",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.55,
+        "depth": 0.45,
+        "height": 0.97
+      },
+      "path": "blocks/floorkit/wash-basin/2.0.0.op",
+      "bytes": 11166,
+      "sha256": "8dab24c126e5e3ce2d273c255ed638169734aa1eb2c5c15d8c0a26bdfc6bd87a",
+      "contentHash": "45596ff22dca4f0b26580ee9d0cf97308fba21115df498ab19c7fdc7009cd11d"
     },
     {
       "id": "floorkit.washing-machine",
@@ -660,12 +2537,14 @@
       },
       "slug": "washing-machine",
       "version": "1.0.0",
+      "format": 1,
       "labelName": "Washing Machine",
       "type": "APPLIANCE",
       "category": "appliances",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
+        "washing machine",
         "laundry",
         "utility"
       ],
@@ -675,9 +2554,39 @@
         "height": 0.85
       },
       "path": "blocks/floorkit/washing-machine/1.0.0.op",
-      "bytes": 3838,
-      "sha256": "de1ccbaff45473de4678e116296210f60204b50d4d40c7a32ac1ff28088477b4",
-      "contentHash": "8ef3936c1158dc875414f5bdc09ca159ea971175fe91c28cda29032871c362a4"
+      "bytes": 5903,
+      "sha256": "7ad166487ce8deb0eca61b04ba66b4e78369d5259ae8d68b0c562e60d6b7ff9a",
+      "contentHash": "0c81600960777f0b272d0f2d5e21ff6ee8819606a9d35b6d135728deaacbfb55"
+    },
+    {
+      "id": "floorkit.water-cooler",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "water-cooler",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Water Cooler",
+      "type": "APPLIANCE",
+      "category": "equipment",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "water cooler",
+        "drinking water",
+        "office"
+      ],
+      "dimensions": {
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 1.1
+      },
+      "path": "blocks/floorkit/water-cooler/1.0.0.op",
+      "bytes": 4762,
+      "sha256": "c94d532219258a73474afa4cfbd4be2b4b03b47e1d5110e79279659c66fce73c",
+      "contentHash": "64dfd276b8e0bf0ef10d268b73a6c2546230d0c0d657e629b1ee235ec86a4e71"
     },
     {
       "id": "floorkit.wc",
@@ -688,55 +2597,246 @@
       },
       "slug": "wc",
       "version": "1.0.0",
-      "labelName": "WC Pan",
+      "format": 1,
+      "labelName": "WC",
       "type": "FIXTURE",
       "category": "sanitary",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
-        "toilet",
         "wc",
+        "toilet",
+        "close-coupled",
         "bathroom"
       ],
       "dimensions": {
-        "width": 0.38,
-        "depth": 0.66,
+        "width": 0.37,
+        "depth": 0.65,
         "height": 0.78
       },
       "path": "blocks/floorkit/wc/1.0.0.op",
-      "bytes": 3607,
-      "sha256": "3b9cdee775210c9a1be3a60f3baaf50863f43c2522c6b738b6f6c2a68c198df8",
-      "contentHash": "ef0fd2d0bb93e57142cc1f83d37056029f64002b88ff684e74845273e7aa9746"
+      "bytes": 7432,
+      "sha256": "038b36344e4f812ba4683905049c1554068476f7016c4dc740c58b6984fc1e68",
+      "contentHash": "89dff44cfb452219734c26719d430fcad46db9bebfc8f8be657ad23f334a62b8"
     },
     {
-      "id": "floorkit.wc-and-basin",
+      "id": "floorkit.wc",
       "publisher": {
         "id": "floorkit",
         "name": "Floorkit",
         "tier": "official"
       },
-      "slug": "wc-and-basin",
-      "version": "1.0.0",
-      "labelName": "WC and Basin",
-      "type": "FURNITURE",
+      "slug": "wc",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "WC",
+      "type": "FIXTURE",
       "category": "sanitary",
       "license": "CC-BY-4.0",
       "attribution": "Vishwajeet Mane",
       "tags": [
         "wc",
         "toilet",
-        "basin",
-        "cloakroom"
+        "close-coupled",
+        "bathroom"
       ],
       "dimensions": {
-        "width": 1.5,
-        "depth": 0.7,
-        "height": 0.85
+        "width": 0.37,
+        "depth": 0.65,
+        "height": 0.78
       },
-      "path": "blocks/floorkit/wc-and-basin/1.0.0.op",
-      "bytes": 3543,
-      "sha256": "4d15484bb9b5e4eecd894feffff694ef3304f1e9699530c2147b0e2403c1a049",
-      "contentHash": "4a25ab1ea11f804342248e1dc8790eb5b54f046612a6a507cc97be1927c779d4"
+      "path": "blocks/floorkit/wc/2.0.0.op",
+      "bytes": 13946,
+      "sha256": "07835774ae948b1da76635b93a84ec3fa21e7a76b0a02afeed8bfd4bb18d2b49",
+      "contentHash": "839d9c35ed25d7fbad0a4c34cb4af0dd67b717fa52b8baa2bae8d9c94747ad6c"
+    },
+    {
+      "id": "floorkit.wc-accessible",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wc-accessible",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Accessible WC",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wc",
+        "toilet",
+        "accessible",
+        "wheelchair",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.38,
+        "depth": 0.75,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/wc-accessible/1.0.0.op",
+      "bytes": 26982,
+      "sha256": "91ed018a36bc085e838c2fedc326784ebfd0c8e1e95a5665ed92dcd91a265594",
+      "contentHash": "d1d61c81310909420d2bd4101f410efe7850138561e1ea1b4d0ff34b58300f89"
+    },
+    {
+      "id": "floorkit.wc-accessible",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wc-accessible",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Accessible WC",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wc",
+        "toilet",
+        "accessible",
+        "wheelchair",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.38,
+        "depth": 0.75,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/wc-accessible/2.0.0.op",
+      "bytes": 12524,
+      "sha256": "d38e411abc2ff61439309374be7f3aad24a1e62ed6f789c525aa2abab28de2cc",
+      "contentHash": "c77aba33cc1a48cbeb1d098b34d848d2e77e2262499b2ade0d5395bde8486da7"
+    },
+    {
+      "id": "floorkit.wc-wall-hung",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wc-wall-hung",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Wall-hung WC",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wc",
+        "toilet",
+        "wall-hung",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.36,
+        "depth": 0.54,
+        "height": 0.63
+      },
+      "path": "blocks/floorkit/wc-wall-hung/1.0.0.op",
+      "bytes": 6393,
+      "sha256": "c729179c8c043bb4e6fb6fce28ac7819db7db5bb6b22f4b9af740162cf393fac",
+      "contentHash": "db98e31a82300d6237280f943ceff3a9cbc195741d22437e7d79a9c83a76c880"
+    },
+    {
+      "id": "floorkit.wc-wall-hung",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wc-wall-hung",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Wall-hung WC",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wc",
+        "toilet",
+        "wall-hung",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.36,
+        "depth": 0.54,
+        "height": 0.63
+      },
+      "path": "blocks/floorkit/wc-wall-hung/2.0.0.op",
+      "bytes": 11238,
+      "sha256": "27d3ecc656b30ade5fdd471c1078d7b43b7821527a958ff0d331cccc8215a796",
+      "contentHash": "ec8e0ec6d01bd417f1604a2e5a26264f9e47cc31c3efafb1f8ccc912aade4982"
+    },
+    {
+      "id": "floorkit.wheelchair",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wheelchair",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Wheelchair",
+      "type": "LANDSCAPE",
+      "category": "other",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wheelchair",
+        "accessibility",
+        "clearance"
+      ],
+      "dimensions": {
+        "width": 0.7,
+        "depth": 1.2,
+        "height": 1.1
+      },
+      "path": "blocks/floorkit/wheelchair/1.0.0.op",
+      "bytes": 12611,
+      "sha256": "94f5a64a2074947985f97944ba2b20eac21d5930237414a97da04a856619adb1",
+      "contentHash": "4d3ddf3c6a6278ab19dd1ade69867d0dd3ff19c86158ad3538c4448335cde494"
+    },
+    {
+      "id": "floorkit.wheelchair-space",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wheelchair-space",
+      "version": "1.0.0",
+      "format": 1,
+      "labelName": "Wheelchair Space",
+      "type": "LANDSCAPE",
+      "category": "other",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wheelchair space",
+        "wheelchair",
+        "clearance",
+        "accessibility",
+        "seating"
+      ],
+      "dimensions": {
+        "width": 0.9,
+        "depth": 1.4,
+        "height": 0.02
+      },
+      "path": "blocks/floorkit/wheelchair-space/1.0.0.op",
+      "bytes": 3387,
+      "sha256": "145514040874e28855b5f17cfbf9200ea2716bc7d0237696f99e2aa8798361c4",
+      "contentHash": "ecea623df4712bc7416ed878a3f0e872ff4f7d96b2eb429b6b339aff85e2e5e0"
     }
   ]
 }

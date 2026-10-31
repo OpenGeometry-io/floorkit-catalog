@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.bathtub",
-  "labelName": "Bathtub",
+  "labelName": "Bath",
   "type": "FIXTURE",
   "dimensions": {
-    "width": 1.65,
+    "width": 1.7,
     "depth": 0.7,
-    "height": 0.55
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
+    "height": 0.65
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,13 +14,26 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "sanitary",
     "catalog:placement": "free",
-    "catalog:tags": "bath, bathroom",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/sanitary/bathtub.op#catalog-sanitary-bathtub",
-    "catalog:note": "Long axis along the wall at -Z; waste at the -X end.",
+    "catalog:lod": "300",
+    "catalog:tags": "bath, bathtub, bathroom",
+    "catalog:note": "Back-to-wall panelled bath, open on the wall side: rim 0.55, a tub 1.52 x 0.56 inside and 0.43 deep, drawn as four rim strips over four wall slabs and a floor, inside a front panel and two end panels to the floor. Two pillar taps 0.10 high on the rim at the tap end, 0.18 apart, make the overall height 0.65; they build as prisms. faucetMount is the midpoint between the taps. Drain and taps sit at the -x end: a mirrored copy keeps drainCenter, faucetMount and the ports where they are.",
+    "catalog:basedOn": "Bath 1.70 x 0.70 x 0.55: drafting standard key dimensions (practice; EN 14516 not read), unverified. Tap centres 0.18: common UK two-hole deck bath filler centres (180 mm), no source checked; EN 232 not read, unverified. Ports: BS EN 12056-2 via the drafting standard, unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "BATH",
-    "mat:shell": "ceramic",
-    "mat:basin": "ceramic"
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:rim-back": "ceramic",
+    "mat:rim-front": "ceramic",
+    "mat:rim-tap-end": "ceramic",
+    "mat:rim-foot-end": "ceramic",
+    "mat:wall-back": "ceramic",
+    "mat:wall-front": "ceramic",
+    "mat:wall-tap-end": "ceramic",
+    "mat:wall-foot-end": "ceramic",
+    "mat:tub-floor": "ceramic",
+    "mat:front-panel": "surface",
+    "mat:end-panel-tap": "surface",
+    "mat:end-panel-foot": "surface",
+    "mat:tap": "metal"
   },
   "anchors": {
     "base": {
@@ -57,6 +53,9 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
     },
     "wallFace": {
@@ -80,252 +79,461 @@
       "metadata": {
         "role": "wall-contact"
       }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          -0.7,
+          0.12,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          -0.805,
+          0.55,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.805,
+          0.52,
+          0.09
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.805,
+          0.52,
+          -0.09
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          -0.7,
+          0.1,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
+  "definitions": {
+    "tap": {
+      "kind": "cylinder",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.6,
+        0
+      ],
+      "radius": 0.015,
+      "height": 0.1
     }
   },
   "profileView": {
     "elements": [
       {
-        "id": "rim",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#eceae4",
         "vertices": [
           [
-            0.825,
-            0.29
-          ],
-          [
-            0.8204,
-            0.313
-          ],
-          [
-            0.8074,
-            0.3324
-          ],
-          [
-            0.788,
-            0.3454
-          ],
-          [
-            0.765,
-            0.35
-          ],
-          [
-            -0.765,
-            0.35
-          ],
-          [
-            -0.788,
-            0.3454
-          ],
-          [
-            -0.8074,
-            0.3324
-          ],
-          [
-            -0.8204,
-            0.313
-          ],
-          [
-            -0.825,
-            0.29
-          ],
-          [
-            -0.825,
-            -0.29
-          ],
-          [
-            -0.8204,
-            -0.313
-          ],
-          [
-            -0.8074,
-            -0.3324
-          ],
-          [
-            -0.788,
-            -0.3454
-          ],
-          [
-            -0.765,
+            -0.85,
             -0.35
           ],
           [
-            0.765,
+            0.85,
             -0.35
           ],
           [
-            0.788,
-            -0.3454
+            0.85,
+            0.35
           ],
           [
-            0.8074,
-            -0.3324
-          ],
-          [
-            0.8204,
-            -0.313
-          ],
-          [
-            0.825,
-            -0.29
+            -0.85,
+            0.35
           ]
         ]
       },
       {
-        "id": "basin",
+        "id": "tub",
         "kind": "polygon",
-        "color": "#ffffff",
         "vertices": [
           [
-            0.75,
-            0.16
-          ],
-          [
-            0.7409,
-            0.2059
-          ],
-          [
-            0.7149,
-            0.2449
-          ],
-          [
-            0.6759,
-            0.2709
-          ],
-          [
-            0.63,
-            0.28
-          ],
-          [
-            -0.63,
-            0.28
-          ],
-          [
-            -0.6759,
-            0.2709
-          ],
-          [
-            -0.7149,
-            0.2449
-          ],
-          [
-            -0.7409,
-            0.2059
-          ],
-          [
-            -0.75,
-            0.16
-          ],
-          [
-            -0.75,
-            -0.16
-          ],
-          [
-            -0.7409,
-            -0.2059
-          ],
-          [
-            -0.7149,
-            -0.2449
-          ],
-          [
-            -0.6759,
-            -0.2709
-          ],
-          [
-            -0.63,
+            -0.76,
             -0.28
           ],
           [
-            0.63,
+            0.76,
             -0.28
           ],
           [
-            0.6759,
-            -0.2709
+            0.76,
+            0.28
           ],
           [
-            0.7149,
-            -0.2449
-          ],
-          [
-            0.7409,
-            -0.2059
-          ],
-          [
-            0.75,
-            -0.16
+            -0.76,
+            0.28
           ]
         ]
       },
       {
-        "id": "waste",
-        "kind": "polygon",
-        "color": "#9aa0a6",
-        "vertices": [
-          [
-            -0.585,
-            0
-          ],
-          [
-            -0.5953,
-            0.0247
-          ],
-          [
-            -0.62,
-            0.035
-          ],
-          [
-            -0.6447,
-            0.0247
-          ],
-          [
-            -0.655,
-            0
-          ],
-          [
-            -0.6447,
-            -0.0247
-          ],
-          [
-            -0.62,
-            -0.035
-          ],
-          [
-            -0.5953,
-            -0.0247
-          ]
-        ]
+        "id": "drain-a",
+        "kind": "arc",
+        "center": [
+          -0.7,
+          0
+        ],
+        "radius": 0.025,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "drain-b",
+        "kind": "arc",
+        "center": [
+          -0.7,
+          0
+        ],
+        "radius": 0.025,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tap-cold-a",
+        "kind": "arc",
+        "center": [
+          -0.805,
+          0.09
+        ],
+        "radius": 0.015,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tap-cold-b",
+        "kind": "arc",
+        "center": [
+          -0.805,
+          0.09
+        ],
+        "radius": 0.015,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tap-hot-a",
+        "kind": "arc",
+        "center": [
+          -0.805,
+          -0.09
+        ],
+        "radius": 0.015,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tap-hot-b",
+        "kind": "arc",
+        "center": [
+          -0.805,
+          -0.09
+        ],
+        "radius": 0.015,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
       }
     ]
   },
   "modelView": {
     "elements": [
       {
-        "id": "shell",
+        "id": "rim-back",
         "kind": "cuboid",
-        "color": "#f4f2ec",
+        "color": "#f2f1ec",
         "center": [
           0,
-          0.275,
-          0
+          0.535,
+          -0.315
         ],
-        "width": 1.65,
-        "height": 0.55,
-        "depth": 0.7
+        "width": 1.7,
+        "height": 0.03,
+        "depth": 0.07
       },
       {
-        "id": "basin",
+        "id": "rim-front",
         "kind": "cuboid",
-        "color": "#ffffff",
+        "color": "#f2f1ec",
         "center": [
           0,
-          0.42,
+          0.535,
+          0.315
+        ],
+        "width": 1.7,
+        "height": 0.03,
+        "depth": 0.07
+      },
+      {
+        "id": "rim-tap-end",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          -0.805,
+          0.535,
           0
         ],
-        "width": 1.5,
-        "height": 0.3,
+        "width": 0.09,
+        "height": 0.03,
         "depth": 0.56
+      },
+      {
+        "id": "rim-foot-end",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0.805,
+          0.535,
+          0
+        ],
+        "width": 0.09,
+        "height": 0.03,
+        "depth": 0.56
+      },
+      {
+        "id": "wall-back",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.32,
+          -0.29
+        ],
+        "width": 1.56,
+        "height": 0.4,
+        "depth": 0.02
+      },
+      {
+        "id": "wall-front",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.32,
+          0.29
+        ],
+        "width": 1.56,
+        "height": 0.4,
+        "depth": 0.02
+      },
+      {
+        "id": "wall-tap-end",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          -0.77,
+          0.32,
+          0
+        ],
+        "width": 0.02,
+        "height": 0.4,
+        "depth": 0.56
+      },
+      {
+        "id": "wall-foot-end",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0.77,
+          0.32,
+          0
+        ],
+        "width": 0.02,
+        "height": 0.4,
+        "depth": 0.56
+      },
+      {
+        "id": "tub-floor",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.11,
+          0
+        ],
+        "width": 1.56,
+        "height": 0.02,
+        "depth": 0.6
+      },
+      {
+        "id": "front-panel",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.26,
+          0.34
+        ],
+        "width": 1.7,
+        "height": 0.52,
+        "depth": 0.02
+      },
+      {
+        "id": "end-panel-tap",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          -0.84,
+          0.26,
+          -0.01
+        ],
+        "width": 0.02,
+        "height": 0.52,
+        "depth": 0.68
+      },
+      {
+        "id": "end-panel-foot",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0.84,
+          0.26,
+          -0.01
+        ],
+        "width": 0.02,
+        "height": 0.52,
+        "depth": 0.68
+      },
+      {
+        "id": "tap-cold",
+        "ref": "tap",
+        "placement": {
+          "position": [
+            -0.805,
+            0,
+            0.09
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "tap-hot",
+        "ref": "tap",
+        "placement": {
+          "position": [
+            -0.805,
+            0,
+            -0.09
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }

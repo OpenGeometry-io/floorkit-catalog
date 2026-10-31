@@ -1,0 +1,626 @@
+{
+  "version": 1,
+  "id": "fixture.v2-sweep-pocket",
+  "labelName": "Wash Basin",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.55,
+    "depth": 0.45,
+    "height": 0.97
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "basin, wash basin, pedestal, bathroom",
+    "catalog:note": "Pedestal wash basin against the wall. rim 0.85. A D-shaped rim slab 0.04 thick, two outline sweeps of true arcs with a round bowl of radius 0.15 through them; under it a revolved bowl whose outline has its wall, curved in 6 chords per arc, and a flat floor 0.13 below the rim with a metal waste in its centre hole, on a tapered round pedestal. The waste port is at the foot of the pedestal: the trap is inside it, not drawn. Parts under radius 0.04 build as polygonal prisms at true size.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified: wash basin 0.55 x 0.45, rim 0.85; EN 14688 not read. Bowl depth 0.13, the D and the pedestal taper are the author's, unverified. Port sizes from the drafting standard (BS EN 12056-2), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "WASHHANDBASIN",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:bowl": "ceramic",
+    "mat:pedestal": "ceramic",
+    "mat:waste": "metal",
+    "mat:tapStem": "metal",
+    "mat:tapSpout": "metal",
+    "mat:rim": "ceramic"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.225
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          0,
+          0.85,
+          -0.18
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.72,
+          0.04
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0,
+          0.04
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.032
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.05,
+          0.83,
+          -0.225
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.05,
+          0.83,
+          -0.225
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.275,
+            -0.225
+          ],
+          [
+            -0.275,
+            -0.05
+          ]
+        ]
+      },
+      {
+        "id": "outline2",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.05
+        ],
+        "radius": 0.275,
+        "startAngle": -3.141593,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "outline3",
+        "kind": "polyline",
+        "points": [
+          [
+            0.275,
+            -0.05
+          ],
+          [
+            0.275,
+            -0.225
+          ],
+          [
+            -0.275,
+            -0.225
+          ]
+        ]
+      },
+      {
+        "id": "bowlA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.04
+        ],
+        "radius": 0.15,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "bowlB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.04
+        ],
+        "radius": 0.15,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tapA",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.18
+        ],
+        "radius": 0.015,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tapB",
+        "kind": "arc",
+        "center": [
+          0,
+          -0.18
+        ],
+        "radius": 0.015,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "rim",
+        "ref": "rim"
+      },
+      {
+        "id": "bowl",
+        "kind": "revolve",
+        "color": "#f2f1ec",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0.04
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "profile": {
+          "start": [
+            0.02,
+            0.695
+          ],
+          "segments": [
+            {
+              "to": [
+                0.08,
+                0.695
+              ]
+            },
+            {
+              "to": [
+                0.107176,
+                0.698578
+              ]
+            },
+            {
+              "to": [
+                0.1325,
+                0.709067
+              ]
+            },
+            {
+              "to": [
+                0.154246,
+                0.725754
+              ]
+            },
+            {
+              "to": [
+                0.170933,
+                0.7475
+              ]
+            },
+            {
+              "to": [
+                0.181422,
+                0.772824
+              ]
+            },
+            {
+              "to": [
+                0.185,
+                0.8
+              ]
+            },
+            {
+              "to": [
+                0.185,
+                0.81
+              ]
+            },
+            {
+              "to": [
+                0.15,
+                0.81
+              ]
+            },
+            {
+              "to": [
+                0.146933,
+                0.786706
+              ]
+            },
+            {
+              "to": [
+                0.137942,
+                0.765
+              ]
+            },
+            {
+              "to": [
+                0.12364,
+                0.74636
+              ]
+            },
+            {
+              "to": [
+                0.105,
+                0.732058
+              ]
+            },
+            {
+              "to": [
+                0.083294,
+                0.723067
+              ]
+            },
+            {
+              "to": [
+                0.06,
+                0.72
+              ]
+            },
+            {
+              "to": [
+                0.02,
+                0.72
+              ]
+            }
+          ],
+          "closed": true
+        }
+      },
+      {
+        "id": "pedestal",
+        "kind": "cone",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.3475,
+          0.04
+        ],
+        "radiusBottom": 0.12,
+        "radiusTop": 0.08,
+        "height": 0.695
+      },
+      {
+        "id": "waste",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.7075,
+          0.04
+        ],
+        "radius": 0.019,
+        "height": 0.025
+      },
+      {
+        "id": "tapStem",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.91,
+          -0.18
+        ],
+        "radius": 0.015,
+        "height": 0.12
+      },
+      {
+        "id": "tapSpout",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.01,
+        "height": 0.1,
+        "placement": {
+          "position": [
+            0,
+            0.96,
+            -0.115
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  },
+  "definitions": {
+    "rimSolid": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.81,
+          0
+        ],
+        [
+          0,
+          0.85,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.275,
+          -0.225
+        ],
+        "segments": [
+          {
+            "to": [
+              0.275,
+              -0.225
+            ]
+          },
+          {
+            "to": [
+              0.275,
+              -0.05
+            ]
+          },
+          {
+            "to": [
+              0,
+              0.225
+            ],
+            "arc": {
+              "center": [
+                0,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.275,
+              -0.05
+            ],
+            "arc": {
+              "center": [
+                0,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "bowlCut": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.82,
+          0
+        ],
+        [
+          0,
+          0.86,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          0,
+          -0.10999999999999999
+        ],
+        "segments": [
+          {
+            "to": [
+              0,
+              0.19
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.04
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0,
+              -0.10999999999999999
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.04
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "rim": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "rimSolid",
+      "operandRefs": [
+        "bowlCut"
+      ],
+      "color": "#f2f1ec"
+    }
+  }
+}

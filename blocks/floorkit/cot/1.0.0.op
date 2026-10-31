@@ -1,0 +1,1309 @@
+{
+  "version": 1,
+  "id": "floorkit.cot",
+  "labelName": "Cot",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.66,
+    "depth": 1.26,
+    "height": 0.9
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "beds",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "cot, bed, baby, nursery, bedroom",
+    "catalog:note": "Cot, mattress 0.60 x 1.20 inside four posts, rails top and bottom, and bars on all four sides. top 0.26 is the mattress, 0.64 below the rail tops. No pillow, as for an infant. The bars of radius 0.01 are drawn at true size and build as polygonal prisms; the kernel decides their facets.",
+    "catalog:basedOn": "EN 716-1 (cots, internal size 0.60 x 1.20), unverified; drafting standard key dimensions",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "BED",
+    "mat:bottom-rail-left": "frame",
+    "mat:bottom-rail-right": "frame",
+    "mat:bottom-rail-head": "frame",
+    "mat:bottom-rail-foot": "frame",
+    "mat:top-rail-left": "frame",
+    "mat:top-rail-right": "frame",
+    "mat:top-rail-head": "frame",
+    "mat:top-rail-foot": "frame",
+    "mat:base-board": "surface",
+    "mat:mattress": "soft",
+    "mat:post": "frame",
+    "mat:sideBar": "frame",
+    "mat:endBar": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "sleepingSurface": {
+      "placement": {
+        "position": [
+          0,
+          0.26,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "sleeping-surface"
+      }
+    }
+  },
+  "definitions": {
+    "post": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.45,
+        0
+      ],
+      "width": 0.03,
+      "height": 0.9,
+      "depth": 0.03
+    },
+    "sideBar": {
+      "kind": "cylinder",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.51,
+        0
+      ],
+      "radius": 0.01,
+      "height": 0.7
+    },
+    "endBar": {
+      "kind": "cylinder",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.5,
+        0
+      ],
+      "radius": 0.01,
+      "height": 0.72
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.33,
+            -0.63
+          ],
+          [
+            0.33,
+            -0.63
+          ],
+          [
+            0.33,
+            0.63
+          ],
+          [
+            -0.33,
+            0.63
+          ]
+        ]
+      },
+      {
+        "id": "mattress",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.3,
+            -0.6
+          ],
+          [
+            0.3,
+            -0.6
+          ],
+          [
+            0.3,
+            0.6
+          ],
+          [
+            -0.3,
+            0.6
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "post-head-left",
+        "ref": "post",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "post-head-right",
+        "ref": "post",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "post-foot-left",
+        "ref": "post",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "post-foot-right",
+        "ref": "post",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bottom-rail-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.315,
+          0.12,
+          0
+        ],
+        "width": 0.03,
+        "height": 0.04,
+        "depth": 1.2
+      },
+      {
+        "id": "bottom-rail-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.315,
+          0.12,
+          0
+        ],
+        "width": 0.03,
+        "height": 0.04,
+        "depth": 1.2
+      },
+      {
+        "id": "bottom-rail-head",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.12,
+          -0.615
+        ],
+        "width": 0.6,
+        "height": 0.04,
+        "depth": 0.03
+      },
+      {
+        "id": "bottom-rail-foot",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.12,
+          0.615
+        ],
+        "width": 0.6,
+        "height": 0.04,
+        "depth": 0.03
+      },
+      {
+        "id": "top-rail-left",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          -0.315,
+          0.88,
+          0
+        ],
+        "width": 0.03,
+        "height": 0.04,
+        "depth": 1.2
+      },
+      {
+        "id": "top-rail-right",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0.315,
+          0.88,
+          0
+        ],
+        "width": 0.03,
+        "height": 0.04,
+        "depth": 1.2
+      },
+      {
+        "id": "top-rail-head",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.88,
+          -0.615
+        ],
+        "width": 0.6,
+        "height": 0.04,
+        "depth": 0.03
+      },
+      {
+        "id": "top-rail-foot",
+        "kind": "cuboid",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.88,
+          0.615
+        ],
+        "width": 0.6,
+        "height": 0.04,
+        "depth": 0.03
+      },
+      {
+        "id": "base-board",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.15,
+          0
+        ],
+        "width": 0.66,
+        "height": 0.02,
+        "depth": 1.2
+      },
+      {
+        "id": "mattress",
+        "kind": "cuboid",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.21,
+          0
+        ],
+        "width": 0.6,
+        "height": 0.1,
+        "depth": 1.2
+      },
+      {
+        "id": "bar-left-1",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            -0.525
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-2",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            -0.45
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-3",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            -0.375
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-4",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            -0.3
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-5",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            -0.225
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-6",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            -0.15
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-7",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            -0.075
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-8",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-9",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0.075
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-10",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0.15
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-11",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0.225
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-12",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0.3
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-13",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0.375
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-14",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0.45
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-left-15",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            -0.315,
+            0,
+            0.525
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-1",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            -0.525
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-2",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            -0.45
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-3",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            -0.375
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-4",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            -0.3
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-5",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            -0.225
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-6",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            -0.15
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-7",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            -0.075
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-8",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-9",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0.075
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-10",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0.15
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-11",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0.225
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-12",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0.3
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-13",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0.375
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-14",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0.45
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-right-15",
+        "ref": "sideBar",
+        "placement": {
+          "position": [
+            0.315,
+            0,
+            0.525
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-head-1",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            -0.225,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-head-2",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            -0.15,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-head-3",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            -0.075,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-head-4",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            0,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-head-5",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            0.075,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-head-6",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            0.15,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-head-7",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            0.225,
+            0,
+            -0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-foot-1",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            -0.225,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-foot-2",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            -0.15,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-foot-3",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            -0.075,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-foot-4",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-foot-5",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            0.075,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-foot-6",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            0.15,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bar-foot-7",
+        "ref": "endBar",
+        "placement": {
+          "position": [
+            0.225,
+            0,
+            0.615
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  }
+}

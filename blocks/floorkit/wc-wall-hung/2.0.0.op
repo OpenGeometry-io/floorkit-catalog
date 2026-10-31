@@ -1,0 +1,583 @@
+{
+  "version": 1,
+  "id": "floorkit.wc-wall-hung",
+  "labelName": "Wall-hung WC",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.36,
+    "depth": 0.54,
+    "height": 0.63
+  },
+  "metadata": {
+    "catalog:version": "2.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "wc, toilet, wall-hung, bathroom",
+    "catalog:note": "Wall-hung WC, its cistern concealed in the wall; lid open against the wall. bottom 0.15, rim 0.40, seat 0.42. The pan is an oval outline sweep fixed to the wall, hollowed by a shell 0.015 thick whose top is opened by an oval bowl cut (an outline sweep through the top face). The seat is one ring: an outline sweep less a round outline sweep. The plan shows the pan only.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice), unverified: rim 0.40, bottom 0.15, seat 0.42; 0.36 x 0.54 generic practice size, unverified; EN 997 not read. Pan oval and bowl opening generic, unverified. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "TOILETPAN",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:pan": "ceramic",
+    "mat:seat": "surface",
+    "mat:lid": "surface"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.27
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "soil",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.18,
+          -0.27
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.25,
+          -0.27
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "panSolid": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.15,
+          0
+        ],
+        [
+          0,
+          0.4,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.18,
+          -0.27
+        ],
+        "segments": [
+          {
+            "to": [
+              0.18,
+              -0.27
+            ]
+          },
+          {
+            "to": [
+              0.18,
+              -0.05
+            ]
+          },
+          {
+            "to": [
+              0.088,
+              0.226
+            ],
+            "arc": {
+              "center": [
+                -0.28,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.088,
+              0.226
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.16
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.18,
+              -0.05
+            ],
+            "arc": {
+              "center": [
+                0.28,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.18,
+              -0.27
+            ]
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "panShell": {
+      "kind": "shell",
+      "color": "#f2f1ec",
+      "sourceRef": "panSolid",
+      "thickness": 0.015
+    },
+    "bowlOpening": {
+      "kind": "sweep",
+      "color": "#f2f1ec",
+      "path": [
+        [
+          0,
+          0.35,
+          0
+        ],
+        [
+          0,
+          0.41,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          0.11,
+          0.05
+        ],
+        "segments": [
+          {
+            "to": [
+              0.0495,
+              0.17099999999999999
+            ],
+            "arc": {
+              "center": [
+                -0.04125,
+                0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.0495,
+              0.17099999999999999
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.10500000000000001
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.11,
+              0.05
+            ],
+            "arc": {
+              "center": [
+                0.04125,
+                0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.0495,
+              -0.071
+            ],
+            "arc": {
+              "center": [
+                0.04125,
+                0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.0495,
+              -0.071
+            ],
+            "arc": {
+              "center": [
+                0,
+                -0.0049999999999999975
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0.11,
+              0.05
+            ],
+            "arc": {
+              "center": [
+                -0.04125,
+                0.05
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "pan": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "panShell",
+      "operandRefs": [
+        "bowlOpening"
+      ],
+      "color": "#f2f1ec"
+    },
+    "seatSolid": {
+      "kind": "sweep",
+      "color": "#d8d2c4",
+      "path": [
+        [
+          0,
+          0.4,
+          0
+        ],
+        [
+          0,
+          0.42,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          -0.18,
+          -0.15
+        ],
+        "segments": [
+          {
+            "to": [
+              0.18,
+              -0.15
+            ]
+          },
+          {
+            "to": [
+              0.18,
+              -0.05
+            ]
+          },
+          {
+            "to": [
+              0.088,
+              0.226
+            ],
+            "arc": {
+              "center": [
+                -0.28,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.088,
+              0.226
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.16
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              -0.18,
+              -0.05
+            ],
+            "arc": {
+              "center": [
+                0.28,
+                -0.05
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "seatHole": {
+      "kind": "sweep",
+      "color": "#d8d2c4",
+      "path": [
+        [
+          0,
+          0.39,
+          0
+        ],
+        [
+          0,
+          0.43,
+          0
+        ]
+      ],
+      "profile": {
+        "start": [
+          0,
+          -0.06
+        ],
+        "segments": [
+          {
+            "to": [
+              0,
+              0.16
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.05
+              ],
+              "counterClockwise": false
+            }
+          },
+          {
+            "to": [
+              0,
+              -0.06
+            ],
+            "arc": {
+              "center": [
+                0,
+                0.05
+              ],
+              "counterClockwise": false
+            }
+          }
+        ],
+        "closed": true
+      },
+      "capStart": true,
+      "capEnd": true
+    },
+    "seat": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "seatSolid",
+      "operandRefs": [
+        "seatHole"
+      ],
+      "color": "#d8d2c4"
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.18,
+            -0.05
+          ],
+          [
+            -0.18,
+            -0.27
+          ],
+          [
+            0.18,
+            -0.27
+          ],
+          [
+            0.18,
+            -0.05
+          ]
+        ]
+      },
+      {
+        "id": "panRight",
+        "kind": "arc",
+        "center": [
+          -0.28,
+          -0.05
+        ],
+        "radius": 0.46,
+        "startAngle": -0.643501,
+        "sweepAngle": 0.643501
+      },
+      {
+        "id": "panFront",
+        "kind": "arc",
+        "center": [
+          0,
+          0.16
+        ],
+        "radius": 0.11,
+        "startAngle": -2.498092,
+        "sweepAngle": 1.85459
+      },
+      {
+        "id": "panLeft",
+        "kind": "arc",
+        "center": [
+          0.28,
+          -0.05
+        ],
+        "radius": 0.46,
+        "startAngle": 3.141593,
+        "sweepAngle": 0.643501
+      },
+      {
+        "id": "seatInnerA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.05
+        ],
+        "radius": 0.11,
+        "startAngle": 0,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "seatInnerB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.05
+        ],
+        "radius": 0.11,
+        "startAngle": 3.141593,
+        "sweepAngle": 3.141593
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "pan",
+        "ref": "pan"
+      },
+      {
+        "id": "seat",
+        "ref": "seat"
+      },
+      {
+        "id": "lid",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.59,
+          -0.26
+        ],
+        "width": 0.36,
+        "height": 0.38,
+        "depth": 0.02
+      }
+    ]
+  }
+}

@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.cafe-counter",
-  "labelName": "Café Counter",
+  "labelName": "Serving Counter",
   "type": "FURNITURE",
   "dimensions": {
-    "width": 2.7,
-    "depth": 1.6,
-    "height": 1
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
+    "width": 2.4,
+    "depth": 0.7,
+    "height": 1.1
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,10 +14,17 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "tables",
     "catalog:placement": "free",
-    "catalog:tags": "counter, cafe, hospitality",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/cafe-counter.op#catalog-furnishing-cafe-counter",
+    "catalog:lod": "300",
+    "catalog:tags": "counter, serving, cafe, bar, hospitality",
+    "catalog:note": "Freestanding serving counter: plinth, body, a 0.04 thick top overhanging 0.25 on the customer side (+z), and a foot rail on brackets there. top 1.10, for a bar of 1.10 to 1.15 (unverified). No stools: place them as their own blocks.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified",
     "ifc:class": "IfcFurniture",
-    "mat:kick": "frame"
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:plinth": "frame",
+    "mat:body": "surface",
+    "mat:top": "surface",
+    "mat:foot-rail": "metal",
+    "mat:bracket": "metal"
   },
   "anchors": {
     "base": {
@@ -54,14 +44,39 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          1.1,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
       }
     },
     "serveEdge": {
       "placement": {
         "position": [
           0,
-          0.95,
-          -0.9
+          1.1,
+          0.35
         ],
         "rotation": [
           0,
@@ -79,51 +94,41 @@
       }
     }
   },
+  "definitions": {
+    "bracket": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.2,
+        0.15
+      ],
+      "width": 0.04,
+      "height": 0.04,
+      "depth": 0.1
+    }
+  },
   "profileView": {
     "elements": [
       {
-        "id": "front-run",
+        "id": "top",
         "kind": "polygon",
-        "color": "#8a7964",
         "vertices": [
           [
-            -1.35,
-            -0.9
+            -1.2,
+            -0.35
           ],
           [
-            1.35,
-            -0.9
+            1.2,
+            -0.35
           ],
           [
-            1.35,
-            -0.3
+            1.2,
+            0.35
           ],
           [
-            -1.35,
-            -0.3
-          ]
-        ]
-      },
-      {
-        "id": "return-run",
-        "kind": "polygon",
-        "color": "#8a7964",
-        "vertices": [
-          [
-            -1.35,
-            -0.3
-          ],
-          [
-            -0.75,
-            -0.3
-          ],
-          [
-            -0.75,
-            0.8
-          ],
-          [
-            -1.35,
-            0.8
+            -1.2,
+            0.35
           ]
         ]
       }
@@ -132,69 +137,98 @@
   "modelView": {
     "elements": [
       {
-        "id": "front-cabinet",
+        "id": "plinth",
         "kind": "cuboid",
-        "color": "#6b5b4b",
-        "center": [
-          0,
-          0.45,
-          -0.6
-        ],
-        "width": 2.7,
-        "height": 0.9,
-        "depth": 0.6
-      },
-      {
-        "id": "front-worktop",
-        "kind": "cuboid",
-        "color": "#2e2e2e",
-        "center": [
-          0,
-          0.95,
-          -0.58
-        ],
-        "width": 2.78,
-        "height": 0.06,
-        "depth": 0.7
-      },
-      {
-        "id": "return-cabinet",
-        "kind": "cuboid",
-        "color": "#6b5b4b",
-        "center": [
-          -1.05,
-          0.45,
-          0.05
-        ],
-        "width": 0.6,
-        "height": 0.9,
-        "depth": 1.1
-      },
-      {
-        "id": "return-worktop",
-        "kind": "cuboid",
-        "color": "#2e2e2e",
-        "center": [
-          -1.03,
-          0.95,
-          0.05
-        ],
-        "width": 0.7,
-        "height": 0.06,
-        "depth": 1.18
-      },
-      {
-        "id": "kick",
-        "kind": "cuboid",
-        "color": "#3c3127",
+        "color": "#7a5c3e",
         "center": [
           0,
           0.05,
-          -0.62
+          -0.125
         ],
-        "width": 2.6,
+        "width": 2.3,
         "height": 0.1,
-        "depth": 0.5
+        "depth": 0.35
+      },
+      {
+        "id": "body",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          0.58,
+          -0.125
+        ],
+        "width": 2.4,
+        "height": 0.96,
+        "depth": 0.45
+      },
+      {
+        "id": "top",
+        "kind": "cuboid",
+        "color": "#d8d2c4",
+        "center": [
+          0,
+          1.08,
+          0
+        ],
+        "width": 2.4,
+        "height": 0.04,
+        "depth": 0.7
+      },
+      {
+        "id": "rail-bracket-left",
+        "ref": "bracket",
+        "placement": {
+          "position": [
+            -0.9,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "rail-bracket-right",
+        "ref": "bracket",
+        "placement": {
+          "position": [
+            0.9,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "foot-rail",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.2,
+          0.22
+        ],
+        "width": 2.2,
+        "height": 0.04,
+        "depth": 0.04
       }
     ]
   }

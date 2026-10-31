@@ -1,0 +1,645 @@
+{
+  "version": 1,
+  "id": "floorkit.shower-level-access",
+  "labelName": "Level-Access Shower",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 1.2,
+    "depth": 1.2,
+    "height": 2.01
+  },
+  "metadata": {
+    "catalog:version": "2.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "shower, level access, accessible, wet room, bathroom",
+    "catalog:note": "Level-access shower: a wet area 1.20 x 1.20; its floor finish, 0.010 thick, is let into the floor (recess), face level with the room floor, and a square gully lies flush in a cut through it; falls in plan only. A fold-down seat, 0.45 x 0.40 with rounded front corners, on two brackets, seat 0.48; a valve centred 0.90 above the floor; a riser rail to 2.00 and a handset on the back wall (wallFace). Rail and handset build as prisms. A mirrored copy keeps the off-centre anchors and ports in place.",
+    "catalog:basedOn": "Approved Document M Vol 2 (2015, 2024 amendments, GOV.UK) 5.18(q): shower controls 750 to 1000mm above the floor (said of communal areas), valve centred 0.90; wet area 1.20 x 1.20 and seat 0.48 (BS 8300-2, not read) and other sizes practice, unverified; ports BS EN 12056-2 via the standard, not read",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "SHOWER",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:gully": "metal",
+    "mat:seat": "surface",
+    "mat:valve": "metal",
+    "mat:riser-rail": "metal",
+    "mat:handset": "metal",
+    "mat:floorSlab": "ceramic",
+    "mat:bracket": "frame"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          0.1,
+          0.9,
+          -0.55
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          -0.3,
+          0.48,
+          -0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.13,
+          0.9,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0.07,
+          0.9,
+          -0.6
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          -0.01,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
+  "definitions": {
+    "floorBase": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        -0.005,
+        0
+      ],
+      "width": 1.2,
+      "height": 0.01,
+      "depth": 1.2
+    },
+    "gullyCut": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        -0.005,
+        0
+      ],
+      "width": 0.15,
+      "height": 0.03,
+      "depth": 0.15
+    },
+    "floorSlab": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "floorBase",
+      "operandRefs": [
+        "gullyCut"
+      ],
+      "color": "#f2f1ec"
+    },
+    "bracket": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.35,
+        -0.45
+      ],
+      "width": 0.02,
+      "height": 0.2,
+      "depth": 0.3
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.6,
+            -0.6
+          ],
+          [
+            0.6,
+            -0.6
+          ],
+          [
+            0.6,
+            0.6
+          ],
+          [
+            -0.6,
+            0.6
+          ]
+        ]
+      },
+      {
+        "id": "gully",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.075,
+            -0.075
+          ],
+          [
+            0.075,
+            -0.075
+          ],
+          [
+            0.075,
+            0.075
+          ],
+          [
+            -0.075,
+            0.075
+          ]
+        ]
+      },
+      {
+        "id": "seat",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.525,
+            -0.6
+          ],
+          [
+            -0.075,
+            -0.6
+          ],
+          [
+            -0.075,
+            -0.25
+          ],
+          [
+            -0.07576,
+            -0.241318
+          ],
+          [
+            -0.078015,
+            -0.232899
+          ],
+          [
+            -0.081699,
+            -0.225
+          ],
+          [
+            -0.086698,
+            -0.217861
+          ],
+          [
+            -0.092861,
+            -0.211698
+          ],
+          [
+            -0.1,
+            -0.206699
+          ],
+          [
+            -0.107899,
+            -0.203015
+          ],
+          [
+            -0.116318,
+            -0.20076
+          ],
+          [
+            -0.125,
+            -0.2
+          ],
+          [
+            -0.475,
+            -0.2
+          ],
+          [
+            -0.483682,
+            -0.20076
+          ],
+          [
+            -0.492101,
+            -0.203015
+          ],
+          [
+            -0.5,
+            -0.206699
+          ],
+          [
+            -0.507139,
+            -0.211698
+          ],
+          [
+            -0.513302,
+            -0.217861
+          ],
+          [
+            -0.518301,
+            -0.225
+          ],
+          [
+            -0.521985,
+            -0.232899
+          ],
+          [
+            -0.52424,
+            -0.241318
+          ],
+          [
+            -0.525,
+            -0.25
+          ]
+        ]
+      },
+      {
+        "id": "fall-1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.2,
+            -0.2
+          ],
+          [
+            -0.075,
+            -0.075
+          ]
+        ]
+      },
+      {
+        "id": "fall-2",
+        "kind": "polyline",
+        "points": [
+          [
+            0.6,
+            -0.6
+          ],
+          [
+            0.075,
+            -0.075
+          ]
+        ]
+      },
+      {
+        "id": "fall-3",
+        "kind": "polyline",
+        "points": [
+          [
+            0.6,
+            0.6
+          ],
+          [
+            0.075,
+            0.075
+          ]
+        ]
+      },
+      {
+        "id": "fall-4",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.6,
+            0.6
+          ],
+          [
+            -0.075,
+            0.075
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "floor",
+        "ref": "floorSlab"
+      },
+      {
+        "id": "gully",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          -0.005,
+          0
+        ],
+        "width": 0.15,
+        "height": 0.01,
+        "depth": 0.15
+      },
+      {
+        "id": "seat",
+        "kind": "sweep",
+        "color": "#d8d2c4",
+        "path": [
+          [
+            -0.3,
+            0.45,
+            -0.4
+          ],
+          [
+            -0.3,
+            0.48,
+            -0.4
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.225,
+            -0.2
+          ],
+          "segments": [
+            {
+              "to": [
+                0.225,
+                -0.2
+              ]
+            },
+            {
+              "to": [
+                0.225,
+                0.15
+              ]
+            },
+            {
+              "to": [
+                0.175,
+                0.2
+              ],
+              "arc": {
+                "center": [
+                  0.175,
+                  0.15
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.175,
+                0.2
+              ]
+            },
+            {
+              "to": [
+                -0.225,
+                0.15
+              ],
+              "arc": {
+                "center": [
+                  -0.175,
+                  0.15
+                ],
+                "counterClockwise": false
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "bracket-left",
+        "ref": "bracket",
+        "placement": {
+          "position": [
+            -0.5,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bracket-right",
+        "ref": "bracket",
+        "placement": {
+          "position": [
+            -0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "valve",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0.1,
+          0.9,
+          -0.575
+        ],
+        "width": 0.12,
+        "height": 0.1,
+        "depth": 0.05
+      },
+      {
+        "id": "riser-rail",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0.35,
+          1.4,
+          -0.588
+        ],
+        "radius": 0.012,
+        "height": 1.2
+      },
+      {
+        "id": "handset",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0.35,
+          1.5,
+          -0.546
+        ],
+        "radius": 0.03,
+        "height": 0.2
+      }
+    ]
+  }
+}

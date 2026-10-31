@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "id": "floorkit.bar-stool",
+  "labelName": "Bar Stool",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.38,
+    "depth": 0.38,
+    "height": 0.75
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "seating",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:tags": "stool, bar, kitchen",
+    "catalog:note": "Bar stool for a bar of 1.10 to 1.15 (unverified). seat 0.75. A round footrest disc on the column, a base disc on the floor.",
+    "catalog:basedOn": "Drafting standard key dimensions (practice, Neufert / Metric Handbook), unverified",
+    "ifc:class": "IfcFurniture",
+    "ifc:predefinedType": "CHAIR",
+    "mat:base-disc": "frame",
+    "mat:column-lower": "frame",
+    "mat:footrest": "metal",
+    "mat:column-upper": "frame",
+    "mat:seat": "soft"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "seatCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.75,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "seating-point"
+      }
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "seat-a",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.19,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "seat-b",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.19,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "base-disc",
+        "kind": "cylinder",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.01,
+          0
+        ],
+        "radius": 0.17,
+        "height": 0.02
+      },
+      {
+        "id": "column-lower",
+        "kind": "cylinder",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.15,
+          0
+        ],
+        "radius": 0.025,
+        "height": 0.26
+      },
+      {
+        "id": "footrest",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.29,
+          0
+        ],
+        "radius": 0.16,
+        "height": 0.02
+      },
+      {
+        "id": "column-upper",
+        "kind": "cylinder",
+        "color": "#7a5c3e",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "radius": 0.025,
+        "height": 0.4
+      },
+      {
+        "id": "seat",
+        "kind": "cylinder",
+        "color": "#9fb0c4",
+        "center": [
+          0,
+          0.725,
+          0
+        ],
+        "radius": 0.19,
+        "height": 0.05
+      }
+    ]
+  }
+}

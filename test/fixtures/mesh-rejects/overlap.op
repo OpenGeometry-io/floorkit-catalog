@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "id": "fixture.overlap",
+  "labelName": "Overlapping Boxes",
+  "type": "FURNITURE",
+  "dimensions": {
+    "width": 0.4,
+    "depth": 0.4,
+    "height": 0.5
+  },
+  "placement": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "metadata": {
+    "catalog:version": "1.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "other",
+    "catalog:note": "Kick inside the carcass: overlap carcass+kick."
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "footprint",
+        "kind": "polygon",
+        "vertices": [
+          [
+            -0.2,
+            -0.2
+          ],
+          [
+            0.2,
+            -0.2
+          ],
+          [
+            0.2,
+            0.2
+          ],
+          [
+            -0.2,
+            0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "carcass",
+        "kind": "cuboid",
+        "center": [
+          0,
+          0.25,
+          0
+        ],
+        "width": 0.4,
+        "height": 0.5,
+        "depth": 0.4
+      },
+      {
+        "id": "kick",
+        "kind": "cuboid",
+        "center": [
+          0,
+          0.05,
+          0.05
+        ],
+        "width": 0.3,
+        "height": 0.1,
+        "depth": 0.3
+      }
+    ]
+  }
+}

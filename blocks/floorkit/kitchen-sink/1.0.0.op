@@ -4,26 +4,9 @@
   "labelName": "Kitchen Sink",
   "type": "FIXTURE",
   "dimensions": {
-    "width": 0.6,
+    "width": 0.86,
     "depth": 0.5,
-    "height": 0.2
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
+    "height": 0.44
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,13 +14,19 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "kitchen",
     "catalog:placement": "free",
-    "catalog:tags": "sink",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/kitchen/sink.op#catalog-kitchen-sink",
-    "catalog:note": "Dropped into a counter run; not scaled with the run.",
+    "catalog:lod": "300",
+    "catalog:tags": "sink, inset sink, drainer, kitchen",
+    "catalog:note": "Inset sink with one bowl and a drainer, set into a worktop at 0.90. rim 0.92. Bowl 0.40 x 0.34, 0.18 deep, as a rim plate with a through-hole and a liner below it. The tap stem and spout are thin and build as polygonal prisms. Bowl and tap sit left of centre: a mirrored copy keeps drainCenter, faucetMount and the ports where they are.",
+    "catalog:basedOn": "EN 1116 sizes as given in the drafting standard key dimensions (sink 0.86 x 0.50, bowl 0.40 x 0.34 x 0.18, worktop 0.90); ports BS EN 12056-2 via the standard; sources not read, unverified",
     "ifc:class": "IfcSanitaryTerminal",
     "ifc:predefinedType": "SINK",
-    "mat:bowl": "metal",
-    "mat:tap": "metal"
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:plate": "ceramic",
+    "mat:bowlSide": "ceramic",
+    "mat:bowlEnd": "ceramic",
+    "mat:bowlFloor": "ceramic",
+    "mat:tapStem": "metal",
+    "mat:tapSpout": "metal"
   },
   "anchors": {
     "base": {
@@ -57,6 +46,9 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
     },
     "wallFace": {
@@ -80,117 +72,301 @@
       "metadata": {
         "role": "wall-contact"
       }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          -0.19,
+          0.74,
+          0.02
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    },
+    "faucetMount": {
+      "placement": {
+        "position": [
+          -0.19,
+          0.92,
+          -0.2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "tap-mount"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.175,
+          0.9,
+          -0.2
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "dhw",
+      "domain": "piping",
+      "systemType": "domesticHotWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          -0.205,
+          0.9,
+          -0.2
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    },
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          -0.19,
+          0.73,
+          0.02
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    }
+  ],
+  "definitions": {
+    "plateBase": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.91,
+        0
+      ],
+      "width": 0.86,
+      "height": 0.02,
+      "depth": 0.5
+    },
+    "bowlCut": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        -0.19,
+        0.91,
+        0.02
+      ],
+      "width": 0.4,
+      "height": 0.04,
+      "depth": 0.34
+    },
+    "plate": {
+      "kind": "boolean3d",
+      "operation": "subtract",
+      "baseRef": "plateBase",
+      "operandRefs": [
+        "bowlCut"
+      ],
+      "color": "#f2f1ec"
+    },
+    "bowlSide": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.82,
+        0.02
+      ],
+      "width": 0.01,
+      "height": 0.16,
+      "depth": 0.34
+    },
+    "bowlEnd": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.82,
+        0
+      ],
+      "width": 0.42,
+      "height": 0.16,
+      "depth": 0.01
     }
   },
   "profileView": {
     "elements": [
       {
-        "id": "bowl",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#9aa0a6",
         "vertices": [
           [
-            0.24,
-            0.16
+            -0.43,
+            -0.25
           ],
           [
-            0.2377,
-            0.1715
+            0.43,
+            -0.25
           ],
           [
-            0.2312,
-            0.1812
+            0.43,
+            0.25
           ],
           [
-            0.2215,
-            0.1877
-          ],
-          [
-            0.21,
-            0.19
-          ],
-          [
-            -0.21,
-            0.19
-          ],
-          [
-            -0.2215,
-            0.1877
-          ],
-          [
-            -0.2312,
-            0.1812
-          ],
-          [
-            -0.2377,
-            0.1715
-          ],
-          [
-            -0.24,
-            0.16
-          ],
-          [
-            -0.24,
-            -0.16
-          ],
-          [
-            -0.2377,
-            -0.1715
-          ],
-          [
-            -0.2312,
-            -0.1812
-          ],
-          [
-            -0.2215,
-            -0.1877
-          ],
-          [
-            -0.21,
-            -0.19
-          ],
-          [
-            0.21,
-            -0.19
-          ],
-          [
-            0.2215,
-            -0.1877
-          ],
-          [
-            0.2312,
-            -0.1812
-          ],
-          [
-            0.2377,
-            -0.1715
-          ],
-          [
-            0.24,
-            -0.16
+            -0.43,
+            0.25
           ]
         ]
       },
       {
-        "id": "tap",
+        "id": "bowl",
         "kind": "polygon",
-        "color": "#b9bcc0",
         "vertices": [
           [
-            -0.03,
-            -0.23
+            -0.39,
+            -0.15
           ],
           [
-            0.03,
-            -0.23
+            0.01,
+            -0.15
           ],
           [
-            0.03,
-            -0.18
+            0.01,
+            0.19
           ],
           [
-            -0.03,
-            -0.18
+            -0.39,
+            0.19
+          ]
+        ]
+      },
+      {
+        "id": "tapRight",
+        "kind": "arc",
+        "center": [
+          -0.19,
+          -0.2
+        ],
+        "radius": 0.015,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "tapLeft",
+        "kind": "arc",
+        "center": [
+          -0.19,
+          -0.2
+        ],
+        "radius": 0.015,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "grooveBack",
+        "kind": "polyline",
+        "points": [
+          [
+            0.06,
+            -0.06
+          ],
+          [
+            0.37,
+            -0.06
+          ]
+        ]
+      },
+      {
+        "id": "grooveMiddle",
+        "kind": "polyline",
+        "points": [
+          [
+            0.06,
+            0.02
+          ],
+          [
+            0.37,
+            0.02
+          ]
+        ]
+      },
+      {
+        "id": "grooveFront",
+        "kind": "polyline",
+        "points": [
+          [
+            0.06,
+            0.1
+          ],
+          [
+            0.37,
+            0.1
           ]
         ]
       }
@@ -199,30 +375,146 @@
   "modelView": {
     "elements": [
       {
-        "id": "bowl",
-        "kind": "cuboid",
-        "color": "#9aa0a6",
-        "center": [
-          0,
-          0.83,
-          0
-        ],
-        "width": 0.48,
-        "height": 0.16,
-        "depth": 0.38
+        "id": "plate",
+        "ref": "plate"
       },
       {
-        "id": "tap",
+        "id": "bowlSideLeft",
+        "ref": "bowlSide",
+        "placement": {
+          "position": [
+            -0.395,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bowlSideRight",
+        "ref": "bowlSide",
+        "placement": {
+          "position": [
+            0.015,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bowlEndBack",
+        "ref": "bowlEnd",
+        "placement": {
+          "position": [
+            -0.19,
+            0,
+            -0.155
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bowlEndFront",
+        "ref": "bowlEnd",
+        "placement": {
+          "position": [
+            -0.19,
+            0,
+            0.195
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "bowlFloor",
         "kind": "cuboid",
-        "color": "#b9bcc0",
+        "color": "#f2f1ec",
         "center": [
-          0,
-          1.02,
+          -0.19,
+          0.735,
+          0.02
+        ],
+        "width": 0.42,
+        "height": 0.01,
+        "depth": 0.36
+      },
+      {
+        "id": "tapStem",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          -0.19,
+          1.045,
           -0.2
         ],
-        "width": 0.05,
-        "height": 0.22,
-        "depth": 0.05
+        "radius": 0.015,
+        "height": 0.25
+      },
+      {
+        "id": "tapSpout",
+        "kind": "cylinder",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.01,
+        "height": 0.2,
+        "placement": {
+          "position": [
+            -0.19,
+            1.16,
+            -0.085
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }

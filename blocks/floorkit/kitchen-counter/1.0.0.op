@@ -1,29 +1,12 @@
 {
   "version": 1,
   "id": "floorkit.kitchen-counter",
-  "labelName": "Kitchen Counter",
+  "labelName": "Kitchen Island",
   "type": "FURNITURE",
   "dimensions": {
-    "width": 2.4,
-    "depth": 0.65,
-    "height": 1.45
-  },
-  "placement": {
-    "position": [
-      0,
-      0,
-      0
-    ],
-    "rotation": [
-      0,
-      0,
-      0
-    ],
-    "scale": [
-      1,
-      1,
-      1
-    ]
+    "width": 1.8,
+    "depth": 0.9,
+    "height": 0.9
   },
   "metadata": {
     "catalog:version": "1.0.0",
@@ -31,12 +14,17 @@
     "catalog:attribution": "Vishwajeet Mane",
     "catalog:category": "kitchen",
     "catalog:placement": "free",
-    "catalog:tags": "counter, worktop",
-    "catalog:basedOn": "OpenGeometry-io/OpenPlans@8a964fb:examples/src/catalog/assets/furnishing/kitchen-counter.op#catalog-furnishing-kitchen-counter",
+    "catalog:lod": "300",
+    "catalog:tags": "island, kitchen island, worktop, breakfast bar, kitchen",
+    "catalog:note": "Freestanding island: three 600 base modules with their doors to the back and a worktop that overhangs the front by 0.30 for seating. top 0.90. Worktop 0.04 on a cabinet with a plinth 0.15 high set back 0.05.",
+    "catalog:basedOn": "EN 1116 co-ordinating sizes as given in the drafting standard key dimensions (600 module, worktop 0.90, worktop 0.04); EN 1116 itself not read, unverified. Island 1.80 x 0.90 is three 600 modules plus a 0.30 overhang, not checked against a published source",
     "ifc:class": "IfcFurniture",
-    "mat:kick": "frame",
-    "mat:hob": "frame",
-    "mat:splashback": "ceramic"
+    "ifc:predefinedType": "USERDEFINED",
+    "mat:plinth": "frame",
+    "mat:carcass": "frame",
+    "mat:worktop": "surface",
+    "mat:door": "frame",
+    "mat:handle": "metal"
   },
   "anchors": {
     "base": {
@@ -56,77 +44,131 @@
           1,
           1
         ]
+      },
+      "metadata": {
+        "role": "floor-contact"
       }
+    },
+    "topCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.9,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "top-surface"
+      }
+    },
+    "serveEdge": {
+      "placement": {
+        "position": [
+          0,
+          0.9,
+          0.45
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "serving-edge"
+      }
+    }
+  },
+  "definitions": {
+    "door": {
+      "kind": "cuboid",
+      "color": "#7a5c3e",
+      "center": [
+        0,
+        0.505,
+        -0.41
+      ],
+      "width": 0.596,
+      "height": 0.704,
+      "depth": 0.02
+    },
+    "handle": {
+      "kind": "cuboid",
+      "color": "#9aa3ab",
+      "center": [
+        0,
+        0.79,
+        -0.4325
+      ],
+      "width": 0.16,
+      "height": 0.02,
+      "depth": 0.025
     }
   },
   "profileView": {
     "elements": [
       {
-        "id": "worktop",
+        "id": "outline",
         "kind": "polygon",
-        "color": "#cfc8bb",
         "vertices": [
           [
-            -1.2,
-            -0.32
+            -0.9,
+            -0.45
           ],
           [
-            1.2,
-            -0.32
+            0.9,
+            -0.45
           ],
           [
-            1.2,
-            0.32
+            0.9,
+            0.45
           ],
           [
-            -1.2,
-            0.32
+            -0.9,
+            0.45
           ]
         ]
       },
       {
-        "id": "hob",
-        "kind": "polygon",
-        "color": "#2b2b2b",
-        "vertices": [
+        "id": "nosing",
+        "kind": "polyline",
+        "points": [
           [
-            0.15,
-            -0.2
+            -0.9,
+            -0.42
           ],
           [
-            0.65,
-            -0.2
-          ],
-          [
-            0.65,
-            0.2
-          ],
-          [
-            0.15,
-            0.2
+            0.9,
+            -0.42
           ]
         ]
       },
       {
-        "id": "sink",
-        "kind": "polygon",
-        "color": "#9aa0a6",
-        "vertices": [
+        "id": "overhang",
+        "kind": "polyline",
+        "points": [
           [
-            -0.7,
-            -0.18
+            -0.9,
+            0.15
           ],
           [
-            -0.3,
-            -0.18
-          ],
-          [
-            -0.3,
-            0.18
-          ],
-          [
-            -0.7,
-            0.18
+            0.9,
+            0.15
           ]
         ]
       }
@@ -135,69 +177,169 @@
   "modelView": {
     "elements": [
       {
-        "id": "base-cabinet",
+        "id": "plinth",
         "kind": "cuboid",
-        "color": "#e8e4dc",
+        "color": "#7a5c3e",
         "center": [
           0,
-          0.45,
-          0
+          0.075,
+          -0.135
         ],
-        "width": 2.4,
-        "height": 0.85,
-        "depth": 0.6
+        "width": 1.7,
+        "height": 0.15,
+        "depth": 0.47
       },
       {
-        "id": "kick",
+        "id": "carcass",
         "kind": "cuboid",
-        "color": "#b9b2a6",
+        "color": "#7a5c3e",
         "center": [
           0,
-          0.05,
-          0.02
+          0.505,
+          -0.125
         ],
-        "width": 2.3,
-        "height": 0.1,
-        "depth": 0.5
+        "width": 1.8,
+        "height": 0.71,
+        "depth": 0.55
       },
       {
         "id": "worktop",
         "kind": "cuboid",
-        "color": "#3a3a3a",
+        "color": "#d8d2c4",
         "center": [
           0,
-          0.9,
+          0.88,
           0
         ],
-        "width": 2.46,
-        "height": 0.05,
-        "depth": 0.64
+        "width": 1.8,
+        "height": 0.04,
+        "depth": 0.9
       },
       {
-        "id": "hob",
-        "kind": "cuboid",
-        "color": "#1d1d1d",
-        "center": [
-          0.4,
-          0.93,
-          0
-        ],
-        "width": 0.5,
-        "height": 0.02,
-        "depth": 0.4
+        "id": "doorLeft",
+        "ref": "door",
+        "placement": {
+          "position": [
+            -0.6,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       {
-        "id": "splashback",
-        "kind": "cuboid",
-        "color": "#d9d4c8",
-        "center": [
-          0,
-          1.2,
-          -0.29
-        ],
-        "width": 2.4,
-        "height": 0.55,
-        "depth": 0.04
+        "id": "doorMiddle",
+        "ref": "door",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "doorRight",
+        "ref": "door",
+        "placement": {
+          "position": [
+            0.6,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handleLeft",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            -0.6,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handleMiddle",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "handleRight",
+        "ref": "handle",
+        "placement": {
+          "position": [
+            0.6,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
       }
     ]
   }
