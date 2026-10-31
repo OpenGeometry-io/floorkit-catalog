@@ -1,0 +1,805 @@
+{
+  "version": 1,
+  "id": "floorkit.wc-accessible",
+  "labelName": "Accessible WC",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.38,
+    "depth": 0.75,
+    "height": 0.8
+  },
+  "metadata": {
+    "catalog:version": "2.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "wc, toilet, accessible, wheelchair, bathroom",
+    "catalog:note": "Accessible close-coupled WC in format v2, a seat and no lid: seat 0.48, rim 0.46, pan front 0.75 from the wall. The pan is an oval of true arcs with a round bowl, two outline sweeps from the wall, on a bowl floor and a foot of the same oval set 0.07 in. The seat is an oval ring on the rim, hinged on a bar behind it. The transfer side and the lever flush are at +x; a mirrored copy keeps flushSide at +x, so mirror it with care. Grab rails are not drawn.",
+    "catalog:basedOn": "Approved Document M and BS 8300-2 via the drafting standard key dimensions: seat 0.48, pan front 0.75 from the wall, from secondary summaries, not the documents; width 0.38 practice, unverified. The oval is the author's. Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "TOILETPAN",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:foot": "ceramic",
+    "mat:bowlFloor": "ceramic",
+    "mat:panLeft": "ceramic",
+    "mat:panRight": "ceramic",
+    "mat:seatLeft": "surface",
+    "mat:seatRight": "surface",
+    "mat:seatHinge": "metal",
+    "mat:cistern": "ceramic",
+    "mat:flushLever": "metal"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.375
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "flushSide": {
+      "placement": {
+        "position": [
+          0.19,
+          0.48,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "transfer-side"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "soil",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.3,
+          -0.375
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.1
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.72,
+          -0.375
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.19,
+            -0.375
+          ],
+          [
+            -0.19,
+            0.069797
+          ]
+        ]
+      },
+      {
+        "id": "outline2",
+        "kind": "arc",
+        "center": [
+          0.21,
+          0.069797
+        ],
+        "radius": 0.4,
+        "startAngle": -3.141593,
+        "sweepAngle": 0.722734
+      },
+      {
+        "id": "outline3",
+        "kind": "arc",
+        "center": [
+          0,
+          0.255
+        ],
+        "radius": 0.12,
+        "startAngle": -2.418858,
+        "sweepAngle": 1.696124
+      },
+      {
+        "id": "outline4",
+        "kind": "arc",
+        "center": [
+          -0.21,
+          0.069797
+        ],
+        "radius": 0.4,
+        "startAngle": -0.722734,
+        "sweepAngle": 0.722734
+      },
+      {
+        "id": "outline5",
+        "kind": "polyline",
+        "points": [
+          [
+            0.19,
+            0.069797
+          ],
+          [
+            0.19,
+            -0.375
+          ],
+          [
+            -0.19,
+            -0.375
+          ]
+        ]
+      },
+      {
+        "id": "cisternFront",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.19,
+            -0.205
+          ],
+          [
+            0.19,
+            -0.205
+          ]
+        ]
+      },
+      {
+        "id": "seatInnerA",
+        "kind": "arc",
+        "center": [
+          0,
+          0.185
+        ],
+        "radius": 0.11,
+        "startAngle": 0,
+        "sweepAngle": 3.14159265
+      },
+      {
+        "id": "seatInnerB",
+        "kind": "arc",
+        "center": [
+          0,
+          0.185
+        ],
+        "radius": 0.11,
+        "startAngle": 3.14159265,
+        "sweepAngle": 3.14159265
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "foot",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0.24,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.12,
+            -0.375
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.12,
+                0.06979740822547864
+              ]
+            },
+            {
+              "to": [
+                -0.037500000000000006,
+                0.28807189138830736
+              ],
+              "arc": {
+                "center": [
+                  0.21000000000000002,
+                  0.06979740822547864
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.037500000000000006,
+                0.28807189138830736
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.255
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.12,
+                0.06979740822547864
+              ],
+              "arc": {
+                "center": [
+                  -0.21000000000000002,
+                  0.06979740822547864
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.12,
+                -0.375
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "bowlFloor",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.24,
+            0
+          ],
+          [
+            0,
+            0.26,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.19,
+            -0.375
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.19,
+                0.06979740822547864
+              ]
+            },
+            {
+              "to": [
+                -0.09000000000000002,
+                0.3343725393319377
+              ],
+              "arc": {
+                "center": [
+                  0.21000000000000002,
+                  0.06979740822547864
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.09000000000000002,
+                0.3343725393319377
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.255
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.19,
+                0.06979740822547864
+              ],
+              "arc": {
+                "center": [
+                  -0.21000000000000002,
+                  0.06979740822547864
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.19,
+                -0.375
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "panLeft",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.26,
+            0
+          ],
+          [
+            0,
+            0.46,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0,
+            0.375
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.09000000000000002,
+                0.3343725393319377
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.255
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.19,
+                0.06979740822547864
+              ],
+              "arc": {
+                "center": [
+                  0.21000000000000002,
+                  0.06979740822547864
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.19,
+                -0.375
+              ]
+            },
+            {
+              "to": [
+                0,
+                -0.375
+              ]
+            },
+            {
+              "to": [
+                0,
+                0.044999999999999984
+              ]
+            },
+            {
+              "to": [
+                0,
+                0.325
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.185
+                ],
+                "counterClockwise": true
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "panRight",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.26,
+            0
+          ],
+          [
+            0,
+            0.46,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0,
+            0.325
+          ],
+          "segments": [
+            {
+              "to": [
+                0,
+                0.044999999999999984
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.185
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0,
+                -0.375
+              ]
+            },
+            {
+              "to": [
+                0.19,
+                -0.375
+              ]
+            },
+            {
+              "to": [
+                0.19,
+                0.06979740822547864
+              ]
+            },
+            {
+              "to": [
+                0.09000000000000002,
+                0.3343725393319377
+              ],
+              "arc": {
+                "center": [
+                  -0.21000000000000002,
+                  0.06979740822547864
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0,
+                0.375
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.255
+                ],
+                "counterClockwise": false
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "seatLeft",
+        "kind": "sweep",
+        "color": "#d8d2c4",
+        "path": [
+          [
+            0,
+            0.46,
+            0
+          ],
+          [
+            0,
+            0.48,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0,
+            0.375
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.09000000000000002,
+                0.3343725393319377
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.255
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.19,
+                0.06979740822547864
+              ],
+              "arc": {
+                "center": [
+                  0.21000000000000002,
+                  0.06979740822547864
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.19,
+                -0.08
+              ]
+            },
+            {
+              "to": [
+                0,
+                -0.08
+              ]
+            },
+            {
+              "to": [
+                0,
+                0.075
+              ]
+            },
+            {
+              "to": [
+                0,
+                0.295
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.185
+                ],
+                "counterClockwise": true
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "seatRight",
+        "kind": "sweep",
+        "color": "#d8d2c4",
+        "path": [
+          [
+            0,
+            0.46,
+            0
+          ],
+          [
+            0,
+            0.48,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            0,
+            0.295
+          ],
+          "segments": [
+            {
+              "to": [
+                0,
+                0.075
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.185
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0,
+                -0.08
+              ]
+            },
+            {
+              "to": [
+                0.19,
+                -0.08
+              ]
+            },
+            {
+              "to": [
+                0.19,
+                0.06979740822547864
+              ]
+            },
+            {
+              "to": [
+                0.09000000000000002,
+                0.3343725393319377
+              ],
+              "arc": {
+                "center": [
+                  -0.21000000000000002,
+                  0.06979740822547864
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                0,
+                0.375
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0.255
+                ],
+                "counterClockwise": false
+              }
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "seatHinge",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0,
+          0.475,
+          -0.1
+        ],
+        "width": 0.16,
+        "height": 0.03,
+        "depth": 0.04
+      },
+      {
+        "id": "cistern",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.63,
+          -0.29
+        ],
+        "width": 0.38,
+        "height": 0.34,
+        "depth": 0.17
+      },
+      {
+        "id": "flushLever",
+        "kind": "cuboid",
+        "color": "#9aa3ab",
+        "center": [
+          0.12,
+          0.75,
+          -0.195
+        ],
+        "width": 0.1,
+        "height": 0.02,
+        "depth": 0.02
+      }
+    ]
+  }
+}

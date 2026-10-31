@@ -1,0 +1,425 @@
+{
+  "version": 1,
+  "id": "floorkit.urinal",
+  "labelName": "Urinal",
+  "type": "FIXTURE",
+  "dimensions": {
+    "width": 0.35,
+    "depth": 0.35,
+    "height": 0.65
+  },
+  "metadata": {
+    "catalog:version": "2.0.0",
+    "catalog:license": "CC-BY-4.0",
+    "catalog:attribution": "Vishwajeet Mane",
+    "catalog:category": "sanitary",
+    "catalog:placement": "free",
+    "catalog:lod": "300",
+    "catalog:format": "2",
+    "catalog:tags": "urinal, wall-hung, washroom",
+    "catalog:note": "Wall-hung urinal in format v2: a back panel; a half-round bowl 0.35 deep from the wall, its wall a U of true arcs (an outline sweep) on a floor of a box and a half-round cylinder sector; and above it a hood of two cheeks and a top, stepped back to 0.175 from the wall. bottom 0.35, rim 0.60. The hood is stepped, not sloped.",
+    "catalog:basedOn": "0.35 x 0.35 x 0.65, bottom 0.35 and rim 0.60 are generic practice sizes, not checked against a published source (unverified). Port sizes from the drafting standard (BS EN 12056-2 conventions), unverified",
+    "ifc:class": "IfcSanitaryTerminal",
+    "ifc:predefinedType": "URINAL",
+    "ifcClass": "IfcSanitaryTerminal",
+    "mat:backPanel": "ceramic",
+    "mat:floorBack": "ceramic",
+    "mat:floorFront": "ceramic",
+    "mat:bowlWall": "ceramic",
+    "mat:hoodCheek": "ceramic",
+    "mat:hoodTop": "ceramic"
+  },
+  "anchors": {
+    "base": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "floor-contact"
+      }
+    },
+    "wallFace": {
+      "placement": {
+        "position": [
+          0,
+          0,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "wall-contact"
+      }
+    },
+    "drainCenter": {
+      "placement": {
+        "position": [
+          0,
+          0.4,
+          0.015
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "metadata": {
+        "role": "drain-point"
+      }
+    }
+  },
+  "ports": [
+    {
+      "id": "waste",
+      "domain": "piping",
+      "systemType": "drainage",
+      "flowDirection": "source",
+      "placement": {
+        "position": [
+          0,
+          0.38,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.04
+      }
+    },
+    {
+      "id": "dcw",
+      "domain": "piping",
+      "systemType": "domesticColdWater",
+      "flowDirection": "sink",
+      "placement": {
+        "position": [
+          0,
+          0.95,
+          -0.175
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "profile": {
+        "shape": "round",
+        "diameter": 0.015
+      }
+    }
+  ],
+  "definitions": {
+    "hoodCheek": {
+      "kind": "cuboid",
+      "color": "#f2f1ec",
+      "center": [
+        0,
+        0.8,
+        -0.0725
+      ],
+      "width": 0.03,
+      "height": 0.4,
+      "depth": 0.145
+    }
+  },
+  "profileView": {
+    "elements": [
+      {
+        "id": "outline1",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.175,
+            -0.175
+          ],
+          [
+            -0.175,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "outline2",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.175,
+        "startAngle": -3.141593,
+        "sweepAngle": 3.141593
+      },
+      {
+        "id": "outline3",
+        "kind": "polyline",
+        "points": [
+          [
+            0.175,
+            0
+          ],
+          [
+            0.175,
+            -0.175
+          ],
+          [
+            -0.175,
+            -0.175
+          ]
+        ]
+      },
+      {
+        "id": "hoodFront",
+        "kind": "polyline",
+        "points": [
+          [
+            -0.175,
+            0
+          ],
+          [
+            0.175,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "bowl1",
+        "kind": "arc",
+        "center": [
+          0,
+          0
+        ],
+        "radius": 0.145,
+        "startAngle": 0,
+        "sweepAngle": -3.141593
+      }
+    ]
+  },
+  "modelView": {
+    "elements": [
+      {
+        "id": "backPanel",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.675,
+          -0.16
+        ],
+        "width": 0.35,
+        "height": 0.65,
+        "depth": 0.03
+      },
+      {
+        "id": "floorBack",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.375,
+          -0.0725
+        ],
+        "width": 0.35,
+        "height": 0.05,
+        "depth": 0.145
+      },
+      {
+        "id": "floorFront",
+        "kind": "cylinder",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.375,
+          0
+        ],
+        "radius": 0.175,
+        "height": 0.05,
+        "angle": 3.14159265,
+        "startAngle": 3.14159265
+      },
+      {
+        "id": "bowlWall",
+        "kind": "sweep",
+        "color": "#f2f1ec",
+        "path": [
+          [
+            0,
+            0.4,
+            0
+          ],
+          [
+            0,
+            0.6,
+            0
+          ]
+        ],
+        "profile": {
+          "start": [
+            -0.175,
+            -0.145
+          ],
+          "segments": [
+            {
+              "to": [
+                -0.175,
+                0
+              ]
+            },
+            {
+              "to": [
+                0.175,
+                0
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": true
+              }
+            },
+            {
+              "to": [
+                0.175,
+                -0.145
+              ]
+            },
+            {
+              "to": [
+                0.145,
+                -0.145
+              ]
+            },
+            {
+              "to": [
+                0.145,
+                0
+              ]
+            },
+            {
+              "to": [
+                -0.145,
+                0
+              ],
+              "arc": {
+                "center": [
+                  0,
+                  0
+                ],
+                "counterClockwise": false
+              }
+            },
+            {
+              "to": [
+                -0.145,
+                -0.145
+              ]
+            }
+          ],
+          "closed": true
+        },
+        "capStart": true,
+        "capEnd": true
+      },
+      {
+        "id": "hoodCheekLeft",
+        "ref": "hoodCheek",
+        "placement": {
+          "position": [
+            -0.16,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hoodCheekRight",
+        "ref": "hoodCheek",
+        "placement": {
+          "position": [
+            0.16,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": "hoodTop",
+        "kind": "cuboid",
+        "color": "#f2f1ec",
+        "center": [
+          0,
+          0.985,
+          -0.0725
+        ],
+        "width": 0.29,
+        "height": 0.03,
+        "depth": 0.145
+      }
+    ]
+  }
+}

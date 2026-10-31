@@ -343,6 +343,35 @@
       "contentHash": "52f90b7fa73613b19423db35e9a718620cea5d419f4b8a6be983098c4bfa6be1"
     },
     {
+      "id": "floorkit.bidet",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "bidet",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Bidet",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "bidet",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.37,
+        "depth": 0.56,
+        "height": 0.48
+      },
+      "path": "blocks/floorkit/bidet/2.0.0.op",
+      "bytes": 13455,
+      "sha256": "4937ec4107dccf19bb6b5533614f255d54bb30700c9d5ef44d0c4baa9a0ab2c1",
+      "contentHash": "37c2becaa6b7c6db896ac8e74b9dcb2ab0db83452efcd0eab790260a49243bf8"
+    },
+    {
       "id": "floorkit.boiler",
       "publisher": {
         "id": "floorkit",
@@ -2254,6 +2283,36 @@
       "contentHash": "d3d0260649b7a8e061b3d799a083433e4461800f2f3aa9816ef315ad1e990530"
     },
     {
+      "id": "floorkit.urinal",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "urinal",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Urinal",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "urinal",
+        "wall-hung",
+        "washroom"
+      ],
+      "dimensions": {
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.65
+      },
+      "path": "blocks/floorkit/urinal/2.0.0.op",
+      "bytes": 8065,
+      "sha256": "6e71912a5f3402da54138ec7216e6a893afb24d54e5aab105cc7e8d0c3c74e53",
+      "contentHash": "638c39c5779151ee894b3370416ec9f34b031d1c1d35c7d73ee3dfb4b6bf4c90"
+    },
+    {
       "id": "floorkit.wall-light",
       "publisher": {
         "id": "floorkit",
@@ -2376,6 +2435,37 @@
       "bytes": 27016,
       "sha256": "e65efa418a6e212a347aad183ae1376475ccbad123cd3ee7130f9eeb37272b0f",
       "contentHash": "91bfbd24c7b6995d25407a1374d413b2bceebcfd731fe1610ff4c60f5213005b"
+    },
+    {
+      "id": "floorkit.wash-basin",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wash-basin",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Wash Basin",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "basin",
+        "wash basin",
+        "pedestal",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.55,
+        "depth": 0.45,
+        "height": 0.97
+      },
+      "path": "blocks/floorkit/wash-basin/2.0.0.op",
+      "bytes": 12341,
+      "sha256": "290c0b219d7fd3ed61c7de23979c7955944ebac9f4897998b73e1dab8c945179",
+      "contentHash": "f7c15bac9152073d3037f8a497794415d2e2461a32325867939140eb78f536d7"
     },
     {
       "id": "floorkit.washing-machine",
@@ -2530,6 +2620,38 @@
       "bytes": 26982,
       "sha256": "91ed018a36bc085e838c2fedc326784ebfd0c8e1e95a5665ed92dcd91a265594",
       "contentHash": "d1d61c81310909420d2bd4101f410efe7850138561e1ea1b4d0ff34b58300f89"
+    },
+    {
+      "id": "floorkit.wc-accessible",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "wc-accessible",
+      "version": "2.0.0",
+      "format": 2,
+      "labelName": "Accessible WC",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "wc",
+        "toilet",
+        "accessible",
+        "wheelchair",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.38,
+        "depth": 0.75,
+        "height": 0.8
+      },
+      "path": "blocks/floorkit/wc-accessible/2.0.0.op",
+      "bytes": 16653,
+      "sha256": "56cee397f521da754c761e8e0f75dc705c0d13470211e320f5b346bea17d3303",
+      "contentHash": "852efc3f19ea9d9e404d36e62ec983c93f69d864ce32e0f5627189f575cee858"
     },
     {
       "id": "floorkit.wc-wall-hung",
