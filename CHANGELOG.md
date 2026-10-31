@@ -16,7 +16,7 @@ The first release, tagged at the public launch ([docs/LAUNCH.md](docs/LAUNCH.md)
 
 #### 80 blocks
 
-Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier `official`), licensed CC BY 4.0 with `catalog:attribution` "Vishwajeet Mane", and drawn by hand to LOD 300 (`catalog:lod` `"300"`) to the [drafting standard](docs/drafting-standard.md). Per category, counted from `index.json`:
+Every block has a `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier `official`), licensed CC BY 4.0 with `catalog:attribution` "Vishwajeet Mane", and drawn by hand to LOD 300 (`catalog:lod` `"300"`) to the [drafting standard](docs/drafting-standard.md). Per category, counted from `index.json`:
 
 | Category | Blocks | Slugs |
 | --- | --- | --- |
@@ -35,6 +35,8 @@ Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier 
 | `other` | 3 | `turning-circle-1500`, `wheelchair`, `wheelchair-space` |
 | | **80** | |
 
+- **Format v2 versions.** 11 of the 80 blocks also have a `2.0.0.op` drawn on [format v2](docs/format-v2.md), beside their unchanged `1.0.0.op`, so `index.json` has 91 entries: `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible` and `wc-wall-hung`.
+
 - **Where they come from.** The catalog was seeded by importing the 26 files of the Floorkit SDK's example catalog. Before this tag, 23 of them were redrawn in place at `1.0.0` to the drafting standard, and three were deleted:
   - `rectangular-bathtub`: `bathtub` absorbs it, and keeps its drain and tap anchors;
   - `wc-and-basin`: a bundle of two fixtures, replaced by the separate WCs and basins;
@@ -50,7 +52,7 @@ Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier 
   - `wc-accessible`: the pan is a D of two straight sweeps, with no crevices; a D seat with a hinge bar replaces the full-width seat back, and the lid pad is gone.
 - **`catalog:basedOn`** names the standard, data sheet or reference a block's dimensions come from, and says "unverified" where a size was not checked against a published source.
 - **Ports and IFC.** 31 blocks have ports. Each of them also sets the legacy `ifcClass`, equal to `ifc:class`, because Floorkit's distribution export reads only that key ([format §11](docs/format-v1.md#11-advisory-notes)).
-- **AI assistance.** Every commit that drew or redrew blocks for this release is co-authored by an AI assistant (Claude), as its `Co-Authored-By:` trailer says, and was reviewed against the standard. Whether such content is protected by copyright is unsettled. This is not legal advice.
+- **AI assistance.** The blocks, tools and documents of this release were drafted with an AI assistant (Claude) and reviewed against the standard. The commits up to 2026-10-27 say so in a `Co-Authored-By:` trailer: 24 of the first 25 (the one without is a merge). The commits of 2026-10-31 (FLO-277, FLO-278, FLO-279, FLO-280, FLO-281, FLO-328) carry no trailer, by the owner's rule for that run, and are AI-assisted too; each pull request says which parts the AI drafted. Whether such content is protected by copyright is unsettled. This is not legal advice.
 - **Redrawn on format v2 (FLO-280).** `wc`, `wc-wall-hung`, `cloakroom-basin` and `basin-accessible` have a `2.0.0.op` beside their `1.0.0.op`, which stays unchanged:
   - the WC pans are oval outline sweeps, hollowed by a `shell` 0.015 thick whose top is opened by a round cylinder cut; the floor-standing WC stands on an oval pedestal that follows the pan, and each seat is two half rings that meet on the centre line;
   - the basin rims are D-shaped outline sweeps, drawn as two half rims, over a bowl that is a `revolve` of an outline with its 0.012 wall in chords, the waste hole the gap at its axis, filled by a metal waste;
@@ -82,9 +84,9 @@ Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier 
 - **The geometry gates** (`tools/lib/geometry.mjs`, `tools/lib/note.mjs`, `tools/lib/roles.mjs`) hold every block to the drafting standard from its JSON alone, so CI runs them ([format §9](docs/format-v1.md#9-limits-and-why)): dimensions equal to the body's extent; nothing below the floor unless the note says `recess`; the plan under the body; every solid connected to a ground; at LOD 300, at least 3 solids filling under 95 % of their bounding box; anchors and ports on the body; note heights on exposed faces; a `mat:` role for every model node; full cylinders only; `catalog:lod` `300` for a `floorkit` block; anchor names and roles, and port ids, from the standard's tables; and `ifc:class` on every block.
 - **`schema/index/v1.schema.json`**: the generated index, `"schema": "floorkit.catalog/v1"`.
 - **[docs/format-v1.md](docs/format-v1.md)**: the format reference, with the Floorkit facts at OpenPlans `main` `b0a084c7` (package 1.2.0).
-- **Format v2** ([docs/format-v2.md](docs/format-v2.md), [RFC 0004](docs/rfcs/0004-format-v2.md)): the Floorkit 3.0 node kinds `sphere`, `cone`, `torus`, `revolve`, `shell` (in `definitions`), the cylinder sector (`angle`, `startAngle`) and the outline sweep, with Floorkit's field names and limits. A block opts in with root metadata `"catalog:format": "2"`; without it a block is format 1, and in format 1 the key may only be `"1"`. The root `version` stays `1`. Four blocks use it: the 2.0.0 versions of `wc`, `wc-wall-hung`, `cloakroom-basin` and `basin-accessible` (FLO-280).
+- **Format v2** ([docs/format-v2.md](docs/format-v2.md), [RFC 0004](docs/rfcs/0004-format-v2.md)): the Floorkit 3.0 node kinds `sphere`, `cone`, `torus`, `revolve`, `shell` (in `definitions`), the cylinder sector (`angle`, `startAngle`) and the outline sweep, with Floorkit's field names and limits. A block opts in with root metadata `"catalog:format": "2"`; without it a block is format 1, and in format 1 the key may only be `"1"`. The root `version` stays `1`. Eleven blocks use it, each in a 2.0.0 version: `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible` and `wc-wall-hung` (FLO-280, FLO-281).
 - **`schema/op/v2.schema.json`** beside v1, as strict and closed. `tools/lib/op.mjs` picks the schema per block and adds the format v2 gates: outlines (arc centres, repeated points, area, crossing), the torus radii, a revolve outline clear of its axis by 0.001 m, an outline sweep straight up, one scale factor per body, and no shell of a revolve or a cylinder sector, also through a boolean or another shell. `tools/lib/geometry.mjs` and `tools/lib/outline.mjs` bound the new kinds for the geometry gates. The format 1 refusal of partial cylinders and of sweeps in booleans stays.
-- **Each index entry has `format`** (1 or 2), required by `schema/index/v1.schema.json`, which keeps the name `floorkit.catalog/v1` ([RFC 0004](docs/rfcs/0004-format-v2.md#the-index)). All 80 entries are format 1.
+- **Each index entry has `format`** (1 or 2), required by `schema/index/v1.schema.json`, which keeps the name `floorkit.catalog/v1` ([RFC 0004](docs/rfcs/0004-format-v2.md#the-index)). Of the 91 entries, 80 are format 1 and 11 are format 2.
 
 #### Catalog files
 
@@ -93,7 +95,7 @@ Every block is `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier 
 | `publishers.json` | One publisher: `floorkit` (Floorkit), tier `official` |
 | `categories.json` | 13 categories, the same list Parti uses; must equal the schema's `catalog:category` enum |
 | `revocations.json` | Empty |
-| `index.json` | Generated: 80 entries. Each entry has the file's `sha256` (raw bytes) and a `contentHash` (SHA-256 of the canonical JSON, keys sorted, no whitespace) |
+| `index.json` | Generated: 91 entries, for 80 blocks. Each entry has the file's `sha256` (raw bytes) and a `contentHash` (SHA-256 of the canonical JSON, keys sorted, no whitespace) |
 
 `contentHash` uses the same algorithm as Parti's `hash.ts`. Measured when the seeds were imported: it reproduced Parti's recorded hash for 26 of 26 of Parti's system blocks.
 
