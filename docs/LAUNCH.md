@@ -19,7 +19,7 @@ Run these on an up-to-date `main`. N is the number of entries in `index.json`: `
 
 | Check | Command | Expect |
 | --- | --- | --- |
-| Tests, blocks and index | `npm ci && npm run check` | `N block(s) valid.` and `index.json is current: N entr(ies).`, with no failing test. On branch `catalog-1.0` on 2026-10-27 these read `80 block(s) valid.` and `index.json is current: 80 entr(ies).` |
+| Tests, blocks and index | `npm ci && npm run check` | `N block(s) valid.` and `index.json is current: N entr(ies).`, with no failing test. On commit `d8161de` (branch `catalog-1.0` at `cfe150e` plus documentation) on 2026-10-31 these read `91 block(s) valid.` and `index.json is current: 91 entr(ies).`, with 69 tests, 62 passing and 7 skipped without `FLOORKIT_DIR` |
 | Licensing metadata | `reuse lint` | `Congratulations! Your project is compliant with version 3.3 of the REUSE Specification :-)` |
 | Immutability gate, before any tag | `node tools/immutable.mjs` | `immutability: NOT ENFORCED — no v* tag yet, so no block has been released.` |
 | Floorkit parity (maintainers with a Floorkit build) | `FLOORKIT_DIR=<dir with dist/index.js> node tools/parity.mjs --build --mesh` | Accepted, unrepaired, built, mirrored and mesh clean, N/N each; kernel-reject fixtures refused 27/27 (the 12 `v2-*.json` need Floorkit 3.0); `parity holds.` |
@@ -152,7 +152,7 @@ What each step proves:
 - **Step 3 also checks redirects.** In Node, the loader refuses any redirect with `CatalogError` code `redirected`, so a pass also shows that jsDelivr answers without one.
 - **A failure in step 3 usually names the file and the reason.** Check the `CatalogError` code: `integrity`, `too-large`, `redirected` or `fetch-failed`.
 
-**Measured so far:** the step 3 command was run against a local HTTP server (`python3 -m http.server`) serving this repository on branch `catalog-1.0` on 2026-10-27, and printed `verified 80 blocks from http://127.0.0.1:8765/`. It has **not** been run against jsDelivr: `cdn.jsdelivr.net` was unreachable from where this file was written. Step 4's expected `access-control-allow-origin: *` is also unverified.
+**Measured so far:** the step 3 command was run against a local HTTP server (`python3 -m http.server`) serving this repository at commit `d8161de` on 2026-10-31, and printed `verified 80 blocks from http://127.0.0.1:8765/`: with the loader's default `maxFormat` 1 it reads the 80 format 1 entries. The same loop with `openCatalog({ baseUrl, maxFormat: 2 })`, loading each entry by its version, printed `verified 91 entries from http://127.0.0.1:8765/`. It has **not** been run against jsDelivr: `cdn.jsdelivr.net` was unreachable from where this file was written. Step 4's expected `access-control-allow-origin: *` is also unverified.
 
 ### 7. Point Parti's credit and `basedOn` at this repository
 

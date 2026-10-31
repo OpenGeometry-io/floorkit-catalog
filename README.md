@@ -2,7 +2,8 @@
 
 Free, reusable building blocks for [Floorkit](https://ploterr.com/floorkit): furniture, beds, kitchen units, sanitaryware, appliances, lighting, doors, planting, vehicles and data-centre equipment. Each block is one plain JSON `.op` file with a plan symbol, a 3D body and named anchors.
 
-- **80 blocks in 13 categories**, listed in [`index.json`](index.json). Each is drawn to LOD 300 to the [drafting standard](docs/drafting-standard.md).
+- **80 blocks in 13 categories**, listed in [`index.json`](index.json). Each is drawn to LOD 300 to the [drafting standard](docs/drafting-standard.md). 11 of them also have a version 2.0.0, so the index has 91 entries.
+- **Two formats.** Every block has a version in format 1. The 2.0.0 versions use [format v2](docs/format-v2.md), the curved node kinds of Floorkit 3.0 (arcs, revolves, cones, sectors). The reference loader skips them unless asked with `maxFormat: 2`.
 - **A released block never changes.** A fix is a new version in a new file, so a URL pinned to a tag always serves the same bytes.
 - **Stricter than Floorkit.** The catalog refuses anything Floorkit would silently repair, so a block draws exactly as written.
 - **Blocks are CC BY 4.0; the tools are Apache-2.0.** See [Licence](#licence).
