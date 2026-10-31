@@ -1,5 +1,9 @@
 # floorkit-catalog
 
+![Section A of the demo: a cut through a kitchen, a bathroom and a bedroom, drawn as black lines on white](docs/images/banner-section-a.png)
+
+*The demo's section A, drawn by Floorkit from catalog blocks: [`examples/demo.mjs`](examples/demo.mjs), and [`examples/TRY-THIS.md`](examples/TRY-THIS.md) to run it.*
+
 Free, reusable building blocks for [Floorkit](https://ploterr.com/floorkit): furniture, beds, kitchen units, sanitaryware, appliances, lighting, doors, planting, vehicles and data-centre equipment. Each block is one plain JSON `.op` file with a plan symbol, a 3D body and named anchors.
 
 - **81 blocks in 13 categories**, listed in [`index.json`](index.json). Each is drawn to LOD 300 to the [drafting standard](docs/drafting-standard.md). 80 of them are in format 1, and 11 of these also have a version 2.0.0. `shower-enclosure-quadrant` is in format v2 only. The index has 92 entries.
