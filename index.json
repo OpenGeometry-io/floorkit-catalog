@@ -1761,6 +1761,37 @@
       "contentHash": "6d43d7486c8bf717e22f8af08c816c67620139abb732347e1bcd7b8099741a03"
     },
     {
+      "id": "floorkit.shower-enclosure-quadrant",
+      "publisher": {
+        "id": "floorkit",
+        "name": "Floorkit",
+        "tier": "official"
+      },
+      "slug": "shower-enclosure-quadrant",
+      "version": "1.0.0",
+      "format": 2,
+      "labelName": "Quadrant Shower Enclosure",
+      "type": "FIXTURE",
+      "category": "sanitary",
+      "license": "CC-BY-4.0",
+      "attribution": "Vishwajeet Mane",
+      "tags": [
+        "shower",
+        "shower enclosure",
+        "quadrant",
+        "bathroom"
+      ],
+      "dimensions": {
+        "width": 0.9,
+        "depth": 0.9,
+        "height": 2
+      },
+      "path": "blocks/floorkit/shower-enclosure-quadrant/1.0.0.op",
+      "bytes": 18422,
+      "sha256": "05abbe71f69db300415199f328caf589970481c27b4d93c55d58baeee77bca31",
+      "contentHash": "a1ff249a34961aa5377baf89b4564ed3154662683c1525795a9017bb7a8e01cf"
+    },
+    {
       "id": "floorkit.shower-level-access",
       "publisher": {
         "id": "floorkit",

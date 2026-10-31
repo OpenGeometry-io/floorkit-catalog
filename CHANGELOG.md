@@ -14,7 +14,7 @@ The first release, tagged at the public launch ([docs/LAUNCH.md](docs/LAUNCH.md)
 
 ### Added
 
-#### 80 blocks
+#### 81 blocks
 
 Every block has a `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (tier `official`), licensed CC BY 4.0 with `catalog:attribution` "Vishwajeet Mane", and drawn by hand to LOD 300 (`catalog:lod` `"300"`) to the [drafting standard](docs/drafting-standard.md). Per category, counted from `index.json`:
 
@@ -25,7 +25,7 @@ Every block has a `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (ti
 | `beds` | 6 | `bedside-table`, `bunk-bed`, `cot`, `double-bed`, `king-bed`, `single-bed` |
 | `storage` | 7 | `bookshelf`, `cabinet`, `chest-of-drawers`, `desk-pedestal`, `filing-cabinet`, `sideboard`, `wardrobe` |
 | `kitchen` | 7 | `base-unit-1000`, `base-unit-600`, `corner-base-unit`, `kitchen-counter`, `kitchen-sink`, `tall-unit-600`, `wall-unit-600` |
-| `sanitary` | 12 | `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-enclosure`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible`, `wc-wall-hung` |
+| `sanitary` | 13 | `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-enclosure`, `shower-enclosure-quadrant`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible`, `wc-wall-hung` |
 | `appliances` | 8 | `cooker`, `dishwasher`, `extractor-hood`, `fridge-freezer`, `hob`, `television`, `tumble-dryer`, `washing-machine` |
 | `lighting` | 6 | `ceiling-luminaire-1200`, `downlight`, `floor-lamp`, `pendant-light`, `table-lamp`, `wall-light` |
 | `planting` | 3 | `planter`, `potted-plant`, `tree` |
@@ -33,16 +33,16 @@ Every block has a `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (ti
 | `equipment` | 10 | `boiler`, `chiller`, `crah`, `hot-water-cylinder`, `pdu`, `photocopier`, `radiator`, `rear-door-heat-exchanger`, `ups`, `water-cooler` |
 | `openings` | 1 | `glazed-door` |
 | `other` | 3 | `turning-circle-1500`, `wheelchair`, `wheelchair-space` |
-| | **80** | |
+| | **81** | |
 
-- **Format v2 versions.** 11 of the 80 blocks also have a `2.0.0.op` drawn on [format v2](docs/format-v2.md), beside their unchanged `1.0.0.op`, so `index.json` has 91 entries: `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible` and `wc-wall-hung`.
+- **Format v2 versions.** 11 of the 80 format 1 blocks also have a `2.0.0.op` drawn on [format v2](docs/format-v2.md), beside their unchanged `1.0.0.op`, and `shower-enclosure-quadrant` is in format v2 only, so `index.json` has 92 entries. The 11 are `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible` and `wc-wall-hung`.
 
 - **Where they come from.** The catalog was seeded by importing the 26 files of the Floorkit SDK's example catalog. Before this tag, 23 of them were redrawn in place at `1.0.0` to the drafting standard, and three were deleted:
   - `rectangular-bathtub`: `bathtub` absorbs it, and keeps its drain and tap anchors;
   - `wc-and-basin`: a bundle of two fixtures, replaced by the separate WCs and basins;
   - `counter-run`: it was authored to be stretched along x, which a Floorkit building model refuses (`bad-scale`).
 
-  The other 57 blocks are new. The importer that wrote the seeds is not part of this release: a tool that regenerated them would undo the redraw.
+  The other 58 blocks are new. The importer that wrote the seeds is not part of this release: a tool that regenerated them would undo the redraw.
 - **Six sanitary blocks redrawn inside format v1** (FLO-278), in place at `1.0.0`, before the tag. Each change was drafted by an AI assistant and checked with `validate.mjs`, `parity.mjs --build --mesh` and `render.mjs`:
   - `bathtub`: end panels carry the rim to the floor; the taps are 0.18 apart (180 mm hole centres), with their ports;
   - `bidet`: the rim and bowl are a D ring of two straight sweeps on a pedestal, with no open space under the rim; the bowl centre, `drainCenter` and the waste port move to z 0.095, on one axis;
@@ -66,6 +66,7 @@ Every block has a `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (ti
   - the wash basin's rim is a D-shaped outline sweep in two halves over a `revolve` bowl whose outline has its wall in chords, with a metal waste in its centre hole, on a tapered `cone` pedestal;
   - overall sizes, anchor names and port ids are as in 1.0.0. The accessible WC's `flushSide` moved to z 0.05, where the oval's side is straight; the wash basin's `drainCenter` moved to the new bowl floor, its `dcw` and `dhw` ports to the rim's back face, and its `waste` port to the foot of the pedestal.
 - **Redrawn on format v2 (FLO-281, part B).** `bathtub` has a `2.0.0.op` beside its `1.0.0.op`, which stays unchanged. An AI assistant drafted it, and it was checked with `validate.mjs`, `parity.mjs --build --mesh` and `render.mjs`. The tub keeps 1.52 x 0.56 inside, now with corners of radius 0.08. It is drawn as a floor slab and two wall halves whose inner faces are outline sweeps with arcs, under a rim of two halves, and the plan's inner line follows the rounded corners. A metal waste sits on the tub floor under `drainCenter`. No anchor or port moves.
+- **New block on format v2 (FLO-281, part B).** `shower-enclosure-quadrant` 1.0.0: a quadrant of radius 0.90 in a 0.90 x 0.90 corner. The tray stands on a quarter cylinder sector, with its floor and rim as outline-sweep halves, the gully flush in a hole, and falls drawn in plan. Curved glass forms two fixed panels and a sliding door. An AI assistant drafted it, and it was checked with `validate.mjs`, `parity.mjs --build --mesh` and `render.mjs`.
 
 #### The drafting standard and the authoring skill
 
@@ -86,7 +87,7 @@ Every block has a `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (ti
 - **[docs/format-v1.md](docs/format-v1.md)**: the format reference, with the Floorkit facts at OpenPlans `main` `b0a084c7` (package 1.2.0).
 - **Format v2** ([docs/format-v2.md](docs/format-v2.md), [RFC 0004](docs/rfcs/0004-format-v2.md)): the Floorkit 3.0 node kinds `sphere`, `cone`, `torus`, `revolve`, `shell` (in `definitions`), the cylinder sector (`angle`, `startAngle`) and the outline sweep, with Floorkit's field names and limits. A block opts in with root metadata `"catalog:format": "2"`; without it a block is format 1, and in format 1 the key may only be `"1"`. The root `version` stays `1`. Eleven blocks use it, each in a 2.0.0 version: `basin-accessible`, `bathtub`, `bidet`, `cloakroom-basin`, `shower-level-access`, `shower-tray`, `urinal`, `wash-basin`, `wc`, `wc-accessible` and `wc-wall-hung` (FLO-280, FLO-281).
 - **`schema/op/v2.schema.json`** beside v1, as strict and closed. `tools/lib/op.mjs` picks the schema per block and adds the format v2 gates: outlines (arc centres, repeated points, area, crossing), the torus radii, a revolve outline clear of its axis by 0.001 m, an outline sweep straight up, one scale factor per body, and no shell of a revolve or a cylinder sector, also through a boolean or another shell. `tools/lib/geometry.mjs` and `tools/lib/outline.mjs` bound the new kinds for the geometry gates. The format 1 refusal of partial cylinders and of sweeps in booleans stays.
-- **Each index entry has `format`** (1 or 2), required by `schema/index/v1.schema.json`, which keeps the name `floorkit.catalog/v1` ([RFC 0004](docs/rfcs/0004-format-v2.md#the-index)). Of the 91 entries, 80 are format 1 and 11 are format 2.
+- **Each index entry has `format`** (1 or 2), required by `schema/index/v1.schema.json`, which keeps the name `floorkit.catalog/v1` ([RFC 0004](docs/rfcs/0004-format-v2.md#the-index)). Of the 92 entries, 80 are format 1 and 12 are format 2.
 
 #### Catalog files
 
@@ -95,7 +96,7 @@ Every block has a `blocks/floorkit/<slug>/1.0.0.op`, published by `floorkit` (ti
 | `publishers.json` | One publisher: `floorkit` (Floorkit), tier `official` |
 | `categories.json` | 13 categories, the same list Parti uses; must equal the schema's `catalog:category` enum |
 | `revocations.json` | Empty |
-| `index.json` | Generated: 91 entries, for 80 blocks. Each entry has the file's `sha256` (raw bytes) and a `contentHash` (SHA-256 of the canonical JSON, keys sorted, no whitespace) |
+| `index.json` | Generated: 92 entries, for 81 blocks. Each entry has the file's `sha256` (raw bytes) and a `contentHash` (SHA-256 of the canonical JSON, keys sorted, no whitespace) |
 
 `contentHash` uses the same algorithm as Parti's `hash.ts`. Measured when the seeds were imported: it reproduced Parti's recorded hash for 26 of 26 of Parti's system blocks.
 
