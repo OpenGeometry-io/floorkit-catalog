@@ -78,7 +78,7 @@ Each kind's fields and bounds are in [format §3](../../../docs/format-v1.md#3-n
 - Every view node has an `id`, unique within its view. The same id may name a part in both views.
 - Every model node has a `mat:` role and the palette colour of that role ([standard §6](../../../docs/drafting-standard.md#6-material-roles-and-colours)): steel or timber legs and rails are `frame`, a shell seat `surface`, upholstery `soft`. Refs take their definition's role: one `mat:<definitionKey>` for all of them. Sizes are at least 0.01 m.
 - Reuse geometry through `definitions` and refs ([format §4](../../../docs/format-v1.md#4-definitions-and-references)). Every definition must be used.
-- `boolean3d` operands: keep to `cuboid`, `cylinder` or another `boolean3d`. A sweep operand, or an arrangement the kernel does not cover, passes `validate.mjs` and fails only when built.
+- `boolean3d` operands: keep to `cuboid`, `cylinder` or another `boolean3d`. In format 1, `validate.mjs` refuses a sweep in a boolean. In format v2, an outline sweep is allowed only as a through-cut in a `subtract`, as [format-v2 §6.1](../../../docs/format-v2.md#61-an-outline-sweep-in-a-boolean) says, and a revolve is never in a boolean. Another arrangement the kernel does not cover can pass `validate.mjs` and fail only when built.
 - **Anchors**: names and roles only from the table in [standard §7](../../../docs/drafting-standard.md#7-anchors); `base` is `floor-contact`; `surface-contact` for an item placed on furniture ([standard §7](../../../docs/drafting-standard.md#7-anchors)). `wallFace` with `wall-contact` for anything placed against a wall. "At its centre" is the centre of that face as drawn.
 - **Ports** are optional, for MEP connectors: ids, `systemType`, direction and size from [standard §8](../../../docs/drafting-standard.md#8-ports). A block with a port sets `ifcClass` equal to `ifc:class` ([standard §9](../../../docs/drafting-standard.md#9-ifc-class)).
 
@@ -100,7 +100,7 @@ Root `metadata` is a closed vocabulary and every value is a string ([format §7]
 
 ## 7a. Format v2, only when a part needs it
 
-`starter.op` is format 1, and so is every block today. Use format v2 only for a part format 1 cannot draw honestly: a sphere, a cone, a torus, a revolved bowl or knob, a hollow `shell`, a cylinder sector, or an outline with arc edges extruded straight up ([format-v2 §2](../../../docs/format-v2.md#2-node-kinds)).
+`starter.op` is format 1. In the catalog, the 2.0.0 versions and `shower-enclosure-quadrant` are format v2; a format v2 block has `"catalog:format": "2"` in its root `metadata`, and a block without that key is format 1. Use format v2 only for a part format 1 cannot draw honestly: a sphere, a cone, a torus, a revolved bowl or knob, a hollow `shell`, a cylinder sector, or an outline with arc edges extruded straight up ([format-v2 §2](../../../docs/format-v2.md#2-node-kinds)).
 
 - Add `"catalog:format": "2"` to the root `metadata`. Keep `"version": 1`.
 - Use Floorkit's field names exactly: `center`, `radiusBottom`, `radiusTop`, `majorRadius`, `minorRadius`, `profile` as `{ start, segments, closed: true }`, `arc: { center, counterClockwise }`, `sourceRef`, `thickness`. Every sweep sets `capStart` and `capEnd` to `true`.
