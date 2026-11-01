@@ -248,7 +248,7 @@ The [`validate` workflow](.github/workflows/validate.yml) runs on every pull req
 
 Locally, `npm ci && npm run check` covers the first four steps, and `reuse lint` the last, if you have the [REUSE tool](https://reuse.software/) installed. Two things CI does **not** do:
 
-- **Hold blocks to Floorkit itself.** `tools/parity.mjs` needs a Floorkit build, and `@opengeometry/floorkit` is not on npm yet, so maintainers run it:
+- **Hold blocks to Floorkit itself.** `tools/parity.mjs` needs a Floorkit build in `FLOORKIT_DIR`, and CI has none, so maintainers run it. The npm package `@opengeometry/floorkit` is 1.2.0; Floorkit 3.0, which format 2 needs, is not on npm:
 
   | Command | Fails when |
   | --- | --- |

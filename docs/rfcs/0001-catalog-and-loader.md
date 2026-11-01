@@ -366,7 +366,7 @@ It is lost at the first embed ([above](#metadata-vocabulary-and-why-it-lives-ins
 
 It is kept as a maintainer check instead.
 - Floorkit's parser repairs where the catalog must refuse.
-- CI cannot install Floorkit, because it is not on npm yet.
+- CI could not install Floorkit, because it was not on npm on 2026-10-05.
 - `tools/parity.mjs` keeps the two in step.
 
 ### Signing from v0.1.0: deferred

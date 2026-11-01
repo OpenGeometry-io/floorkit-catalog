@@ -502,7 +502,7 @@ const lineUp = (a, b) => linesUp(a.map((edge) => edge.from), a, b) ?? linesUp(b.
 function sweepBooleanIssues(definitions, nodes) {
   const issues = [];
   const holdsSweep = (node) => node?.kind === 'boolean3d' && refsOf(node).some(([, child]) => isOutlineSweep(definitions[child]));
-  const OPE107 = 'kernel 3.0.0 leaves open edges round the hole (measured)';
+  const CYLINDER_THROUGH_SWEEP = 'kernel 3.0.0 leaves open edges round the hole (measured)';
   const notMeasured = 'not measured on kernel 3.0.0';
   for (const [node, path] of nodes) {
     if (node.kind !== 'boolean3d') continue;
@@ -550,7 +550,7 @@ function sweepBooleanIssues(definitions, nodes) {
     const prisms = [];
     for (const [field, ref, kid] of kids.slice(1)) {
       if (kid.kind === 'cylinder' && isOutlineSweep(base)) {
-        add(field, `"${ref}" is a cylinder through the outline sweep "${baseRef}"; ${OPE107}. Cut the hole with an outline sweep of a circle (two half arcs) instead`);
+        add(field, `"${ref}" is a cylinder through the outline sweep "${baseRef}"; ${CYLINDER_THROUGH_SWEEP}. Cut the hole with an outline sweep of a circle (two half arcs) instead`);
         continue;
       }
       // A full cylinder may cut a cuboid or a shell (the released WC pans: a shell of a sweep less a

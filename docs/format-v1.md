@@ -20,7 +20,7 @@ A block whose root metadata says `"catalog:format": "2"` is format v2: format 1 
 - **Measured earlier.** The other statements marked *measured* were checked by running Floorkit built from OpenPlans `681e4f1` (package version 0.6.1, kernel 2.0.16), and were not run again at `b0a084c7`. Between the two commits the parser is unchanged: `git diff 681e4f1 b0a084c7` on `generic-element.ts` adds imports and changes only the `OpenElement` class (an `ifcClass` getter, live editing, `getPhysicalParts`, and building a mirrored placement as mirrored data). So a parser fact measured at `681e4f1` holds at `b0a084c7` by reading the code. A fact about the kernel (a boolean that builds or fails, a build time) is unverified on kernel 2.0.18.
 - **Read, not executed.** Statements marked *read* come from the source alone.
 
-CI cannot run Floorkit, because `@opengeometry/floorkit` is not on npm.
+CI cannot run Floorkit: the tools need a Floorkit build in `FLOORKIT_DIR`, and CI has none.
 
 ## Contents
 
