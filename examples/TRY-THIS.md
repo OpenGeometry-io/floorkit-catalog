@@ -19,10 +19,10 @@ It ends with `demo holds; pictures in examples/out` and exits 0. Open the files 
 - **`elevation-kitchen-1-50.svg`**: the kitchen wall with its window, the fridge freezer, the base units with the sink and the hob, the hood, the wall unit, the washing machine under it, the dishwasher, and the pendant.
 - **`elevation-bathroom-1-50.svg`**: the bathroom's south wall seen from inside the bathroom, with the WC, the wash basin and the bathroom door.
 - **`elevation-office-1-50.svg`**: the office desk wall with its two windows, four desks, each with a pedestal under its right-hand end and a chair in front, and four ceiling luminaires.
-- **`ifc-request.json`**: 108 elements. Each of the 82 blocks carries the class its `.op` names: `IfcElectricAppliance 7, IfcFurniture 43, IfcSanitaryTerminal 5, IfcLightFixture 20, IfcSpaceHeater 6, IfcAudioVisualAppliance 1`. For the 32 blocks with ports, Floorkit reads the class from the .op's legacy ifcClass key, which equals ifc:class (FLO-236).
+- **`ifc-request.json`**: 108 elements. Each of the 82 blocks carries the class its `.op` names: `IfcElectricAppliance 7, IfcFurniture 43, IfcSanitaryTerminal 5, IfcLightFixture 20, IfcSpaceHeater 6, IfcAudioVisualAppliance 1`. For the 32 blocks with ports, Floorkit reads the class from the .op's legacy ifcClass key, which equals ifc:class (a known Floorkit fault: its distribution path reads only that key).
 - **`roundtrip.json`**: the project saved (309369 bytes, with the text of all 43 blocks), opened again without the catalog and rebuilt. All 123 element ids and boxes are equal (`"equal": true`).
 
-Every placed block draws in the section and the elevations it stands in: the list of blocks left out (`NOT_DRAWN`) is empty on Floorkit `68604c67`.
+Every placed block draws in the section and the elevations it stands in: the list of blocks left out (`NOT_DRAWN`) is empty on a Floorkit 3.0 build.
 
 Walls are not in the IFC request: Floorkit's semantic IFC refuses WallNetwork walls. Each elevation shows only the wall it is drawn for and the blocks in front of that wall.
 

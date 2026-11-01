@@ -3,7 +3,7 @@
 How `OpenGeometry-io/floorkit-catalog` goes from private to public. Work through it in order. Each item says how to check it is done.
 
 > **Do not send anything from this repository to anyone outside before items 5 and 6 pass.** That covers the blocks, `index.json` and links to either.
-> - **The credit link would not open.** Every copy carries the credit line from [LICENSE.md](../LICENSE.md), which links to `https://github.com/OpenGeometry-io/floorkit-catalog`. While the repository is private, that URL answers 404 to anyone without access. A copy sent out now would carry a credit link its recipient cannot open, one of the defects of [OpenPlans#128](https://github.com/OpenGeometry-io/OpenPlans/pull/128) ([RFC 0001](rfcs/0001-catalog-and-loader.md#the-example-blocks-had-no-licence)).
+> - **The credit link would not open.** Every copy carries the credit line from [LICENSE.md](../LICENSE.md), which links to `https://github.com/OpenGeometry-io/floorkit-catalog`. While the repository was private, that URL answers 404 to anyone without access. A copy sent out now would carry a credit link its recipient cannot open, one of the defects of [OpenPlans#128](https://github.com/OpenGeometry-io/OpenPlans/pull/128) ([RFC 0001](rfcs/0001-catalog-and-loader.md#the-example-blocks-had-no-licence)).
 > - **The loader example would not work.** jsDelivr cannot serve a private repository, so the README's loader example fails until launch.
 
 **Who and what you need:**
@@ -70,7 +70,7 @@ A further check: open a pull request and confirm that `catalog` and `reuse` are 
 
 ### 3. Enable private vulnerability reporting
 
-This is only available on public repositories, which is why it waits until now. Until it is on, reports go to the owner directly ([SECURITY.md](../SECURITY.md)).
+This is only available on public repositories, which is why it waits until now. Until it is on, reports go to the maintainer directly ([SECURITY.md](../SECURITY.md)).
 
 ```sh
 gh api -X PUT repos/OpenGeometry-io/floorkit-catalog/private-vulnerability-reporting

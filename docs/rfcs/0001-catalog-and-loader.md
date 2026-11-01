@@ -28,14 +28,14 @@ This repository is a public catalog of Floorkit `.op` element definitions ("bloc
 
 ### The example blocks had no licence
 
-- **Where the seeds came from.** The 26 seed blocks started as example assets in `examples/src/catalog/assets` of `OpenGeometry-io/OpenPlans`, Floorkit's source repository, which is private. They were imported at the Floorkit v0.6.1 release (`8a964fb`), and the files are byte-identical on OpenPlans `main` (`681e4f1`).
+- **Where the seeds came from.** The 26 seed blocks started as example assets in `examples/src/catalog/assets` of `OpenGeometry-io/OpenPlans`, Floorkit's source repository, which is not public. They were imported at the Floorkit v0.6.1 release (`8a964fb`), and the files are byte-identical on OpenPlans `main` (`681e4f1`).
 - **The SDK licence does not cover them.** That repository's `LICENSE.md` now defines **Software** as "the floorkit SDK published as the npm package `@opengeometry/floorkit`". The assets are not in that package (`rollup.config.js` builds from `src/index.ts`, and nothing in `src/` imports an `.op`). So the assets had no licence at all.
 - **Parti's stamp had nothing behind it.** Parti stamps its copies of the assets `CC-BY-4.0` / `OpenPlans` with no grant behind the stamp.
 
 [OpenGeometry-io/OpenPlans#128](https://github.com/OpenGeometry-io/OpenPlans/pull/128) tried a carve-out inside the proprietary repository: an exception paragraph in the root `LICENSE.md`, plus a CC BY 4.0 `LICENSE.md` in the assets folder. **This repository supersedes it**, because the carve-out could not be made to work:
 - **It conflicts with `main`.** The root `LICENSE.md` was rewritten on `main`, and the PR conflicts with the whole file.
 - **It would ship to npm users.** The root `LICENSE.md` is copied into the npm package. An exception about repository paths would reach every npm user, and none of them receive those paths.
-- **Nobody can follow its credit URL.** The PR credits `https://github.com/OpenGeometry-io/openplans`, which returned 404 to an anonymous request on 2026-10-05 because the repository is private. CC BY 4.0 §3(a)(1)(A)(v) asks for "a URI or hyperlink to the Licensed Material to the extent reasonably practicable".
+- **Nobody can follow its credit URL.** The PR credits `https://github.com/OpenGeometry-io/openplans`, which returned 404 to an anonymous request on 2026-10-05 because the repository was not public. CC BY 4.0 §3(a)(1)(A)(v) asks for "a URI or hyperlink to the Licensed Material to the extent reasonably practicable".
 - **Outsiders cannot contribute to a private repository.**
 - **Its names are stale.** It names "OpenPlans" as the copyright holder, and an old package name.
 

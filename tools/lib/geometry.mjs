@@ -399,7 +399,7 @@ export function geometryIssues(definition, note) {
 
   // (e) the LOD floor
   const body = { min: [0, 1, 2].map((i) => extreme(i, 'min').box.min[i]), max: [0, 1, 2].map((i) => extreme(i, 'max').box.max[i]) };
-  // (e) binds only a block drawn to LOD 300 (owner decision 2026-10-27).
+  // (e) binds only a block drawn to LOD 300 (a maintainer decision, 2026-10-27).
   const lod300 = definition.metadata['catalog:lod'] === '300';
   if (lod300 && solids.length < MIN_SOLIDS) issues.push({ path: '/modelView', message: `has ${solids.length} solid(s); LOD 300 needs at least ${MIN_SOLIDS}` });
   const fill = solids.reduce((sum, s) => sum + s.box.volume, 0) / body.max.reduce((v, hi, i) => v * (hi - body.min[i]), 1);

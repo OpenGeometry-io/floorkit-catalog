@@ -1,7 +1,7 @@
 {
   "version": 1,
   "id": "fixture.v2-shell-cut-near-concave-corner",
-  "labelName": "Probe p26",
+  "labelName": "Cut near a concave corner",
   "type": "FURNITURE",
   "dimensions": {
     "width": 0.6,
@@ -28,11 +28,11 @@
   "metadata": {
     "catalog:version": "1.0.0",
     "catalog:license": "CC-BY-4.0",
-    "catalog:attribution": "Review A probe",
+    "catalog:attribution": "Catalog test probe",
     "catalog:category": "other",
     "catalog:lod": "100",
     "catalog:format": "2",
-    "catalog:note": "FLO-330 review A probe. ",
+    "catalog:note": "A cut of a shell near a concave corner of its void. ",
     "ifc:class": "IfcSanitaryTerminal",
     "mat:body": "ceramic"
   },
