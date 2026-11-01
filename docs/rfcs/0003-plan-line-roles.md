@@ -2,7 +2,7 @@
 
 | | |
 | --- | --- |
-| **Status** | Proposed, awaiting the owner (2026-10-27) |
+| **Status** | Proposed, awaiting the maintainers (2026-10-27) |
 | **Covers** | An optional `lineRole` on a plan node of a `.op` v1 block: its five values, the pen and dash Floorkit draws each with, what a reader that ignores it draws, the catalog gate, versioning, and the blocks that get a `1.1.0` |
 | **Maintainer** | [@aka-blackboots](https://github.com/aka-blackboots) |
 | **Date** | 2026-10-27 |
@@ -10,7 +10,7 @@
 
 How to read this document:
 - **Nothing here is built.** The schema, `tools/validate.mjs` and every block are unchanged by this RFC. Two later changes build it: one in Floorkit, one in this catalog.
-- **Read** means taken from Floorkit's source at OpenPlans `main` `b0a084c7`, whose `package.json` declares `@opengeometry/floorkit` 1.2.0. That repository is private; paths are for maintainers who can open them. `generic-element.ts` is `src/packages/openplans-core/src/elements/generic-element.ts`, `pen.ts` is `src/packages/openplans-paper/src/emit/pen.ts`, `plan-style.ts` is `src/packages/openplans-paper/src/screen/plan-style.ts`, and `draw-plan-blocks.ts` is `src/project-manager/draw/draw-plan-blocks.ts`.
+- **Read** means taken from Floorkit's source at OpenPlans `main` `b0a084c7`, whose `package.json` declares `@opengeometry/floorkit` 1.2.0. That repository is not public; paths are for maintainers who can open them. `generic-element.ts` is `src/packages/openplans-core/src/elements/generic-element.ts`, `pen.ts` is `src/packages/openplans-paper/src/emit/pen.ts`, `plan-style.ts` is `src/packages/openplans-paper/src/screen/plan-style.ts`, and `draw-plan-blocks.ts` is `src/project-manager/draw/draw-plan-blocks.ts`.
 - **Measured** means a command was run. No Floorkit behaviour in this RFC was measured: parity was not run for it. **Unverified** means neither read nor measured.
 - **The ISO and BS standards cited were not read.** `iso.org` refused a direct fetch (HTTP 403), and the standards are sold, not published. What they say is taken from the drafting standard's §12 and is unverified here.
 
@@ -149,7 +149,7 @@ The exception is a block whose type has a heavier pen: `floorkit.glazed-door` is
 ### Versioning and release order
 
 - **Adding, changing or removing a `lineRole` is MINOR.** It is a drawing-only change that moves no anchor, port or insertion point ([drafting standard §14](../drafting-standard.md#14-labels-attribution-and-versions)).
-- **The owner decided on 2026-10-27 to tag first.** `v0.1.0` is tagged on the redrawn blocks with solid lines. The roles ship afterwards as new `1.1.0.op` files beside the tagged `1.0.0.op` files, which never change (`tools/immutable.mjs`).
+- **The maintainers decided on 2026-10-27 to tag first.** `v0.1.0` is tagged on the redrawn blocks with solid lines. The roles ship afterwards as new `1.1.0.op` files beside the tagged `1.0.0.op` files, which never change (`tools/immutable.mjs`).
 - **Their CHANGELOG entry goes to the release after 0.1.0.**
 - **Each `1.1.0` note says it needs a Floorkit release that draws line roles.** Which release that is, is not known yet.
 
@@ -204,7 +204,7 @@ See [The field](#the-field).
 
 ## Open questions
 
-Each has a default, which applies if the owner says go without answering it.
+Each has a default, which applies if the maintainers say go without answering it.
 
 1. **Which role draws a clearance zone?** `turning-circle-1500` and `wheelchair-space` mark floor space; they are neither overhead nor concealed. *Default:* `hidden`, the dashed narrow line, defined above to cover "a zone that is no physical edge". A sixth value such as `clearance` would need a new RFC.
 2. **Which dash for `overhead`?** *Default:* `DASH_PHANTOM` at 0.18 mm, as Floorkit's `CEILING` (`pen.ts:135`), so that it reads apart from `hidden`. The alternative is `DASH_HIDDEN` at 0.18 mm, as Floorkit draws walls and stairs above the cut (`pen.ts:183`, `199`), which would leave `overhead` and `hidden` told apart by weight alone.

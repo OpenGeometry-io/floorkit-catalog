@@ -248,8 +248,8 @@ test('an unknown id is not found', async () => {
   await refusal(catalog.load('floorkit.sofa-bed'), 'not-found');
 });
 
-// The hand-off to Floorkit itself needs a Floorkit build, which CI does not
-// have until @opengeometry/floorkit is on npm. A skip is reported, not passed.
+// The hand-off to Floorkit itself needs a Floorkit build in FLOORKIT_DIR, which
+// CI does not have. A skip is reported, not passed.
 test('a loaded block parses in Floorkit', { skip: process.env.FLOORKIT_DIR ? false : 'FLOORKIT_DIR is not set' }, async () => {
   const floorkit = await import(pathToFileURL(path.resolve(process.env.FLOORKIT_DIR, 'dist', 'index.js')).href);
   const catalog = await openCatalog({ baseUrl: `${origin}/good/`, maxFormat: 2 });

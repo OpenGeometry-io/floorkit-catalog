@@ -14,8 +14,8 @@
  *
  * Each view is cropped to the body's height with a margin of `MARGIN`. The
  * section is drawn and checked but not shown on the gallery card: Floorkit
- * draws a block in a section as seen lines, not cut (FLO-308), so it equals
- * the elevation until FLO-272.
+ * draws a block in a section as seen lines, not cut, so it equals
+ * the elevation until Floorkit cuts blocks in sections.
  */
 
 /** The margin around the body, in metres, of each view's crop. */

@@ -51,7 +51,7 @@ If both hold, a maintainer sets the tier in `publishers.json` in that pull reque
   - `revocations.json`;
   - `schema/`, `tools/` and `.github/`;
   - `LICENSE.md`, `LICENSES/` and `REUSE.toml`.
-- **Maintainers may run Floorkit parity** (`FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs --build`) before merging. CI cannot run it until `@opengeometry/floorkit` is published on npm.
+- **Maintainers may run Floorkit parity** (`FLOORKIT_DIR=<a Floorkit build> node tools/parity.mjs --build`) before merging. CI cannot run it: it needs a Floorkit build in `FLOORKIT_DIR`, and CI has none.
 
 ## Releases
 

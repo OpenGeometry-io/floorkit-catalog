@@ -6,13 +6,33 @@
 
 Free, reusable building blocks for [Floorkit](https://ploterr.com/floorkit): furniture, beds, kitchen units, sanitaryware, appliances, lighting, doors, planting, vehicles and data-centre equipment. Each block is one plain JSON `.op` file with a plan symbol, a 3D body and named anchors.
 
-- **81 blocks in 13 categories**, listed in [`index.json`](index.json). Each is drawn to LOD 300 to the [drafting standard](docs/drafting-standard.md). 80 of them are in format 1, and 11 of these also have a version 2.0.0. `shower-enclosure-quadrant` is in format v2 only. The index has 92 entries.
-- **Two formats.** The 2.0.0 versions and `shower-enclosure-quadrant` use [format v2](docs/format-v2.md), the curved node kinds of Floorkit 3.0 (arcs, revolves, cones, sectors). The reference loader skips them unless asked with `maxFormat: 2`.
+- **81 blocks in 13 categories**, listed in [`index.json`](index.json). Each is drawn to LOD 300 to the [drafting standard](docs/drafting-standard.md).
+- **92 index entries**, because some blocks have two versions:
+  - 80 blocks are in format 1, at `1.0.0`;
+  - 11 of those 80 also have a `2.0.0` in format 2;
+  - `shower-enclosure-quadrant` is in format 2 only.
+- **Two formats.** Format 2 ([docs/format-v2.md](docs/format-v2.md)) adds the curved node kinds of Floorkit 3.0: arcs, revolves, cones and sectors.
 - **A released block never changes.** A fix is a new version in a new file, so a URL pinned to a tag always serves the same bytes.
 - **Stricter than Floorkit.** The catalog refuses anything Floorkit would silently repair, so a block draws exactly as written.
 - **Blocks are CC BY 4.0; the tools are Apache-2.0.** See [Licence](#licence).
 
-> **Coding agents:** read [AGENTS.md](AGENTS.md) before you change anything in this repository.
+## Quick start
+
+Get one block in three steps:
+
+1. Use a release tag of the catalog on jsDelivr. Pin a tag, never a branch:
+   `https://cdn.jsdelivr.net/gh/OpenGeometry-io/floorkit-catalog@v0.1.0/`
+2. Copy [`tools/loader.mjs`](tools/loader.mjs) into your project, and open the catalog with that URL as `baseUrl`.
+3. Call `catalog.load('floorkit.bathtub')`. It returns the index entry and the block's text.
+
+[Use a block in Floorkit](#use-a-block-in-floorkit) has the full example.
+
+## Which Floorkit
+
+| Blocks | Floorkit | Notes |
+| --- | --- | --- |
+| Format 1 (the `1.0.0` of the 80 format 1 blocks) | The Floorkit on npm, `@opengeometry/floorkit` 1.2.0 | Parity with 1.2.0 is recorded in [CHANGELOG.md](CHANGELOG.md) |
+| Format 2 (the `2.0.0` versions and `shower-enclosure-quadrant`) | Floorkit 3.0, not released yet | The loader skips them unless you open the catalog with `maxFormat: 2` |
 
 ## What is in the catalog
 
@@ -77,8 +97,7 @@ const bathtub = new OpenElement(text);
 
 Place copies of the asset with `add-element`, as in Floorkit's [Place furniture](https://docs.ploterr.com/floorkit/guides/place-furniture) guide.
 
-- **`load` checks** the byte count, the SHA-256, the `id` and the version against `index.json`. It refuses any redirect, a path outside the catalog, an oversized file and a revoked block, each with a `CatalogError` `code` ([list](SECURITY.md#what-the-catalog-already-defends-against)).
-- **`index.json` itself is not signed** ([RFC 0001](docs/rfcs/0001-catalog-and-loader.md)). Without the loader, nothing checks what you fetch.
+`load` checks each block against `index.json` before it returns it.
 
 ## What a block looks like
 
@@ -140,6 +159,15 @@ Add `blocks/<you>/<slug>/1.0.0.op`, run `npm run check`, sign off every commit (
 - [GOVERNANCE.md](GOVERNANCE.md): publisher tiers, releases, revocation and takedowns.
 - [SECURITY.md](SECURITY.md): report a vulnerability privately.
 
+## For coding agents
+
+- Read [AGENTS.md](AGENTS.md) before you change anything.
+- To author a block, follow the [`author-block` skill](.claude/skills/author-block/SKILL.md).
+- Run `npm run check` before you call a change done.
+- Never edit `index.json` by hand; `npm run index` writes it.
+- Never change a released block. A fix is a new version in a new file.
+- Sign off every commit (`git commit -s`).
+
 ## Licence
 
 - **Blocks**, `index.json`, and the test fixtures and gallery pictures derived from them: [CC BY 4.0](LICENSES/CC-BY-4.0.txt). Credit the catalog with:
@@ -155,8 +183,9 @@ Add `blocks/<you>/<slug>/1.0.0.op`, run `npm run check`, sign off every commit (
 
 [LICENSE.md](LICENSE.md) says what the licences do and do not grant.
 
-## Plans
+## RFCs
 
-- [RFC 0001: catalog and loader](docs/rfcs/0001-catalog-and-loader.md): the trust model, distribution (an npm package and a signed index later) and moving the loader into the Floorkit SDK.
+- [RFC 0001: catalog and loader](docs/rfcs/0001-catalog-and-loader.md): the block layout, the metadata vocabulary, `index.json`, distribution and the loader.
 - [RFC 0002: toward Revit-family-like blocks](docs/rfcs/0002-parametric-families.md): what `.op` would need to work like a Revit family, and what should not be copied.
 - [RFC 0003: plan line roles](docs/rfcs/0003-plan-line-roles.md): an optional `lineRole` on a plan node, so a block can draw outline, detail, overhead, hidden and swing lines, each with its own pen.
+- [RFC 0004: format v2](docs/rfcs/0004-format-v2.md): the Floorkit 3.0 node kinds, the `catalog:format` marker, and how an older reader is kept off format 2 blocks.

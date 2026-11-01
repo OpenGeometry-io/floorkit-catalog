@@ -28,11 +28,11 @@
   "metadata": {
     "catalog:version": "1.0.0",
     "catalog:license": "CC-BY-4.0",
-    "catalog:attribution": "Plan047 probe",
+    "catalog:attribution": "Format v2 probe",
     "catalog:category": "other",
     "catalog:lod": "100",
     "catalog:format": "2",
-    "catalog:note": "Plan047 probe in format v2: a D-shaped pan, a 0.4 x 0.3 rectangle closed at the front (+z) by one half-circle arc of radius 0.2, extruded straight up 0.4. The arc turns counter-clockwise seen from above, so it bulges to z 0.25; the Plan047 copy had false, which bites into the D.",
+    "catalog:note": "A probe in format v2: a D-shaped pan, a 0.4 x 0.3 rectangle closed at the front (+z) by one half-circle arc of radius 0.2, extruded straight up 0.4. The arc turns counter-clockwise seen from above, so it bulges to z 0.25; the first copy had false, which bites into the D.",
     "ifc:class": "IfcSanitaryTerminal",
     "mat:pan": "ceramic"
   },

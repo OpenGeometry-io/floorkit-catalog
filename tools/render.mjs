@@ -13,8 +13,8 @@
  * `elevation-1-50.svg` (Floorkit's own section and front elevation of the block
  * alone, through its paper emitter, `lib/views.mjs`), and `iso`, `iso-ne`, `front` and `side`.
  * The section is drawn and checked but not shown on the card: Floorkit draws a
- * block in a section as seen lines, not cut (FLO-308), so it equals the
- * elevation until FLO-272.
+ * block in a section as seen lines, not cut, so it equals the
+ * elevation until Floorkit cuts blocks in sections.
  * Those four are the kernel's mesh, no coarser than Floorkit's 2 mm drawing
  * deflection, coloured by `mat:` role, NOT Floorkit's OpenThree viewer: PNG
  * drawn by Floorkit's three.js in headless Chromium with the kernel's normals,
@@ -125,7 +125,7 @@ const esc = (text) => String(text).replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0
 const shown = (dir, files) => files.map((file) => `<figure><img src="${dir}/${file}" alt="${file}" loading="lazy"><figcaption>${file}</figcaption></figure>`).join('');
 const relOf = (card) => path.relative(renders, card.out).split(path.sep).join('/');
 // The elevation of a "before" version, when its folder has one (older renders and baselines may not). The section is
-// not shown: it equals the elevation until FLO-272 (see the header).
+// not shown: it equals the elevation until Floorkit cuts blocks in sections (see the header).
 const drawings = (dir) => ['elevation-1-50.svg'].filter((file) => existsSync(path.join(dir, file)));
 // One card per block, at its newest version rendered. The "before" column shows the version it
 // replaces (the newest older one rendered, a 1.0.0 beside its 2.0.0), then the baseline pictures

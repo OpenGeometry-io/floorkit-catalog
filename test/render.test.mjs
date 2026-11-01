@@ -127,7 +127,7 @@ test('parity --mesh honours an overlap listed in catalog:note, and only then', {
 });
 
 test('parity --mesh prints the slivers it drops', { skip: !floorkit && 'FLOORKIT_DIR is not set' }, () => {
-  // Kernel bd44f13 (OPE-101) emits no slivers here; older kernels emit some on the arc wall.
+  // A kernel built after 2026-10-31 emits no slivers here; older kernels emit some on the arc wall.
   const run = parity('--mesh', path.join(ROOT, 'test/fixtures/valid/v2-sweep-arc-profile.op'));
   assert.equal(run.status, 0, run.stdout);
   const total = run.stdout.match(/^slivers dropped:\s+(\d+) triangle\(s\) in (\d+) block\(s\)$/m);
@@ -176,7 +176,7 @@ test('render draws one gallery card per block, with its older version in the "be
   assert.equal(run.seen.match(/class="card"/g)?.length, 1);
   assert.match(run.seen, /<h3>floorkit\.wash-basin@2\.0\.0 /);
   assert.match(run.seen, /<div class="before"><h4>Before<\/h4><h5>1\.0\.0<\/h5><figure><img src="floorkit\/wash-basin\/1\.0\.0\/plan-1-50\.svg"/);
-  // The card shows the elevation, of both versions, and not the section (it equals the elevation until FLO-272).
+  // The card shows the elevation, of both versions, and not the section (it equals the elevation until Floorkit cuts blocks in sections).
   for (const version of ['1.0.0', '2.0.0']) assert.match(run.seen, new RegExp(`<img src="floorkit/wash-basin/${version.replaceAll('.', '\\.')}/elevation-1-50\\.svg"`));
   assert.match(run.seen.slice(run.seen.indexOf('<div class="now">')), /<img src="floorkit\/wash-basin\/2\.0\.0\/elevation-1-50\.svg"/);
   assert.doesNotMatch(run.seen, /section-1-50\.svg/);

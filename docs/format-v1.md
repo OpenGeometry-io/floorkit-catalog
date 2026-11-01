@@ -15,12 +15,12 @@ A block whose root metadata says `"catalog:format": "2"` is format v2: format 1 
 
 ## Where the Floorkit facts come from
 
-- **Read.** Floorkit's `.op` parser is `src/packages/openplans-core/src/elements/generic-element.ts` in the OpenPlans repository. This page calls it "Floorkit `generic-element.ts`" and cites line numbers from OpenPlans `origin/main` at `b0a084c7`, whose package `@opengeometry/floorkit` declares version 1.2.0 and depends on the `opengeometry` kernel `^2.0.18` (2.0.18 installed). That repository is private, so this page names files rather than linking to them.
+- **Read.** Floorkit's `.op` parser is `src/packages/openplans-core/src/elements/generic-element.ts` in the OpenPlans repository. This page calls it "Floorkit `generic-element.ts`" and cites line numbers from OpenPlans `origin/main` at `b0a084c7`, whose package `@opengeometry/floorkit` declares version 1.2.0 and depends on the `opengeometry` kernel `^2.0.18` (2.0.18 installed). That repository is not public, so this page names files rather than linking to them.
 - **Measured at `b0a084c7`.** The parity counts in [§8](#8-what-floorkit-repairs-and-what-the-catalog-rejects), the IFC export paths in [§11](#11-advisory-notes), the example in [§12](#12-a-complete-example), and every statement that names `b0a084c7`.
 - **Measured earlier.** The other statements marked *measured* were checked by running Floorkit built from OpenPlans `681e4f1` (package version 0.6.1, kernel 2.0.16), and were not run again at `b0a084c7`. Between the two commits the parser is unchanged: `git diff 681e4f1 b0a084c7` on `generic-element.ts` adds imports and changes only the `OpenElement` class (an `ifcClass` getter, live editing, `getPhysicalParts`, and building a mirrored placement as mirrored data). So a parser fact measured at `681e4f1` holds at `b0a084c7` by reading the code. A fact about the kernel (a boolean that builds or fails, a build time) is unverified on kernel 2.0.18.
 - **Read, not executed.** Statements marked *read* come from the source alone.
 
-CI cannot run Floorkit, because `@opengeometry/floorkit` is not on npm.
+CI cannot run Floorkit: the tools need a Floorkit build in `FLOORKIT_DIR`, and CI has none.
 
 ## Contents
 
@@ -69,7 +69,7 @@ Catalog bounds on every placement:
 - every coordinate (`position`, `anchor`) is within ±1000 m;
 - each rotation component is within ±360°;
 - each scale component is in (0, 100];
-- on a body (a `modelView` element or a solid definition), the three scale components are equal: Floorkit 3.0 places a body by a turn, a move and one scale factor and refuses any other as `bad-scale` (`shapes/base-type.ts:51-63` at OpenPlans-3.0 `7bc2d595`; read). `op.mjs` checks it; see [format-v2 §5](format-v2.md#5-placements).
+- on a body (a `modelView` element or a solid definition), the three scale components are equal: Floorkit 3.0 places a body by a turn, a move and one scale factor and refuses any other as `bad-scale` (`shapes/base-type.ts:51-63` in a Floorkit 3.0 build; read). `op.mjs` checks it; see [format-v2 §5](format-v2.md#5-placements).
 
 `position`, `rotation` and `scale` are all required whenever a placement is given; `anchor` is optional.
 

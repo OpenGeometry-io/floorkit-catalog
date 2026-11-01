@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 /**
  * Hold the catalog to Floorkit itself. Run by maintainers, against a Floorkit
- * build; CI cannot run it until @opengeometry/floorkit is on npm.
+ * build in FLOORKIT_DIR, which CI does not have.
  *
  *   FLOORKIT_DIR=<dir containing dist/index.js> node tools/parity.mjs [--build] [--mesh] [--out=<dir>] [file.op ...]
  *

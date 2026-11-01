@@ -34,9 +34,9 @@ const TOLERANCE = 0.005;
 const MAX_FORMAT = 2;
 // Blocks Floorkit cannot draw in a section or an elevation, each with its filed fault, found on their format 1
 // versions. A placed format 1 block on this list is left out of those views only; any other drawing error fails
-// the run. Format 2 blocks draw in sections and elevations as seen lines (Floorkit FLO-308) and are never left out.
-// Empty since 2026-10-31: on Floorkit 68604c67 every block that was on it (FLO-238, FLO-239) draws alone in a section
-// and an elevation (evidence/048-catalog/demo/probe/draws.log in the review vault), and this demo holds with all of them drawn.
+// the run. Format 2 blocks draw in sections and elevations as seen lines and are never left out.
+// Empty since 2026-10-31: on a Floorkit 3.0 build every block that was on it (a cylinder turned about x or z, and a
+// boolean with a cylinder operand) draws alone in a section and an elevation, and this demo holds with all of them drawn.
 const NOT_DRAWN = {};
 
 // The same steps as loadFloorkit in tools/lib/floorkit.mjs, copied so that this
@@ -124,7 +124,7 @@ const placed = [
   ['k-base-hob', 'base-unit-600', 2.0, 0.4], ['k-hob', 'hob', 2.0, 0.36], ['k-hood', 'extractor-hood', 2.0, 0.35],
   ['k-washer', 'washing-machine', 2.6, 0.4], ['k-wall-unit', 'wall-unit-600', 2.6, 0.275], ['k-dishwasher', 'dishwasher', 3.2, 0.4],
   ['k-pendant', 'pendant-light', 1.8, 1.4],
-  ['b-shower', 'shower-enclosure@1.0.0', 4.1, 0.55], // TODO(lead, FLO-281): 2.0.0 waits for the owner's decision on its quadrant
+  ['b-shower', 'shower-enclosure@1.0.0', 4.1, 0.55], // shower-enclosure has no 2.0.0: the curved quadrant is the separate block shower-enclosure-quadrant
   ['b-bath', 'bathtub@2.0.0', 5.5, 0.45],
   ['b-wc', 'wc@2.0.0', 5.8, 2.625, 180],
   ['b-basin', 'wash-basin@2.0.0', 4.9, 2.725, 180],
@@ -228,7 +228,7 @@ else console.log(`plan: all ${placed.length} placed blocks draw (1:50)`);
 // ── The four heights, from the built bodies and from the section ──
 // The box of the vertices that the triangles (or lines) use. Box3.setFromObject reads the whole position buffer, and a
 // kernel boolean with an outline-sweep cutter leaves the cutter's own vertices there, unused: the bath rim, a body from
-// 0.52 to 0.55 cut by a sweep from 0.51 to 0.56, reads 0.51 to 0.56 that way (FLO-330).
+// 0.52 to 0.55 cut by a sweep from 0.51 to 0.56, reads 0.51 to 0.56 that way.
 const box = (object) => {
   const out = new THREE.Box3();
   const v = new THREE.Vector3();
@@ -287,7 +287,7 @@ for (const p of placed) {
   const got = byId.get(p.id)?.ifcClass;
   classes[got ?? 'none'] = (classes[got ?? 'none'] ?? 0) + 1;
   if (got && got === p.block.ifcClass) continue;
-  if (!got && p.block.ifcClass === 'IfcDoor') console.log(`FLO-235: ${p.id} (${p.block.id}) reaches the request with no class`);
+  if (!got && p.block.ifcClass === 'IfcDoor') console.log(`known Floorkit fault: ${p.id} (${p.block.id}), a DOOR block, reaches the request with no class`);
   else fail(`IFC class of ${p.id} (${p.block.id}): ${got ?? 'none'}, the block names ${p.block.ifcClass ?? 'none'}`);
 }
 const kinds = {};
@@ -296,7 +296,7 @@ console.log(`IFC request: ${request.elements.length} element(s) by type ${JSON.s
 console.log(`IFC classes of the ${placed.length} blocks: ${Object.entries(classes).map(([k, n]) => `${k} ${n}`).join(', ')}`);
 // Floorkit's distribution path takes a ported block's class from the .op's legacy metadata.ifcClass, not from ifc:class.
 const ported = placed.filter((p) => byId.get(p.id)?.type === 'DISTRIBUTION_EQUIPMENT');
-console.log(`FLO-236: ${ported.length} ported block(s) take their class from the legacy ifcClass key`);
+console.log(`known Floorkit fault: ${ported.length} ported block(s) take their class from the legacy ifcClass key`);
 
 // ── Save, open again with no sources, rebuild: the same ids and boxes ──
 const text = manager.save();
